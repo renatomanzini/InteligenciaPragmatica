@@ -5,7 +5,7 @@ nome: Inteligência Pragmática
 
 # "desligado" = gera a edição mas NÃO manda e-mail (fase de testes).
 # "ligado"    = agenda o e-mail para o horário de entrega.
-envio: desligado
+envio: ligado
 
 horario_entrega: "06:30"        # horário de Brasília
 fuso: America/Sao_Paulo
