@@ -61,7 +61,27 @@ Para ver a coleta de hoje e a última edição no navegador, sem enviar nada:
 - `dados/historico.json` é a memória da newsletter: o que já saiu e as histórias em andamento.
 
 ## 5. Configuração da nuvem
-> *Esta seção vai ser preenchida na fase 1b, depois que você aprovar as edições de teste. Ela vai ter o passo a passo para criar a conta no GitHub e no Resend e para ligar a rotina.*
+Está tudo montado. Esta seção serve para você saber onde fica cada peça e como mexer nela.
+
+| Peça | Onde fica | Para quê |
+|---|---|---|
+| Repositório | https://github.com/renatomanzini/InteligenciaPragmatica | Guarda o código, as edições e o histórico. É público. |
+| Site | https://renatomanzini.github.io/InteligenciaPragmatica/ | O arquivo de todas as edições, que dá para instalar no celular como app. |
+| App do Claude no GitHub | github.com → Settings → Applications → Claude | Deixa a rotina ler e gravar **só** neste repositório. |
+| Ambiente "Default" | claude.ai/code → botão do ambiente embaixo da caixa de mensagem → engrenagem | Rede **Full** (para ler os sites de notícia), as variáveis `EMAIL_DESTINO` e `RESEND_VIA_PROXY=1` e o *network secret* do Resend. |
+| Rotina | https://claude.ai/code/routines | Roda toda madrugada e segue o `manual/ROTINA.md`. |
+| Resend | https://resend.com | Entrega o e-mail. A chave fica guardada no *network secret*, e a rotina usa sem enxergar. |
+
+**O que fica fora do GitHub (de propósito):** o seu e-mail e a chave do Resend. No Mac, os dois ficam em `chave_resend.txt`, que o git ignora.
+
+### Tarefas comuns
+- **Pausar a newsletter:** em claude.ai/code/routines, abra a rotina e desligue a chave no topo. Para ligar de novo, é a mesma chave.
+- **Gerar uma edição agora:** na mesma página, clique em **Run now**.
+- **Ver o que a rotina fez:** cada execução aparece na lista da rotina. Clique nela para ver a conversa inteira. Verde só quer dizer que rodou, então confira o resultado lá dentro.
+- **Mudar o horário:** peça ao Claude ("muda a rotina da newsletter para começar às 4h"). O cron da rotina usa o horário de Londres (UTC), que fica 3 h à frente de Brasília.
+- **Trocar a chave do Resend:** crie uma chave nova no Resend. No ambiente, apague o secret antigo e adicione o novo: Bearer, `api.resend.com`, `Authorization`.
+- **Parar só o e-mail** (a edição continua saindo no site): troque `envio: ligado` por `envio: desligado` no `config.yaml`.
+- **Quanto da assinatura isso gasta:** veja em https://claude.ai/settings/usage. A rotina usa o mesmo limite das suas conversas com o Claude.
 
 ## 6. Problemas comuns
 - **O e-mail não chegou:**

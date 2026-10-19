@@ -16,6 +16,7 @@ pip install -q -r requirements.txt
 TZ=America/Sao_Paulo date "+%F %A %H:%M"
 python main.py historico --dias 21
 ```
+- Se o comando `python` não existir, use `python3` em todos os passos.
 - Leia `config.yaml`, `preferencias.md` (e principalmente o "Feedback recebido") e `manual/MANUAL_DE_REDACAO.md`, inteiro.
 - Defina **DATA**, que é a data de hoje em Brasília, e o **tipo**: sábado → `sabado`, domingo → `domingo`, os outros dias → `dia_util`.
 - Pegue o **número** da edição, que é o "próxima: nº" do histórico.
@@ -88,7 +89,7 @@ Cada um grava `verificacao_parte1.md` ou `verificacao_parte2.md`. Depois, junte 
 > Você é o checador de fatos. Leia `edicoes/DATA/edicao.md` e `manual/MANUAL_DE_REDACAO.md` (seção 14).
 > Para CADA afirmação factual da edição (números, datas, nomes, citações, "lançou", "anunciou", estrelas, valores):
 > abra o link citado (WebFetch) e confira se a fonte diz exatamente aquilo.
-> Escreva `edicoes/DATA/verificacao.md` com uma tabela: afirmação | fonte | status (confirmada / não confirmada / errada) | correção sugerida.
+> Escreva `edicoes/DATA/verificacao_parteN.md` (N = 1 ou 2, a sua parte) com uma tabela: afirmação | fonte | status (confirmada / não confirmada / errada) | correção sugerida.
 > No fim, liste as correções obrigatórias.
 > Seja cético: número arredondado diferente da fonte é erro; fonte que não menciona o fato é "não confirmada".
 > Cace também opinião sem selo `**Opinião:**`, aspas que não existem na fonte e número atribuído ao link errado.
@@ -108,7 +109,7 @@ Confira se o `edicoes/DATA/email.html` foi gerado sem erro.
 ```bash
 python main.py enviar DATA
 ```
-Com `envio: desligado` no `config.yaml`, ele só avisa e não envia, e isso é o esperado na fase de testes.
+Com `envio: ligado` no `config.yaml`, o e-mail sai agendado para as 06:30 de Brasília. Se já passou desse horário, sai na hora. Com `envio: desligado`, o comando só avisa. Anote no resumo final o ID que o Resend devolveu.
 
 ## Passo 8: publicar
 ```bash
