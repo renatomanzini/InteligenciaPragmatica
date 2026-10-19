@@ -28,12 +28,13 @@ O passo a passo completo está em `manual/ROTINA.md`.
 
 ## Fases
 - [x] **Plano** aprovado pelo leitor em 16/10/2026.
-- [ ] **Fase 1a, MVP local:** código, manual e 2–3 edições de teste aprovadas pelo leitor.
-- [ ] **Fase 1b, nuvem:**
-  - o leitor cria as contas no GitHub e no Resend;
-  - eu crio o repositório e a rotina;
-  - roda uma edição real pelo "Run now", com o e-mail conferido;
-  - só depois liga o agendamento.
+- [x] **Fase 1a, MVP local:** código, manual e 3 edições de teste. O leitor aprovou o estilo em 18/10/2026.
+- [x] **Fase 1b, nuvem** (concluída em 19/10/2026):
+  - o leitor criou as contas no GitHub e no Resend;
+  - o repositório é público e o site está no GitHub Pages;
+  - a rotina roda sem conectores;
+  - a edição nº 4 saiu pelo "Run now" em 12 minutos, e o leitor confirmou que o e-mail chegou;
+  - o agendamento foi ligado: todo dia às 05:07 de Brasília (cron `7 8 * * *` em UTC), com o e-mail às 06:30.
 - [ ] **Fase 2, Telegram:** um bot com a versão curta e o link. É também por ele que entra o feedback "mais disso / menos disso".
 - [ ] **Fase 3 (opcional), WhatsApp:** pela Cloud API oficial da Meta. Antes de implementar, levantar o custo por mensagem e os requisitos (conta Meta Business, número dedicado, template aprovado). Nada de biblioteca não oficial.
 
