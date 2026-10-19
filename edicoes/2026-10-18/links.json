@@ -1,0 +1,86 @@
+{
+  "data": "2026-10-18",
+  "verificado_em": "2026-10-18T21:52:06-03:00",
+  "total": 12,
+  "resumo": {
+    "ok": 10,
+    "quebrado": 0,
+    "inconclusivo": 2
+  },
+  "links": [
+    {
+      "url": "https://classics.mit.edu/Aristotle/nicomachaen.6.vi.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.canadianlawyermag.com/news/international/sullivan-cromwell-apologizes-to-us-bankruptcy-judge-for-aigenerated-errors-in-prince-group-case/394014",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.oabsp.org.br/jornaldaadvocacia/26-10-07-1742-oab-sp-aciona-justica-contra-empresa-de-ia-para-estabelecer-limites-a-automacao-e-proteger-atividades-privativas-da-advocacia",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.meioemensagem.com.br/marketing/apos-proibicao-das-bets-santos-tem-novo-patrocinador",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.facebook.com/legal/commercial_terms_preview",
+      "status": 400,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "resposta inesperada (400)"
+    },
+    {
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_0a31a3c9ac404f7a9b0e917ce3412997.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://startups.com.br/negocios/legaltech/oab-sp-entra-com-acao-contra-a-enter-e-pede-r-1m-por-dano-moral/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8906.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://lawletter.com.br/exclusiva/oab-sp-acao-civil-publica-enter-inteligencia-artificial",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://openai.com/index/sullivan-cromwell/",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1394.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

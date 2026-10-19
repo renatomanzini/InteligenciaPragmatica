@@ -1,0 +1,331 @@
+#!/usr/bin/env python3
+"""Inteligência Pragmática: linha de comando.
+
+Exemplos:
+  python main.py coletar
+  python main.py montar 2026-10-17
+  python main.py --dry-run
+"""
+import argparse
+import importlib
+import re
+import sys
+import traceback
+import webbrowser
+from datetime import date
+from pathlib import Path
+from typing import Optional
+
+RAIZ = Path(__file__).resolve().parent
+sys.path.insert(0, str(RAIZ))
+
+from ferramentas import historico, util  # noqa: E402
+
+
+def _carregar_env() -> None:
+    """Lê o arquivo .env (só no Mac; fica fora do git) para as variáveis do envio."""
+    import os
+    for nome in ("chave_resend.txt", ".env"):  # os dois ficam fora do git
+        arq = RAIZ / nome
+        if not arq.exists():
+            continue
+        for linha in arq.read_text(encoding="utf-8").splitlines():
+            linha = linha.strip()
+            if linha and not linha.startswith("#") and "=" in linha:
+                chave, valor = linha.split("=", 1)
+                if valor.strip():
+                    os.environ.setdefault(chave.strip(), valor.strip())
+
+
+_carregar_env()
+
+try:  # prefere IPv4 (evita esperas em redes com IPv6 quebrado); opcional
+    from ferramentas import rede  # noqa: E402,F401
+except ImportError:
+    pass
+
+
+# ───────────────────────── ajudantes ─────────────────────────
+
+def _data(texto: str) -> str:
+    """Valida AAAA-MM-DD (ou 'hoje') e devolve a data como texto."""
+    if texto.lower() == "hoje":
+        return str(util.hoje_brasilia())
+    try:
+        return date.fromisoformat(texto).isoformat()
+    except ValueError:
+        raise argparse.ArgumentTypeError("data inválida: %r. Use AAAA-MM-DD, por exemplo 2026-10-17." % texto)
+
+
+def _importar(nome: str):
+    """Importa ferramentas.NOME; devolve None se o arquivo ainda não existe (outros erros sobem)."""
+    try:
+        return importlib.import_module("ferramentas." + nome)
+    except ModuleNotFoundError as e:
+        if e.name == "ferramentas." + nome:
+            return None
+        raise
+
+
+def _config() -> dict:
+    arq = RAIZ / "config.yaml"
+    return util.ler_yaml(arq) if arq.exists() else {}
+
+
+def _resolver_data(data: Optional[str]) -> str:
+    """Data pedida, ou a da edição mais recente. Confere se o edicao.md existe."""
+    if data:
+        if not (RAIZ / "edicoes" / data / "edicao.md").exists():
+            raise FileNotFoundError("Não achei edicoes/%s/edicao.md. A edição desse dia já foi escrita?" % data)
+        return data
+    recente = util.edicao_mais_recente(RAIZ)
+    if not recente:
+        raise FileNotFoundError("Ainda não há nenhuma edição em edicoes/. A edição é escrita pela rotina (manual/ROTINA.md).")
+    return recente
+
+
+# ───────────────────────── comandos ─────────────────────────
+
+def cmd_coletar(args) -> int:
+    coleta = _importar("coleta")
+    if coleta is None:
+        print("A coleta ainda não está instalada (falta ferramentas/coleta.py).")
+        return 1
+    data = date.fromisoformat(args.data or str(util.hoje_brasilia()))
+    coleta.coletar(data, RAIZ)
+    return 0
+
+
+def cmd_historico(args) -> int:
+    print(historico.resumo(args.dias, RAIZ))
+    return 0
+
+
+def _formatar_repo(info: dict) -> str:
+    def milhar(n):
+        return "{:,}".format(n).replace(",", ".") if isinstance(n, int) else "?"
+    dia = lambda iso: (iso or "?")[:10]  # noqa: E731
+    linha = "%s · %s estrelas · %s forks · criado em %s · último push em %s" % (
+        info.get("full_name", "?"), milhar(info.get("estrelas")), milhar(info.get("forks")),
+        dia(info.get("created_at")), dia(info.get("pushed_at")))
+    if info.get("arquivado"):
+        linha += " · ARQUIVADO"
+    if info.get("descricao"):
+        linha += "\n    " + str(info["descricao"])
+    if info.get("html_url"):
+        linha += "\n    " + str(info["html_url"])
+    return linha
+
+
+def cmd_github(args) -> int:
+    github = _importar("github")
+    if github is None:
+        print("A consulta ao GitHub ainda não está instalada (falta ferramentas/github.py).")
+        return 1
+    falhou = False
+    for repo in args.repos:
+        # aceita também o endereço completo: https://github.com/dono/repo
+        limpo = re.sub(r"^https?://(www\.)?github\.com/", "", repo.strip()).strip("/")
+        limpo = re.sub(r"\.git$", "", limpo)
+        if not re.fullmatch(r"[\w.-]+/[\w.-]+", limpo):
+            print("%s: formato inválido. Use DONO/REPO, por exemplo anthropics/claude-code." % repo)
+            falhou = True
+            continue
+        try:
+            info = github.info(limpo)
+        except Exception as e:
+            print("%s: não consegui consultar (%s)." % (limpo, e))
+            falhou = True
+            continue
+        if not isinstance(info, dict) or info.get("erro") or not info.get("full_name"):
+            motivo = info.get("erro") if isinstance(info, dict) else None
+            print("%s: não consegui consultar%s." % (limpo, " (%s)" % motivo if motivo else ""))
+            falhou = True
+            continue
+        print(_formatar_repo(info))
+    return 1 if falhou else 0
+
+
+def cmd_links(args) -> int:
+    from ferramentas import links
+    data = _resolver_data(args.data)
+    res = links.verificar(data, RAIZ)
+    return 1 if res["resumo"]["quebrado"] else 0
+
+
+def cmd_montar(args) -> int:
+    from ferramentas import montagem
+    data = _resolver_data(args.data)
+    res = montagem.montar(data, RAIZ, _config())
+    print("Edição de %s montada:" % data)
+    print("  e-mail:      %s" % res["email"])
+    print("  versão curta: %s (%d caracteres)" % (res["curta"], res["caracteres_curta"]))
+    print("  site:        %s e %s" % (res["pagina"], res["indice"]))
+    print("  tempo de leitura: %d min" % res["minutos"])
+    for aviso in res["avisos"]:
+        print("  Atenção: %s" % aviso)
+    return 0
+
+
+def cmd_registrar(args) -> int:
+    data = _resolver_data(args.data)
+    entrada = historico.registrar(data, RAIZ)
+    historias = entrada.get("historias") or []
+    print("Edição de %s registrada no histórico (nº %s, %d histórias)." % (data, entrada.get("numero"), len(historias)))
+    faltando = [c for c in ("assunto", "numero", "historias", "formatos") if not entrada.get(c)]
+    if faltando:
+        print("Atenção: faltam no front matter: %s." % ", ".join(faltando))
+    return 0
+
+
+def cmd_enviar(args) -> int:
+    from ferramentas import envio
+    data = _resolver_data(args.data)
+    res = envio.enviar(data, RAIZ, _config(), agora=args.agora, forcar=args.forcar)
+    # "desligado" não é erro: é o esperado na fase de testes.
+    return 1 if res["status"] == "erro" else 0
+
+
+def cmd_configurar_email(args) -> int:
+    """Pede a chave do Resend sem mostrar na tela e grava no .env (fora do git)."""
+    import getpass
+    import os
+    print("Configuração do e-mail (Resend). Nada do que você digitar aparece na tela nem vai para o GitHub.")
+    chave = ""
+    for tentativa in range(3):
+        chave = getpass.getpass("Cole a chave do Resend (começa com re_) e aperte Enter: ").strip()
+        if chave.startswith("re_"):
+            break
+        if not chave:
+            print("Não recebi nada: o colar não funcionou. Clique dentro desta janela e use Cmd+V.")
+        else:
+            # Mostra só o começo e o tamanho, para ajudar sem expor a chave.
+            print("O que chegou começa com '%s' e tem %d caracteres. A chave do Resend começa com 're_'."
+                  % (chave[:3], len(chave)))
+            print("No Resend, a chave aparece uma vez só, logo depois de 'Create API Key'.")
+            print("Se ela sumiu, crie outra e copie com o botão de copiar.")
+    else:
+        print("Nada foi gravado. Rode o comando de novo quando tiver a chave.")
+        return 1
+    destino = input("E-mail que recebe a newsletter: ").strip() or os.environ.get("EMAIL_DESTINO", "")
+    arq = RAIZ / ".env"
+    arq.write_text("RESEND_API_KEY=%s\nEMAIL_DESTINO=%s\n" % (chave, destino), encoding="utf-8")
+    os.chmod(arq, 0o600)
+    print("Pronto: chave guardada em .env (só você lê esse arquivo). Pode voltar para o Claude.")
+    return 0
+
+
+def cmd_dry_run(data_arg: Optional[str]) -> int:
+    """Ensaio: coleta, checa links, monta e abre o e-mail no navegador. Nunca envia."""
+    coletou = False
+    try:
+        coleta = _importar("coleta")
+        if coleta is None:
+            print("Aviso: a coleta ainda não está instalada; sigo sem ela.")
+        else:
+            coleta.coletar(util.hoje_brasilia(), RAIZ)
+            coletou = True
+    except Exception as e:
+        print("Aviso: a coleta falhou (%s); sigo sem ela." % e)
+
+    try:
+        data = _resolver_data(data_arg)
+    except FileNotFoundError as e:
+        if data_arg:
+            print("Erro: %s" % e)
+            return 1
+        if coletou:
+            print("Coleta pronta. A edição é escrita pela rotina (manual/ROTINA.md).")
+        else:
+            print("Ainda não há edição para montar. A edição é escrita pela rotina (manual/ROTINA.md).")
+        return 0
+
+    from ferramentas import links
+    print("\nChecando os links da edição de %s..." % data)
+    res_links = links.verificar(data, RAIZ)
+    if res_links["resumo"]["quebrado"]:
+        print("Aviso: há link quebrado (veja acima). Sigo com a montagem.")
+    print("\nMontando...")
+    cmd_montar(argparse.Namespace(data=data))
+    email = RAIZ / "edicoes" / data / "email.html"
+    webbrowser.open(email.as_uri())
+    print("\nAbri %s no navegador. Ensaio terminado: nenhum e-mail foi enviado." % email.relative_to(RAIZ))
+    return 0
+
+
+# ───────────────────────── linha de comando ─────────────────────────
+
+class _Parser(argparse.ArgumentParser):
+    """Igual ao padrão, mas erro de uso sai com código 1 (e não 2), como o resto do programa."""
+
+    def error(self, message):
+        self.print_usage(sys.stderr)
+        self.exit(1, "Erro: %s\n" % message)
+
+
+def criar_parser() -> argparse.ArgumentParser:
+    p = _Parser(
+        prog="python main.py",
+        description="Inteligência Pragmática: coleta, checa, monta e envia a newsletter diária.",
+        epilog="Sem data, 'coletar' usa hoje e os outros comandos usam a edição mais recente.")
+    p.add_argument("--dry-run", nargs="?", const=True, default=None, metavar="AAAA-MM-DD", type=_data,
+                   help="ensaio: coleta, checa links, monta e abre o e-mail no navegador. Nunca envia.")
+    sub = p.add_subparsers(dest="comando", metavar="comando")
+
+    c = sub.add_parser("coletar", help="busca as fontes e grava os candidatos do dia")
+    c.add_argument("--data", type=_data, metavar="AAAA-MM-DD", help="padrão: hoje (Brasília)")
+    c.set_defaults(func=cmd_coletar)
+
+    c = sub.add_parser("historico", help="mostra as últimas edições e as histórias em andamento")
+    c.add_argument("--dias", type=int, default=14, help="quantos dias olhar para trás (padrão: 14)")
+    c.set_defaults(func=cmd_historico)
+
+    c = sub.add_parser("github", help="confere estrelas e datas de repositórios")
+    c.add_argument("repos", nargs="+", metavar="DONO/REPO")
+    c.set_defaults(func=cmd_github)
+
+    for nome, func, ajuda in (
+            ("links", cmd_links, "testa os links da edição (sai com erro se algum estiver quebrado)"),
+            ("montar", cmd_montar, "gera email.html, curta.txt e o site em docs/"),
+            ("registrar", cmd_registrar, "guarda a edição no histórico")):
+        c = sub.add_parser(nome, help=ajuda)
+        c.add_argument("data", nargs="?", type=_data, metavar="AAAA-MM-DD")
+        c.set_defaults(func=func)
+
+    c = sub.add_parser("enviar", help="envia a edição por e-mail (só com envio: ligado no config.yaml)")
+    c.add_argument("data", nargs="?", type=_data, metavar="AAAA-MM-DD")
+    c.add_argument("--agora", action="store_true", help="envia já, sem agendar para o horário de entrega")
+    c.add_argument("--forcar", action="store_true", help="envia mesmo com envio: desligado")
+    c.set_defaults(func=cmd_enviar)
+
+    c = sub.add_parser("configurar-email", help="guarda a chave do Resend no .env (pede sem mostrar na tela)")
+    c.set_defaults(func=cmd_configurar_email)
+    return p
+
+
+def main(argv=None) -> int:
+    parser = criar_parser()
+    args = parser.parse_args(argv)
+    try:
+        if args.dry_run is not None:
+            if args.comando:
+                parser.error("use --dry-run sozinho, sem outro comando")
+            return cmd_dry_run(None if args.dry_run is True else args.dry_run)
+        if not args.comando:
+            parser.print_help()
+            return 0
+        return args.func(args)
+    except (FileNotFoundError, ValueError) as e:
+        print("Erro: %s" % e)
+        return 1
+    except KeyboardInterrupt:
+        print("\nInterrompido.")
+        return 1
+    except Exception as e:
+        print("Erro inesperado: %s: %s" % (type(e).__name__, e))
+        traceback.print_exc(file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

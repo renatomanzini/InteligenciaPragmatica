@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>abriram a caixa-preta (e ela ficou barata) · Inteligência Pragmática</title>
+<meta name="description" content="+ a OAB processa uma IA, e a Meta recua">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="index.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática</div>
+<div class="meta">sábado, 17 de outubro de 2026 · Edição nº 2 · 7 min de leitura</div>
+<h1 class="assunto">abriram a caixa-preta (e ela ficou barata)</h1>
+</header>
+<main class="corpo">
+<p>bom dia. Foi a semana em que abrir jogos e programas fechados ficou coisa de dias. E duas notícias da semana passada seguem rendendo: usar IA ficou bem mais barato, e a OAB-SP foi à Justiça para dizer até onde a IA pode ir.</p>
+<hr>
+<h4 class="rotulo">🚨 OS BREAKTHROUGHS DA SEMANA</h4>
+<h2>1. Abrir a caixa-preta virou trabalho de dias</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> agentes de IA estão descompilando jogos e programas em dias. Antes, eram anos de trabalho de comunidade.</p>
+</blockquote>
+<p>Descompilar é pegar um programa pronto, sem o código-fonte, e reconstruir como ele foi escrito. Quem fazia isso eram especialistas ou comunidades inteiras, ao longo de anos.</p>
+<p>Na quarta (14), o desenvolvedor indie Popcar listou o que mudou. Com IA, saíram versões novas de <strong>The Binding of Isaac</strong> (a versão original, em Flash, agora em 1440p), <strong>Colin McRae Rally 2.0</strong> e <strong>Final Fantasy Tactics Advance</strong>, entre outros. O do Isaac levou alguns dias, segundo ele. Ele mesmo admite que o código não sai tão limpo quanto o feito à mão. O título do texto já diz tudo: "awesome and scary" (incrível e assustador) (<a href="https://popcar.bearblog.dev/ai-is-mass-decompiling-games-thats-both-awesome-and-scary/">Popcar</a>; <a href="https://simonwillison.net/2026/Oct/14/ai-is-mass-decompiling-games/">Simon Willison</a>).</p>
+<p>No dia seguinte veio o sinal mais forte. O <strong>decomp.dev</strong>, índice e placar dos projetos dessa comunidade, anunciou que está encerrando: o índice e a entrada de projetos novos foram desativados, e o que existe fica no ar como arquivo. Segundo o site, o lado comunitário do trabalho foi quebrado por quem usa IA para tomar e portar projetos alheios (<a href="https://decomp.dev">decomp.dev</a>; <a href="https://404media.co/video-game-reverse-engineering-community-shuts-down-because-ai-has-made-it-too-easy">404 Media</a>).</p>
+<p>Um exemplo de ferramenta do tipo é o <strong>REA</strong>, que liga o agente de IA a programas de inspeção como o Ghidra e roda na máquina do usuário. Tem <strong>mais de 308 mil estrelas</strong> no GitHub, mas não é novidade da semana: o repositório existe desde <strong>abril</strong> (<a href="https://github.com/morluto/rea">GitHub</a>).</p>
+<p>🚨 <strong>Por que é breakthrough:</strong> o tempo para entender por dentro um programa que não é seu despencou de anos de especialista para dias de agente.</p>
+<p>⚖️ <strong>E é legal?</strong> O Popcar afirma que descompilar é "completamente legal". No Brasil, não é tão simples:</p>
+<ul>
+<li>a Lei do Software (Lei 9.609/98) não fala em descompilação nem em engenharia reversa;</li>
+<li>ela põe o software sob o regime do direito autoral (art. 2º);</li>
+<li>as exceções do art. 6º não citam a descompilação, e a mais próxima, a "integração" do inciso IV, vale só para uso exclusivo de quem a fez;</li>
+<li>violar o direito do autor de programa é crime (art. 12).</li>
+</ul>
+<p>A lei, portanto, não resolve a questão (<a href="https://www.planalto.gov.br/ccivil_03/leis/l9609.htm">Planalto</a>). <strong>Opinião:</strong> na prática, a resposta tende a depender da licença do software e da finalidade. O próprio REA avisa que é para software que você possui ou está autorizado a examinar (<a href="https://github.com/morluto/rea">REA</a>).</p>
+<h2>2. A IA pequena ficou 4 vezes mais barata</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o Claude Haiku 5.5 custa, na média, cerca de 75% menos que o Haiku 4.5 e acerta bem mais em tarefas de computador.</p>
+</blockquote>
+<p>Saiu em 7/10, antes desta newsletter existir, por isso entra aqui. A preço de tabela, são <strong>US$ 0,10</strong> por milhão de tokens de entrada (em prompts de até 100 mil tokens), contra <strong>US$ 1,00</strong> no modelo anterior, um corte de 90% (<a href="https://platform.claude.com/docs/en/about-claude/pricing">preços</a>). Mas o modelo novo conta o mesmo texto em cerca de 30% mais tokens (<a href="https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide">guia</a>), e prompts longos custam mais. Por isso a própria Anthropic fala em ~<strong>75%</strong> de economia média (<a href="https://www.anthropic.com/news/claude-haiku-5-5">Anthropic</a>).</p>
+<p>Em escala: resumir <strong>1.000 contratos</strong> (5 mil tokens de entrada e 500 de saída cada) sai por <strong>US$ 7,50</strong> no modelo antigo e cerca de <strong>US$ 1</strong> no novo, já contando os 30% de tokens a mais (conta nossa, com os preços oficiais). Num teste de uso de computador (OSWorld 2.1), ele foi de <strong>15,7%</strong> para <strong>72,4%</strong> de acerto. Os números são da Anthropic.</p>
+<p>🚨 <strong>Por que é breakthrough:</strong> automatizar tarefa simples e repetitiva, como triar, resumir ou classificar, ficou barato o bastante para caber no orçamento de um escritório pequeno.</p>
+<p><em>Transparência: esta newsletter é escrita com modelos da Anthropic.</em></p>
+<p><strong>Não passou no critério:</strong> o <strong>Gemini 4 Argon</strong>, do Google (13/10). Ele só está nos planos pagos, a partir de <strong>R$ 96,99/mês</strong>. Na API, custa US$ 2 de entrada e US$ 10 de saída por milhão de tokens até 30/11 e depois dobra, para US$ 4 e US$ 20. O Gemini 3.1 Pro custa US$ 2 e US$ 12 (<a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Google</a>; <a href="https://gemini.google/subscriptions/">planos</a>; <a href="https://ai.google.dev/gemini-api/docs/pricing">preços</a>).</p>
+<hr>
+<h4 class="rotulo">O QUE MUDOU DESDE ONTEM</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Meta</strong>: depois da reação, tirou da versão em inglês dos novos termos a frase que, segundo especialistas, poderia permitir usar o conteúdo dos sites para "treinar" produtos. O robô continua autorizado nos sites de clientes comerciais, agora para "desenvolver, melhorar, pesquisar e manter" produtos de anúncio e negócio. Até a noite de sábado, a versão em português ainda trazia o texto antigo. A Meta diz que "não é sobre raspar sites de notícia" (<a href="https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites">The Verge</a>; <a href="https://www.facebook.com/legal/commercial_terms_preview">termos</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Agentes barrados</strong>: a Delta impede agentes de comprar passagens, o JPMorgan e a Schwab bloqueiam agentes nas contas, e o Yelp só libera quem paga pela licença de dados (<a href="https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web">The Verge</a>). Ontem falamos de agente invadindo sistema. Hoje o movimento é o contrário: os sites trancando a porta.</p>
+<p class="seta"><span class="seta-ic">→</span><strong>6x1, com correção</strong>: ontem escrevemos que a jornada de 42h valeria "em 60 dias". A emenda diz <strong>2 meses após a publicação</strong> (16/10), e esse prazo termina em <strong>16/12/2026</strong> (conta nossa; há quem conte a partir de 17/12). As 40h vêm um ano depois (<a href="https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc141.htm">EC 141</a>). Na Câmara, Hugo Motta mandou aplicar a escala nova a ~1.700 terceirizados a partir da próxima semana (<a href="https://www.camara.leg.br/noticias/1311899-motta-determina-adocao-imediata-da-nova-escala-de-trabalho-na-camara-dos-deputados">Câmara</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">📊 OS NÚMEROS DA SEMANA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>US$ 16,8 bilhões</strong>: a receita da Anthropic no 3º trimestre, cerca de <strong>45%</strong> acima do anterior, segundo um investidor que estava na apresentação da empresa (<a href="https://www.dealstreetasia.com/?p=498196">Reuters</a>; <a href="https://simonwillison.net/2026/Oct/15/anthropic-tells-investors/">Simon Willison</a>). A empresa não divulgou os números. Segundo a Bloomberg, a oferta do IPO pode começar na semana de 9/11 (<a href="https://thenextweb.com/news/anthropic-q3-revenue-16-8bn-ipo">The Next Web</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>US$ 40 mil</strong>: foi o gasto em IA da empresa de segurança XBOW para montar, em <strong>6 dias</strong>, um ataque completo ao Chrome. Era a segunda tentativa: a primeira levou 2 meses e foi descartada. Segundo a XBOW, o Google concedeu <strong>US$ 250 mil</strong> de recompensa, e a falha já foi corrigida (<a href="https://xbow.com/blog/xbow-built-a-chrome-full-chain-exploit">XBOW</a>). A empresa estima que, sem IA, seriam 4 pessoas por 6 a 9 meses (<a href="https://xbow.com/labs/research/zero-to-calc-in-six-days-inside-xbow-chrome-full-chain">relato técnico</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>392 mil</strong>: são as estrelas do OpenClaw, o agente pessoal de código aberto. Parece explosão, mas eram 388 mil no fim de agosto (<a href="https://github.com/openclaw/openclaw">GitHub</a>; <a href="https://github.blog/open-source/maintainers/openclaw-went-viral-meet-the-maintainers-building-and-securing-it/">GitHub Blog</a>). <strong>Opinião:</strong> o hype também estaciona.</p>
+</div>
+<hr>
+<h4 class="rotulo">🧠 IA NA PRÁTICA DA SEMANA</h4>
+<h2>Duas IAs jurídicas, dois destinos</h2>
+<p>A diferença entre ferramenta e substituto do advogado parece filosofia. Desde o dia 7, ela virou processo.</p>
+<p><strong>Nos EUA</strong>, o escritório Sullivan &amp; Cromwell criou com a OpenAI o <strong>Agreement Analyzer</strong>, apresentado em 17/09. O advogado põe a minuta, os precedentes e o "playbook" do escritório. Pela descrição do sócio John Savva, agentes revisam por ângulos diferentes, e outros agentes <strong>contestam</strong> os achados. A saída é um memorando com alterações em controle de alterações, que o advogado revisa, adapta ou rejeita (<a href="https://openai.com/index/sullivan-cromwell/">OpenAI</a>; <a href="https://news.bloomberglaw.com/tech-and-telecom-law/sullivan-cromwells-openai-gambit-delivers-tech-talent-access">Bloomberg Law</a>).</p>
+<p><strong>Em São Paulo</strong>, a OAB-SP entrou em 07/10 com uma ação civil pública contra a legaltech <strong>Enter</strong> (processo nº 5031169-20.2026.4.03.6100). A tese é que a plataforma pratica atos privativos da advocacia sem ser sociedade de advogados. Os pedidos:</p>
+<ul>
+<li>em caráter de urgência, que novos contratos tenham advogado responsável identificado, sob multa de <strong>R$ 50 mil</strong> por contrato;</li>
+<li>supervisão humana auditável;</li>
+<li><strong>R$ 1 milhão</strong> de dano moral coletivo.</li>
+</ul>
+<p>A Enter nega que substitua advogados e diz que a revisão, a assinatura e o protocolo ficam com eles. Não encontramos decisão até 17/10 (<a href="https://www.oabsp.org.br/jornaldaadvocacia/26-10-07-1742-oab-sp-aciona-justica-contra-empresa-de-ia-para-estabelecer-limites-a-automacao-e-proteger-atividades-privativas-da-advocacia">OAB-SP</a>; <a href="https://lawletter.com.br/exclusiva/oab-sp-acao-civil-publica-enter-inteligencia-artificial">Lawletter</a>; <a href="https://startups.com.br/negocios/legaltech/oab-sp-entra-com-acao-contra-a-enter-e-pede-r-1m-por-dano-moral/">Startups</a>).</p>
+<p>⚖️ A ideia de "ato privativo" vem do Estatuto da Advocacia: são privativas da advocacia a postulação ao Judiciário e a consultoria, a assessoria e a direção jurídicas (Lei 8.906/94, art. 1º) (<a href="https://www.planalto.gov.br/ccivil_03/leis/l8906.htm">Planalto</a>).</p>
+<p>⚠️ <strong>O freio:</strong></p>
+<ul>
+<li>O caso americano é um estudo de caso publicado pela própria OpenAI e não traz <strong>nenhum</strong> número de desempenho.</li>
+<li>O brasileiro ainda não tem decisão.</li>
+<li>A fronteira entre ferramenta e substituto não foi julgada.</li>
+</ul>
+<p><strong>Agora aplica no mundo real:</strong></p>
+<ul>
+<li><strong>Advogado:</strong> a ideia de "agente que contesta o outro" funciona até sem software próprio. Peça a revisão a uma IA e, depois, peça a outra que ataque essa revisão.</li>
+<li><strong>Estudante de Direito:</strong> use a IA como parte contrária. Peça que ela derrube a sua peça antes do professor.</li>
+<li><strong>Quem cria legaltech:</strong> <strong>Opinião:</strong> os pedidos da OAB-SP funcionam como um checklist de produto: advogado responsável identificado, registro de revisão e nada de vender como "substituto".</li>
+</ul>
+<p><strong>Como isso vira serviço:</strong> montar, para escritórios pequenos, o "playbook" de cláusulas e um fluxo de revisão com IA em que o advogado assina e fica registrado. <strong>Opinião:</strong> depois da ação da OAB-SP, a parte de conformidade, com a trilha de quem revisou o quê, vale tanto quanto a IA.</p>
+<hr>
+<p><strong>Para ler no fim de semana:</strong></p>
+<ul>
+<li>[Para ler] <a href="https://popcar.bearblog.dev/ai-is-mass-decompiling-games-thats-both-awesome-and-scary/">O texto do Popcar</a> sobre a descompilação de jogos, em inglês, com os dois lados.</li>
+<li>[Curiosidade] <a href="https://www.technologyreview.com/2026/10/15/1146091/pig-kidneys-that-were-frozen-for-a-year-have-been-brought-back-to-life/">Um rim de porco "congelado" por mais de um ano voltou a funcionar</a> (MIT Technology Review), produzindo cerca de 2/3 da urina esperada e com sinais de lesão. Ainda é preprint, e para comparar: hoje um órgão humano dura de 24 a 36 horas fora do corpo.</li>
+<li>[Para ler] <a href="https://importai.substack.com/p/import-ai-476-creativity-and-rsi">Import AI 476</a>, de Jack Clark: os novos modelos abertos americano (Beam) e europeu (Mistral Large 4) ainda ficam atrás do chinês GLM-5.3 em código. Clark é cofundador da Anthropic (<a href="https://www.anthropic.com/company">Anthropic</a>).</li>
+</ul>
+<hr>
+<p><strong>Pergunta da semana:</strong> se uma IA fizesse a primeira versão de todas as suas peças, o que exatamente continuaria sendo trabalho seu?</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="index.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>

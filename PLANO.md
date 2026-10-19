@@ -1,0 +1,43 @@
+# Plano vivo: Inteligência Pragmática
+
+Newsletter pessoal diária sobre IA, economia, negócios e marketing, escrita por IA para um leitor só. Ela chega às 06:30 de Brasília.
+
+## Decisões fechadas (16/10/2026)
+- **Quem escreve:** uma rotina do Claude Code na nuvem da Anthropic, paga pela assinatura do Claude (sem API). Ela roda com o Mac desligado.
+- **Modelos:** o Opus coordena e escreve, e agentes Sonnet apuram e checam.
+- **Estilo:** a clareza e os números do the news, o humor e as seções fixas das Drops e o arco "aplica no mundo real" da Ressonância. Imitar o jeito, nunca o texto. As regras estão em `manual/MANUAL_DE_REDACAO.md`.
+- **Fim de semana:** no sábado sai a semana em revista e os breakthroughs da semana. No domingo sai o ensaio, o único dia com filosofia.
+- **Fontes:** `fontes.yaml`, sem os dados do BCB e do IBGE. As newsletters que o leitor assina entram como **radar**, pela versão pública: servem para achar pauta e não repetir, nunca para copiar.
+- **E-mail:** pelo Resend, com o remetente de teste, que só entrega ao dono da conta. A rotina **não** tem acesso ao Gmail.
+- **Memória:**
+  - `dados/historico.json` guarda as edições, as histórias em andamento e os formatos usados;
+  - `preferencias.md` guarda os gostos e o feedback.
+- **Arquivo:** o site estático `docs/` no GitHub Pages, instalável no celular.
+
+## Como uma edição nasce
+O passo a passo completo está em `manual/ROTINA.md`.
+1. `coletar`: RSS, Hacker News, GitHub, Hugging Face, Reddit e radar.
+2. Triagem pelo Opus: decide o dia forte ou morno e se há breakthrough.
+3. Apuração por agentes Sonnet em paralelo, na fonte primária.
+4. Redação pelo Opus.
+5. Checagem por um agente novo, mais o teste dos links.
+6. `montar`: o e-mail em HTML, a versão curta e o site.
+7. `registrar` no histórico.
+8. `enviar`, que agenda o e-mail para as 06:30.
+9. `git push`, que publica o arquivo.
+
+## Fases
+- [x] **Plano** aprovado pelo leitor em 16/10/2026.
+- [ ] **Fase 1a, MVP local:** código, manual e 2–3 edições de teste aprovadas pelo leitor.
+- [ ] **Fase 1b, nuvem:**
+  - o leitor cria as contas no GitHub e no Resend;
+  - eu crio o repositório e a rotina;
+  - roda uma edição real pelo "Run now", com o e-mail conferido;
+  - só depois liga o agendamento.
+- [ ] **Fase 2, Telegram:** um bot com a versão curta e o link. É também por ele que entra o feedback "mais disso / menos disso".
+- [ ] **Fase 3 (opcional), WhatsApp:** pela Cloud API oficial da Meta. Antes de implementar, levantar o custo por mensagem e os requisitos (conta Meta Business, número dedicado, template aprovado). Nada de biblioteca não oficial.
+
+## Custos
+- Nenhum além da assinatura do Claude. A rotina gasta do limite de uso, e o consumo será medido nos testes.
+- Resend, GitHub e GitHub Pages: grátis.
+- Os créditos extras ficam desligados, para nunca haver cobrança a mais. Se o limite estourar, a edição do dia não sai.

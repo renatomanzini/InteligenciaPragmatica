@@ -1,0 +1,214 @@
+{
+  "data": "2026-10-17",
+  "verificado_em": "2026-10-17T23:55:32-03:00",
+  "total": 33,
+  "resumo": {
+    "ok": 31,
+    "quebrado": 0,
+    "inconclusivo": 2
+  },
+  "links": [
+    {
+      "url": "https://popcar.bearblog.dev/ai-is-mass-decompiling-games-thats-both-awesome-and-scary/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://decomp.dev",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://github.com/morluto/rea",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-haiku-5-5",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.anthropic.com/claude-haiku-5-5"
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc141.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.dealstreetasia.com/?p=498196",
+      "status": 308,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://simonwillison.net/2026/Oct/15/anthropic-tells-investors/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://xbow.com/blog/xbow-built-a-chrome-full-chain-exploit",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://github.com/openclaw/openclaw",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.oabsp.org.br/jornaldaadvocacia/26-10-07-1742-oab-sp-aciona-justica-contra-empresa-de-ia-para-estabelecer-limites-a-automacao-e-proteger-atividades-privativas-da-advocacia",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://openai.com/index/sullivan-cromwell/",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://simonwillison.net/2026/Oct/14/ai-is-mass-decompiling-games/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://404media.co/video-game-reverse-engineering-community-shuts-down-because-ai-has-made-it-too-easy",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.404media.co/video-game-reverse-engineering-community-shuts-down-because-ai-has-made-it-too-easy/"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9609.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://gemini.google/subscriptions/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "status": 302,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.facebook.com/legal/commercial_terms_preview",
+      "status": 400,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "resposta inesperada (400)"
+    },
+    {
+      "url": "https://www.camara.leg.br/noticias/1311899-motta-determina-adocao-imediata-da-nova-escala-de-trabalho-na-camara-dos-deputados",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://thenextweb.com/news/anthropic-q3-revenue-16-8bn-ipo",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET"
+    },
+    {
+      "url": "https://xbow.com/labs/research/zero-to-calc-in-six-days-inside-xbow-chrome-full-chain",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://github.blog/open-source/maintainers/openclaw-went-viral-meet-the-maintainers-building-and-securing-it/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://news.bloomberglaw.com/tech-and-telecom-law/sullivan-cromwells-openai-gambit-delivers-tech-talent-access",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET"
+    },
+    {
+      "url": "https://lawletter.com.br/exclusiva/oab-sp-acao-civil-publica-enter-inteligencia-artificial",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://startups.com.br/negocios/legaltech/oab-sp-entra-com-acao-contra-a-enter-e-pede-r-1m-por-dano-moral/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8906.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.technologyreview.com/2026/10/15/1146091/pig-kidneys-that-were-frozen-for-a-year-have-been-brought-back-to-life/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://importai.substack.com/p/import-ai-476-creativity-and-rsi",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.anthropic.com/company",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

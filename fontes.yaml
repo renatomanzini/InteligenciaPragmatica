@@ -1,0 +1,120 @@
+# Fontes da Inteligência Pragmática.
+# Para acrescentar uma fonte, copie um bloco e troque os valores.
+# Para pausar uma fonte, mude "ativo: true" para "ativo: false".
+#
+# Campos:
+#   nome   — como a fonte aparece na lista de candidatos
+#   tema   — ia | economia | negocios | marketing | direito_tech | china | filosofia
+#   tipo   — primaria (a própria empresa/governo/paper) | imprensa | analise | comunidade
+#   rss    — endereço do feed (a coleta lê sozinha)
+#   pagina — para fontes sem feed: a rotina visita a página na hora de apurar
+#   ativo  — true | false
+
+# Quantas horas para trás a coleta olha, por tipo de dia.
+janela_horas:
+  padrao: 30
+  segunda: 78     # pega o fim de semana
+  sabado: 168     # semana em revista
+  domingo: 168
+
+limite_por_fonte: 15
+
+fontes:
+  # ───────────── IA: fontes primárias ─────────────
+  - {nome: OpenAI News, tema: ia, tipo: primaria, rss: "https://openai.com/news/rss.xml", ativo: true}
+  - {nome: Google Blog (IA), tema: ia, tipo: primaria, rss: "https://blog.google/technology/ai/rss/", ativo: true}
+  - {nome: Google DeepMind, tema: ia, tipo: primaria, rss: "https://deepmind.google/blog/rss.xml", ativo: true}
+  - {nome: Meta Newsroom, tema: ia, tipo: primaria, rss: "https://about.fb.com/news/feed/", ativo: true}
+  - {nome: Hugging Face Blog, tema: ia, tipo: primaria, rss: "https://huggingface.co/blog/feed.xml", ativo: true}
+  - {nome: GitHub Blog, tema: ia, tipo: primaria, rss: "https://github.blog/feed/", ativo: true}
+  - {nome: NVIDIA Blog, tema: ia, tipo: primaria, rss: "https://blogs.nvidia.com/feed/", ativo: true}
+  - {nome: Anthropic News, tema: ia, tipo: primaria, pagina: "https://www.anthropic.com/news", ativo: true}
+  - {nome: Anthropic Research, tema: ia, tipo: primaria, pagina: "https://www.anthropic.com/research", ativo: true}
+  - {nome: Anthropic Engineering, tema: ia, tipo: primaria, pagina: "https://www.anthropic.com/engineering", ativo: true}
+
+  # ───────────── IA: imprensa e análise ─────────────
+  - {nome: TechCrunch IA, tema: ia, tipo: imprensa, rss: "https://techcrunch.com/category/artificial-intelligence/feed/", ativo: true}
+  - {nome: The Verge IA, tema: ia, tipo: imprensa, rss: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", ativo: true}
+  - {nome: Ars Technica, tema: ia, tipo: imprensa, rss: "https://feeds.arstechnica.com/arstechnica/index", ativo: true}
+  - {nome: The Register IA, tema: ia, tipo: imprensa, rss: "https://www.theregister.com/software/ai_ml/headlines.atom", ativo: true}
+  - {nome: MIT Technology Review, tema: ia, tipo: imprensa, rss: "https://www.technologyreview.com/feed/", ativo: true}
+  - {nome: CNBC Tecnologia, tema: ia, tipo: imprensa, rss: "https://www.cnbc.com/id/19854910/device/rss/rss.html", ativo: true}
+  - {nome: Simon Willison, tema: ia, tipo: analise, rss: "https://simonwillison.net/atom/everything/", ativo: true}
+  - {nome: Import AI, tema: ia, tipo: analise, rss: "https://importai.substack.com/feed", ativo: true}
+  - {nome: Reuters Tecnologia, tema: ia, tipo: imprensa, pagina: "https://www.reuters.com/technology/", ativo: true}  # responde 401 a robôs: a rotina precisa de busca na web para ver as manchetes
+
+  # ───────────── China e tecnologia ─────────────
+  - {nome: SCMP Tech, tema: china, tipo: imprensa, rss: "https://www.scmp.com/rss/36/feed", ativo: true}
+  - {nome: Rest of World, tema: china, tipo: imprensa, rss: "https://restofworld.org/feed/latest/", ativo: true}
+  - {nome: iyiou, tema: china, tipo: imprensa, pagina: "https://www.iyiou.com/", ativo: true}
+
+  # ───────────── Economia e negócios: Brasil ─────────────
+  - {nome: Valor Econômico, tema: economia, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/", ativo: true}
+  - {nome: Pipeline (Valor), tema: negocios, tipo: imprensa, pagina: "https://pipelinevalor.globo.com/", ativo: true}
+  - {nome: Brazil Journal, tema: negocios, tipo: imprensa, rss: "https://braziljournal.com/feed/", ativo: true}
+  - {nome: NeoFeed, tema: negocios, tipo: imprensa, rss: "https://neofeed.com.br/feed/", ativo: true}
+  - {nome: InfoMoney, tema: economia, tipo: imprensa, rss: "https://www.infomoney.com.br/feed/", ativo: true}
+  - {nome: InvestNews, tema: economia, tipo: imprensa, rss: "https://investnews.com.br/feed/", ativo: true}
+  - {nome: Exame, tema: negocios, tipo: imprensa, rss: "https://exame.com/feed/", ativo: true}
+  - {nome: Folha Mercado, tema: economia, tipo: imprensa, rss: "https://feeds.folha.uol.com.br/mercado/rss091.xml", ativo: true}
+  - {nome: Estadão Economia, tema: economia, tipo: imprensa, rss: "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/", ativo: true}
+  - {nome: Bloomberg Línea Brasil, tema: economia, tipo: imprensa, rss: "https://www.bloomberglinea.com.br/arc/outboundfeeds/rss/?outputType=xml", ativo: true}
+  - {nome: Startups.com.br, tema: negocios, tipo: imprensa, rss: "https://startups.com.br/feed/", ativo: true}
+
+  # ───────────── Economia e negócios: mundo ─────────────
+  - {nome: WSJ Tecnologia, tema: negocios, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/RSSWSJD", ativo: true}  # feed antigo (feeds.a.dj.com) parou em 2025; este é o atual
+  - {nome: WSJ Mercados, tema: economia, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain", ativo: true}  # feed antigo (feeds.a.dj.com) parou em 2025; este é o atual
+  - {nome: The Economist Finanças, tema: economia, tipo: imprensa, rss: "https://www.economist.com/finance-and-economics/rss.xml", ativo: true}
+  - {nome: NPR Planet Money, tema: economia, tipo: analise, rss: "https://feeds.npr.org/510289/podcast.xml", ativo: true}
+  - {nome: Reuters Negócios, tema: negocios, tipo: imprensa, pagina: "https://www.reuters.com/business/", ativo: true}  # responde 401 a robôs: a rotina precisa de busca na web para ver as manchetes
+
+  # ───────────── Startups e estratégia ─────────────
+  - {nome: Stratechery, tema: negocios, tipo: analise, rss: "https://stratechery.com/feed/", ativo: true}
+  - {nome: Lenny's Newsletter, tema: negocios, tipo: analise, rss: "https://www.lennysnewsletter.com/feed", ativo: true}
+  - {nome: Y Combinator Blog, tema: negocios, tipo: primaria, rss: "https://www.ycombinator.com/blog/rss/", ativo: true}
+  - {nome: a16z, tema: negocios, tipo: analise, rss: "https://www.a16z.news/feed", ativo: true}  # a16z.com/feed/ dá 404; as publicações da a16z saem neste feed (Substack)
+
+  # ───────────── Marketing ─────────────
+  - {nome: Meio & Mensagem, tema: marketing, tipo: imprensa, rss: "https://www.meioemensagem.com.br/feed", ativo: true}
+  - {nome: Propmark, tema: marketing, tipo: imprensa, rss: "https://propmark.com.br/feed/", ativo: true}
+  - {nome: Digiday, tema: marketing, tipo: imprensa, rss: "https://digiday.com/feed/", ativo: true}
+  - {nome: Adweek, tema: marketing, tipo: imprensa, rss: "https://www.adweek.com/feed/", ativo: true}
+  - {nome: AdExchanger, tema: marketing, tipo: imprensa, rss: "https://www.adexchanger.com/feed/", ativo: true}
+  - {nome: Marketing Dive, tema: marketing, tipo: imprensa, rss: "https://www.marketingdive.com/feeds/news/", ativo: true}
+  - {nome: Social Media Today, tema: marketing, tipo: imprensa, rss: "https://www.socialmediatoday.com/feeds/news/", ativo: true}
+  - {nome: Search Engine Journal, tema: marketing, tipo: imprensa, rss: "https://www.searchenginejournal.com/feed/", ativo: true}
+  - {nome: Search Engine Roundtable, tema: marketing, tipo: imprensa, rss: "https://www.seroundtable.com/index.xml", ativo: true}
+  - {nome: PPC Land, tema: marketing, tipo: imprensa, rss: "https://ppc.land/rss/", ativo: true}
+  - {nome: Tubefilter, tema: marketing, tipo: imprensa, rss: "https://www.tubefilter.com/feed/", ativo: true}
+  - {nome: Think with Google, tema: marketing, tipo: primaria, pagina: "https://business.google.com/br/think/", ativo: true}
+
+  # ───────────── Direito e tecnologia ─────────────
+  - {nome: JOTA, tema: direito_tech, tipo: imprensa, rss: "https://www.jota.info/feed", ativo: true}
+  - {nome: Conjur, tema: direito_tech, tipo: imprensa, pagina: "https://www.conjur.com.br/", ativo: true}  # feed bloqueado pelo Cloudflare (HTTP 403 anti-robô); visitar a página na apuração
+  - {nome: Migalhas, tema: direito_tech, tipo: imprensa, pagina: "https://www.migalhas.com.br/quentes", ativo: true}  # feed /rss/quentes saiu do ar (404) e o site não publica outro; visitar a página
+  - {nome: ANPD (notícias), tema: direito_tech, tipo: primaria, pagina: "https://www.gov.br/anpd/pt-br/assuntos/noticias", ativo: true}
+
+  # ───────────── Filosofia (inspiração para o ensaio de domingo) ─────────────
+  - {nome: Daniel Macedo (Caminho do Sol), tema: filosofia, tipo: analise, rss: "https://macedodaniel.substack.com/feed", ativo: true}
+  - {nome: Johnathan Bi, tema: filosofia, tipo: analise, rss: "https://www.johnathanbi.com/feed", ativo: true}
+
+# Fontes especiais, lidas por API (não precisam de RSS).
+especiais:
+  hacker_news: {ativo: true, limite: 30}          # primeira página do Hacker News
+  github_em_alta: {ativo: true, limite: 15, dias: 7}   # repositórios novos com mais estrelas
+  hugging_face: {ativo: true, limite: 12}         # modelos e papers em alta
+  reddit:
+    ativo: true
+    subreddits: [LocalLLaMA, singularity]
+    limite: 10
+
+# Radar: newsletters que eu já assino, lidas pela versão pública.
+# Servem para ACHAR pauta e para NÃO REPETIR o que eu já li.
+# Nunca são citadas como fonte, e o texto delas nunca é copiado.
+radar:
+  - {nome: the news, rss: "https://rss.beehiiv.com/feeds/j9teVW9Qmi.xml", ativo: true}
+  - {nome: TechDrops, sitemap: "https://www.techdrops.com.br/sitemap.xml", ativo: true}
+  - {nome: AI Drops, sitemap: "https://www.aidrops.com.br/sitemap.xml", ativo: true}
+  - {nome: MoneyDrops, sitemap: "https://www.moneydrops.com.br/sitemap.xml", ativo: true}
+  - {nome: MarketingDrops, sitemap: "https://www.marketingdrops.news/sitemap.xml", ativo: true}
+  - {nome: Neat Prompts, sitemap: "https://www.neatprompts.com/sitemap.xml", ativo: true}

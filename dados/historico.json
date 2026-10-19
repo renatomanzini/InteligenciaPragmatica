@@ -1,0 +1,348 @@
+[
+  {
+    "data": "2026-10-16",
+    "tipo": "dia_util",
+    "numero": 1,
+    "assunto": "o ~~estagiário~~ agente aprontou. quem paga?",
+    "previa": "+ a IA que mora no escritório (e por que não é a da Meta)",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "agentes-incidentes-responsabilidade",
+        "titulo": "Agentes de IA em teste invadem sistemas reais; seguro e responsabilidade entram em pauta",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADV01&CACODE=CICA-2026-3630",
+          "https://alignment.openai.com/misalignment-reports/",
+          "https://www.wsj.com/tech/ai/ai-runs-into-its-next-big-obstacle-insurance-8b2d4556"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-muse-spark-open",
+        "titulo": "Meta lança o Muse Spark Open, modelo aberto que roda em cluster de Mac Studio",
+        "tema": "ia",
+        "urls": [
+          "https://research.meta.ai/blog/muse-spark-open",
+          "https://machinelearning.apple.com/research/mlx-distributed-inference"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "fim-escala-6x1",
+        "titulo": "Congresso promulga a EC 141, que acaba com a escala 6x1",
+        "tema": "economia",
+        "urls": [
+          "https://www12.senado.leg.br/noticias/materias/2026/10/16/congresso-promulga-o-fim-da-escala-6x1-e-aposentadoria-de-agentes-de-saude"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "big-techs-semana-ia",
+        "titulo": "Nasdaq tem a pior semana desde junho com dúvida sobre o retorno da IA",
+        "tema": "economia",
+        "urls": [
+          "https://timesbrasil.com.br/investimentos/bolsa/nasdaq-recua-2-e-registra-pior-semana-desde-junho-pressionado-por-acoes-ligadas-a-ia-e-alta-do-petroleo/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "petroleo-brent-2026",
+        "titulo": "Brent fecha a US$ 109,86, maior desde maio",
+        "tema": "economia",
+        "urls": [
+          "https://br.investing.com/news/commodities-news/petroleo-toca-us110-por-barril-pela-primeira-vez-desde-maio-devido-a-temores-relacionados-ao-oriente-medio-e-a-russia-2094277"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "itau-ia-openai",
+        "titulo": "Itaú leva IA da OpenAI a 300 mil clientes e mira toda a base",
+        "tema": "negocios",
+        "urls": [
+          "https://openai.com/index/itau-generative-ai/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "bets-mp-1394",
+        "titulo": "Com a MP que proíbe as bets, Agibank vira patrocinador máster do Santos",
+        "tema": "negocios",
+        "urls": [
+          "https://www12.senado.leg.br/noticias/materias/2026/09/28/mp-proibe-bets-e-determina-encerramento-das-operacoes-em-30-dias",
+          "https://www.meioemensagem.com.br/marketing/apos-proibicao-das-bets-santos-tem-novo-patrocinador"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "americanas-fraude",
+        "titulo": "12 ex-executivos da Americanas viram réus",
+        "tema": "negocios",
+        "urls": [
+          "https://timesbrasil.com.br/brasil/fraude-na-americanas-justica-aceita-denuncia-contra-12-ex-executivos/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "consumidor-ia-anuncios",
+        "titulo": "87% das conversas nas redes criticam marcas que usam IA em anúncios",
+        "tema": "marketing",
+        "urls": [
+          "https://www.meioemensagem.com.br/marketing/consumidor-rejeita-ia-em-moda-delivery-e-marketplaces"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "meta-termos-comerciais-crawling",
+        "titulo": "Novos termos da Meta autorizam robôs em sites de clientes comerciais a partir de 30/10",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.facebook.com/legal/commercial_terms_preview",
+          "https://www.theverge.com/tech/1012846/meta-business-terms-scrape-news-publishers"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "china-controle-exportacao-ia",
+        "titulo": "China propõe controle de exportação para 23 tecnologias de IA",
+        "tema": "china",
+        "urls": [
+          "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_0a31a3c9ac404f7a9b0e917ce3412997.html"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "chatgpt-utm-bug",
+        "titulo": "Bug tira a etiqueta UTM dos links do ChatGPT e derruba tráfego atribuído",
+        "tema": "marketing",
+        "urls": [
+          "https://www.searchenginejournal.com/chatgpt-traffic-drop-appears-to-be-a-tracking-problem/593157/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "cal-ai-influenciadores",
+        "titulo": "Cal AI fez US$ 30 mi com exército de influenciadores",
+        "tema": "marketing",
+        "urls": [
+          "https://techcrunch.com/2026/10/15/when-it-came-to-cal-ais-viral-success-a-small-army-of-influencers-paid-off/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "mercor-benchmark-map",
+        "titulo": "Mercor: 90% das horas de trabalho nos EUA estão fora dos benchmarks de IA",
+        "tema": "ia",
+        "urls": [
+          "https://www.mercor.com/research/labor-index/benchmark-map/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "sementes-curvas-nist",
+        "titulo": "Modelo da Anthropic descobre origem das sementes das curvas NIST",
+        "tema": "ia",
+        "urls": [
+          "https://www.anthropic.com/research/ecdsa-curve-origins"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "explicador",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
+  },
+  {
+    "data": "2026-10-17",
+    "tipo": "sabado",
+    "numero": 2,
+    "assunto": "abriram a caixa-preta (e ela ficou barata)",
+    "previa": "+ a OAB processa uma IA, e a Meta recua",
+    "dia": "forte",
+    "breakthrough": true,
+    "historias": [
+      {
+        "id": "descompilacao-ia",
+        "titulo": "IA passa a descompilar jogos e programas em dias; decomp.dev desativa seu índice",
+        "tema": "ia",
+        "urls": [
+          "https://popcar.bearblog.dev/ai-is-mass-decompiling-games-thats-both-awesome-and-scary/",
+          "https://decomp.dev",
+          "https://github.com/morluto/rea"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "claude-haiku-5-5",
+        "titulo": "Claude Haiku 5.5 fica ~75% mais barato na média que o Haiku 4.5",
+        "tema": "ia",
+        "urls": [
+          "https://www.anthropic.com/news/claude-haiku-5-5"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "gemini-4-argon",
+        "titulo": "Google lança o Gemini 4 Argon, só em planos pagos",
+        "tema": "ia",
+        "urls": [
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "meta-termos-comerciais-crawling",
+        "titulo": "Meta tira 'treinar' da versão em inglês dos termos; robô segue autorizado para anúncios",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "agentes-bloqueados-sites",
+        "titulo": "Sites e bancos começam a barrar agentes de IA",
+        "tema": "ia",
+        "urls": [
+          "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "fim-escala-6x1",
+        "titulo": "EC 141: 42h a partir de 2 meses da publicação (16/12) e 40h um ano depois",
+        "tema": "economia",
+        "urls": [
+          "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc141.htm"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "anthropic-receita-ipo",
+        "titulo": "Anthropic diz a investidores que faturou US$ 16,8 bi no 3º trimestre",
+        "tema": "negocios",
+        "urls": [
+          "https://www.dealstreetasia.com/?p=498196",
+          "https://simonwillison.net/2026/Oct/15/anthropic-tells-investors/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "xbow-chrome-exploit",
+        "titulo": "XBOW monta exploit completo do Chrome com IA em 6 dias e leva US$ 250 mil",
+        "tema": "ia",
+        "urls": [
+          "https://xbow.com/blog/xbow-built-a-chrome-full-chain-exploit"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "openclaw-estrelas",
+        "titulo": "OpenClaw estaciona perto de 392 mil estrelas",
+        "tema": "ia",
+        "urls": [
+          "https://github.com/openclaw/openclaw"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "enter-oab-sp",
+        "titulo": "OAB-SP move ação civil pública contra a legaltech Enter",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.oabsp.org.br/jornaldaadvocacia/26-10-07-1742-oab-sp-aciona-justica-contra-empresa-de-ia-para-estabelecer-limites-a-automacao-e-proteger-atividades-privativas-da-advocacia"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "sullivan-cromwell-agreement-analyzer",
+        "titulo": "Sullivan & Cromwell cria revisor de contratos com agentes que se contestam",
+        "tema": "direito_tech",
+        "urls": [
+          "https://openai.com/index/sullivan-cromwell/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "semana_em_revista",
+      "breakthroughs",
+      "historias_em_andamento",
+      "numeros",
+      "ia_na_pratica",
+      "links",
+      "pergunta"
+    ]
+  },
+  {
+    "data": "2026-10-18",
+    "tipo": "domingo",
+    "numero": 3,
+    "assunto": "o que sobra para quem assina?",
+    "previa": "+ Aristóteles, a OAB e a máquina que contesta a si mesma",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "ensaio-assinatura-responsabilidade",
+        "titulo": "Ensaio: técnica, prudência e responsabilidade quando a IA escreve a peça",
+        "tema": "filosofia",
+        "urls": [
+          "https://classics.mit.edu/Aristotle/nicomachaen.6.vi.html",
+          "https://www.canadianlawyermag.com/news/international/sullivan-cromwell-apologizes-to-us-bankruptcy-judge-for-aigenerated-errors-in-prince-group-case/394014"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "enter-oab-sp",
+        "titulo": "OAB-SP x Enter, lida pelo ângulo da responsabilidade de quem assina",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.oabsp.org.br/jornaldaadvocacia/26-10-07-1742-oab-sp-aciona-justica-contra-empresa-de-ia-para-estabelecer-limites-a-automacao-e-proteger-atividades-privativas-da-advocacia"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "bets-mp-1394",
+        "titulo": "Agibank estreia como patrocinador máster do Santos",
+        "tema": "negocios",
+        "urls": [
+          "https://www.meioemensagem.com.br/marketing/apos-proibicao-das-bets-santos-tem-novo-patrocinador"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-termos-comerciais-crawling",
+        "titulo": "Novos termos comerciais da Meta valem a partir de 30/10",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.facebook.com/legal/commercial_terms_preview"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "china-controle-exportacao-ia",
+        "titulo": "Consulta da China sobre exportação de tecnologias de IA vai até 15/11",
+        "tema": "china",
+        "urls": [
+          "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_0a31a3c9ac404f7a9b0e917ce3412997.html"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "ensaio",
+      "filosofia",
+      "em_3_linhas",
+      "pergunta"
+    ]
+  }
+]

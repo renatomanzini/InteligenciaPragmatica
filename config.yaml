@@ -1,0 +1,26 @@
+# Configuração da Inteligência Pragmática.
+# Pode editar à vontade: é só texto. O que vem depois de # é comentário.
+
+nome: Inteligência Pragmática
+
+# "desligado" = gera a edição mas NÃO manda e-mail (fase de testes).
+# "ligado"    = agenda o e-mail para o horário de entrega.
+envio: desligado
+
+horario_entrega: "06:30"        # horário de Brasília
+fuso: America/Sao_Paulo
+
+# Endereço público do arquivo de edições (preenchido quando o GitHub Pages existir).
+site_url: "https://renatomanzini.github.io/InteligenciaPragmatica"
+
+# Tamanho-alvo (minutos de leitura). Dia fraco pode (e deve) ficar abaixo.
+leitura_min:
+  dia_util: [5, 8]
+  sabado: [6, 9]
+  domingo: [5, 8]
+
+# Quantas histórias no máximo a apuração pode pesquisar a fundo por edição.
+max_historias_apuradas: 8
+
+# O e-mail de destino NÃO fica aqui (o repositório é público).
+# Ele vem da variável de ambiente EMAIL_DESTINO, e a chave do Resend de RESEND_API_KEY.

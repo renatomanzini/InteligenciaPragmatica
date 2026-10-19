@@ -1,0 +1,345 @@
+"""Teste de ponta a ponta do código (sem enviar e-mail e sem tocar nas pastas reais).
+
+Rode da raiz do projeto:
+    .venv/bin/python testes/testar.py
+
+Tudo acontece numa pasta temporária: a edição de exemplo é copiada para lá, montada,
+registrada no histórico e conferida. Os links do exemplo apontam para sites reais, então
+a verificação de links usa a internet (sem internet, ela vira "inconclusiva" e o teste segue).
+"""
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+RAIZ_PROJETO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(RAIZ_PROJETO))
+
+from ferramentas import envio, historico, links, montagem, util  # noqa: E402
+
+DATA = "2026-01-15"
+falhas = []
+
+
+def conferir(condicao, descricao):
+    print(("  ok     " if condicao else "  FALHOU ") + descricao)
+    if not condicao:
+        falhas.append(descricao)
+
+
+def secao(titulo):
+    print("\n== %s" % titulo)
+
+
+def preparar_raiz(tmp: Path, copiar_codigo: bool = False) -> Path:
+    raiz = tmp / "projeto"
+    pasta = raiz / "edicoes" / DATA
+    pasta.mkdir(parents=True)
+    shutil.copy(RAIZ_PROJETO / "testes" / "edicao_exemplo.md", pasta / "edicao.md")
+    if copiar_codigo:  # para rodar o main.py de verdade (ele usa a pasta onde está)
+        shutil.copy(RAIZ_PROJETO / "main.py", raiz / "main.py")
+        shutil.copy(RAIZ_PROJETO / "config.yaml", raiz / "config.yaml")
+        shutil.copytree(RAIZ_PROJETO / "ferramentas", raiz / "ferramentas",
+                        ignore=shutil.ignore_patterns("__pycache__", "coleta.py", "github.py"))
+    return raiz
+
+
+def testar_links(raiz):
+    secao("links.verificar")
+    res = links.verificar(DATA, raiz, imprimir=False)
+    arq = raiz / "edicoes" / DATA / "links.json"
+    conferir(arq.exists(), "gravou links.json")
+    conferir(json.loads(arq.read_text(encoding="utf-8"))["total"] == res["total"], "links.json bate com o resultado")
+    urls = [i["url"] for i in res["links"]]
+    conferir(res["total"] == 6, "achou os 6 links diferentes do corpo e do front matter (%d)" % res["total"])
+    conferir("https://www.python.org" in urls and "https://github.com" in urls, "inclui links do front matter e do texto")
+    conferir(not any(u.endswith((")", ".", ",")) for u in urls), "nenhuma URL ficou com pontuação colada")
+    conferir(res["resumo"]["quebrado"] == 0, "nenhum link do exemplo está quebrado: %s" % res["resumo"])
+    # extração de URLs em casos chatos
+    texto = "veja [x](https://a.com/foo_(bar)) e https://b.com/p?q=1. Também <https://c.com/z>, fim."
+    conferir(links.extrair_urls(texto) == ["https://a.com/foo_(bar)", "https://b.com/p?q=1", "https://c.com/z"],
+             "extrair_urls lida com parênteses, ponto final e <autolink>")
+
+    # classificação com um link morto de verdade (só se a internet estiver funcionando)
+    if res["resumo"]["ok"] == 0:
+        print("  (sem internet: pulei o teste de link quebrado)")
+        return
+    pasta = raiz / "edicoes" / "2026-01-16"
+    pasta.mkdir()
+    (pasta / "edicao.md").write_text(
+        "---\ndata: 2026-01-16\n---\n[a](https://github.com/pagina-que-nao-existe-ip-teste-404-xyz) "
+        "[b](https://dominio-que-nao-existe.invalid/x) [c](https://github.com)\n", encoding="utf-8")
+    r2 = links.verificar("2026-01-16", raiz, imprimir=False)
+    por_url = {i["url"]: i["resultado"] for i in r2["links"]}
+    conferir(por_url["https://github.com/pagina-que-nao-existe-ip-teste-404-xyz"] == "quebrado", "404 é 'quebrado'")
+    conferir(por_url["https://dominio-que-nao-existe.invalid/x"] == "quebrado", "domínio que não existe é 'quebrado'")
+    conferir(por_url["https://github.com"] == "ok", "github.com é 'ok'")
+    shutil.rmtree(pasta)
+
+
+def png_tamanho(dados: bytes):
+    if dados[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return int.from_bytes(dados[16:20], "big"), int.from_bytes(dados[20:24], "big")
+
+
+def testar_montagem(raiz):
+    secao("montagem.montar")
+    config = util.ler_yaml(RAIZ_PROJETO / "config.yaml")
+    config["site_url"] = ""
+    res = montagem.montar(DATA, raiz, config)
+    pasta = raiz / "edicoes" / DATA
+    docs = raiz / "docs"
+    conferir(res["avisos"] == [], "sem avisos de front matter/TL;DR (%s)" % res["avisos"])
+    for caminho in (pasta / "email.html", pasta / "curta.txt", docs / (DATA + ".html"), docs / "index.html",
+                    docs / "manifest.webmanifest", docs / "sw.js", docs / "icon.svg",
+                    docs / "icon-192.png", docs / "icon-512.png"):
+        conferir(caminho.exists() and caminho.stat().st_size > 0, "gerou %s" % caminho.relative_to(raiz))
+    conferir(png_tamanho((docs / "icon-192.png").read_bytes()) == (192, 192), "icon-192.png é um PNG 192x192")
+    conferir(png_tamanho((docs / "icon-512.png").read_bytes()) == (512, 512), "icon-512.png é um PNG 512x512")
+    json.loads((docs / "manifest.webmanifest").read_text(encoding="utf-8"))
+    conferir(True, "manifest.webmanifest é um JSON válido")
+
+    email = (pasta / "email.html").read_text(encoding="utf-8")
+    secao("email.html: convenções convertidas")
+    conferir("~~" not in email, "nenhum ~~ sobrou")
+    conferir(email.count("<del ") == 2 and "</del>" in email, "os 2 tachados do corpo viraram <del> (o assunto não aparece no corpo)")
+    conferir(not re.search(r"<(h[1-4]|p|ul|li|blockquote|hr)>", email), "todas as tags principais têm style inline")
+    conferir("####" not in email and "<h4" in email and "text-transform:uppercase" in email, "#### virou rótulo em caixa alta")
+    conferir(email.count("border-left:4px solid #0F5C6E") == 4, "4 TL;DR viraram caixa com borda (%d)" % email.count("border-left:4px solid #0F5C6E"))
+    conferir(re.search(r"TL;DR:</strong> \w", email) is not None, "TL;DR com espaço depois do rótulo")
+    conferir(email.count('class="seta"') == 5, "5 linhas → viraram itens com seta (%d)" % email.count('class="seta"'))
+    conferir('class="setas"' in email, "linhas → consecutivas formam bloco")
+    conferir(email.count('class="fonte"') == 5 and "13.5px" in email, "5 linhas 🔗 viraram linha de fonte menor (%d)" % email.count('class="fonte"'))
+    conferir('class="opiniao"' in email and 'class="selo"' in email and "font-style:italic" in email,
+             "**Opinião:** virou parágrafo com selo")
+    conferir("Opinião:</strong>" not in email, "o '**Opinião:**' cru sumiu")
+    conferir("<hr" in email and "border-top:1px solid" in email, "--- virou linha fina")
+    conferir("<h3" in email and "<h2" in email, "## e ### viram títulos")
+    conferir("Georgia" in email and "#FAF8F5" in email and "#0F5C6E" in email and "#1F1F1F" in email, "paleta e fontes do visual")
+    conferir('max-width:640px' in email and 'width="640"' in email, "tabela centralizada de 640 px")
+    conferir("prefers-color-scheme: dark" in email, "tem modo escuro")
+    conferir("Inteligência Pragmática" in email and "quinta-feira, 15 de janeiro de 2026" in email
+             and "Edição nº 1" in email and "7 min de leitura" in email, "cabeçalho: nome, data por extenso, nº e minutos")
+    conferir("display:none" in email and "EXEMPLO FICTÍCIO · + quanto custa" in email, "pré-header escondido com a prévia")
+    conferir("Feita por IA para um leitor só. Fontes linkadas em cada afirmação." in email, "rodapé com a frase fixa")
+    conferir("Arquivo de edições" not in email, "sem site_url, sem link de arquivo no rodapé")
+    conferir(not re.search(r"<img|src=\"http|url\(http", email), "sem imagens externas")
+
+    curta = (pasta / "curta.txt").read_text(encoding="utf-8")
+    secao("curta.txt")
+    conferir(len(curta.strip()) <= 900, "cabe em 900 caracteres (%d)" % len(curta.strip()))
+    conferir(3 <= curta.count("• ") <= 5, "tem de 3 a 5 bullets (%d)" % curta.count("• "))
+    conferir("TL;DR" not in curta and "**" not in curta and "~~" not in curta, "sem marcas de Markdown")
+    conferir("̶" in curta.splitlines()[0], "assunto com tachado combinante na primeira linha")
+    conferir("quinta-feira, 15 de janeiro de 2026" in curta, "tem a data por extenso")
+    conferir("Edição completa" not in curta, "sem site_url, sem link de edição completa")
+
+    pagina = (docs / (DATA + ".html")).read_text(encoding="utf-8")
+    indice = (docs / "index.html").read_text(encoding="utf-8")
+    secao("site (docs/)")
+    for nome, texto in (("página da edição", pagina), ("índice", indice)):
+        conferir('rel="manifest"' in texto and "apple-touch-icon" in texto and 'name="theme-color"' in texto,
+                 "%s: manifest, apple-touch-icon e theme-color" % nome)
+        internos = [u for u in re.findall(r'(?:href|src)="([^"]+)"', texto) if not re.match(r"(https?:|#|mailto:)", u)]
+        conferir(internos and not any(u.startswith("/") for u in internos), "%s: links internos são relativos %s" % (nome, sorted(set(internos))))
+    conferir("← todas as edições" in pagina and 'href="index.html"' in pagina, "página tem o link '← todas as edições'")
+    conferir("prefers-color-scheme: dark" in pagina and "max-width" in pagina and "viewport" in pagina,
+             "página é responsiva e tem modo escuro")
+    conferir("<del>" in pagina and '<h1 class="assunto">o <del>estagiário</del>' in pagina, "assunto com <del> na página")
+    conferir(f'href="{DATA}.html"' in indice and "<del>estagiário</del>" in indice and "nº 1" in indice,
+             "índice lista a edição com data, nº e assunto com <del>")
+    conferir("EXEMPLO FICTÍCIO" in indice, "índice mostra a prévia")
+    conferir("serviceWorker" in pagina and "serviceWorker" in indice, "páginas registram o service worker")
+    conferir("caches.open" in (docs / "sw.js").read_text(encoding="utf-8"), "sw.js guarda páginas em cache")
+
+    # segunda edição: o índice deve ordenar da mais nova para a mais antiga
+    pasta2 = raiz / "edicoes" / "2026-01-16"
+    pasta2.mkdir()
+    texto2 = (pasta / "edicao.md").read_text(encoding="utf-8").replace("2026-01-15", "2026-01-16").replace("numero: 1", "numero: 2")
+    (pasta2 / "edicao.md").write_text(texto2, encoding="utf-8")
+    montagem.montar("2026-01-16", raiz, config)
+    indice2 = (docs / "index.html").read_text(encoding="utf-8")
+    conferir(indice2.index("2026-01-16.html") < indice2.index("2026-01-15.html"), "índice ordena da mais nova para a mais antiga")
+    shutil.rmtree(pasta2)
+    (docs / "2026-01-16.html").unlink()
+    montagem.montar(DATA, raiz, config)
+
+    # com site_url preenchido
+    config["site_url"] = "https://exemplo.github.io/ip/"
+    montagem.montar(DATA, raiz, config)
+    email = (pasta / "email.html").read_text(encoding="utf-8")
+    curta = (pasta / "curta.txt").read_text(encoding="utf-8")
+    secao("com site_url preenchido")
+    conferir('href="https://exemplo.github.io/ip/"' in email and "Arquivo de edições" in email, "rodapé do e-mail linka o arquivo")
+    conferir(curta.strip().endswith("Edição completa: https://exemplo.github.io/ip/%s.html" % DATA), "curta.txt termina com o link da edição")
+    conferir(len(curta.strip()) <= 900, "curta.txt continua cabendo em 900 (%d)" % len(curta.strip()))
+    pagina = (docs / (DATA + ".html")).read_text(encoding="utf-8")
+    conferir("exemplo.github.io" not in pagina, "links internos do site não usam o site_url (continuam relativos)")
+
+
+def testar_historico(raiz):
+    secao("historico.registrar e resumo")
+    entrada = historico.registrar(DATA, raiz)
+    arq = raiz / "dados" / "historico.json"
+    conferir(arq.exists(), "gravou dados/historico.json")
+    dados = json.loads(arq.read_text(encoding="utf-8"))
+    conferir(len(dados) == 1 and dados[0]["data"] == DATA and dados[0]["numero"] == 1, "entrada com data e número certos")
+    conferir(len(entrada["historias"]) == 3, "3 histórias registradas")
+    historico.registrar(DATA, raiz)
+    conferir(len(json.loads(arq.read_text(encoding="utf-8"))) == 1, "registrar de novo substitui, não duplica")
+    texto = historico.resumo(36500, raiz)
+    conferir("exemplo-agente-de-contratos" in texto and "(em andamento)" in texto, "resumo lista as histórias e o 'em andamento'")
+    conferir("Histórias em andamento" in texto and DATA in texto, "resumo tem a seção de histórias em andamento")
+    conferir(historico.proximo_numero(raiz) == 2, "próximo número é 2")
+    conferir("https://www.python.org" in {u.rstrip("/") for u in historico.urls_cobertas(raiz)} or len(historico.urls_cobertas(raiz)) >= 3,
+             "urls_cobertas devolve as URLs das histórias")
+
+
+def testar_envio(raiz):
+    secao("envio.enviar (sem chamar o Resend de verdade)")
+    chamadas = []
+    original_postar = envio._postar
+
+    def postar_falso(payload, chave):
+        chamadas.append((payload, chave))
+        return {"ok": True, "dados": {"id": "id-de-teste"}}
+
+    envio._postar = postar_falso
+    guardadas = {k: os.environ.pop(k, None) for k in ("RESEND_API_KEY", "EMAIL_DESTINO")}
+    try:
+        cfg_desligado = {"envio": "desligado", "horario_entrega": "06:30"}
+        r = envio.enviar(DATA, raiz, cfg_desligado)
+        conferir(r["status"] == "desligado" and "Envio desligado no config.yaml (fase de testes)" in r["mensagem"] and not chamadas,
+                 "desligado: recusa e não chama a API")
+        r = envio.enviar(DATA, raiz, {"envio": "ligado"})
+        conferir(r["status"] == "erro" and "RESEND_API_KEY" in r["mensagem"] and "EMAIL_DESTINO" in r["mensagem"] and not chamadas,
+                 "ligado sem variáveis: avisa quais faltam")
+        os.environ["RESEND_API_KEY"] = "chave-de-teste"
+        r = envio.enviar(DATA, raiz, {"envio": "ligado"})
+        conferir(r["status"] == "erro" and "EMAIL_DESTINO" in r["mensagem"] and "RESEND_API_KEY" not in r["mensagem"] and not chamadas,
+                 "falta só EMAIL_DESTINO: avisa só ele")
+        # com tudo preenchido, o envio falso confere o conteúdo que iria para o Resend
+        os.environ["EMAIL_DESTINO"] = "leitor@exemplo.test"
+        r = envio.enviar(DATA, raiz, cfg_desligado, forcar=True, agora=True)
+        conferir(r["status"] == "enviado" and len(chamadas) == 1, "--forcar envia mesmo desligado (com API falsa)")
+        payload = chamadas[0][0]
+        conferir(payload["to"] == ["leitor@exemplo.test"] and payload["from"].startswith("Inteligência Pragmática <"), "remetente e destino")
+        conferir("~~" not in payload["subject"] and "̶" in payload["subject"], "assunto com tachado combinante")
+        conferir("scheduled_at" not in payload, "--agora não agenda")
+        conferir(payload["html"].startswith("<!DOCTYPE html>") and payload["text"].rstrip().endswith("Versão completa no HTML."),
+                 "html é o email.html e text é curta.txt + aviso")
+        env = json.loads((raiz / "edicoes" / DATA / "envio.json").read_text(encoding="utf-8"))
+        conferir(env["id"] == "id-de-teste" and "leitor@exemplo.test" not in json.dumps(env), "envio.json guarda o id e NÃO guarda o e-mail")
+        # agendamento: data futura entra com offset -03:00; passada não
+        futura = envio._horario_agendado(util.hoje_brasilia().replace(year=util.hoje_brasilia().year + 1), "06:30")
+        conferir(futura is not None and futura.endswith("T06:30:00-03:00"), "horário futuro agenda com -03:00 (%s)" % futura)
+        conferir(envio._horario_agendado(util.hoje_brasilia().replace(year=2020), "06:30") is None, "horário passado não agenda")
+        (raiz / "edicoes" / DATA / "envio.json").unlink()
+    finally:
+        envio._postar = original_postar
+        for k, v in guardadas.items():
+            os.environ.pop(k, None)
+            if v is not None:
+                os.environ[k] = v
+
+
+def testar_cli(tmp):
+    secao("main.py (linha de comando, numa cópia temporária)")
+    raiz = preparar_raiz(tmp / "cli", copiar_codigo=True)
+    env = {k: v for k, v in os.environ.items() if k not in ("RESEND_API_KEY", "EMAIL_DESTINO")}
+    env["BROWSER"] = "true"  # se alguma coisa tentar abrir o navegador, não abre nada
+
+    def rodar(*args):
+        p = subprocess.run([sys.executable, str(raiz / "main.py")] + list(args), cwd=str(raiz), env=env,
+                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, timeout=300)
+        return p.returncode, p.stdout
+
+    codigo, saida = rodar("--help")
+    conferir(codigo == 0 and "montar" in saida and "--dry-run" in saida, "--help lista os comandos")
+    codigo, saida = rodar("montar", DATA)
+    conferir(codigo == 0 and (raiz / "edicoes" / DATA / "email.html").exists(), "montar DATA gera o email.html")
+    codigo, saida = rodar("montar")
+    conferir(codigo == 0 and DATA in saida, "montar sem data usa a edição mais recente")
+    codigo, saida = rodar("registrar", DATA)
+    conferir(codigo == 0 and "registrada" in saida, "registrar grava no histórico")
+    codigo, saida = rodar("historico", "--dias", "36500")
+    conferir(codigo == 0 and "exemplo-agente-de-contratos" in saida, "historico imprime o resumo")
+    codigo, saida = rodar("enviar", DATA)
+    conferir(codigo == 0 and "Envio desligado no config.yaml (fase de testes)" in saida, "enviar com envio desligado recusa (saída 0)")
+    codigo, saida = rodar("enviar", DATA, "--forcar")
+    conferir(codigo == 1 and "RESEND_API_KEY" in saida and "EMAIL_DESTINO" in saida, "enviar --forcar sem variáveis dá erro (saída 1)")
+    codigo, saida = rodar("montar", "2030-01-01")
+    conferir(codigo == 1 and "Não achei" in saida, "data sem edição dá erro claro (saída 1)")
+    codigo, saida = rodar("montar", "ontem")
+    conferir(codigo == 1 and "Use AAAA-MM-DD" in saida, "data inválida explica o formato")
+    codigo, saida = rodar("coletar")
+    conferir(codigo == 1 and "coleta" in saida.lower(), "coletar sem o módulo avisa em vez de quebrar")
+    codigo, saida = rodar("--dry-run", DATA)
+    conferir(codigo == 0 and "nenhum e-mail foi enviado" in saida, "--dry-run monta e não envia")
+    conferir(not (raiz / "edicoes" / DATA / "envio.json").exists(), "--dry-run não criou envio.json")
+    # links: uma edição só com link quebrado deve sair com 1
+    pasta = raiz / "edicoes" / "2026-01-17"
+    pasta.mkdir()
+    (pasta / "edicao.md").write_text("---\ndata: 2026-01-17\n---\n[x](https://dominio-que-nao-existe.invalid/)\n", encoding="utf-8")
+    codigo, saida = rodar("links", "2026-01-17")
+    if "sem internet" in saida:
+        print("  (sem internet: pulei o teste de saída do comando links)")
+    else:
+        conferir(codigo == 1 and "quebrado" in saida, "links com link quebrado sai com 1")
+
+
+def testar_conversao():
+    secao("conversão Markdown → HTML em casos chatos (sem linhas em branco)")
+    md = (
+        "**Nesta edição:**\n- um\n- dois\ntexto colado\n"
+        "#### ROTULO\n## Título com ~~óbvio~~ real\n> **TL;DR:** colado no título.\n"
+        "Texto depois da citação com [link](https://a.com/x_(y)).\n"
+        "→ **A**: um\n→ **B**: dois\n🔗 [Fonte](https://x.com)\n🔗 [Fonte2](https://y.com)\n"
+        "Parágrafo\n---\n### Subtítulo\n**Opinião:** eu acho.\n"
+    )
+    h = montagem._semantico(montagem._renderizar(md))
+    conferir("<ul>" in h and "<p>texto colado</p>" in h, "lista sem linha em branco antes funciona e termina")
+    conferir('<h4 class="rotulo">ROTULO</h4>' in h and "<h2>Título com <del>óbvio</del> real</h2>" in h, "título e tachado")
+    conferir('<blockquote class="tldr">' in h and "<p>Texto depois da citação" in h, "TL;DR colado ao título e texto colado à citação")
+    conferir(h.count('<p class="seta">') == 2 and h.count('<div class="setas">') == 1, "duas linhas → coladas viram um bloco com 2 itens")
+    conferir(h.count('<p class="fonte">') == 2, "duas linhas 🔗 coladas viram 2 linhas de fonte")
+    conferir("<hr>" in h and "<h2>Parágrafo" not in h, "--- depois de texto colado vira linha, não título")
+    conferir('<p class="opiniao"><span class="selo">Opinião</span> eu acho.' in h, "**Opinião:** vira selo")
+    conferir('a.com/x_(y)"' in h, "link com parêntese no endereço")
+    tit = montagem.assunto_tachado("o ~~óbvio~~ real")
+    conferir(tit == "o ó\u0336b\u0336v\u0336i\u0336o\u0336 real" and montagem.assunto_sem_marcas("o ~~óbvio~~ real") == "o óbvio real",
+             "assunto: tachado combinante e sem marcas")
+
+
+def fotografia():
+    """Lista de arquivos de edicoes/ e docs/ e o estado do historico.json do projeto real."""
+    arquivos = sorted(str(p.relative_to(RAIZ_PROJETO)) for pasta in ("edicoes", "docs")
+                      for p in (RAIZ_PROJETO / pasta).rglob("*"))
+    hist = RAIZ_PROJETO / "dados" / "historico.json"
+    return arquivos, (hist.stat().st_mtime if hist.exists() else None)
+
+
+def main():
+    antes = fotografia()
+    with tempfile.TemporaryDirectory(prefix="ip-teste-") as t:
+        tmp = Path(t)
+        raiz = preparar_raiz(tmp / "api")
+        testar_links(raiz)
+        testar_montagem(raiz)
+        testar_conversao()
+        testar_historico(raiz)
+        testar_envio(raiz)
+        testar_cli(tmp)
+    secao("projeto real")
+    conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
+    print("\n" + ("TUDO CERTO" if not falhas else "%d FALHA(S):\n  - " % len(falhas) + "\n  - ".join(falhas)))
+    return 1 if falhas else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
