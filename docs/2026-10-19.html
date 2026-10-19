@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a anthropic prometeu 5% de si. quem manda nela? · Inteligência Pragmática</title>
+<meta name="description" content="+ o modelo que escreve sem cara de ia (e cabe no seu mac)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="index.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática</div>
+<div class="meta">segunda-feira, 19 de outubro de 2026 · Edição nº 4 · 8 min de leitura</div>
+<h1 class="assunto">a anthropic prometeu 5% de si. quem manda nela?</h1>
+</header>
+<main class="corpo">
+<p>bom dia. Hoje a pauta é sobre quem decide. Uma empresa de quase um trilhão de dólares promete parte de si ao "bem público" e ainda não disse quem vai assinar os cheques.</p>
+<p><strong>Hoje eu aprendi:</strong> cães também parecem sentir que "bouba" é redondo e "kiki" é pontudo. Num estudo da Universidade de Parma, eles olharam mais para a forma redonda ao ouvir "bouba" e para a pontuda ao ouvir "kiki", a mesma associação que os humanos fazem sem pensar (<a href="https://doi.org/10.1098/rspb.2026.1209">Proceedings of the Royal Society B</a>; <a href="https://www.sciencealert.com/dogs-seem-to-agree-with-humans-that-bouba-is-round-and-kiki-is-spiky">ScienceAlert</a>).</p>
+<p><strong>Nesta edição:</strong></p>
+<ul>
+<li>A Anthropic promete 5% das ações ao bem público. Quem manda nela, afinal?</li>
+<li>Um modelo que escreve sem cara de IA, ajustado num MacBook Air</li>
+<li>O Focus corta o PIB e a China acelera</li>
+<li>A Disney contrata o time da Character.AI, que faliu</li>
+<li>US$ 2,9 bilhões por dia: a conta de juros dos EUA</li>
+</ul>
+<hr>
+<h4 class="rotulo">⚖️ DIREITO &amp; TECH</h4>
+<h2>A Anthropic prometeu 5% de si. Quem manda nela?</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> a Anthropic promete <strong>5%</strong> das ações a um fundo de benefício público, cerca de <strong>US$ 48 bi</strong> na última avaliação, mas a governança do fundo ainda não saiu, e o IPO vem aí.</p>
+</blockquote>
+<p>No domingo (18), a Anthropic anunciou o <strong>Anthropic Public Benefit Fund</strong>. Se os acionistas aprovarem, <strong>5%</strong> das ações vão para ele. A cada alta de <strong>50%</strong> no valor da empresa acima de uma base, o conselho pode pôr mais <strong>2%</strong> (<a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic</a>).</p>
+<p>Somando a promessa dos cofundadores (doar <strong>80%</strong> do que têm, feita na fundação) e o programa em que a empresa iguala as doações de ações dos funcionários, a Anthropic diz que cerca de <strong>20%</strong> das ações vão para o bem público (<a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic</a>).</p>
+<p>Para dar escala: na rodada de maio, a empresa foi avaliada em <strong>US$ 965 bi</strong> (<a href="https://www.orrick.com/en/News/2026/05/Anthropic-Raises-65B-Series-H-at-965B-Post-Money-Valuation">Orrick</a>). Pela nossa conta, 5% disso dá <strong>~US$ 48 bi</strong>, ou ~R$ 245 bi com o dólar a R$ 5,07. É <strong>cinco vezes</strong> a régua do Pledge 1%, o compromisso de doar 1% que o Reddit, por exemplo, levou para o IPO (<a href="https://pledge1percent.org/">Pledge 1%</a>).</p>
+<p><strong>O que ainda falta.</strong> O fundo é uma LLC, uma empresa limitada, que pertence inteira à Anthropic. Não é uma fundação filantrópica independente. A empresa diz que o dinheiro não vai para lobby nem para doação política. Mas a estrutura, a governança e a base de cálculo dos 2% só saem nos próximos meses, e o anúncio não diz quem vai escolher o que será financiado (<a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic</a>; <a href="https://techcrunch.com/2026/10/18/anthropic-says-its-committing-5-of-its-shares-to-a-public-benefit-fund/">TechCrunch</a>).</p>
+<p><strong>O contexto que importa: o trust.</strong> A Anthropic é uma <em>public benefit corporation</em> (PBC), uma empresa com fins lucrativos que tem, no estatuto, um propósito público. Pela lei de Delaware, o conselho dela é obrigado a <strong>equilibrar</strong> o lucro dos acionistas, os interesses de quem é afetado e esse propósito (DGCL, §365) (<a href="https://delcode.delaware.gov/title8/c001/sc15/index.html">Delaware Code</a>).</p>
+<p>Por cima disso há o <strong>Long-Term Benefit Trust</strong>, um grupo de curadores (cinco, no desenho de 2023) com ações de uma classe especial. Por esse desenho, eles passariam a eleger a maioria do conselho em até quatro anos. Ben Bernanke, ex-presidente do Fed, entrou em julho (<a href="https://www.anthropic.com/news/the-long-term-benefit-trust">Anthropic</a>). O conselho é eleito pelos acionistas e pelo trust (<a href="https://www.anthropic.com/company">Anthropic</a>).</p>
+<p>Lê de novo: a própria página do trust prevê que uma <strong>supermaioria de acionistas</strong> pode mudar os poderes dele sem o consentimento dos curadores (<a href="https://www.anthropic.com/news/the-long-term-benefit-trust">Anthropic</a>).</p>
+<p><strong>Quem defende diz:</strong> a empresa amarra parte da própria riqueza ao bem público, soma isso à promessa dos cofundadores e proíbe que esse patrimônio vire lobby (<a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic</a>).</p>
+<p><strong>Quem critica diz:</strong> por enquanto é promessa. Os acionistas ainda não aprovaram, a governança não foi publicada e o fundo é da própria empresa (<a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic</a>). E o trust pode ser reescrito por uma supermaioria de acionistas (<a href="https://www.anthropic.com/news/the-long-term-benefit-trust">Anthropic</a>).</p>
+<p><strong>O que mudou desde 17/10:</strong> naquela edição, o assunto era a receita de <strong>US$ 16,8 bi</strong> no 3º trimestre, relatada por quem viu a apresentação a investidores. Agora a pergunta deixa de ser só quanto a Anthropic vale. É também quem manda nela quando estiver na bolsa.</p>
+<p><strong>Por que isso importa pra você:</strong> quem compra ação de uma PBC compra uma empresa cujo conselho pode, legalmente, dizer não ao lucro máximo. Para quem estuda Direito, é um caso vivo de governança: o estatuto e as classes de ações decidem mais que o discurso. <strong>Opinião:</strong> o anúncio só vira fato quando sair a governança do fundo.</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic: Investing in the public benefit</a></p>
+<hr>
+<h4 class="rotulo">🧠 IA NA PRÁTICA</h4>
+<h2>Um modelo pequeno, ajustado num notebook, para escrever de outro jeito</h2>
+<p>O <em>fine-tuning</em>, que é treinar de novo um modelo pronto com seus exemplos, costumava ser coisa de laboratório. A versão leve dele é o <strong>LoRA</strong>: em vez de reescrever o livro, você cola post-its nas páginas certas. O arquivo dos post-its é pequeno, e o livro continua o mesmo.</p>
+<p>O desenvolvedor Erik Markus Kannike usou isso para atacar os tiques de escrita da IA: o travessão a cada frase, o "não é X, é Y" e as listas de três. Ele pegou o <strong>Qwen3-4B</strong>, um modelo aberto de 4 bilhões de parâmetros, e o ajustou num <strong>MacBook Air M2</strong>. O método: uma versão anterior do próprio modelo, com <strong>4 neurônios</strong> editados e um comando de estilo, gerou respostas; filtros separaram as boas; e um adaptador LoRA de <strong>126 MB</strong> aprendeu com elas (<a href="https://100toolkit.com/blog/deslop-model/">blog do autor</a>).</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://huggingface.co/erikkannike/qwen3-4b-deslop-v4">Pesos no Hugging Face (Apache-2.0)</a></p>
+<p>Na medição dele, os tiques caíram de <strong>121</strong> para <strong>12,5</strong> a cada mil palavras, e os travessões, de <strong>20,5 para zero</strong> a cada mil palavras. O modelo acertou <strong>30 de 30</strong> perguntas factuais de controle. A versão comprimida tem <strong>~2,5 GB</strong> (<a href="https://100toolkit.com/blog/deslop-model/">blog do autor</a>). Pelo tamanho, deve caber num Mac de 8 GB, mas a gente não testou.</p>
+<p>⚠️ <strong>Agora o freio:</strong></p>
+<ul>
+<li><strong>Só inglês.</strong> Foi testado em prosa curta em inglês. Em português, não há evidência nenhuma.</li>
+<li><strong>Quem mediu foi o autor</strong>, com uma régua (expressões regulares) tirada do próprio guia de estilo. Ele admite que parte dos números favorece o modelo. Ninguém testou às cegas com leitores.</li>
+<li><strong>Ele inventa nomes e lugares</strong>, escreve longo e tem voz "plana", nas palavras do próprio autor.</li>
+<li><strong>É nicho:</strong> <strong>31</strong> downloads no último mês (<a href="https://huggingface.co/erikkannike/qwen3-4b-deslop-v4">Hugging Face</a>).</li>
+<li>Tirar a cara de IA do texto não tira a responsabilidade de quem assina.</li>
+</ul>
+<p><strong>Agora aplica no mundo real:</strong></p>
+<ul>
+<li><strong>Advogado:</strong> a lição não é este modelo. É que um modelo pequeno, ajustado com as peças do próprio escritório, roda no computador do escritório, e o texto do cliente não sai de lá.</li>
+<li><strong>Dono de e-commerce:</strong> um modelo local para descrição de produto no tom da marca, sem pagar por chamada.</li>
+<li><strong>Professor:</strong> separar o que é tique de máquina do que é ideia fraca na hora de corrigir. A lista de tiques do autor serve de checklist.</li>
+</ul>
+<p><strong>Como isso vira serviço:</strong> "modelo no tom da casa" para negócios pequenos. Você junta algumas centenas de textos bons do cliente (estimativa nossa), ajusta um modelo pequeno com LoRA, entrega rodando no computador dele e cobra a manutenção. <strong>Opinião:</strong> o cliente paga por consistência e privacidade, não por genialidade. E o freio vale para você também: sem teste cego com gente de verdade, a promessa fica só no slide.</p>
+<p><strong>Para testar hoje:</strong> releia um texto seu escrito com IA e conte os travessões e os "não é X, é Y". Saber o que é tique já resolve metade.</p>
+<hr>
+<h4 class="rotulo">ECONOMIA</h4>
+<p><strong>🇧🇷 Por aqui</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Focus</strong>: o mercado cortou a previsão do PIB de 2026 de <strong>1,85%</strong> para <strong>1,83%</strong> e subiu a da inflação de 2027 de <strong>4,30%</strong> para <strong>4,32%</strong>. A Selic esperada para o fim do ano ficou em <strong>13,25%</strong> (<a href="https://exame.com/economia/boletim-focus-mercado-reduz-projecao-do-pib-para-183-em-2026/">Exame</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Sexta (16)</strong>: o Ibovespa subiu <strong>0,54%</strong>, a 205.430 pontos, mas fechou a semana em queda de <strong>1,74%</strong>. O dólar terminou perto de <strong>R$ 5,07</strong> (<a href="https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-19102026/">InfoMoney</a>).</p>
+</div>
+<p><strong>🌎 Lá fora</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>China</strong>: o PIB cresceu <strong>4,5%</strong> no 3º trimestre, contra <strong>4,3%</strong> no 2º (<a href="https://english.news.cn/20261019/89cd3cbf51d94ed7bc3156fa7c628667/c.html">Xinhua</a>), um pouco acima dos 4,4% esperados (<a href="https://www.fxstreet.com/news/breaking-chinas-gdp-expands-by-45-yoy-in-q3-vs-44-expected-202610190200">FXStreet</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Petróleo</strong>: o Brent caiu <strong>1,8%</strong>, para <strong>US$ 107,88</strong>, no início do pregão desta segunda, depois que Trump assinou na sexta uma ordem que suspende sanções contra a Rússia. O fechamento de sexta tinha sido <strong>US$ 109,86</strong> (<a href="https://www.oeconomico.com/brent-recua-18-para-us-10788-apos-trump-aliviar-sancoes-a-russia/">O Econômico</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">BRASIL ADENTRO</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Ri Happy</strong>: pediu recuperação extrajudicial no domingo (18), cerca de <strong>48 dias</strong> depois do anúncio da venda para a BluSun. Héctor Núñez volta à presidência, e o tamanho da dívida não foi divulgado (<a href="https://exame.com/negocios/ri-happy-pede-recuperacao-extrajudicial-48-dias-apos-mudar-de-dono/">Exame</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Braskem</strong>: o FIP Shine, fundo ligado à IG4, ficou com <strong>50,11%</strong> do capital votante, contra cerca de 47% da Petrobras. A liquidação é na quarta (21) (<a href="https://investnews.com.br/negocios/fip-shine-conclui-aquisicao-de-acoes-e-assume-mais-de-50-de-votos-na-braskem/">InvestNews</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Petrobras e a 6x1</strong>: a estatal montou um grupo para medir o impacto do fim da escala em quase <strong>130 mil</strong> terceirizados, mais que o dobro dos cerca de <strong>50 mil</strong> empregados próprios, que não são afetados. O efeito chega pelos contratos de serviço (<a href="https://www.estadao.com.br/economia/coluna-da-broad/petrobras-avalia-impactos-do-fim-da-escala-6x1-a-130-mil-terceirizados/">Estadão</a>).</p>
+</div>
+<h4 class="rotulo">MUNDO AFORA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Disney</strong>: vai oferecer emprego a pelo menos <strong>60</strong> funcionários da Character.AI, que está em falência, num pacote estimado em <strong>US$ 60 mi</strong> por ano. Segundo a Character.AI, a Disney já tinha acertado comprar ativos dela por <strong>US$ 20 mi</strong>, num lance que outro comprador ainda pode cobrir (<a href="https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/">TechCrunch</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Replit</strong>: o CEO Amjad Masad pôs os modelos da OpenAI como padrão do agente da plataforma, e o Claude segue como opção. Segundo Masad, a Replit estava entre os <strong>cinco maiores</strong> clientes da Anthropic; uma fonte anônima contestou a versão dele (<a href="https://techcrunch.com/2026/10/17/replit-is-no-longer-working-with-anthropic-ceo-says/">TechCrunch</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Stablecoins</strong>: pagamentos com essas criptomoedas atreladas ao dólar somaram <strong>US$ 482 bi</strong> (~R$ 2,4 tri) de janeiro a setembro no mundo, <strong>45%</strong> a mais que um ano antes, segundo a Allium (<a href="https://investnews.com.br/financas/stablecoins-ja-movimentaram-r-24-trilhoes-em-pagamentos-no-ano/">InvestNews</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>LinkedIn</strong>: lançou consultas pagas individuais marcadas direto pelo perfil, por enquanto para assinantes do Business Premium nos EUA (<a href="https://news.linkedin.com/2026/new-ways-to-build-meaningful-connections">LinkedIn</a>). <strong>Opinião:</strong> para quem vende serviço, o perfil vira balcão.</p>
+</div>
+<hr>
+<h4 class="rotulo">📊 STATS</h4>
+<h2>US$ 1,05 trilhão</h2>
+<p>É quanto o governo americano pagou de juros líquidos da dívida no ano fiscal de 2026, que terminou em setembro. Um ano antes, foram <strong>US$ 970 bi</strong>. São <strong>3,2%</strong> do PIB, um recorde que supera o de 1991, segundo estimativa da Peterson Foundation (<a href="https://investnews.com.br/economia/nao-e-so-no-brasil-divida-publica-dos-eua-custa-us-1-trilhao-so-em-juros-e-ameaca-virar-bola-de-neve/">InvestNews/Bloomberg</a>).</p>
+<p>Dá cerca de <strong>US$ 2,9 bi por dia</strong>, pela nossa conta.</p>
+<p>A cadeia (leitura nossa): a taxa média da dívida negociável sobe de <strong>1,47%</strong> para <strong>3,52%</strong> em cinco anos » cada título que vence é trocado por um mais caro » a conta de juros cresce » o governo pega mais emprestado para pagar » a dívida cresce. A TD Securities calcula que <strong>1 ponto</strong> a mais nos juros somaria <strong>US$ 310 bi</strong> à conta de 2027 (mesma fonte).</p>
+<p>Ressalva: economistas ouvidos na mesma reportagem dizem que não é crise, porque o PIB nominal ainda cresce <strong>6,3%</strong>, acima da taxa média de juros da dívida.</p>
+<hr>
+<p><strong>Para ler:</strong></p>
+<ul>
+<li>[Para ler] <a href="https://www.technologyreview.com/2026/10/19/1147095/ai-stranded-claude-virtual-desert-island-play/">Pesquisadores deixaram o Claude numa ilha deserta virtual, e ele começou a "brincar"</a> (MIT Technology Review). Especialistas duvidam que seja brincadeira de verdade.</li>
+<li>[Para ler] <a href="https://importai.substack.com/p/import-ai-477-in-which-i-tell-the">Import AI 477</a>: Jack Clark, cofundador da Anthropic, diz em palestra na reunião do FMI que a singularidade já começou.</li>
+<li>[Para ler] <a href="https://karrisaarinen.com/posts/someone-behind-the-software/">Someone behind the software</a>, de Karri Saarinen: software feito por agentes sem alguém com julgamento vira média.</li>
+</ul>
+<hr>
+<p><strong>Pergunta do dia:</strong> se o seu trabalho valesse muito amanhã, quem você deixaria com o poder de dizer "não" ao dinheiro?</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="index.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>

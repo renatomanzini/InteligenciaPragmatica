@@ -344,5 +344,145 @@
       "em_3_linhas",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-19",
+    "tipo": "dia_util",
+    "numero": 4,
+    "assunto": "a anthropic prometeu 5% de si. quem manda nela?",
+    "previa": "+ o modelo que escreve sem cara de ia (e cabe no seu mac)",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "anthropic-receita-ipo",
+        "titulo": "Anthropic promete 5% das ações a um fundo de benefício público antes do IPO",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.anthropic.com/news/public-benefit-fund",
+          "https://www.anthropic.com/news/the-long-term-benefit-trust"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "qwen-deslop-modelo-local",
+        "titulo": "Modelo de 4B ajustado num MacBook Air tira os tiques de escrita de IA",
+        "tema": "ia",
+        "urls": [
+          "https://100toolkit.com/blog/deslop-model/",
+          "https://huggingface.co/erikkannike/qwen3-4b-deslop-v4"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "focus-expectativas",
+        "titulo": "Focus corta PIB de 2026 para 1,83% e sobe inflação de 2027 para 4,32%",
+        "tema": "economia",
+        "urls": [
+          "https://exame.com/economia/boletim-focus-mercado-reduz-projecao-do-pib-para-183-em-2026/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "china-pib-trimestral",
+        "titulo": "PIB da China cresce 4,5% no 3º trimestre",
+        "tema": "china",
+        "urls": [
+          "https://english.news.cn/20261019/89cd3cbf51d94ed7bc3156fa7c628667/c.html"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "petroleo-brent-2026",
+        "titulo": "Brent recua depois que Trump suspende sanções à Rússia",
+        "tema": "economia",
+        "urls": [
+          "https://www.oeconomico.com/brent-recua-18-para-us-10788-apos-trump-aliviar-sancoes-a-russia/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "fim-escala-6x1",
+        "titulo": "Petrobras estuda impacto do fim da 6x1 em quase 130 mil terceirizados",
+        "tema": "economia",
+        "urls": [
+          "https://www.estadao.com.br/economia/coluna-da-broad/petrobras-avalia-impactos-do-fim-da-escala-6x1-a-130-mil-terceirizados/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "ri-happy-recuperacao",
+        "titulo": "Ri Happy pede recuperação extrajudicial 48 dias após mudar de dono",
+        "tema": "negocios",
+        "urls": [
+          "https://exame.com/negocios/ri-happy-pede-recuperacao-extrajudicial-48-dias-apos-mudar-de-dono/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "braskem-ig4",
+        "titulo": "Fundo ligado à IG4 assume 50,11% do capital votante da Braskem",
+        "tema": "negocios",
+        "urls": [
+          "https://investnews.com.br/negocios/fip-shine-conclui-aquisicao-de-acoes-e-assume-mais-de-50-de-votos-na-braskem/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "disney-character-ai",
+        "titulo": "Disney fica com a maioria dos funcionários da Character.AI, em falência",
+        "tema": "negocios",
+        "urls": [
+          "https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "replit-openai-anthropic",
+        "titulo": "Replit põe a OpenAI como padrão do seu agente no lugar da Anthropic",
+        "tema": "ia",
+        "urls": [
+          "https://techcrunch.com/2026/10/17/replit-is-no-longer-working-with-anthropic-ceo-says/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "stablecoins-pagamentos",
+        "titulo": "Stablecoins movimentam US$ 482 bi em pagamentos até setembro",
+        "tema": "economia",
+        "urls": [
+          "https://investnews.com.br/financas/stablecoins-ja-movimentaram-r-24-trilhoes-em-pagamentos-no-ano/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "linkedin-consultas-pagas",
+        "titulo": "LinkedIn lança consultas pagas marcadas pelo perfil",
+        "tema": "marketing",
+        "urls": [
+          "https://news.linkedin.com/2026/new-ways-to-build-meaningful-connections"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "eua-juros-divida",
+        "titulo": "EUA pagam US$ 1,05 tri de juros líquidos da dívida no ano fiscal de 2026",
+        "tema": "economia",
+        "urls": [
+          "https://investnews.com.br/economia/nao-e-so-no-brasil-divida-publica-dos-eua-custa-us-1-trilhao-so-em-juros-e-ameaca-virar-bola-de-neve/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "continuacao",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
