@@ -110,7 +110,7 @@ Confira se o `edicoes/DATA/email.html` foi gerado sem erro.
 ```bash
 python main.py enviar DATA
 ```
-Com `envio: ligado` no `config.yaml`, o e-mail sai agendado para as 06:30 de Brasília. Se já passou desse horário, sai na hora. Com `envio: desligado`, o comando só avisa. Anote no resumo final o ID que o Resend devolveu.
+Com `envio: ligado` no `config.yaml`, o e-mail sai **na hora**. O remetente de teste do Resend não deixa agendar, então o e-mail chega quando a rotina termina, e o horário de chegada depende do horário da rotina. Com `envio: desligado`, o comando só avisa. Anote no resumo final o ID que o Resend devolveu.
 
 ## Passo 8: publicar
 ```bash
