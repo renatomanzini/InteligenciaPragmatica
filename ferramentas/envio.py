@@ -12,6 +12,10 @@ from .util import FUSO, USER_AGENT, agora_brasilia, ler_front_matter
 
 URL_RESEND = "https://api.resend.com/emails"
 REMETENTE = "Inteligência Pragmática <onboarding@resend.dev>"
+# O remetente de teste do Resend (resend.dev) não agenda: o envio com scheduled_at falha com
+# "Domain is not verified" (aconteceu em 20/10/2026). Sem domínio próprio, o e-mail sai na hora
+# e o horário de chegada depende do horário da rotina.
+PODE_AGENDAR = not REMETENTE.rstrip(">").endswith("@resend.dev")
 AVISO_HTML = "Versão completa no HTML."
 
 
@@ -92,7 +96,7 @@ def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: boo
         "html": arq_html.read_text(encoding="utf-8"),
         "text": texto,
     }
-    agendado = None if agora else _horario_agendado(date.fromisoformat(data), config.get("horario_entrega", "06:30"))
+    agendado = None if (agora or not PODE_AGENDAR) else _horario_agendado(date.fromisoformat(data), config.get("horario_entrega", "06:30"))
     if agendado:
         payload["scheduled_at"] = agendado
 
