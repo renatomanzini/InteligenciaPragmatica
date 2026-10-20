@@ -1,6 +1,6 @@
 # Plano vivo: Inteligência Pragmática
 
-Newsletter pessoal diária sobre IA, economia, negócios e marketing, escrita por IA para um leitor só. Ela chega às 06:30 de Brasília.
+Newsletter pessoal diária sobre IA, economia, negócios e marketing, escrita por IA para um leitor só. Ela chega por volta das 06:20 de Brasília.
 
 ## Decisões fechadas (16/10/2026)
 - **Quem escreve:** uma rotina do Claude Code na nuvem da Anthropic, paga pela assinatura do Claude (sem API). Ela roda com o Mac desligado.
@@ -23,7 +23,7 @@ O passo a passo completo está em `manual/ROTINA.md`.
 5. Checagem por um agente novo, mais o teste dos links.
 6. `montar`: o e-mail em HTML, a versão curta e o site.
 7. `registrar` no histórico.
-8. `enviar`, que agenda o e-mail para as 06:30.
+8. `enviar`, que manda o e-mail na hora. O remetente de teste do Resend não agenda: o envio agendado falhou em 20/10.
 9. `git push`, que publica o arquivo.
 
 ## Fases
@@ -34,7 +34,8 @@ O passo a passo completo está em `manual/ROTINA.md`.
   - o repositório é público e o site está no GitHub Pages;
   - a rotina roda sem conectores;
   - a edição nº 4 saiu pelo "Run now" em 12 minutos, e o leitor confirmou que o e-mail chegou;
-  - o agendamento foi ligado: todo dia às 05:07 de Brasília (cron `7 8 * * *` em UTC), com o e-mail às 06:30.
+  - o agendamento foi ligado: todo dia às 05:07 de Brasília, com o e-mail agendado para as 06:30;
+  - em 20/10/2026, o envio agendado falhou ("Domain is not verified"). Desde então, o e-mail sai na hora e a rotina começa às **06:07** (cron `7 9 * * *` em UTC), com chegada por volta das 06:20.
 - [ ] **Fase 2, Telegram:** um bot com a versão curta e o link. É também por ele que entra o feedback "mais disso / menos disso".
 - [ ] **Fase 3 (opcional), WhatsApp:** pela Cloud API oficial da Meta. Antes de implementar, levantar o custo por mensagem e os requisitos (conta Meta Business, número dedicado, template aprovado). Nada de biblioteca não oficial.
 
