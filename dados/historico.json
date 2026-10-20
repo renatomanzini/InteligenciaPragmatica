@@ -484,5 +484,136 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-20",
+    "tipo": "dia_util",
+    "numero": 5,
+    "assunto": "o whatsapp mandou o robô não citar a lgpd",
+    "previa": "+ seus agentes trabalham 6 vezes mais. e você?",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "whatsapp-instrucoes-escondidas-ia",
+        "titulo": "Páginas de ajuda do WhatsApp escondiam ordens ao chatbot, como não indicar o regulador",
+        "tema": "direito_tech",
+        "urls": [
+          "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions",
+          "https://arxiv.org/abs/2610.11932"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "anthropic-emprego-agentes",
+        "titulo": "Anthropic: horas de agentes são 6 vezes as dos funcionários, e a atenção humana vira gargalo",
+        "tema": "ia",
+        "urls": [
+          "https://www.anthropic.com/research/employment-at-anthropic"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "opencode-invasao",
+        "titulo": "OpenCode tem sistema invadido e usuários sofrem cobranças nas contas de IA",
+        "tema": "ia",
+        "urls": [
+          "https://techcrunch.com/2026/10/19/hackers-hit-ai-coding-tool-opencode-running-up-charges-on-users-ai-accounts/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "big-techs-semana-ia",
+        "titulo": "Nasdaq sobe 1,11%, mas a dívida da CoreWeave vira alerta",
+        "tema": "economia",
+        "urls": [
+          "https://aa.com.tr/en/economy/us-stocks-close-monday-mixed-as-tech-shares-raise/4093958",
+          "https://www.theverge.com/ai-artificial-intelligence/1014045/coreweave-stock-debt-sector-ai"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "bancos-inadimplencia-3t",
+        "titulo": "Balanços do 3º tri começam com inadimplência recorde de 5,04%",
+        "tema": "economia",
+        "urls": [
+          "https://c-level.folha.uol.com.br/financas/2026/10/bancos-vao-apresentar-resultados-mais-fracos-no-3o-tri-com-inadimplencia-em-alta.shtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "americanas-fraude",
+        "titulo": "Americanas sai da recuperação judicial",
+        "tema": "negocios",
+        "urls": [
+          "https://investnews.com.br/negocios/americanas-encerra-recuperacao-judicial-2/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "inter-seguros-wiz",
+        "titulo": "Inter compra a fatia da Wiz e fica com 100% da Inter Seguros",
+        "tema": "negocios",
+        "urls": [
+          "https://neofeed.com.br/negocios/inter-compra-fatia-da-wiz-co-por-r-4095-milhoes-e-fica-com-100-de-sua-seguradora/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "mexico-brasil-vc",
+        "titulo": "México supera o Brasil em aportes de venture capital em 2026",
+        "tema": "negocios",
+        "urls": [
+          "https://startups.com.br/negocios/venture-capital/mexico-supera-brasil-em-aportes-para-startups-em-2026/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "tenstorrent-rodada",
+        "titulo": "Tenstorrent capta US$ 1,5 bi e vale US$ 6,2 bi",
+        "tema": "negocios",
+        "urls": [
+          "https://techcrunch.com/2026/10/19/tenstorrent-hits-6-2b-valuation-to-scale-open-weight-ai-chips/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "tradeweb-trumid",
+        "titulo": "Tradeweb compra a Trumid por cerca de US$ 1,97 bi",
+        "tema": "negocios",
+        "urls": [
+          "https://www.sec.gov/Archives/edgar/data/0001758730/000119312526425378/d140509dex991.htm"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "google-anuncios-ai-mode",
+        "titulo": "Google testa anúncios no AI Mode com Personal Intelligence",
+        "tema": "marketing",
+        "urls": [
+          "https://www.seroundtable.com/google-ads-ai-mode-personal-intelligence-42320.html"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "chartbeat-busca-publishers",
+        "titulo": "Busca cai para 12% das pageviews de publishers na América do Norte",
+        "tema": "marketing",
+        "urls": [
+          "https://ppc.land/search-drops-to-12-of-north-american-publisher-pageviews-chartbeat-finds/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "explicador",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
