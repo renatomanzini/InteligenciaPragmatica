@@ -1,0 +1,147 @@
+{
+  "data": "2026-10-21",
+  "verificado_em": "2026-10-21T06:23:52-03:00",
+  "total": 22,
+  "resumo": {
+    "ok": 19,
+    "quebrado": 0,
+    "inconclusivo": 3
+  },
+  "links": [
+    {
+      "url": "https://techcrunch.com/2026/10/20/anthropics-cloud-partnerships-are-getting-messy/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/anthropic-revenue-hits-163-billion-as-preliminary-s1-outlines-ipo-risks--wsj-4960928",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://www.anthropic.com/research/attack-surface-reduction",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://emudhra.we-have-a-problem.com/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://techcrunch.com/2026/10/20/spacexs-ai-business-is-beating-expectations/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://neofeed.com.br/startups/ifood-beneficios-compra-caju-por-mais-de-r-12-bilhao/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/negocios/r-600-milhoes-em-jogo-por-que-o-mercado-reagiu-mal-ao-acordo-da-anima-com-o-einstein/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ppc.land/salesforce-agrees-to-buy-braze-for-5-66bn-in-cash/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://techcrunch.com/2026/10/20/anthropic-pitches-ai-safety-bill-that-may-block-a-model-if-50-people-could-be-killed/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/tech/1014627/meta-muse-ai-sharing-ai-chats",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://e360.yale.edu/digest/deepwater-horizon-deep-sea-recovery",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.pnas.org/doi/full/10.1073/pnas.2616554123",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?company=anthropic&type=S-1",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://simonwillison.net/2026/Oct/20/emudhra-certificates/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-20102026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/economia/brasil-prepara-primeira-emissao-de-panda-bonds-para-depois-da-eleicao-presidencial/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/pesquisa-quaest-balancos-weg-meta-tesla-21102026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://neofeed.com.br/negocios/exclusivo-patria-acerta-compra-de-22-lojas-do-atacadao-por-cerca-de-r-1-bilhao/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ppc.land/yelp-charges-30-a-month-for-ai-agent-that-answers-and-qualifies-leads-2/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://stevekrouse.com/ends",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://simonwillison.net/2026/Oct/20/battledrones/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.technologyreview.com/2026/10/21/1146053/editor-letter-we-can-do-impossible-things/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

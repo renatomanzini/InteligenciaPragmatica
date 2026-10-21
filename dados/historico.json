@@ -615,5 +615,108 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-21",
+    "tipo": "dia_util",
+    "numero": 6,
+    "assunto": "a anthropic faturou us$ 16,3 bi e perdeu us$ 80,7 bi",
+    "previa": "+ o código que você não usa é a porta que você esqueceu aberta",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "anthropic-receita-ipo",
+        "titulo": "Rascunho do prospecto da Anthropic: US$ 16,3 bi de receita e US$ 80,7 bi de prejuízo no 1º semestre",
+        "tema": "ia",
+        "urls": [
+          "https://techcrunch.com/2026/10/20/anthropics-cloud-partnerships-are-getting-messy/",
+          "https://www.investing.com/news/stock-market-news/anthropic-revenue-hits-163-billion-as-preliminary-s1-outlines-ipo-risks--wsj-4960928"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "claude-superficie-ataque",
+        "titulo": "Anthropic usa o Claude para cortar código desnecessário exposto a ataque em 25 projetos abertos",
+        "tema": "ia",
+        "urls": [
+          "https://www.anthropic.com/research/attack-surface-reduction"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "emudhra-certificados",
+        "titulo": "Chaves de 8 certificados intermediários da eMudhra vazam, e navegadores bloqueiam",
+        "tema": "ia",
+        "urls": [
+          "https://emudhra.we-have-a-problem.com/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "spacex-ia-receita",
+        "titulo": "IA já é 52% da receita da SpaceX",
+        "tema": "economia",
+        "urls": [
+          "https://techcrunch.com/2026/10/20/spacexs-ai-business-is-beating-expectations/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "ifood-caju",
+        "titulo": "iFood Benefícios compra a Caju",
+        "tema": "negocios",
+        "urls": [
+          "https://neofeed.com.br/startups/ifood-beneficios-compra-caju-por-mais-de-r-12-bilhao/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "anima-einstein",
+        "titulo": "Ação da Ânima cai 9% após acordo com o Einstein",
+        "tema": "negocios",
+        "urls": [
+          "https://investnews.com.br/negocios/r-600-milhoes-em-jogo-por-que-o-mercado-reagiu-mal-ao-acordo-da-anima-com-o-einstein/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "salesforce-braze",
+        "titulo": "Salesforce compra a Braze por cerca de US$ 5,66 bi",
+        "tema": "marketing",
+        "urls": [
+          "https://ppc.land/salesforce-agrees-to-buy-braze-for-5-66bn-in-cash/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "anthropic-projeto-lei-seguranca",
+        "titulo": "Anthropic leva ao Congresso dos EUA rascunho de lei de segurança de IA",
+        "tema": "direito_tech",
+        "urls": [
+          "https://techcrunch.com/2026/10/20/anthropic-pitches-ai-safety-bill-that-may-block-a-model-if-50-people-could-be-killed/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-muse-compartilhamento",
+        "titulo": "Meta pausa o compartilhamento de conversas do Muse",
+        "tema": "ia",
+        "urls": [
+          "https://www.theverge.com/tech/1014627/meta-muse-ai-sharing-ai-chats"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "continuacao",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
