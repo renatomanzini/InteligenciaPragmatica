@@ -791,6 +791,71 @@ def publicar_arquivos(raiz, data, caderno):
     return publicar.arquivos_proprios(raiz, data, caderno)
 
 
+def _chave_fonte(f: dict) -> str:
+    """Como reconhecer a mesma fonte em dois arquivos: o endereço do RSS; nas páginas, o nome."""
+    return f.get("rss") or "pagina:" + f["nome"]
+
+
+def testar_arquivos_do_projeto():
+    secao("projeto real: cadernos, fontes juntas (Economia no Mercado, Marketing na geral) e janelas de coleta")
+    from ferramentas import cadernos, coleta
+    raiz = RAIZ_PROJETO
+    nomes = cadernos.nomes(raiz)
+    for c in nomes:
+        cfg = cadernos.config(raiz, c)
+        faltam = [k for k in ("fontes", "manual", "roteiro") if not (raiz / str(cfg.get(k) or "x")).exists()]
+        conferir(not faltam, "caderno %s: fontes, manual e roteiro existem (faltam: %s)" % (c, faltam))
+    arquivos = {"geral": raiz / "fontes.yaml"}
+    arquivos.update({c: cadernos.arquivo_fontes(raiz, c) for c in nomes})
+    todos = {}
+    for c, arq in arquivos.items():
+        cfg = util.ler_yaml(arq)
+        todos[c] = cfg
+        fontes = cfg.get("fontes") or []
+        chaves = [_chave_fonte(f) for f in fontes]
+        conferir(len(chaves) == len(set(chaves)), "%s: nenhuma fonte repetida (%s)"
+                 % (arq.name, sorted({k for k in chaves if chaves.count(k) > 1})))
+        conferir(all(f.get("nome") and (f.get("rss") or f.get("pagina")) for f in fontes),
+                 "%s: toda fonte tem nome e rss ou página" % arq.name)
+        if cfg.get("temas"):
+            fora = sorted({f["tema"] for f in fontes if f.get("tema") not in cfg["temas"]})
+            conferir(not fora, "%s: todo tema das fontes está na lista `temas` (fora: %s)" % (arq.name, fora))
+        validas = set(coleta.DIAS_JANELA) | {"padrao"}
+        janelas = [cfg.get("janela_horas") or {}] + [f["janela_horas"] for f in fontes
+                                                     if isinstance(f.get("janela_horas"), dict)]
+        conferir(all(set(j) <= validas for j in janelas), "%s: janela_horas só usa `padrao` e nomes de dia" % arq.name)
+
+    # a Economia virou bloco do Mercado, e o Marketing virou seção da geral: nenhuma fonte ativa ficou para trás
+    for velho, novo_cad in (("economia", "mercado"), ("marketing", "geral")):
+        if velho not in todos:
+            continue
+        no_novo = {_chave_fonte(f) for f in todos[novo_cad].get("fontes") or []}
+        no_novo |= {f["nome"] for f in todos[novo_cad].get("fontes") or []}
+        faltam = [f["nome"] for f in todos[velho].get("fontes") or []
+                  if f.get("ativo", True) and _chave_fonte(f) not in no_novo and f["nome"] not in no_novo]
+        conferir(not faltam, "as fontes ativas do caderno %s estão no %s (faltam: %s)" % (velho, novo_cad, faltam))
+        radar_novo = {r.get("sitemap") or r.get("rss") for r in todos[novo_cad].get("radar") or []}
+        faltam = [r["nome"] for r in todos[velho].get("radar") or [] if (r.get("sitemap") or r.get("rss")) not in radar_novo]
+        conferir(not faltam, "o radar do caderno %s está no %s (faltam: %s)" % (velho, novo_cad, faltam))
+    if "mercado" in todos:
+        eco = [f for f in todos["mercado"]["fontes"] if str(f.get("tema", "")).startswith("economia_") and f.get("rss")]
+        conferir(eco and all(coleta._horas_janela(f.get("janela_horas"), date(2026, 10, 26)) == 72
+                             and coleta._horas_janela(f.get("janela_horas"), date(2026, 10, 28)) == 48
+                             for f in eco if isinstance(f.get("janela_horas"), dict)),
+                 "fontes do bloco ECONOMIA no Mercado: 72 horas na segunda e 48 nos outros dias")
+
+    # Niterói: a coleta da edição cobre desde a última edição; o radar olha o último dia
+    if "niteroi" in todos:
+        j = todos["niteroi"]["janela_horas"]
+        segunda = date(2026, 10, 26).toordinal()
+        horas = {d: coleta._horas_janela(j, date.fromordinal(segunda + i)) for i, d in enumerate(coleta.DIAS_JANELA)}
+        conferir([horas[d] for d in ("segunda", "quarta", "sexta")] == [72, 48, 48],
+                 "Niterói: 72 horas na segunda e 48 na quarta e na sexta (dias de edição)")
+        conferir(all(horas[d] == 30 for d in ("terca", "quinta", "sabado", "domingo")),
+                 "Niterói: 30 horas nos dias de radar")
+        conferir(not cadernos.usa_curadoria(raiz, "niteroi"), "Niterói não guarda curadoria entre as edições")
+
+
 def testar_horario_de_entrega(raiz):
     secao("envio junto no horário de entrega")
     from datetime import datetime as _dt
@@ -972,6 +1037,7 @@ def main():
         testar_coleta_ia()
         testar_caderno_economia(tmp)
         testar_guardar_curadoria(tmp)
+        testar_arquivos_do_projeto()
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
     print("\n" + ("TUDO CERTO" if not falhas else "%d FALHA(S):\n  - " % len(falhas) + "\n  - ".join(falhas)))

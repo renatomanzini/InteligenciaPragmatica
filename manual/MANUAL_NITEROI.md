@@ -1,6 +1,6 @@
 # Manual do caderno Niterói
 
-O caderno Niterói é a newsletter local da Inteligência Pragmática. Sai **segunda, quarta e sexta, de manhã**. Na **sexta**, a edição traz também o **bloco semanal de Vassouras e Búzios**.
+O caderno Niterói é a newsletter local da Inteligência Pragmática. Sai **segunda, quarta e sexta, de manhã**. Na **sexta**, a edição traz também o **bloco semanal de Vassouras e Búzios**. Nos outros dias (terça, quinta, sábado e domingo), uma checagem leve, o **radar**, só publica uma **edição extra** quando há aviso urgente (seção 10).
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz (seção 2), números com escala (seção 9), não repetição (seção 13), o rigor (seção 14) e as convenções de formato (seção 15). Este arquivo diz só o que muda.
 
@@ -75,18 +75,12 @@ Igual ao da geral (manual, seção 15), com estas diferenças:
 - [ ] Na sexta, o bloco de Vassouras e Búzios cobre a semana inteira.
 - [ ] O fecho aponta para a próxima edição certa.
 
-## 10. Quando sai: curadoria diária, dias fixos e edição extra
-O leitor pediu assim (22/10): a pesquisa é diária, o envio não. A rotina roda **todo dia** às 05:15 e faz uma de três coisas:
-1. **Dia fixo** (segunda, quarta e sexta, os `dias_envio` do bloco `niteroi` no `cadernos.yaml`): a edição sai sempre, com o que estiver na curadoria e o que chegou hoje. O bloco de Vassouras e Búzios continua só na sexta.
-2. **Fora do dia fixo, com aviso muito importante:** sai uma **edição extra**, curta.
-3. **Fora do dia fixo, sem nada urgente:** a rotina só **guarda** na curadoria o que achou e para. Sem edição e sem e-mail.
+## 10. Quando sai: edição nos dias fixos, radar nos outros
+O leitor decidiu em 22/10/2026 cortar o custo do caderno: a pesquisa diária com curadoria acabou. Agora há duas rotinas, e o prompt de cada uma diz o modo:
+1. **Modo EDIÇÃO: segunda, quarta e sexta** (os `dias_envio` do bloco `niteroi` no `cadernos.yaml`). A edição completa sai sempre, escrita pelo Sonnet e conferida por dois checadores. A coleta cobre **desde a última edição**: 48 horas, ou 72 na segunda, que pega a sexta e o fim de semana. Por isso não há curadoria entre as edições. O bloco de Vassouras e Búzios continua só na sexta.
+2. **Modo RADAR: terça, quinta, sábado e domingo.** Uma rotina leve (modelo Haiku) coleta, lê **só os títulos** e decide se há aviso urgente pelo critério abaixo. Sem urgência, não faz nada: sem edição, sem e-mail e sem commit. Com urgência, sai uma **edição extra**, curta, escrita por um agente Sonnet e conferida por outro.
 
-**A curadoria** fica em `dados/niteroi/curadoria.md`: uma seção `## AAAA-MM-DD` por dia e uma linha por achado, no formato `- [seção] Título — por que importa; data do fato ou do evento (url)`. A seção é `cidade`, `servico`, `agenda`, `vassouras` ou `buzios`.
-- Guarde só o que tem chance de entrar: de 2 a 8 itens por dia. Dia fraco pode ter zero.
-- **Serviço e agenda vencem.** Tire da curadoria o que já terá passado no próximo dia fixo, como evento que já aconteceu, prazo que já venceu ou obra que já terminou.
-- Se a história andou, troque a linha pela versão nova.
-- No dia da edição, **reconfira** cada item guardado antes de usar: data, horário e local mudam.
-- O que entrou na edição sai da curadoria.
+O que não é urgente **não se guarda**: o próximo dia fixo já cobre o período, porque a coleta dele começa na última edição. Quem escreve a edição de segunda, quarta ou sexta olha tudo o que chegou desde então (inclusive o que o radar viu e deixou passar).
 
 **O que conta como muito importante** (o critério da edição extra). O aviso **não pode esperar o próximo dia fixo**, porque quem mora em Niterói precisa agir hoje ou amanhã:
 - falta d'água ou de luz programada, interdição de via, túnel ou ponte, mudança ou greve de barcas e ônibus;
@@ -94,12 +88,11 @@ O leitor pediu assim (22/10): a pesquisa é diária, o envio não. A rotina roda
 - prazo que vence antes do próximo dia fixo e mexe no bolso ou na vida do morador (vacinação, matrícula, imposto, cadastro);
 - emergência na cidade, com orientação oficial.
 
-Obra anunciada, inauguração, política local, evento cultural e crime **não** são urgentes: vão para a curadoria. **Na dúvida, guarda.** Edição extra toda semana vira ruído.
+Obra anunciada, inauguração, política local, evento cultural e crime **não** são urgentes: esperam o próximo dia fixo. **Na dúvida, não sai.** Edição extra toda semana vira ruído. O radar também não repete um aviso: se a extra de ontem já deu o assunto, só uma novidade (o que mudou) justifica outra.
 
-**A edição extra** é curta, de 120 a 250 palavras:
+**A edição extra** é curta, de 120 a 250 palavras, e fica na pasta do dia (`edicoes/niteroi/AAAA-MM-DD/`, com `tipo: extra`), para a rotina de envio das 06:00 achar:
 - "bom dia, Niterói." e uma frase sobre o aviso;
-- `#### AVISO` e `## Título`, que diz o que acontece e quando;
+- `#### AVISO` e `## Título`, que diz o que acontece e quando, com o `> **TL;DR:**`;
 - o aviso: o quê, quando, onde, quem é afetado e **o que fazer**, com a fonte primária;
 - outros avisos urgentes, se houver;
-- um fecho de uma linha que aponta para o próximo dia fixo.
-
+- um fecho de uma linha que aponta para o próximo dia fixo ("A edição normal sai quarta (DD/MM)" na terça, "sexta (DD/MM)" na quinta e "segunda (DD/MM)" no sábado e no domingo).

@@ -21,7 +21,8 @@ niteroi:
   nome: "Inteligência Pragmática · Niterói"
   remetente: "IP · Niterói"
   envio: ligado
-  dias_envio: [segunda, quarta, sexta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra
+  dias_envio: [segunda, quarta, sexta]   # dias de EDIÇÃO (Sonnet). Nos outros dias roda o RADAR (Haiku), que só publica uma edição extra se houver aviso urgente
+  curadoria: nao                         # sem curadoria entre as edições: a coleta do dia fixo cobre desde a última edição (48 h; 72 na segunda)
   fontes: fontes_niteroi.yaml
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md
