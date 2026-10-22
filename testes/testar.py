@@ -525,8 +525,94 @@ def testar_horario_de_entrega(raiz):
         conferir(r["status"] != "aguardando", "depois das 06:00 (rotina atrasada), envia na hora")
         r = envio.enviar(DATA + "-extra", raiz, cfg)
         conferir(r["status"] != "aguardando", "edição extra da tarde não espera")
+        envio.agora_brasilia = lambda: _dt(2026, 1, 15, 5, 56, tzinfo=util.FUSO)
+        r = envio.enviar(DATA, raiz, cfg)
+        conferir(r["status"] != "aguardando", "de 05:55 em diante não espera (a rotina de envio pode já ter lido a main)")
     finally:
         envio.agora_brasilia, envio._postar = original, postar
+
+
+def testar_publicar_em_paralelo(tmp: Path):
+    secao("publicar: três rotinas publicando ao mesmo tempo")
+    from concurrent.futures import ThreadPoolExecutor
+    from ferramentas import publicar
+
+    def git(cwd, *args):
+        return subprocess.run(["git", "-c", "init.defaultBranch=main"] + list(args), cwd=str(cwd),
+                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+
+    origem, base = tmp / "pub" / "origem.git", tmp / "pub" / "base"
+    origem.mkdir(parents=True)
+    git(origem, "init", "-q", "--bare")
+    base.mkdir()
+    git(base, "init", "-q")
+    shutil.copy(RAIZ_PROJETO / "cadernos.yaml", base / "cadernos.yaml")
+    (base / "config.yaml").write_text('nome: "Inteligência Pragmática"\nenvio: desligado\n'
+                                      'site_url: "https://exemplo.github.io/ip"\n', encoding="utf-8")
+    (base / "dados").mkdir()
+    (base / "dados" / "historico.json").write_text("[]\n", encoding="utf-8")
+    (base / "docs").mkdir()
+    (base / "docs" / "index.html").write_text("vazio\n", encoding="utf-8")
+    for cmd in (["config", "user.email", "t@t"], ["config", "user.name", "Teste"], ["add", "-A"],
+                ["commit", "-q", "-m", "base"], ["remote", "add", "origin", str(origem)], ["push", "-q", "origin", "HEAD:main"]):
+        git(base, *cmd)
+
+    edicoes = {
+        "geral": ("edicoes/2026-01-15", (RAIZ_PROJETO / "testes" / "edicao_exemplo.md").read_text(encoding="utf-8")),
+        "mercado": ("edicoes/mercado/2026-01-15", EDICAO_MERCADO),
+        "niteroi": ("edicoes/niteroi/2026-01-15", EDICAO_MERCADO.replace("o touro tropeçou", "a barca atrasou")),
+    }
+    clones = {}
+    for caderno, (pasta, texto) in edicoes.items():
+        c = tmp / "pub" / caderno
+        git(tmp / "pub", "clone", "-q", str(origem), str(c))
+        git(c, "config", "user.email", "t@t")
+        git(c, "config", "user.name", "Teste")
+        (c / pasta).mkdir(parents=True)
+        (c / pasta / "edicao.md").write_text(texto, encoding="utf-8")
+        if caderno != "geral":
+            (c / pasta / "painel.md").write_text("**Painel de teste**\n", encoding="utf-8")
+        # como a rotina faz: monta e registra antes de publicar (isso suja docs/ e o histórico)
+        cfg = cadernos_cfg(c, caderno)
+        montagem.montar("2026-01-15", c, cfg, caderno)
+        historico.registrar("2026-01-15", c, caderno)
+        clones[caderno] = c
+
+    def roda(caderno):
+        try:
+            return publicar.publicar("2026-01-15", clones[caderno], "%s nº 1 — teste" % caderno, caderno, espera=0.3)
+        except Exception as e:
+            return {"erro": str(e)}
+
+    # A geral publica primeiro (e leva os índices dos cadernos, que nenhum clone tinha); depois os dois
+    # cadernos publicam juntos. Sem o "git clean" no publicar, o pull deles travava em docs/<caderno>.html.
+    res = {"geral": roda("geral")}
+    with ThreadPoolExecutor(2) as pool:
+        res.update(zip(["mercado", "niteroi"], pool.map(roda, ["mercado", "niteroi"])))
+    conferir(all("erro" not in r for r in res.values()), "as três publicaram sem erro (%s)" % res)
+
+    final = tmp / "pub" / "final"
+    git(tmp / "pub", "clone", "-q", str(origem), str(final))
+    hist_txt = (final / "dados" / "historico.json").read_text(encoding="utf-8")
+    hist = json.loads(hist_txt)
+    conferir("<<<<<<<" not in hist_txt and len(hist) == 3, "histórico sem conflito e com as 3 edições (%d)" % len(hist))
+    conferir(sorted(e.get("caderno") or "geral" for e in hist) == ["geral", "mercado", "niteroi"],
+             "uma edição de cada caderno no histórico")
+    docs = final / "docs"
+    paginas = ["2026-01-15.html", "mercado-2026-01-15.html", "niteroi-2026-01-15.html", "mercado.html", "niteroi.html"]
+    conferir(all((docs / p).exists() for p in paginas), "as páginas e os arquivos dos 3 cadernos estão no site")
+    indice = (docs / "index.html").read_text(encoding="utf-8")
+    conferir('href="mercado.html"' in indice and 'href="niteroi.html"' in indice and "2026-01-15.html" in indice,
+             "o índice da geral foi refeito com a edição e os links dos cadernos")
+    conferir((docs / "mercado.html").read_text(encoding="utf-8").count("mercado-2026-01-15.html") == 1,
+             "o arquivo do Mercado lista a edição dele")
+    log = git(final, "log", "--format=%s").stdout
+    conferir(all(("%s nº 1 — teste" % c) in log for c in clones), "os commits das três rotinas estão na main")
+
+
+def cadernos_cfg(raiz, caderno):
+    from ferramentas import cadernos as _c
+    return _c.config(raiz, caderno)
 
 
 def fotografia():
@@ -550,6 +636,7 @@ def main():
         testar_cli(tmp)
         testar_cadernos(tmp)
         testar_horario_de_entrega(raiz)
+        testar_publicar_em_paralelo(tmp)
         testar_coleta_filtros()
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")

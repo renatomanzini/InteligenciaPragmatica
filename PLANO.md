@@ -24,7 +24,7 @@ O passo a passo completo está em `manual/ROTINA.md`.
 6. `montar`: o e-mail em HTML, a versão curta e o site.
 7. `registrar` no histórico.
 8. `enviar`, que manda o e-mail na hora. O remetente de teste do Resend não agenda: o envio agendado falhou em 20/10.
-9. `git push`, que publica o arquivo.
+9. `python main.py publicar`, que publica na main e aguenta várias rotinas publicando ao mesmo tempo.
 
 ## Fases
 - [x] **Plano** aprovado pelo leitor em 16/10/2026.
@@ -39,7 +39,7 @@ O passo a passo completo está em `manual/ROTINA.md`.
   - em 22/10/2026, o leitor pediu que todas as newsletters chegassem juntas às 06:00. As rotinas de redação agora rodam de madrugada e deixam a edição pronta, e a rotina de envio (`enviar-pendentes`, às 05:59) manda todas.
 - [ ] **Fase 2, Telegram:** um bot com a versão curta e o link. É também por ele que entra o feedback "mais disso / menos disso".
 - [ ] **Fase 3 (opcional), WhatsApp:** pela Cloud API oficial da Meta. Antes de implementar, levantar o custo por mensagem e os requisitos (conta Meta Business, número dedicado, template aprovado). Nada de biblioteca não oficial.
-- [ ] **Cadernos** (pedido em 22/10/2026): newsletters especializadas ao lado da geral. As especializadas são escritas no Sonnet, para caber no plano Pro.
+- [ ] **Cadernos** (pedido em 22/10/2026): newsletters especializadas ao lado da geral. Começaram no Sonnet para caber no plano Pro. Desde 22/10 (plano Max), todas as rotinas usam Opus com dois checadores e escrevem em paralelo às 05:15, e o envio de todas sai junto às 06:00.
   - [ ] **Mercado:** sai nos dias úteis, de manhã, com o painel de cotações gerado por código. Tem edição extra quando o pregão dispara um gatilho.
     - Pronto: código, manual e roteiro.
     - Falta: a edição de teste aprovada e as rotinas (manhã e alarme).

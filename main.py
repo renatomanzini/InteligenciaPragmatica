@@ -206,6 +206,21 @@ def cmd_enviar(args) -> int:
     return 1 if res["status"] == "erro" else 0
 
 
+def cmd_publicar(args) -> int:
+    """Publica a edição na main de um jeito que aguenta várias rotinas publicando ao mesmo tempo."""
+    from ferramentas import publicar
+    caderno = _caderno(args)
+    data = _resolver_data(args.data, caderno)
+    try:
+        res = publicar.publicar(data, RAIZ, args.mensagem, caderno)
+    except publicar.ErroPublicacao as e:
+        print("Erro na publicação: %s" % e)
+        return 1
+    print("Publicada na main (commit %s, %d tentativa%s)." % (res["commit"], res["tentativas"],
+                                                             "" if res["tentativas"] == 1 else "s"))
+    return 0
+
+
 def cmd_enviar_pendentes(args) -> int:
     """Rotina de envio: manda, na ordem (geral e depois os cadernos), as edições de hoje ainda não enviadas."""
     from ferramentas import envio
@@ -377,6 +392,12 @@ def criar_parser() -> argparse.ArgumentParser:
     c.add_argument("--agora", action="store_true", help="envia já, sem agendar para o horário de entrega")
     c.add_argument("--forcar", action="store_true", help="envia mesmo com envio: desligado")
     c.set_defaults(func=cmd_enviar)
+
+    c = sub.add_parser("publicar", help="grava e publica a edição na main (seguro com várias rotinas ao mesmo tempo)")
+    c.add_argument("data", nargs="?", type=_pasta, metavar="AAAA-MM-DD")
+    c.add_argument("--caderno", default=cadernos.GERAL, help=ajuda_caderno)
+    c.add_argument("-m", "--mensagem", required=True, help='mensagem do commit, por ex. "Edição nº 9 — 2026-10-23: ..."')
+    c.set_defaults(func=cmd_publicar)
 
     c = sub.add_parser("enviar-pendentes", help="rotina de envio: manda juntas as edições de hoje ainda não enviadas")
     c.set_defaults(func=cmd_enviar_pendentes)

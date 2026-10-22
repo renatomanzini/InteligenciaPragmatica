@@ -110,18 +110,17 @@ Confira se o `edicoes/DATA/email.html` foi gerado sem erro.
 ```bash
 python main.py enviar DATA
 ```
-Antes das 06:00 (`horario_entrega` no `config.yaml`), o `enviar` só deixa a edição pronta ("aguardando"). O e-mail sai às 06:00, junto com o das outras newsletters, pela rotina de envio (`python main.py enviar-pendentes`). Se você terminar depois das 06:00, ele envia na hora; nesse caso, anote no resumo final o ID que o Resend devolveu. Com `envio: desligado`, o comando só avisa.
+Antes das 05:55 (5 minutos antes do `horario_entrega` do `config.yaml`), o `enviar` só deixa a edição pronta ("aguardando"). O e-mail sai às 06:00, junto com o das outras newsletters, pela rotina de envio (`python main.py enviar-pendentes`). De 05:55 em diante, ele envia na hora; nesse caso, anote no resumo final o ID que o Resend devolveu. Com `envio: desligado`, o comando só avisa.
 
 ## Passo 8: publicar
 ```bash
-git add edicoes/DATA dados docs
-git commit -m "Edição nº N — DATA: <assunto>"
-git push origin HEAD:main
+python main.py publicar DATA -m "Edição nº N — DATA: <assunto>"
 ```
-O push é direto na branch `main`, porque é ela que publica o arquivo no GitHub Pages.
+O `publicar` grava a edição direto na branch `main`, que é a que publica o site no GitHub Pages. Ele refaz o histórico e o site já com o que os cadernos publicaram, e aguenta todas as rotinas rodando ao mesmo tempo (05:15). **Nunca use `git push` direto.**
 
 ## Se algo der errado
 - **A coleta falhou:** siga com busca na web e avise no `pauta.md`.
 - **O tempo acabou:** entregue uma edição curta (bom dia, principal, IA na prática, pergunta), sempre checada.
 - **Nada passou na checagem num bloco:** corte o bloco.
-- **Erro no envio:** registre o erro em `edicoes/DATA/envio_erro.txt`, faça o commit mesmo assim e termine.
+- **Erro no envio:** registre o erro em `edicoes/DATA/envio_erro.txt`, publique mesmo assim (passo 8) e termine.
+- **Erro no `publicar`:** rode o mesmo comando mais uma vez. Se falhar de novo, não use `git push --force` nem resolva conflito à mão. Se o `enviar` do passo 7 respondeu "aguardando", rode `python main.py enviar DATA --agora`: a edição não chegou à main, então a rotina de envio não vai vê-la, e não há risco de e-mail duplicado. Copie no resumo final o erro e o ramo `pendente/...` que o publicar informou. A edição NÃO está no site: o clone da rotina é descartado, e ela só existe nesse ramo.

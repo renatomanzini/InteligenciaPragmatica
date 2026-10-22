@@ -8,7 +8,7 @@ import json
 import os
 import urllib.error
 import urllib.request
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -29,6 +29,7 @@ def _remetente(config: dict) -> str:
     nome = (config or {}).get("remetente")
     return REMETENTE if not nome else REMETENTE.replace("Inteligência Pragmática", str(nome), 1)
 AVISO_HTML = "Versão completa no HTML."
+MARGEM_MIN = 5  # a espera pelo horário de entrega acaba 5 minutos antes dele
 
 
 def _horario_agendado(d: date, horario: str) -> Optional[str]:
@@ -84,7 +85,10 @@ def _espera_horario(data: str, config: dict) -> Optional[str]:
     except ValueError:
         return None
     agora = agora_brasilia()
-    if data[:10] != agora.date().isoformat() or agora.time() >= time(h, m):
+    # A espera acaba 5 minutos antes: uma rotina que termina em cima da hora pode publicar depois que a
+    # rotina de envio já leu a main, e aí ninguém mandaria o e-mail. Perto das 06:00, ela mesma manda.
+    limite = datetime.combine(agora.date(), time(h, m), tzinfo=FUSO) - timedelta(minutes=MARGEM_MIN)
+    if data[:10] != agora.date().isoformat() or agora >= limite:
         return None
     return "%02d:%02d" % (h, m)
 
