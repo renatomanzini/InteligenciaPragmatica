@@ -1302,5 +1302,118 @@
       "agenda"
     ],
     "caderno": "economia"
+  },
+  {
+    "data": "2026-10-22",
+    "tipo": "regular",
+    "numero": 1,
+    "assunto": "a ia mexe no anúncio. a conta é sua",
+    "previa": "+ a criadora que diz ter 500 clientes sem pagar anúncio",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "meta-termos-ia-responsabilidade-anunciante",
+        "titulo": "Termos da Meta que valem em 30/10 põem no anunciante os riscos do que a IA cria no anúncio",
+        "tema": "plataformas",
+        "urls": [
+          "https://www.facebook.com/legal/commercial_terms_preview",
+          "https://www.adweek.com/media/advertisers-pull-meta-ads-that-had-unwanted-ai-glow-ups/",
+          "https://s21.q4cdn.com/399680738/files/content_files/META-Q3-2026-Earnings-Call-Transcript.pdf"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-publico-por-criativo",
+        "titulo": "Meta deixa indicar idade e gênero para cada criativo, pela API de marketing",
+        "tema": "plataformas",
+        "urls": [
+          "https://developers.facebook.com/blog/post/2026/10/19/choose-an-audience-for-each-ad-creative/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "gemini-pequenos-negocios",
+        "titulo": "Google anuncia página inicial para pequenos negócios no app do Gemini, ligada ao Perfil da Empresa e ao Google Ads",
+        "tema": "plataformas",
+        "urls": [
+          "https://blog.google/intl/pt-br/produtos/novas-ferramentas-do-gemini-para-pequenos-negocios/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "youtube-afiliados-aliexpress",
+        "titulo": "Afiliados do YouTube Shopping vão incluir a AliExpress no Brasil, sem data",
+        "tema": "criadores",
+        "urls": [
+          "https://www.prnewswire.com/news-releases/aliexpress-and-youtube-announce-global-strategic-affiliate-partnership-302913625.html"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "chatgpt-ads-paises",
+        "titulo": "ChatGPT Ads vai chegar a mais 26 países, sem data; o Brasil entrou em agosto",
+        "tema": "trafego_pago",
+        "urls": [
+          "https://www.adexchanger.com/marketers/chatgpt-ads-is-expanding-to-new-markets-and-exploring-new-ad-formats/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "mercado-ads-engage-plus",
+        "titulo": "Mercado Ads anuncia o Engage+, que automatiza campanhas de topo de funil com IA",
+        "tema": "trafego_pago",
+        "urls": [
+          "https://www.meioemensagem.com.br/midia/ia-mercado-ads-automatiza-campanhas"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "safari-bloqueio-identidade",
+        "titulo": "Safari 27 bloqueia serviços que transformam e-mail em identificador de rastreio",
+        "tema": "trafego_pago",
+        "urls": [
+          "https://webkit.org/blog/18438/blocking-identity-resolution-infrastructure/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "adcos-tiktok-shop",
+        "titulo": "Adcos estreia no TikTok Shop com live de até 12 horas e 10% de comissão para criadores",
+        "tema": "criadores",
+        "urls": [
+          "https://propmark.com.br/digital/adcos-estreia-no-tiktok-shop-com-campanha-e-live-de-ate-12-horas/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "whatsapp-black-friday-sinch",
+        "titulo": "Pesquisa da Sinch: 68,6% dos brasileiros ouvidos preferem o WhatsApp para acompanhar pedidos na Black Friday",
+        "tema": "funis",
+        "urls": [
+          "https://www.meioemensagem.com.br/midia/brasileiros-preferem-whatsapp-para-acompanhar-black-friday"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "maddy-gustini-conteudo-servico",
+        "titulo": "Criadora de moda masculina diz ter mais de 500 clientes de consultoria vindos só do conteúdo",
+        "tema": "cases",
+        "urls": [
+          "https://digiday.com/media/how-a-fashion-creator-turned-audience-demand-into-a-500-client-styling-business/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_principal",
+      "plataformas",
+      "trafego_busca",
+      "criadores_marcas",
+      "case",
+      "vira_servico",
+      "pergunta"
+    ],
+    "caderno": "marketing"
   }
 ]
