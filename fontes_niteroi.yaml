@@ -15,10 +15,10 @@
 # tema: niteroi | vassouras | buzios
 
 janela_horas:
-  padrao: 48      # quarta e sexta: desde a edição anterior
-  segunda: 72     # pega sexta, sábado e domingo
-  sabado: 48
-  domingo: 48
+  padrao: 30      # a rotina roda todo dia e guarda na curadoria o que não sai no dia
+  segunda: 30
+  sabado: 30
+  domingo: 30
 
 limite_por_fonte: 12
 

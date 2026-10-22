@@ -1,6 +1,6 @@
 # Roteiro da rotina do caderno Niterói
 
-Você é o editor do **caderno Niterói** da Inteligência Pragmática. A edição sai **segunda, quarta e sexta**. Na sexta, ela traz também o bloco semanal de Vassouras e Búzios.
+Você é o editor do **caderno Niterói** da Inteligência Pragmática. A rotina roda **todo dia**: pesquisa sempre, mas só escreve edição no dia fixo (**segunda, quarta e sexta**) ou quando há aviso muito importante. Nos outros dias, guarda o que achou na curadoria (MANUAL_NITEROI, seção 10). Na sexta, a edição traz também o bloco semanal de Vassouras e Búzios.
 
 O estilo e as regras estão em `manual/MANUAL_NITEROI.md`, que complementa o `manual/MANUAL_DE_REDACAO.md`. Leia o MANUAL_NITEROI inteiro e, do manual geral, as seções 2, 9, 13, 14 e 15.
 
@@ -21,14 +21,15 @@ python3 -m pip install -q --no-deps --ignore-installed -r requirements.txt
 TZ=America/Sao_Paulo date "+%F %A %H:%M"
 python3 main.py historico --caderno niteroi --dias 14
 ```
-- Defina **DATA**, que é a data de hoje em Brasília.
-- Se hoje não for segunda, quarta ou sexta, a rotina foi disparada à mão (Run now): faça **só o teste de fontes**, sem edição e sem commit, e termine.
+- Defina **DATA**, que é a data de hoje em Brasília. O `historico` diz se hoje é **dia fixo**, a data da última edição e quantos itens há na curadoria.
+- Se `edicoes/niteroi/DATA/edicao.md` já existir, ou se `dados/niteroi/curadoria.md` já tiver a seção `## DATA`, o trabalho de hoje já foi feito e a rotina foi disparada à mão (Run now): faça **só o teste de fontes**, sem edição e sem commit, e termine.
 ```bash
 python3 main.py coletar --caderno niteroi
 cat dados/candidatos/niteroi-DATA-fontes.log
 ```
   Rode também os dois `curl` do passo 1 (O Dia e A Tribuna). Responda com a contagem de candidatos por seção (`grep "^## " dados/candidatos/niteroi-DATA.md`), as fontes que falharam, com o motivo, e quantas manchetes cada `curl` trouxe.
-- **BLOCO** = sim na sexta, não nos outros dias.
+- **BLOCO** = sim na sexta, não nos outros dias (nem na edição extra).
+- Leia a seção 10 do `manual/MANUAL_NITEROI.md` (quando sai).
 - Pegue o **número** da edição, que é o "próxima: nº" do histórico. Veja também as histórias em andamento: obra que já saiu aqui só volta com "o que mudou desde [data]".
 
 ## Passo 1: coleta
@@ -49,15 +50,29 @@ curl -sL -A "Mozilla/5.0" https://www.atribunarj.com.br/ | grep -oE 'materia/[a-
   Os endereços completos são `https://odia.ig.com.br` + o caminho e `https://www.atribunarj.com.br/` + `materia/...`. Confira a data ao abrir.
 - Na sexta, olhe também as páginas da Câmara de Niterói e da Câmara de Vassouras listadas no fim do arquivo de candidatos.
 
-## Passo 2: pauta
-Escolha (MANUAL_NITEROI, seção 6):
+## Passo 2: decisão
+Leia também `dados/niteroi/curadoria.md`. Escolha **um** caminho (MANUAL_NITEROI, seção 10) e escreva o porquê numa linha:
+- **Dia fixo:** siga para o passo 2a. A edição sai sempre.
+- **Fora do dia fixo, com aviso que passa no critério de muito importante:** siga para o passo 2a, como **edição extra** (`tipo: extra`). Na dúvida, não é extra.
+- **Fora do dia fixo, sem nada urgente:** guarde e pare.
+  1. Acrescente em `dados/niteroi/curadoria.md` a seção `## DATA`, com de 0 a 8 linhas `- [seção] Título — por que importa; data do fato ou do evento (url)`. Tire o que já terá passado no próximo dia fixo.
+  2. Publique só a curadoria:
+```bash
+python3 main.py guardar DATA --caderno niteroi -m "Niterói: curadoria de DATA"
+```
+  3. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria.
+
+## Passo 2a: pauta
+**Edição extra:** a pauta é só o aviso urgente (MANUAL_NITEROI, seção 10). O resto continua na curadoria. Pule para o passo 3.
+
+**Dia fixo:** junte a curadoria e os candidatos de hoje e escolha (MANUAL_NITEROI, seção 6):
 - a história da cidade;
 - de 3 a 6 itens de serviço;
 - de 2 a 4 itens de "Na cidade";
 - a agenda dos próximos dias;
 - na sexta, o bloco de Vassouras e Búzios.
 
-A mesma notícia costuma sair em várias fontes (a prefeitura e três jornais). Escolha o link da fonte primária para o fato e um jornal só para o contexto. Grave em `edicoes/niteroi/DATA/pauta.md`, com meia página no máximo.
+A mesma notícia costuma sair em várias fontes (a prefeitura e três jornais). Escolha o link da fonte primária para o fato e um jornal só para o contexto. Grave em `edicoes/niteroi/DATA/pauta.md`, com meia página no máximo. Depois, tire de `dados/niteroi/curadoria.md` as linhas que entraram na pauta.
 
 ## Passo 3: apuração e redação (você mesmo)
 - Abra a fonte de cada fato que vai usar, com WebFetch ou `curl -sL`, e confirme **data, dia da semana, local, horário e valor**.
@@ -72,6 +87,8 @@ python3 main.py links DATA --caderno niteroi
 Lance **dois** agentes novos (`model: "sonnet"`) **em paralelo**, numa mesma mensagem, que não participaram da redação:
 - a **parte 1** vai do começo até o fim do SERVIÇO (história da cidade e serviço);
 - a **parte 2** vai do NA CIDADE até o fim (agenda e, na sexta, o bloco de Vassouras e Búzios).
+
+Na edição extra, que é curta, a **parte 1** confere o aviso (o quê, quando e onde), e a **parte 2** confere o "o que fazer" e os outros avisos.
 
 Cada um grava `edicoes/niteroi/DATA/verificacao_parteN.md`. Depois, junte os dois em `edicoes/niteroi/DATA/verificacao.md`. O briefing de cada um, ajustando a parte, é este:
 
@@ -102,8 +119,9 @@ python3 main.py publicar DATA --caderno niteroi -m "Niterói nº N — DATA: <as
 
 ## Resumo final
 Termine com até 5 linhas:
-- o que saiu (número e assunto), ou por que não saiu;
-- se o Resend aceitou o e-mail, com o ID;
+- o que saiu (número e assunto, e se foi extra), ou por que não saiu;
+- quantos itens ficaram guardados na curadoria;
+- o resultado do `enviar` ("aguardando" ou o ID do Resend);
 - o commit;
 - a hora de início e de fim;
 - o que deu errado, se algo deu (inclusive fonte fora do ar, pelo `dados/candidatos/niteroi-DATA-fontes.log`).

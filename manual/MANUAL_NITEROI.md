@@ -59,10 +59,10 @@ Alvo: **de 400 a 700 palavras** na segunda e na quarta, e **de 550 a 900** na se
 
 ## 8. O front matter
 Igual ao da geral (manual, seção 15), com estas diferenças:
-- `tipo`: `segunda`, `quarta` ou `sexta`;
+- `tipo`: `segunda`, `quarta`, `sexta` ou `extra` (seção 10);
 - `tema` das histórias: `niteroi | vassouras | buzios`;
 - `formatos`: `[historia_da_cidade, servico, na_cidade, agenda, vassouras_buzios]`, só os usados;
-- `breakthrough`: sempre `false` (o caderno não tem edição extra).
+- `breakthrough`: `true` só na edição extra; nela, `motivo_extra` diz em uma linha por que não podia esperar.
 
 ## 9. Checklist
 - [ ] Toda data está explícita ("sábado (24/10)") e nenhum evento já passou na hora da entrega.
@@ -74,3 +74,32 @@ Igual ao da geral (manual, seção 15), com estas diferenças:
 - [ ] Toda afirmação tem link, e o link do serviço é o da fonte primária quando ela existe.
 - [ ] Na sexta, o bloco de Vassouras e Búzios cobre a semana inteira.
 - [ ] O fecho aponta para a próxima edição certa.
+
+## 10. Quando sai: curadoria diária, dias fixos e edição extra
+O leitor pediu assim (22/10): a pesquisa é diária, o envio não. A rotina roda **todo dia** às 05:15 e faz uma de três coisas:
+1. **Dia fixo** (segunda, quarta e sexta, os `dias_envio` do bloco `niteroi` no `cadernos.yaml`): a edição sai sempre, com o que estiver na curadoria e o que chegou hoje. O bloco de Vassouras e Búzios continua só na sexta.
+2. **Fora do dia fixo, com aviso muito importante:** sai uma **edição extra**, curta.
+3. **Fora do dia fixo, sem nada urgente:** a rotina só **guarda** na curadoria o que achou e para. Sem edição e sem e-mail.
+
+**A curadoria** fica em `dados/niteroi/curadoria.md`: uma seção `## AAAA-MM-DD` por dia e uma linha por achado, no formato `- [seção] Título — por que importa; data do fato ou do evento (url)`. A seção é `cidade`, `servico`, `agenda`, `vassouras` ou `buzios`.
+- Guarde só o que tem chance de entrar: de 2 a 8 itens por dia. Dia fraco pode ter zero.
+- **Serviço e agenda vencem.** Tire da curadoria o que já terá passado no próximo dia fixo, como evento que já aconteceu, prazo que já venceu ou obra que já terminou.
+- Se a história andou, troque a linha pela versão nova.
+- No dia da edição, **reconfira** cada item guardado antes de usar: data, horário e local mudam.
+- O que entrou na edição sai da curadoria.
+
+**O que conta como muito importante** (o critério da edição extra). O aviso **não pode esperar o próximo dia fixo**, porque quem mora em Niterói precisa agir hoje ou amanhã:
+- falta d'água ou de luz programada, interdição de via, túnel ou ponte, mudança ou greve de barcas e ônibus;
+- alerta da Defesa Civil (chuva forte, ressaca, deslizamento), com o que fazer;
+- prazo que vence antes do próximo dia fixo e mexe no bolso ou na vida do morador (vacinação, matrícula, imposto, cadastro);
+- emergência na cidade, com orientação oficial.
+
+Obra anunciada, inauguração, política local, evento cultural e crime **não** são urgentes: vão para a curadoria. **Na dúvida, guarda.** Edição extra toda semana vira ruído.
+
+**A edição extra** é curta, de 120 a 250 palavras:
+- "bom dia, Niterói." e uma frase sobre o aviso;
+- `#### AVISO` e `## Título`, que diz o que acontece e quando;
+- o aviso: o quê, quando, onde, quem é afetado e **o que fazer**, com a fonte primária;
+- outros avisos urgentes, se houver;
+- um fecho de uma linha que aponta para o próximo dia fixo.
+

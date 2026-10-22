@@ -21,6 +21,7 @@ niteroi:
   nome: "Inteligência Pragmática · Niterói"
   remetente: "IP · Niterói"
   envio: ligado
+  dias_envio: [segunda, quarta, sexta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra
   fontes: fontes_niteroi.yaml
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md
