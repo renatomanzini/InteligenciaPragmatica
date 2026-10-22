@@ -12,7 +12,7 @@
 mercado:
   nome: "Inteligência Pragmática · Mercado"
   remetente: "IP · Mercado"
-  envio: desligado
+  envio: ligado
   fontes: fontes_mercado.yaml
   manual: manual/MANUAL_MERCADO.md
   roteiro: manual/ROTINA_MERCADO.md
