@@ -27,21 +27,22 @@ Quando passar no critério, marque com 🚨 e justifique numa linha: `🚨 **Por
 - **caso de empresa analisado:** como um negócio ganha dinheiro e o que dá para aprender com ele;
 - **continuação:** uma história que já saiu aqui, "o que mudou desde [data]".
 
-**Uma edição curta num dia fraco é melhor que uma edição inchada.** Qualquer seção das partes 4 a 8 pode sair, e uma seção nunca é preenchida com assunto irrelevante só para completar.
+**Uma edição curta num dia fraco é melhor que uma edição inchada.** Qualquer seção das partes 4 a 9 pode sair (o "como isso vira serviço" do MARKETING DIGITAL é a exceção: fica sempre), e uma seção nunca é preenchida com assunto irrelevante só para completar.
 
 ## 4. A estrutura de cada dia
 
-### Dia útil (alvo: de 1.200 a 1.700 palavras, de 5 a 8 minutos)
+### Dia útil (alvo: de 1.200 a 1.700 palavras, de 5 a 8 minutos; na terça e na quinta, de 1.500 a 2.100, de 7 a 10 minutos, por causa do MARKETING DIGITAL)
 1. **bom dia** e uma reflexão de 2 a 3 linhas, ligada ao tema do dia. Começa com "bom dia." em minúsculas.
 2. **Hoje eu aprendi:** um fato curioso de verdade, fora da pauta, numa frase ou duas, com fonte.
 3. **Nesta edição:** de 3 a 6 bullets que já vendem cada parte, com piada se couber.
 4. **Matéria principal**, com a anatomia da seção 5. Se for breakthrough, leva 🚨.
 5. **IA na prática**, com o arco da seção 6.
 6. **Economia em 3 linhas:** *Por aqui* e *Lá fora*, em linhas `→`. Mostra o que mexeu ontem e o que observar hoje.
-7. **Brasil adentro / Mundo afora:** negócios e marketing, de 3 a 5 linhas `→` cada, uma frase por linha.
-8. **STATS:** um número do dia, explicado com escala e com a cadeia `»`. Quando há um gráfico ou ranking bom, essa seção pode virar **Contra dados não há argumentos**: o texto lê o gráfico e diz quem ganha.
-9. **Para ler, ouvir ou assistir:** 3 links rotulados `[Para ler]`, `[Para ouvir]`, `[Para assistir]` ou `[Curiosidade]`. Vale conteúdo atemporal.
-10. **Pergunta de fechamento:** uma pergunta que faz o leitor pensar no próprio trabalho. Uma linha.
+7. **Brasil adentro / Mundo afora:** negócios e marketing, de 3 a 5 linhas `→` cada, uma frase por linha. Na terça e na quinta, o marketing sai daqui e vai para a seção própria (item 8).
+8. **Só na terça e na quinta: MARKETING DIGITAL** (`#### MARKETING DIGITAL`, de 300 a 500 palavras): o que mudou nas plataformas, tráfego e busca, criadores e marcas, um case e o "como isso vira serviço". As regras estão na seção 17. Nos outros dias, esta seção não existe.
+9. **STATS:** um número do dia, explicado com escala e com a cadeia `»`. Quando há um gráfico ou ranking bom, essa seção pode virar **Contra dados não há argumentos**: o texto lê o gráfico e diz quem ganha.
+10. **Para ler, ouvir ou assistir:** 3 links rotulados `[Para ler]`, `[Para ouvir]`, `[Para assistir]` ou `[Curiosidade]`. Vale conteúdo atemporal.
+11. **Pergunta de fechamento:** uma pergunta que faz o leitor pensar no próprio trabalho. Uma linha.
 
 ### Sábado: semana em revista (de 6 a 9 minutos)
 1. "bom dia" e uma frase sobre a semana.
@@ -199,7 +200,7 @@ historias:
 formatos: [materia_principal, ia_na_pratica, economia, rodadas, stats, links, pergunta]
 ---
 ```
-Inclua em `formatos` o tipo da principal quando for o caso (`explicador`, `caso_empresa`, `continuacao`) e `filosofia` no domingo.
+Inclua em `formatos` o tipo da principal quando for o caso (`explicador`, `caso_empresa`, `continuacao`) e `filosofia` no domingo. Na terça e na quinta, inclua `marketing_digital` (e `case`, se a seção tiver um).
 
 **Convenções do corpo:**
 - `#### RÓTULO` (kicker);
@@ -225,3 +226,46 @@ Inclua em `formatos` o tipo da principal quando for o caso (`explicador`, `caso_
 - [ ] Nenhuma anedota pessoal.
 - [ ] As cotas de estilo e de emoji foram respeitadas.
 - [ ] O front matter está completo e os ids das histórias são estáveis.
+
+## 17. Terça e quinta: a seção MARKETING DIGITAL
+Desde 22/10/2026, o caderno Marketing não existe mais: ele virou uma seção da geral, **só na terça e na quinta** (os dias fixos que o caderno tinha). Nos outros dias, e no sábado e no domingo, a seção não existe, e o marketing aparece só nas rodadas "Brasil adentro / Mundo afora". Não há mais edição extra de marketing: se uma notícia de marketing passar no critério da seção 3, ela pode ser a matéria principal do dia.
+
+**Para quem é.** Para o leitor que **vende** marketing a pequenos negócios e escritórios, não para diretor de grande anunciante. A pergunta de cada item é: "o que isso muda para quem anuncia, cria conteúdo ou vende esse serviço?". Nada de guru: proibido "escalar", "faturar seis dígitos", "hack", "segredo", "fórmula" e "resultado garantido".
+
+### A estrutura da seção
+`#### MARKETING DIGITAL`, depois de "Brasil adentro / Mundo afora" e antes do STATS. De **300 a 500 palavras**, sem `##` e sem TL;DR (o montador cobra TL;DR de todo `##`). Nesta ordem:
+1. **Plataformas**: de 2 a 4 linhas `→`, com a plataforma no rótulo e os dois-pontos fora do negrito (`→ **Meta**: ...`, `→ **Google**: ...`, `→ **TikTok**: ...`, `→ **YouTube**: ...`, `→ **LinkedIn**: ...`). Uma frase com o que mudou, **onde vale e desde quando**, e a fonte; termine com "na prática, ..." quando ajudar. Plataforma sem novidade fica de fora.
+2. **Tráfego e busca**: de 1 a 3 linhas `→` sobre tráfego pago, SEO e busca com IA (AI Overviews, AI Mode, ChatGPT, Perplexity): o que mudou no custo, no alcance ou no tráfego, com escala.
+3. **Criadores e marcas**: de 1 a 2 linhas `→` sobre criadores, *branding* e funis.
+4. **O case** (opcional, no máximo uma vez por semana, de preferência brasileiro): `### Título` e de 120 a 200 palavras, nesta ordem:
+   - o que a marca ou a pessoa fez (canal, formato, público);
+   - o resultado, atribuído a quem diz;
+   - **O que dá para copiar:** de 2 a 3 linhas, adaptando para um negócio pequeno (clínica, escritório, restaurante, loja);
+   - **⚠️ Freio de realidade:** o que o case não prova (verba, marca forte, sorte, falta de base de comparação).
+5. **Como isso vira serviço** (**sempre**): `### Título` e de 100 a 180 palavras com:
+   - **o que vender**, numa linha;
+   - **para quem** (um nicho concreto: dentistas, escritórios de advocacia, restaurantes, imobiliárias...);
+   - **por que o cliente pagaria agora** (a mudança que cria a dor);
+   - **como entregar**, com as ferramentas;
+   - **⚠️ o limite** (regra de plataforma, LGPD, CONAR, conselho profissional).
+   Nunca invente preço de mercado nem faturamento: se citar valor, ele tem fonte. Se a matéria principal ou o IA na prática do dia já terminou num serviço, o do marketing é outro.
+
+Dia fraco encurta a seção (as partes 2, 3 e 4 podem sair), mas as **Plataformas** e o **Como isso vira serviço** ficam. A seção não repete a matéria principal: se a principal do dia é de marketing, aqui entram só os outros itens e o serviço.
+
+### As regras de rigor do marketing
+- **Número de case é alegação de quem vende.** Case de agência, de plataforma ou de ferramenta é comunicação de quem quer vender: conte o fato e atribua o número ("a marca diz que as vendas cresceram 40%"). Diga o período e a base quando a fonte disser, e diga quando ela **não** diz ("a empresa não informou a base de comparação"). Estudo de plataforma sobre os próprios anúncios é estudo de parte interessada: diga isso em meia frase. Prêmio (Cannes Lions, Effie, Wave) não prova resultado. Número de seguidor ou visualização sem fonte não entra.
+- **Disponibilidade e datas.** Todo recurso novo diz onde e quando vale: "já liberado para todos", "em teste nos EUA", "chega ao Brasil em novembro, segundo a Meta", "sem data para o Brasil". Recurso só em teste é escrito como teste, nunca como novidade disponível. Escreva a data explícita ("na terça (20/10)"), nunca "esta semana" ou "ontem" sozinhos, e "a partir de" para mudança com data futura.
+- **A fonte primária da plataforma.** O que a plataforma lançou ou mudou se confirma na **fonte dela**: Meta Newsroom, Meta for Developers ou a Central de Ajuda da Meta para empresas, Google Ads & Commerce Blog ou a Ajuda do Google Ads, Google Search Central, YouTube Official Blog, TikTok Newsroom, LinkedIn News. A imprensa especializada (Social Media Today, Search Engine Roundtable, PPC Land) serve para achar e dar contexto. Quando o "lançamento" só aparece num print de usuário ou num teste visto por um jornalista, diga: "em teste, segundo o Search Engine Roundtable; o Google não anunciou". As páginas do facebook.com recusam robôs (o `links` dá "inconclusivo"): confira o texto pelo WebFetch, que segue o endereço web.facebook.com.
+- **Jargão explicado na primeira vez**, numa oração curta: CPM (quanto custa mil exibições), CPC, CTR, ROAS (quanto volta de venda para cada real em anúncio), CAC, LTV, funil, *retargeting*, *lookalike*, Advantage+, Performance Max, GEO (otimizar para aparecer na resposta das IAs), UGC (conteúdo feito pelo cliente ou por criador).
+- **Direito & tech no marketing** (⚖️, de 1 a 3 linhas, quando couber): publicidade de influenciador e identificação de anúncio (Código de Defesa do Consumidor e o Guia de Publicidade por Influenciadores Digitais do CONAR); dados para anúncio, *pixel*, consentimento e *cookies* (LGPD); direito autoral e de imagem em criativo feito com IA; regras das plataformas e dos conselhos de classe (a publicidade da advocacia segue o Provimento 205/2021 da OAB). Mesma régua da seção 11: cite a norma com link oficial só quando tiver certeza.
+- **Radar.** A MarketingDrops (que chega pelo remetente "M15") serve para achar pauta, nunca para citar ou copiar. Assunto que já saiu lá, ou nas rodadas de dias anteriores, só entra com valor novo.
+
+### O front matter e o checklist da seção
+- Em `formatos`, `marketing_digital` (e `case`). O `tema` das histórias de marketing é `marketing`.
+- [ ] Todo recurso novo diz onde vale (Brasil, EUA, teste) e a data está explícita.
+- [ ] O lançamento foi confirmado na fonte da plataforma, ou está escrito como teste ou como "segundo [veículo]".
+- [ ] Todo número de case está atribuído a quem diz, e prêmio não virou prova.
+- [ ] Nenhuma promessa de guru, nenhum preço ou faturamento inventado.
+- [ ] O case (se houver) tem "O que dá para copiar" e "⚠️ Freio de realidade".
+- [ ] O "Como isso vira serviço" diz o que, para quem, por que agora, como entregar e o limite.
+- [ ] Nada repetido da matéria principal, das rodadas ou do radar sem valor novo.

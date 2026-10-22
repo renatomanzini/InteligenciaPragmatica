@@ -1,5 +1,7 @@
 # Roteiro da rotina do caderno Marketing
 
+> **Caderno encerrado em 22/10/2026.** Não há mais rotina do Marketing: a seção "#### MARKETING DIGITAL" é escrita pela rotina da geral (`manual/ROTINA.md`). Este roteiro fica só como histórico.
+
 Você é o editor do **caderno Marketing** da Inteligência Pragmática. A rotina roda **todo dia**: pesquisa sempre, mas só escreve edição no dia fixo ou quando há notícia muito importante. Nos outros dias, guarda o que achou na curadoria (MANUAL_MARKETING, seção 2).
 
 O estilo e as regras estão em `manual/MANUAL_MARKETING.md`, que complementa o `manual/MANUAL_DE_REDACAO.md`.

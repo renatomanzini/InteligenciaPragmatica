@@ -1,5 +1,7 @@
 # Manual do caderno Marketing
 
+> **Caderno encerrado em 22/10/2026.** O Marketing virou a seção "#### MARKETING DIGITAL" da geral, às terças e quintas. Este manual fica só como histórico; o que vale está no `manual/MANUAL_DE_REDACAO.md`, seção 17.
+
 O caderno Marketing é a newsletter de marketing digital da Inteligência Pragmática. A pesquisa é **diária**, mas o envio não: a edição sai em **dois dias fixos por semana** (os `dias_envio` do bloco `marketing` no `cadernos.yaml`), às 06:00. Fora deles, só sai **edição extra** com notícia muito importante (seção 2).
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz (seção 2), a regra contra a novidade forçada (seção 3), a anatomia da matéria principal (seção 5), números com escala (seção 9), o ângulo Direito & tech (seção 11), radar e não repetição (seção 13), o rigor (seção 14) e as convenções de formato (seção 15). Este arquivo diz só o que muda.

@@ -87,6 +87,16 @@ fontes:
   - {nome: PPC Land, tema: marketing, tipo: imprensa, rss: "https://ppc.land/rss/", ativo: true}
   - {nome: Tubefilter, tema: marketing, tipo: imprensa, rss: "https://www.tubefilter.com/feed/", ativo: true}
   - {nome: Think with Google, tema: marketing, tipo: primaria, pagina: "https://business.google.com/br/think/", ativo: true}
+  # Plataformas, busca e tráfego pago: vieram do caderno Marketing, que virou a seção "MARKETING DIGITAL" da geral
+  # (terças e quintas) em 22/10/2026. O Meta Newsroom, a MarketingDrops e as demais fontes de marketing já estavam aqui.
+  # Os blogs das plataformas publicam pouco: na maioria dos dias, eles respondem sem itens, e está tudo bem.
+  - {nome: YouTube Official Blog, tema: marketing, tipo: primaria, rss: "https://blog.youtube/rss/", ativo: true}
+  - {nome: Blog do Google Brasil, tema: marketing, tipo: primaria, rss: "https://blog.google/intl/pt-br/rss/", ativo: true}
+  - {nome: Google Search Central, tema: marketing, tipo: primaria, rss: "https://developers.google.com/search/blog/feed.xml", ativo: true}
+  - {nome: Google Ads & Commerce Blog, tema: marketing, tipo: primaria, rss: "https://blog.google/products/ads-commerce/rss/", ativo: true}
+  # sem RSS: visitar na apuração, só quando a pauta pedir (por exemplo, para confirmar um lançamento do TikTok ou do LinkedIn)
+  - {nome: TikTok Newsroom, tema: marketing, tipo: primaria, pagina: "https://newsroom.tiktok.com/ (anúncios de produto e de anúncios; também ads.tiktok.com/business/en/blog)", ativo: true}
+  - {nome: LinkedIn News, tema: marketing, tipo: primaria, pagina: "https://news.linkedin.com/ (e o blog de marketing: business.linkedin.com/marketing-solutions/blog)", ativo: true}
 
   # ───────────── Direito e tecnologia ─────────────
   - {nome: JOTA, tema: direito_tech, tipo: imprensa, rss: "https://www.jota.info/feed", ativo: true}

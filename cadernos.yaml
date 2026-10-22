@@ -26,11 +26,13 @@ niteroi:
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md
 
+# ENCERRADO em 22/10/2026: o caderno IA deixou de existir, porque a geral já cobre IA todo dia (matéria principal
+# e "IA na prática"). As edições antigas e as páginas do site continuam aqui; os arquivos do caderno ficam só como histórico.
 ia:
   nome: "Inteligência Pragmática · IA"
   remetente: "IP · IA"
-  envio: ligado
-  dias_envio: [segunda, quarta, sexta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra
+  envio: desligado
+  dias_envio: [segunda, quarta, sexta]   # (histórico) eram os dias fixos do caderno
   fontes: fontes_ia.yaml
   manual: manual/MANUAL_IA.md
   roteiro: manual/ROTINA_IA.md
@@ -48,11 +50,14 @@ economia:
   manual: manual/MANUAL_ECONOMIA.md
   roteiro: manual/ROTINA_ECONOMIA.md
 
+# ENCERRADO em 22/10/2026: o Marketing virou a seção "#### MARKETING DIGITAL" da geral, nas terças e quintas (que eram
+# os dias fixos dele). As edições antigas e as páginas do site continuam aqui; o manual, o roteiro e as fontes ficam só como
+# histórico (o que vale está no MANUAL_DE_REDACAO, seção 17, e no fontes.yaml, tema marketing).
 marketing:
   nome: "Inteligência Pragmática · Marketing"
   remetente: "IP · Marketing"
-  envio: ligado
-  dias_envio: [terca, quinta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra (aprovado pelo leitor em 22/10)
+  envio: desligado
+  dias_envio: [terca, quinta]   # (histórico) hoje são os dias da seção MARKETING DIGITAL na geral
   fontes: fontes_marketing.yaml
   manual: manual/MANUAL_MARKETING.md
   roteiro: manual/ROTINA_MARKETING.md

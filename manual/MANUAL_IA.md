@@ -1,5 +1,7 @@
 # Manual do caderno IA
 
+> **Caderno encerrado em 22/10/2026.** A geral já cobre IA todo dia (matéria principal e "IA na prática"); o caderno IA deixou de existir. Este manual fica só como histórico.
+
 O caderno IA é a newsletter de inteligência artificial da Inteligência Pragmática. Vai mais fundo que a geral: breakthroughs, modelos novos e o que mudou de verdade, open source, ferramentas e agentes, regulação e o IA na prática. A pesquisa é diária; a edição sai nos **dias fixos** e, fora deles, só quando há notícia muito importante (seção 2).
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz (seção 2), o critério de breakthrough (seção 3), o arco do IA na prática (seção 6), as linhas rápidas (seção 7), o assunto e a prévia (seção 8), números com escala (seção 9), as cotas de estilo (seção 10), o ângulo Direito & tech (seção 11), radar e não repetição (seção 13), o rigor (seção 14) e o formato do arquivo (seção 15). Este arquivo diz só o que muda.
