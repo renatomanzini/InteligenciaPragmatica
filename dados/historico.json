@@ -718,5 +718,143 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-22",
+    "tipo": "dia_util",
+    "numero": 7,
+    "assunto": "o furo no php que a ia achou",
+    "previa": "+ o agente novo da anthropic, que ainda não chegou aqui",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "php2shell-ia",
+        "titulo": "IA ajuda a achar duas falhas críticas no núcleo do PHP; correção sai em 21/10",
+        "tema": "ia",
+        "urls": [
+          "https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/",
+          "https://www.php.net/archive/2026.php"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "claude-duet",
+        "titulo": "Anthropic lança o Claude Duet, agente para profissionais e pequenos negócios, só nos EUA",
+        "tema": "ia",
+        "urls": [
+          "https://claude.com/product/claude-duet"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "stf-iss-pis-cofins",
+        "titulo": "STF tira o ISS da base do PIS/Cofins por 6 a 5",
+        "tema": "economia",
+        "urls": [
+          "https://www.estadao.com.br/economia/por-6-a-5-stf-exclui-iss-da-base-do-piscofins-em-derrota-de-r-354-bi-para-a-uniao/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "desenrola-3",
+        "titulo": "Desenrola 3 prevê leilão de até R$ 90 bi em dívidas",
+        "tema": "economia",
+        "urls": [
+          "https://www.estadao.com.br/economia/desenrola-3-governo-espera-comprar-r-90-bi-em-dividas-antigas-em-novembro-diz-durigan/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "prospera-mei",
+        "titulo": "Lei sancionada perdoa a parte previdenciária das dívidas de MEIs e sobe o teto",
+        "tema": "economia",
+        "urls": [
+          "https://investnews.com.br/economia/prospera-mei-perdao-dividas/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "tesla-3t-2026",
+        "titulo": "Lucro da Tesla cai 43% no 3º trimestre",
+        "tema": "economia",
+        "urls": [
+          "https://arstechnica.com/cars/2026/10/tesla-profits-drop-43-in-q3/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "enter-oab-sp",
+        "titulo": "Justiça adia restrições à Enter pedidas pela OAB-SP e manda preservar registros",
+        "tema": "direito_tech",
+        "urls": [
+          "https://c-level.folha.uol.com.br/negocios/2026/10/justica-rejeita-suspensao-imediata-de-servicos-de-startup-juridica-de-ia-por-pedido-da-oab-sp.shtml"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "keeta-anr",
+        "titulo": "Associação de restaurantes processa a Keeta pela 'compra intermediada'",
+        "tema": "negocios",
+        "urls": [
+          "https://neofeed.com.br/negocios/a-revolta-dos-restaurantes-associacao-vai-a-justica-contra-compra-intermediada-da-keeta/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "weg-america-norte",
+        "titulo": "WEG cresce 31% na América do Norte com data centers",
+        "tema": "negocios",
+        "urls": [
+          "https://investnews.com.br/negocios/weg-ganha-espaco-eua-data-center/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "agentes-bloqueados-sites",
+        "titulo": "Walmart abre o site para agentes de IA, enquanto a Amazon bloqueia",
+        "tema": "ia",
+        "urls": [
+          "https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-nova-classe-acoes",
+        "titulo": "Meta cria classe de ações sem voto para financiar IA",
+        "tema": "negocios",
+        "urls": [
+          "https://www.theverge.com/tech/1015799/meta-shares-class-ai-q3-2026-earnings"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "chatgpt-anuncios-reescritos",
+        "titulo": "OpenAI vai reescrever anúncios do ChatGPT por padrão a partir de 29–30/10",
+        "tema": "marketing",
+        "urls": [
+          "https://ppc.land/openai-to-rewrite-chatgpt-ads-by-default-as-advertisers-get-days-to-opt-out/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "meta-novo-mexico-multa",
+        "titulo": "Meta condenada a pagar US$ 25 bi ao Novo México no caso Cambridge Analytica",
+        "tema": "direito_tech",
+        "urls": [
+          "https://ppc.land/metas-ad-revenue-gains-26-on-the-day-a-new-mexico-judge-fines-it-25bn/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]

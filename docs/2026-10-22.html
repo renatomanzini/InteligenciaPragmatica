@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>o furo no php que a ia achou · Inteligência Pragmática</title>
+<meta name="description" content="+ o agente novo da anthropic, que ainda não chegou aqui">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="index.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática</div>
+<div class="meta">quinta-feira, 22 de outubro de 2026 · Edição nº 7 · 8 min de leitura</div>
+<h1 class="assunto">o furo no php que a ia achou</h1>
+</header>
+<main class="corpo">
+<p>bom dia. A IA que ajuda a escrever código agora também ajuda a achar furos nele. A corrida é entre quem conserta e quem invade. E, no site em hospedagem, quem faz a atualização é o host, não você.</p>
+<p><strong>Hoje eu aprendi:</strong> dois marsupiais que a ciência dava como extintos havia 6 mil anos, um gambá-pigmeu-de-dedos-longos e um planador de cauda anelada, foram achados vivos nas florestas da Papua Ocidental. O achado, de março, teve guia de anciãos dos povos Tambrauw e Maybrat, para quem o planador é sagrado (<a href="https://www.bbc.com/news/articles/cp814l80pw2o">BBC</a>).</p>
+<p><strong>Nesta edição:</strong></p>
+<ul>
+<li>Duas falhas no coração do PHP, a linguagem por trás de <strong>69%</strong> dos sites, achadas com ajuda de IA. O que fazer hoje</li>
+<li>O Claude Duet quer ser o seu assistente de escritório. Por enquanto, só nos EUA e com fila de espera</li>
+<li>STF tira o ISS da base do PIS/Cofins, e o governo prepara o maior Desenrola</li>
+<li>A Enter ganha tempo contra a OAB-SP, e a juíza manda guardar os registros da IA</li>
+<li>US$ 25 bi: a conta que o Novo México mandou para a Meta</li>
+</ul>
+<hr>
+<h4 class="rotulo">IA</h4>
+<h2>A IA achou o furo. Agora a corrida é para fechar</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o PHP corrigiu ontem (21) <strong>2</strong> falhas críticas que deixam um invasor rodar código no servidor; IA ajudou a achá-las, e não há proteção completa sem atualizar.</p>
+</blockquote>
+<p>O PHP, linguagem que roda no servidor de <strong>69,3%</strong> dos sites cuja linguagem dá para identificar, segundo a W3Techs (<a href="https://w3techs.com/technologies/details/pl-php">W3Techs</a>), soltou na quarta (21) as versões <strong>8.5.12, 8.4.27, 8.3.36 e 8.2.35</strong>. Elas fecham duas falhas de execução remota de código, o tipo de brecha em que um estranho manda o seu servidor fazer o que ele quiser (<a href="https://www.php.net/archive/2026.php">PHP</a>).</p>
+<p>O WordPress, que roda em PHP, está em <strong>39,6%</strong> de todos os sites (<a href="https://w3techs.com/technologies/details/cm-wordpress">W3Techs</a>). Ou seja: site de cliente em WordPress entra na conta.</p>
+<p><strong>Contexto.</strong> A correção estava marcada para hoje (22). Foi antecipada porque as falhas vazaram na terça (20), e um vídeo de prova de conceito chegou a ser publicado por engano (<a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">PHP Foundation</a>).</p>
+<p>Quem achou mostra a virada. A Calif reportou o problema em <strong>11 de agosto</strong>, dentro do programa Patch the Planet. A OpenAI reportou no mesmo dia e mandou mais caminhos de ataque em setembro. A Wiz, de segurança, reportou em <strong>24 de agosto</strong> (mesma fonte) e diz ter usado o Gemini 4 Argon e o GPT-5.6 Sol na busca (<a href="https://wiz.io/blog/php2shell-php-rce">Wiz</a>). Os primeiros sinais já tinham aparecido numa auditoria de 2024 (<a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">PHP Foundation</a>).</p>
+<p><strong>Os números.</strong></p>
+<ul>
+<li><strong>9,2</strong> de 10 na escala de gravidade CVSS v4.0. O "10" que circulou estava errado (<a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">PHP Foundation</a>).</li>
+<li><strong>15</strong> falhas registradas (CVEs) no PHP desde 1º de julho e mais de <strong>100</strong> relatórios inválidos ou repetidos no mesmo período. É quase uma falha por semana, com muito ruído no meio (mesma fonte).</li>
+<li>O PHP 8.1 e anteriores não têm correção oficial. Há só remendos mínimos para 7.4, 8.0 e 8.1 (<a href="https://www.php.net/archive/2026.php">PHP</a>).</li>
+</ul>
+<p>Lê de novo: "There are no complete mitigations, updating is the only safe choice", diz a nota da versão. Não há remendo completo, só atualizar (<a href="https://github.com/php/php-src/releases/tag/php-8.2.35">GitHub</a>).</p>
+<p><strong>Os otimistas:</strong> a equipe do PHP diz que não havia exploit funcional conhecido quando divulgou (<a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">PHP Foundation</a>). O desenvolvedor Elias Taylor testou as provas públicas e diz que a falha é real, mas "not easy to exploit". As que estão no GitHub não funcionam num PHP comum (<a href="https://eliastaylor.com/noexploit/">Elias Taylor</a>).</p>
+<p><strong>Os pessimistas:</strong> a Wiz diz que provou ataque sem login contra Drupal e WordPress (<a href="https://wiz.io/blog/php2shell-php-rce">Wiz</a>). Segundo a Search Engine Journal, sites dos governos holandês e finlandês saíram do ar por precaução, e sites de universidades também ficaram fora (<a href="https://www.searchenginejournal.com/critical-php-core-security-flaws-affect-websites-including-wordpress/593812/">SEJ</a>). E Simon Willison relata que provas de conceito circularam depois do vazamento (<a href="https://simonwillison.net/2026/Oct/21/php-security-release/">Simon Willison</a>).</p>
+<p><strong>Por que isso importa pra você:</strong> atualizar o WordPress ou os plugins <strong>não</strong> atualiza o PHP, que fica com a hospedagem (mesma fonte). Abra Ferramentas &gt; Saúde do Site &gt; Info &gt; Servidor, veja a versão e mande uma mensagem ao host perguntando se a correção está instalada. Se precisar tirar o site do ar, o Google recomenda devolver o código 503, que avisa que a parada é temporária, e por no máximo 1 a 2 dias (<a href="https://www.searchenginejournal.com/google-reminds-sites-to-serve-503s-during-server-downtime/593873/">SEJ</a>).</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">PHP Foundation: Today's PHP security release</a></p>
+<hr>
+<h4 class="rotulo">🧠 IA NA PRÁTICA</h4>
+<h2>O Claude quer ser o seu secretário. Por enquanto, de longe</h2>
+<p>Pense num secretário que lê a sua caixa de entrada antes de você acordar. Ele separa o que é urgente, rascunha as respostas e te chama só quando precisa de um "sim". Você não dá ordem a cada passo; você aprova.</p>
+<p>Isso é um agente proativo: em vez de esperar a pergunta, ele trabalha sozinho e te procura.</p>
+<p>A Anthropic lançou na quarta (21) o Claude Duet, nessa linha. Ele roda na nuvem, conectado aos seus apps, e avisa quando termina ou quando precisa de uma decisão (<a href="https://claude.com/product/claude-duet">Claude</a>). São mais de <strong>6.000</strong> conectores, como Gmail, Slack, Google Drive, Notion, Stripe e QuickBooks. A lista de tarefas inclui resumo matinal, rascunho de respostas, achar faturas em aberto, preparar a folha de pagamento para revisão e preparar contratos (mesma fonte). Segundo o Verge, ele pede aprovação antes de passos grandes, como pagar ou apagar algo, e concorre com o Muse, da Meta, e o Dots, da OpenAI (<a href="https://www.theverge.com/ai-artificial-intelligence/1015843/anthropic-claude-duet-ai-agent">The Verge</a>).</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://claude.com/product/claude-duet">Claude Duet</a></p>
+<p>⚠️ <strong>Agora o freio:</strong></p>
+<ul>
+<li><strong>Não chegou aqui.</strong> É uma prévia com fila de espera, só nos EUA e para os planos Pro e Max. Team e Enterprise ainda não entram (mesma fonte). Não há informação sobre português.</li>
+<li><strong>Ele erra a urgência.</strong> A própria página avisa que ele pode ler errado uma conversa ou "miscalibrate what's urgent" (mesma fonte).</li>
+<li><strong>Caprichado, mas esquecido.</strong> Claire Vo testou para a newsletter do Lenny e achou o lançamento o mais caprichado que já viu. Mesmo assim, esqueceu de usar: ele é pouco proativo, lento e não tem app de computador (<a href="https://www.lennysnewsletter.com/p/claude-duet-is-beautiful-i-still">Lenny's Newsletter</a>).</li>
+<li><strong>E os seus dados?</strong> No Hacker News, parte da discussão questiona entregar e-mail e finanças a uma só empresa (<a href="https://news.ycombinator.com/item?id=50186037">Hacker News</a>).</li>
+</ul>
+<p><strong>Agora aplica no mundo real:</strong></p>
+<ul>
+<li><strong>Advogado:</strong> triagem do e-mail do escritório e rascunho de resposta ao cliente. O "sim" final continua sendo do advogado.</li>
+<li><strong>Corretor de imóveis:</strong> resumo matinal de quem pediu visita e quem sumiu, com o follow-up já escrito.</li>
+<li><strong>Dono de restaurante:</strong> achar boleto de fornecedor vencendo e preparar a lista de pagamento da semana para revisar.</li>
+</ul>
+<p><strong>Como isso vira serviço:</strong> configurar o agente para um pequeno negócio. É escolher os conectores, escrever as regras do que ele pode fazer sozinho e do que precisa de aprovação, e testar com o dono por uma semana. <strong>Opinião:</strong> o cliente paga pela configuração e pelo manual de "o que o robô não faz", não pelo robô. Enquanto o Duet não chega aqui, a mesma lógica vale para outros agentes disponíveis.</p>
+<hr>
+<h4 class="rotulo">ECONOMIA</h4>
+<p><strong>🇧🇷 Por aqui</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>STF</strong>: por 6 a 5, com o voto de desempate de Fux, o tribunal tirou o ISS da base do PIS/Cofins; a União estima <strong>R$ 35,4 bi</strong> em 5 anos de devolução, mas o valor real depende da modulação, que ainda não foi decidida (<a href="https://www.estadao.com.br/economia/por-6-a-5-stf-exclui-iss-da-base-do-piscofins-em-derrota-de-r-354-bi-para-a-uniao/">Estadão</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Desenrola 3</strong>: o ministro Dario Durigan prevê um leilão de <strong>até R$ 90 bi</strong> em dívidas antigas em novembro, podendo ir ao começo de dezembro (<a href="https://www.estadao.com.br/economia/desenrola-3-governo-espera-comprar-r-90-bi-em-dividas-antigas-em-novembro-diz-durigan/">Estadão</a>); se sair inteiro, pode superar os dois primeiros programas somados (<a href="https://www1.folha.uol.com.br/mercado/2026/10/com-estimativa-de-r-90-bi-desenrola-3-pode-superar-soma-dos-dois-primeiros-programas.shtml">Folha</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>MEI</strong>: a lei sancionada ontem permite perdoar, a partir de 1º/1/2027, a parte do INSS do DAS não pago até 13/10 por cerca de <strong>3,6 mi</strong> de MEIs (<strong>R$ 12,57 bi</strong> em débitos), e sobe o teto de faturamento de <strong>R$ 81 mil</strong> para <strong>R$ 110 mil</strong> em 2027; o ISS municipal continua devido (<a href="https://investnews.com.br/economia/prospera-mei-perdao-dividas/">InvestNews</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Hoje</strong>: o Bradesco divulga o balanço do 3º trimestre, e técnicos da Receita comentam a arrecadação federal (<a href="https://www.infomoney.com.br/mercados/datafolha-arrecadacao-balanco-bradesco-agenda-22102026/">InfoMoney</a>).</p>
+</div>
+<p><strong>🌎 Lá fora</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Tesla</strong>: lucro de <strong>US$ 787 mi</strong> no 3º trimestre, <strong>43%</strong> menor que um ano antes, com margem operacional de <strong>2,6%</strong> (era <strong>5,8%</strong>) e investimento mais que dobrado, a <strong>US$ 4,7 bi</strong> (<a href="https://arstechnica.com/cars/2026/10/tesla-profits-drop-43-in-q3/">Ars Technica</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Meta</strong>: elevou o piso do investimento de 2026 para <strong>US$ 135 bi a US$ 145 bi</strong> e vai criar uma classe de ações sem direito a voto, negociada a partir de 2027, para pagar IA, aquisições e salários (<a href="https://www.theverge.com/tech/1015799/meta-shares-class-ai-q3-2026-earnings">The Verge</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">🇧🇷 BRASIL ADENTRO</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span>⚖️ <strong>Enter</strong>: a juíza Raquel Fernandez Perrini, da 4ª Vara Cível Federal de SP, deixou para depois da produção de provas as restrições pedidas pela OAB-SP, mas mandou preservar contratos, versões dos modelos de IA e registros de uso desde janeiro de 2024, sob multa de <strong>R$ 50 mil</strong> por descumprimento; não é decisão sobre a legalidade do serviço (<a href="https://c-level.folha.uol.com.br/negocios/2026/10/justica-rejeita-suspensao-imediata-de-servicos-de-startup-juridica-de-ia-por-pedido-da-oab-sp.shtml">Folha</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Keeta</strong>: a Associação Nacional de Restaurantes entrou com ação civil pública contra a "compra intermediada" do app e pede multa diária de <strong>R$ 10 mil</strong> por restaurante listado sem autorização; a Keeta diz que é um piloto local (<a href="https://neofeed.com.br/negocios/a-revolta-dos-restaurantes-associacao-vai-a-justica-contra-compra-intermediada-da-keeta/">NeoFeed</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>WEG</strong>: a receita na América do Norte cresceu <strong>31%</strong> em dólares no 3º trimestre, a <strong>US$ 723 mi</strong>, com data centers como motor, segundo a reportagem; o exterior já é <strong>62,5%</strong> da receita (<a href="https://investnews.com.br/negocios/weg-ganha-espaco-eua-data-center/">InvestNews</a>).</p>
+</div>
+<h4 class="rotulo">🌎 MUNDO AFORA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Walmart</strong>: a partir de novembro, vai deixar agentes de IA comprarem no site por um "Agent Gateway", com aprovação de toda compra por padrão; a Amazon segue bloqueando agentes, como o da Perplexity e o Muse (<a href="https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents">The Verge</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>OpenAI</strong>: a partir de 29–30 de outubro, a empresa poderá reescrever títulos, descrições e o link de destino dos anúncios self-serve do ChatGPT sem aprovação de cada versão; quem não quiser precisa desligar no Ads Manager (<a href="https://ppc.land/openai-to-rewrite-chatgpt-ads-by-default-as-advertisers-get-days-to-opt-out/">PPC Land</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">📊 STATS</h4>
+<h2>US$ 25 bi</h2>
+<p>É a multa civil que um juiz do Novo México, Francis J. Mathew, mandou a Meta pagar ao estado na quarta (21), no caso ligado ao Cambridge Analytica. Um júri já tinha decidido em setembro que a empresa enganou consumidores em <strong>43.899.720</strong> violações (<a href="https://ppc.land/metas-ad-revenue-gains-26-on-the-day-a-new-mexico-judge-fines-it-25bn/">PPC Land</a>).</p>
+<p>Dá cerca de <strong>39%</strong> do que a Meta faturou no 3º trimestre inteiro (<strong>US$ 64,6 bi</strong>, mesma fonte). Ao câmbio de R$ 5, uns <strong>R$ 125 bi</strong>.</p>
+<p>A régua da lei era maior. A <strong>US$ 5.000</strong> por violação, o teto passaria de <strong>US$ 219 bi</strong> (mesma fonte). O estado pediu de <strong>US$ 35 bi a US$ 40 bi</strong>, a Meta defendeu pagar no máximo <strong>US$ 3,4 bi</strong> e diz que vai recorrer (<a href="https://abc7ny.com/story/judge-orders-meta-pay-25-billion-violating-new-mexico-law-cambridge-analytica-data-breach/19965355/">AP/ABC7</a>). Pela conta da gente, a multa ficou em uns <strong>US$ 570</strong> por violação.</p>
+<p class="opiniao"><span class="selo">Opinião</span> a cadeia é esta: multa por violação » cada usuário enganado vira uma linha na conta » escala de bilhões de usuários vira escala de bilhões de dólares. Para quem monta produto com dados pessoais no Brasil, a lição é a mesma da LGPD: o risco se multiplica pelo tamanho da base.</p>
+<hr>
+<p><strong>Para ler:</strong></p>
+<ul>
+<li>[Para ler] <a href="https://simonwillison.net/2026/Oct/21/php-security-release/">Today's PHP security release</a>, de Simon Willison: o cronograma do vazamento, as provas que circularam e o que atualizar.</li>
+<li>[Para ler] <a href="https://www.lennysnewsletter.com/p/claude-duet-is-beautiful-i-still">Claude Duet is beautiful. I still forgot to use it</a> (Lenny's Newsletter): o teste de Claire Vo com o agente.</li>
+<li>[Para ler] <a href="https://arstechnica.com/ai/2026/10/the-15-billion-ad-powered-ai-startup-your-doctor-may-already-be-using/">The $15 billion ad-powered AI startup your doctor may already be using</a> (Ars Technica/FT): a OpenEvidence, usada por quase dois terços dos médicos dos EUA, vive de anúncios, mesmo com dúvidas sobre precisão.</li>
+</ul>
+<hr>
+<p><strong>Pergunta do dia:</strong> se um cliente seu ligasse hoje perguntando "meu site está seguro?", você saberia responder em quanto tempo?</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="index.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>

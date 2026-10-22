@@ -1,0 +1,194 @@
+{
+  "data": "2026-10-22",
+  "verificado_em": "2026-10-22T06:20:18-03:00",
+  "total": 30,
+  "resumo": {
+    "ok": 29,
+    "quebrado": 0,
+    "inconclusivo": 1
+  },
+  "links": [
+    {
+      "url": "https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.php.net/archive/2026.php",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://claude.com/product/claude-duet",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.estadao.com.br/economia/por-6-a-5-stf-exclui-iss-da-base-do-piscofins-em-derrota-de-r-354-bi-para-a-uniao/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.estadao.com.br/economia/desenrola-3-governo-espera-comprar-r-90-bi-em-dividas-antigas-em-novembro-diz-durigan/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/economia/prospera-mei-perdao-dividas/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/10/tesla-profits-drop-43-in-q3/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://c-level.folha.uol.com.br/negocios/2026/10/justica-rejeita-suspensao-imediata-de-servicos-de-startup-juridica-de-ia-por-pedido-da-oab-sp.shtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://neofeed.com.br/negocios/a-revolta-dos-restaurantes-associacao-vai-a-justica-contra-compra-intermediada-da-keeta/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/negocios/weg-ganha-espaco-eua-data-center/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/tech/1015799/meta-shares-class-ai-q3-2026-earnings",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ppc.land/openai-to-rewrite-chatgpt-ads-by-default-as-advertisers-get-days-to-opt-out/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ppc.land/metas-ad-revenue-gains-26-on-the-day-a-new-mexico-judge-fines-it-25bn/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.bbc.com/news/articles/cp814l80pw2o",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://w3techs.com/technologies/details/pl-php",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://w3techs.com/technologies/details/cm-wordpress",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://wiz.io/blog/php2shell-php-rce",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.wiz.io/blog/php2shell-php-rce"
+    },
+    {
+      "url": "https://github.com/php/php-src/releases/tag/php-8.2.35",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://eliastaylor.com/noexploit/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.searchenginejournal.com/critical-php-core-security-flaws-affect-websites-including-wordpress/593812/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://simonwillison.net/2026/Oct/21/php-security-release/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.searchenginejournal.com/google-reminds-sites-to-serve-503s-during-server-downtime/593873/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1015843/anthropic-claude-duet-ai-agent",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.lennysnewsletter.com/p/claude-duet-is-beautiful-i-still",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50186037",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET"
+    },
+    {
+      "url": "https://www1.folha.uol.com.br/mercado/2026/10/com-estimativa-de-r-90-bi-desenrola-3-pode-superar-soma-dos-dois-primeiros-programas.shtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/datafolha-arrecadacao-balanco-bradesco-agenda-22102026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://abc7ny.com/story/judge-orders-meta-pay-25-billion-violating-new-mexico-law-cambridge-analytica-data-breach/19965355/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/10/the-15-billion-ad-powered-ai-startup-your-doctor-may-already-be-using/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
