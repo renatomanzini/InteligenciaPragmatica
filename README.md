@@ -68,7 +68,7 @@ Está tudo montado. Esta seção serve para você saber onde fica cada peça e c
 | Repositório | https://github.com/renatomanzini/InteligenciaPragmatica | Guarda o código, as edições e o histórico. É público. |
 | Site | https://renatomanzini.github.io/InteligenciaPragmatica/ | O arquivo de todas as edições, que dá para instalar no celular como app. |
 | App do Claude no GitHub | github.com → Settings → Applications → Claude | Deixa a rotina ler e gravar **só** neste repositório. |
-| Ambiente "Default" | claude.ai/code → botão do ambiente embaixo da caixa de mensagem → engrenagem | Rede **Full** (para ler os sites de notícia), as variáveis `EMAIL_DESTINO` e `RESEND_VIA_PROXY=1` e o *network secret* do Resend. |
+| Ambiente "Default" | claude.ai/code → botão do ambiente embaixo da caixa de mensagem → engrenagem | Rede **Full** (para ler os sites de notícia), as variáveis `EMAIL_DESTINO`, `RESEND_VIA_PROXY=1` e `GITHUB_TOKEN_LEITURA` e o *network secret* do Resend. |
 | Rotina | https://claude.ai/code/routines | Roda toda madrugada e segue o `manual/ROTINA.md`. |
 | Resend | https://resend.com | Entrega o e-mail. A chave fica guardada no *network secret*, e a rotina usa sem enxergar. |
 
@@ -80,6 +80,7 @@ Está tudo montado. Esta seção serve para você saber onde fica cada peça e c
 - **Ver o que a rotina fez:** cada execução aparece na lista da rotina. Clique nela para ver a conversa inteira. Verde só quer dizer que rodou, então confira o resultado lá dentro.
 - **Mudar o horário:** peça ao Claude ("muda a rotina da newsletter para começar às 4h"). O cron da rotina usa o horário de Londres (UTC), que fica 3 h à frente de Brasília.
 - **Trocar a chave do Resend:** crie uma chave nova no Resend. No ambiente, apague o secret antigo e adicione o novo: Bearer, `api.resend.com`, `Authorization`.
+- **Trocar a chave do GitHub** (`GITHUB_TOKEN_LEITURA`, que dá as estrelas e o GitHub em alta na nuvem): em github.com/settings/personal-access-tokens, crie ou regenere a chave "Inteligencia Pragmatica - leitura", só com **Public repositories** e sem permissões. No ambiente, troque o valor da linha `GITHUB_TOKEN_LEITURA=`. Ela fica numa variável, e não num *network secret*, porque a nuvem nunca anexa secret a pedidos ao GitHub. Por isso a chave só lê o que é público.
 - **Parar só o e-mail** (a edição continua saindo no site): troque `envio: ligado` por `envio: desligado` no `config.yaml`.
 - **Quanto da assinatura isso gasta:** veja em https://claude.ai/settings/usage. A rotina usa o mesmo limite das suas conversas com o Claude.
 
