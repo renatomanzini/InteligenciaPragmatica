@@ -1176,5 +1176,131 @@
       "pergunta"
     ],
     "caderno": "ia"
+  },
+  {
+    "data": "2026-10-22",
+    "tipo": "edicao",
+    "numero": 1,
+    "assunto": "o mundo sobe o juro, o brasil desce",
+    "previa": "+ o imposto dos dividendos rendeu metade da previsão para o ano",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "selic-ciclo-de-cortes-2026",
+        "titulo": "Copom cortou a Selic de 14,50% para 13,75% desde junho, enquanto Fed e BCE sobem juros e o Banco da Inglaterra deve subir, com a guerra no Irã",
+        "tema": "juros",
+        "urls": [
+          "https://www.bcb.gov.br/controleinflacao/historicotaxasjuros",
+          "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+          "https://www.theguardian.com/business/2026/oct/21/inflation-rises-middle-east-conflict-drives-up-fuel-prices",
+          "https://www.moneytimes.com.br/fitch-independentemente-do-resultado-das-urnas-pib-deve-perder-forca-em-2027-selic-fica-1350-2026-jcav/",
+          "https://www1.folha.uol.com.br/mercado/2026/10/grupo-propoe-a-lula-e-flavio-medidas-para-derrubar-a-taxa-selic-a-75-em-2027.shtml",
+          "https://www.infomoney.com.br/mercados/petrobras-petr3-petr4-pode-ter-subir-diesel-ate-cinquenta-porcento-goldman-sachs-quais-impactos-acoes-inflacao/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "arrecadacao-federal-2026",
+        "titulo": "Arrecadação federal de setembro bate recorde (R$ 239,4 bi), mas a XP vê perda de fôlego",
+        "tema": "fiscal",
+        "urls": [
+          "https://www.moneytimes.com.br/arrecadacao-bate-recorde-setembro-perde-folego-acende-alerta-para-meta-fiscal-xp-jcav/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "imposto-dividendos-2026",
+        "titulo": "Imposto sobre dividendos rende R$ 5,26 bi até setembro, metade da previsão revisada para o ano",
+        "tema": "fiscal",
+        "urls": [
+          "https://oglobo.globo.com/economia/noticia/2026/10/22/imposto-sobre-dividendos-rende-r-53-bilhoes-ate-setembro-metade-da-previsao-do-governo-para-2026.ghtml"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "cni-margem-industria",
+        "titulo": "Satisfação da indústria com a margem de lucro cai a 42,2 pontos, a menor desde 2020",
+        "tema": "setores",
+        "urls": [
+          "https://valor.globo.com/brasil/noticia/2026/10/22/insatisfacao-dos-empresarios-da-industria-com-margem-de-lucro-e-a-maior-desde-a-pandemia-diz-cni.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "piso-do-frete-autonomos",
+        "titulo": "Piso do frete por eixo tira carga do caminhoneiro autônomo, mostra a Frete.com",
+        "tema": "setores",
+        "urls": [
+          "https://braziljournal.com/piso-do-frete-sai-pela-culatra-caminhoneiro-autonomo-perde-mercado"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "leilao-gas-uniao",
+        "titulo": "Primeiro leilão de gás da União vende os 110 lotes a 23 indústrias",
+        "tema": "empresas",
+        "urls": [
+          "https://valor.globo.com/empresas/noticia/2026/10/22/leilo-de-gs-da-unio-termina-com-todos-os-lotes-arrematados-por-23-empresas.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "turquia-juros",
+        "titulo": "Turquia corta os juros em 1 ponto percentual, para 36% ao ano",
+        "tema": "mundo",
+        "urls": [
+          "https://valor.globo.com/financas/noticia/2026/10/22/banco-central-da-turquia-corta-taxa-de-juros-para-36percent-ao-ano.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "reino-unido-juros-da-divida",
+        "titulo": "Reino Unido paga £ 10,9 bi de juros da dívida em setembro, recorde para o mês",
+        "tema": "mundo",
+        "urls": [
+          "https://www.theguardian.com/business/2026/oct/21/inflation-rises-middle-east-conflict-drives-up-fuel-prices"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "zona-do-euro-confianca",
+        "titulo": "Confiança do consumidor da zona do euro cai a -17,9 pontos em outubro",
+        "tema": "mundo",
+        "urls": [
+          "https://valor.globo.com/mundo/noticia/2026/10/22/confianca-do-consumidor-na-zona-do-euro-recua-mais-que-o-esperado-na-leitura-preliminar-de-outubro.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "igpm-aluguel-2026",
+        "titulo": "Aluguel pelo IGP-M sobe 3,34% em outubro; a 2ª prévia do mês marca 1,59%",
+        "tema": "precos",
+        "urls": [
+          "https://www.quintoandar.com.br/guias/reajuste-de-aluguel-calculadora-igpm-2026/",
+          "https://valor.globo.com/brasil/noticia/2026/10/21/igp-m-sobe-159-pontos-percentuais-na-segunda-prvia-de-outubro-informa-fgv.ghtml"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "desenrola-3",
+        "titulo": "Desenrola 3: a primeira etapa é só com os bancos; a União pagaria no máximo R$ 9 bi por R$ 90 bi em dívidas",
+        "tema": "consumo",
+        "urls": [
+          "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/ministro-preve-renegociacao-de-r-90-bi-em-3a-fase-do-desenrola"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "painel",
+      "explicador",
+      "brasil",
+      "empresas_precos",
+      "mundo",
+      "no_bolso",
+      "agenda"
+    ],
+    "caderno": "economia"
   }
 ]
