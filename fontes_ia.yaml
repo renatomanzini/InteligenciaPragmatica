@@ -1,0 +1,119 @@
+# Fontes do caderno IA. Mesmo formato do fontes.yaml da geral (veja os campos lá), com os campos
+# do caderno Niterói quando precisa: filtro (só entram as notícias que citam uma dessas palavras;
+# palavra de até 3 letras, como "IA" ou "AI", só casa inteira) e limite (máximo de itens da fonte).
+#
+# Testadas uma a uma em 22/10/2026 no Mac. Descartadas no teste:
+#   Meta AI blog (HTTP 400), Microsoft AI blog (410, saiu do ar), Mistral e xAI (sem RSS; xAI dá 403),
+#   VentureBeat (429), Lawfare (403), IAPP (sem RSS), Exame IA (404), Estadão Link (parado em junho),
+#   Qwen blog (parado em 2025), Ahead of AI (quase parado), The Shift, Every, LangChain e Stanford HAI
+#   (feed vazio), iyiou (desafio anti-robô), arXiv (370 papers por semana: os papers do dia do
+#   Hugging Face já fazem essa triagem), The Information (paywall: não dá para confirmar o fato).
+#   Na nuvem (registros da geral), a CNBC dá 403 e a busca do GitHub dá 403; o GitHub em alta passa
+#   a usar a página de tendências quando a API falha.
+#
+# tema: as seções do arquivo de candidatos, na ordem de "temas" abaixo.
+
+janela_horas:
+  padrao: 72      # quinta: desde a edição de segunda
+  segunda: 96     # segunda: desde a edição de quinta
+  sabado: 72
+  domingo: 72
+
+limite_por_fonte: 10
+
+temas:
+  laboratorios: "Laboratórios e modelos (fontes primárias)"
+  open_source: "Open source"
+  ferramentas: "Ferramentas e agentes"
+  pesquisa: "Pesquisa"
+  regulacao: "Regulação"
+  brasil: "IA no Brasil"
+  china: "China"
+  imprensa: "Imprensa de IA"
+  analise: "Análise"
+
+fontes:
+  # ───────────── Laboratórios e modelos ─────────────
+  - {nome: OpenAI News, tema: laboratorios, tipo: primaria, rss: "https://openai.com/news/rss.xml", limite: 12, ativo: true}
+  - {nome: Google Blog (IA), tema: laboratorios, tipo: primaria, rss: "https://blog.google/technology/ai/rss/", ativo: true}
+  - {nome: Google DeepMind, tema: laboratorios, tipo: primaria, rss: "https://deepmind.google/blog/rss.xml", ativo: true}
+  - {nome: Meta Newsroom, tema: laboratorios, tipo: primaria, rss: "https://about.fb.com/news/feed/", filtro: [AI, Llama, superintelligence], ativo: true}
+  - {nome: NVIDIA Blog, tema: laboratorios, tipo: primaria, rss: "https://blogs.nvidia.com/feed/", limite: 8, ativo: true}
+  - {nome: Anthropic News, tema: laboratorios, tipo: primaria, pagina: "https://www.anthropic.com/news", ativo: true}
+  - {nome: Anthropic Research, tema: laboratorios, tipo: primaria, pagina: "https://www.anthropic.com/research", ativo: true}
+  - {nome: Mistral AI, tema: laboratorios, tipo: primaria, pagina: "https://mistral.ai/news", ativo: true}
+
+  # ───────────── Open source ─────────────
+  - {nome: Hugging Face Blog, tema: open_source, tipo: primaria, rss: "https://huggingface.co/blog/feed.xml", ativo: true}
+  - {nome: Ollama Blog, tema: open_source, tipo: primaria, rss: "https://ollama.com/blog/rss.xml", ativo: true}
+  - {nome: Interconnects (Nathan Lambert), tema: open_source, tipo: analise, rss: "https://www.interconnects.ai/feed", ativo: true}
+
+  # ───────────── Ferramentas e agentes ─────────────
+  - {nome: Anthropic Engineering, tema: ferramentas, tipo: primaria, pagina: "https://www.anthropic.com/engineering", ativo: true}
+  - {nome: GitHub Blog, tema: ferramentas, tipo: primaria, rss: "https://github.blog/feed/", ativo: true}
+  - {nome: Cursor (changelog), tema: ferramentas, tipo: primaria, rss: "https://cursor.com/changelog/rss.xml", ativo: true}
+  - {nome: Lovable Blog, tema: ferramentas, tipo: primaria, rss: "https://lovable.dev/blog/rss.xml", ativo: true}
+  - {nome: Replit Blog, tema: ferramentas, tipo: primaria, rss: "https://blog.replit.com/feed.xml", ativo: true}
+  - {nome: Simon Willison, tema: ferramentas, tipo: analise, rss: "https://simonwillison.net/atom/everything/", limite: 12, ativo: true}
+  - {nome: Latent Space, tema: ferramentas, tipo: analise, rss: "https://www.latent.space/feed", ativo: true}
+
+  # ───────────── Pesquisa ─────────────
+  - {nome: Google Research, tema: pesquisa, tipo: primaria, rss: "https://research.google/blog/rss/", ativo: true}
+  - {nome: Quanta Magazine (computação), tema: pesquisa, tipo: imprensa, rss: "https://www.quantamagazine.org/computer-science/feed/", ativo: true}
+  - {nome: Import AI, tema: pesquisa, tipo: analise, rss: "https://importai.substack.com/feed", ativo: true}
+
+  # ───────────── Regulação ─────────────
+  - {nome: EU AI Act Newsletter, tema: regulacao, tipo: analise, rss: "https://artificialintelligenceact.substack.com/feed", ativo: true}
+  - {nome: Câmara (ciência e tecnologia), tema: regulacao, tipo: primaria, rss: "https://www.camara.leg.br/noticias/rss/dinamico/CIENCIA-E-TECNOLOGIA", ativo: true}
+  # o feed do Senado só traz as 15 últimas notícias (menos de um dia): pega o que sair na véspera
+  - {nome: Agência Senado, tema: regulacao, tipo: primaria, rss: "https://www12.senado.leg.br/noticias/rss", filtro: [inteligência artificial, IA, algoritmo], ativo: true}
+  - {nome: JOTA, tema: regulacao, tipo: imprensa, rss: "https://www.jota.info/feed", filtro: [inteligência artificial, IA, algoritmo, LGPD, ANPD], ativo: true}
+  - {nome: ANPD (notícias), tema: regulacao, tipo: primaria, pagina: "https://www.gov.br/anpd/pt-br/assuntos/noticias", ativo: true}
+
+  # ───────────── IA no Brasil ─────────────
+  - {nome: MIT Technology Review Brasil, tema: brasil, tipo: imprensa, rss: "https://mittechreview.com.br/feed/", filtro: [inteligência artificial, IA, IAs, agente, modelo, ChatGPT, Claude, Gemini, algoritmo], ativo: true}
+  - {nome: Tecnoblog, tema: brasil, tipo: imprensa, rss: "https://tecnoblog.net/feed/", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Claude, Anthropic, DeepSeek, LLM], ativo: true}
+  - {nome: Folha Tec, tema: brasil, tipo: imprensa, rss: "https://feeds.folha.uol.com.br/tec/rss091.xml", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Claude, Anthropic, DeepSeek], ativo: true}
+  - {nome: Exame, tema: brasil, tipo: imprensa, rss: "https://exame.com/feed/", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Anthropic, agentes], ativo: true}
+  - {nome: Startups.com.br, tema: brasil, tipo: imprensa, rss: "https://startups.com.br/feed/", filtro: [inteligência artificial, IA, agente, LLM], ativo: true}
+
+  # ───────────── China ─────────────
+  - {nome: SCMP Tech, tema: china, tipo: imprensa, rss: "https://www.scmp.com/rss/36/feed", filtro: [AI, DeepSeek, Qwen, Kimi, Moonshot, Zhipu, MiniMax, Huawei, chip, model, robot], ativo: true}
+  - {nome: Rest of World, tema: china, tipo: imprensa, rss: "https://restofworld.org/feed/latest/", filtro: [AI, artificial intelligence, chatbot, DeepSeek, chip], ativo: true}
+  - {nome: ChinaTalk, tema: china, tipo: analise, rss: "https://www.chinatalk.media/feed", ativo: true}
+  - {nome: TechNode, tema: china, tipo: imprensa, rss: "https://technode.com/feed/", filtro: [AI, DeepSeek, Qwen, Kimi, Moonshot, Zhipu, MiniMax, model, chip, robot], ativo: true}
+  - {nome: Pandaily, tema: china, tipo: imprensa, rss: "https://pandaily.com/feed/", filtro: [AI, DeepSeek, Qwen, Kimi, Moonshot, Zhipu, MiniMax, model, chip, robot], ativo: true}
+  - {nome: DeepSeek (novidades), tema: china, tipo: primaria, pagina: "https://api-docs.deepseek.com/ (menu News)", ativo: true}
+
+  # ───────────── Imprensa de IA ─────────────
+  - {nome: TechCrunch IA, tema: imprensa, tipo: imprensa, rss: "https://techcrunch.com/category/artificial-intelligence/feed/", ativo: true}
+  - {nome: The Verge IA, tema: imprensa, tipo: imprensa, rss: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", ativo: true}
+  - {nome: Ars Technica IA, tema: imprensa, tipo: imprensa, rss: "https://arstechnica.com/ai/feed/", ativo: true}
+  - {nome: The Register IA, tema: imprensa, tipo: imprensa, rss: "https://www.theregister.com/software/ai_ml/headlines.atom", ativo: true}
+  - {nome: MIT Technology Review, tema: imprensa, tipo: imprensa, rss: "https://www.technologyreview.com/feed/", filtro: [AI, artificial intelligence, model, chatbot, agent], ativo: true}
+  - {nome: The Decoder, tema: imprensa, tipo: imprensa, rss: "https://the-decoder.com/feed/", ativo: true}
+  - {nome: Wired IA, tema: imprensa, tipo: imprensa, rss: "https://www.wired.com/feed/tag/ai/latest/rss", ativo: true}
+  # a CNBC dá 403 na nuvem todos os dias (registros da geral de 20 a 22/10)
+  - {nome: CNBC Tecnologia, tema: imprensa, tipo: imprensa, rss: "https://www.cnbc.com/id/19854910/device/rss/rss.html", ativo: false}
+  - {nome: Reuters Tecnologia, tema: imprensa, tipo: imprensa, pagina: "https://www.reuters.com/technology/", ativo: true}  # responde 401 a robôs: a rotina precisa de busca na web para ver as manchetes
+
+  # ───────────── Análise ─────────────
+  - {nome: One Useful Thing (Ethan Mollick), tema: analise, tipo: analise, rss: "https://www.oneusefulthing.org/feed", ativo: true}
+  - {nome: AI Snake Oil, tema: analise, tipo: analise, rss: "https://www.aisnakeoil.com/feed", ativo: true}
+
+# Fontes especiais, lidas por API (vão para a seção Comunidade).
+especiais:
+  hacker_news: {ativo: true, limite: 30}
+  github_em_alta: {ativo: true, limite: 15, dias: 7}
+  hugging_face: {ativo: true, limite: 12}
+  reddit:
+    ativo: true
+    subreddits: [LocalLLaMA, ClaudeAI]   # o Reddit devolve 429 se pedirmos muitos seguidos
+    limite: 8
+
+# Radar: newsletters que o leitor já recebe. Servem para ACHAR pauta e para NÃO REPETIR.
+# Nunca são citadas como fonte, e o texto delas nunca é copiado.
+radar:
+  - {nome: AI Drops, sitemap: "https://www.aidrops.com.br/sitemap.xml", ativo: true}
+  - {nome: Neat Prompts, sitemap: "https://www.neatprompts.com/sitemap.xml", ativo: true}
+  - {nome: TechDrops, sitemap: "https://www.techdrops.com.br/sitemap.xml", ativo: true}

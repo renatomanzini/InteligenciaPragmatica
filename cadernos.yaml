@@ -24,3 +24,11 @@ niteroi:
   fontes: fontes_niteroi.yaml
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md
+
+ia:
+  nome: "Inteligência Pragmática · IA"
+  remetente: "IP · IA"
+  envio: desligado
+  fontes: fontes_ia.yaml
+  manual: manual/MANUAL_IA.md
+  roteiro: manual/ROTINA_IA.md

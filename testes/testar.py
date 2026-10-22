@@ -506,6 +506,60 @@ def testar_coleta_filtros():
              "linha → com os dois-pontos dentro ou fora do negrito (%s)" % setas)
 
 
+TENDENCIAS_FALSAS = """<html><body>
+<article class="Box-row"><h2 class="h3 lh-condensed"><a href="/dono/agente"><span>dono /</span> agente</a></h2>
+<p class="col-9 color-fg-muted my-1">Um agente que faz tudo.</p>
+<span itemprop="programmingLanguage">Python</span>
+<a href="/dono/agente/stargazers" class="Link"><svg><path d="M8 .25a.75"></path></svg>
+  12,345</a>
+<span class="d-inline-block float-sm-right"><svg><path d="M1 2"></path></svg> 6,789 stars this week</span></article>
+<article class="Box-row"><h2 class="h3"><a href="/outro/sem-descricao">outro / sem-descricao</a></h2></article>
+</body></html>"""
+
+
+def testar_coleta_ia():
+    secao("coleta: filtro com palavra curta e GitHub em alta pela página de tendências (caderno IA)")
+    from ferramentas import cadernos, coleta
+    conferir(coleta._passa_filtro(["IA"], "A IA do Google chegou"), "filtro 'IA' casa a palavra inteira")
+    conferir(coleta._passa_filtro(["IA"], "https://tecnoblog.net/noticias/ia-do-google/"), "filtro 'IA' olha o endereço")
+    conferir(not coleta._passa_filtro(["IA"], "Bom dia: a mídia e a polícia"), "filtro 'IA' não casa com 'dia' nem 'mídia'")
+    conferir(coleta._passa_filtro(["inteligência artificial"], "Inteligencia Artificial no STF"),
+             "palavra longa continua casando dentro do texto")
+
+    original = coleta._baixar
+    try:
+        def baixar_falso(url, *a, **k):
+            if "api.github.com" in url:
+                return 403, b'{"message": "API rate limit exceeded"}', url
+            return 200, TENDENCIAS_FALSAS.encode(), url
+        coleta._baixar = baixar_falso
+        itens, stat = coleta._github_em_alta({"limite": 15}, date(2026, 10, 22))
+        coleta._baixar = lambda url, *a, **k: (200, (b'{"items": []}' if "api.github.com" in url
+                                                     else TENDENCIAS_FALSAS.encode()), url)
+        vazia, _ = coleta._github_em_alta({"limite": 15}, date(2026, 10, 22))
+        conferir(len(vazia) == 2, "busca da API vazia também cai na página de tendências")
+    finally:
+        coleta._baixar = original
+    conferir(stat["ok"] and "tendências" in (stat["erro"] or ""), "API com 403 cai na página de tendências (%s)" % stat)
+    conferir([c["titulo"] for c in itens] == ["dono/agente", "outro/sem-descricao"], "lê os repositórios da página")
+    primeiro = itens[0] if itens else {"extra": {}, "resumo": ""}
+    conferir(primeiro["extra"] == {"estrelas": 12345, "linguagem": "Python", "estrelas_semana": 6789}
+             and primeiro["resumo"] == "Um agente que faz tudo.", "estrelas, estrelas da semana, linguagem e descrição")
+    conferir("+6789 ★ na semana" in coleta._linha_md(primeiro), "as estrelas da semana aparecem nos candidatos")
+
+    # o caderno IA do projeto: fontes com os campos certos e temas que existem
+    if "ia" in cadernos.nomes(RAIZ_PROJETO):
+        cfg = util.ler_yaml(cadernos.arquivo_fontes(RAIZ_PROJETO, "ia"))
+        temas = set(cfg.get("temas") or {})
+        ruins = [f.get("nome") for f in cfg.get("fontes") or []
+                 if not f.get("nome") or f.get("tema") not in temas or not (f.get("rss") or f.get("pagina"))]
+        conferir(not ruins, "fontes_ia.yaml: toda fonte tem nome, tema da lista e rss ou página (%s)" % ruins)
+        conferir([r["nome"] for r in cfg.get("radar") or []] and all(r.get("sitemap") or r.get("rss")
+                 for r in cfg["radar"]), "fontes_ia.yaml: o radar tem endereço")
+        for chave in ("manual", "roteiro"):
+            conferir((RAIZ_PROJETO / cadernos.config(RAIZ_PROJETO, "ia")[chave]).exists(), "caderno IA: %s existe" % chave)
+
+
 def testar_horario_de_entrega(raiz):
     secao("envio junto no horário de entrega")
     from datetime import datetime as _dt
@@ -638,6 +692,7 @@ def main():
         testar_horario_de_entrega(raiz)
         testar_publicar_em_paralelo(tmp)
         testar_coleta_filtros()
+        testar_coleta_ia()
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
     print("\n" + ("TUDO CERTO" if not falhas else "%d FALHA(S):\n  - " % len(falhas) + "\n  - ".join(falhas)))

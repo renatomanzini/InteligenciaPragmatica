@@ -166,12 +166,19 @@ def _sem_acento(s: str) -> str:
 
 def _passa_filtro(filtro, texto: str) -> bool:
     """Filtro de fonte: lista de palavras (ou uma só); basta uma aparecer, sem ligar para acento,
-    maiúscula ou hífen (vale também para o endereço: '.../niteroi-ganha-...' casa com 'Niterói')."""
+    maiúscula ou hífen (vale também para o endereço: '.../niteroi-ganha-...' casa com 'Niterói').
+    Palavra de até 3 letras (como 'IA') só casa inteira: senão 'dia' e 'mídia' passariam."""
     if not filtro:
         return True
     palavras = [filtro] if isinstance(filtro, str) else filtro
     alvo = _sem_acento(texto).replace("-", " ")
-    return any(_sem_acento(str(p)).replace("-", " ") in alvo for p in palavras)
+
+    def casa(p):
+        p = _sem_acento(str(p)).replace("-", " ")
+        if len(p) <= 3:
+            return re.search(r"(?<![a-z0-9])%s(?![a-z0-9])" % re.escape(p), alvo) is not None
+        return p in alvo
+    return any(casa(p) for p in palavras)
 
 
 def _iso(dt: Optional[datetime]) -> Optional[str]:
@@ -367,9 +374,46 @@ def _github_em_alta(cfg: dict, data: date) -> Tuple[List[dict], dict]:
                 r.get("full_name") or "", r.get("html_url") or "", "GitHub em alta", "comunidade", "comunidade",
                 _parse_iso(r.get("created_at")), r.get("description") or "",
                 extra={"estrelas": r.get("stargazers_count"), "linguagem": r.get("language")}))
-        return [c for c in itens if c["titulo"] and c["url"]], _stat(True, len(itens), None, t0, "api")
+        itens = [c for c in itens if c["titulo"] and c["url"]]
+        if not itens:  # a busca às vezes estoura o tempo do GitHub e volta vazia
+            raise RuntimeError("a busca voltou vazia")
+        return itens, _stat(True, len(itens), None, t0, "api")
     except Exception as ex:
+        # Na nuvem, a busca da API dá 403 (limite por IP, que é dividido com outros usuários).
+        # A página de tendências não usa a API: os repositórios com mais estrelas na semana.
+        itens = _github_tendencias(cfg)
+        if itens:
+            return itens, _stat(True, len(itens), "API: %s; usei a página de tendências" % ex, t0, "api")
         return [], _stat(False, 0, str(ex), t0, "api")
+
+
+def _numero(s: str) -> Optional[int]:
+    s = re.sub(r"[^\d]", "", s or "")
+    return int(s) if s else None
+
+
+def _github_tendencias(cfg: dict) -> List[dict]:
+    """github.com/trending da semana. Sem data de criação: os itens ficam 'sem data'."""
+    status, corpo, _ = _baixar("https://github.com/trending?since=weekly", tentativas=2)
+    if status != 200:
+        return []
+    texto = corpo.decode("utf-8", "replace")
+    itens = []
+    for bloco in re.findall(r'<article class="Box-row">(.*?)</article>', texto, re.S):
+        nome = re.search(r'<h2[^>]*>.*?href="/([\w.-]+/[\w.-]+)"', bloco, re.S)
+        if not nome:
+            continue
+        desc = re.search(r"<p(?:\s[^>]*)?>(.*?)</p>", bloco, re.S)
+        lingua = re.search(r'itemprop="programmingLanguage">([^<]+)<', bloco)
+        total = re.search(r'/stargazers"[^>]*>.*?</svg>\s*([\d,.]+)', bloco, re.S)
+        semana = re.search(r"([\d,.]+) stars this week", bloco)
+        extra = {"estrelas": _numero(total.group(1)) if total else None,
+                 "linguagem": lingua.group(1).strip() if lingua else None,
+                 "estrelas_semana": _numero(semana.group(1)) if semana else None}
+        itens.append(_candidato(nome.group(1), "https://github.com/" + nome.group(1), "GitHub em alta",
+                                "comunidade", "comunidade", None, _texto(desc.group(1)) if desc else "",
+                                extra={k: v for k, v in extra.items() if v is not None}))
+    return itens[:int(cfg.get("limite", 15))]
 
 
 def _hugging_face(cfg: dict) -> Tuple[List[dict], dict]:
@@ -552,7 +596,8 @@ def _deduplicar(candidatos: List[dict]) -> List[dict]:
 
 def _extra_texto(extra: dict) -> str:
     rotulos = [("pontos", "{} pts"), ("comentarios", "{} comentários"), ("curtidas", "{} curtidas"),
-               ("votos", "{} votos"), ("estrelas", "★ {}"), ("linguagem", "{}"), ("downloads", "{} downloads")]
+               ("votos", "{} votos"), ("estrelas", "★ {}"), ("estrelas_semana", "+{} ★ na semana"),
+               ("linguagem", "{}"), ("downloads", "{} downloads")]
     partes = []
     usados = set()
     for chave, formato in rotulos:
