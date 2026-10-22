@@ -5,7 +5,7 @@
 #   paginas      — quantas páginas do feed ler (prefeituras publicam muito e o feed só mostra as 10 últimas).
 #   limite       — máximo de itens dessa fonte (no lugar do limite_por_fonte).
 #
-# Testadas uma a uma em 22/10/2026 (no Mac). Descartadas no teste:
+# Testadas uma a uma em 22/10/2026 no Mac e de novo na nuvem (Run now). Descartadas no teste:
 #   Câmara de Niterói (sem RSS; a página entra abaixo), O Dia (RSS parado em 2018), G1 Rio antigo (parado em 2018),
 #   O Perú Molhado (feed parado e com spam), Correio da Manhã (RSS dá 403), Diário do Rio (403),
 #   busca e tag do Diário do Vale (anti-robô; fica o feed geral),
@@ -31,7 +31,8 @@ temas:
 fontes:
   # ───────────── Niterói: fontes oficiais ─────────────
   - {nome: Prefeitura de Niterói, tema: niteroi, tipo: primaria, rss: "https://niteroi.rj.gov.br/feed/", paginas: 5, limite: 40, ativo: true}
-  - {nome: NitTrans (trânsito), tema: niteroi, tipo: primaria, rss: "https://nittrans.niteroi.rj.gov.br/feed/", ativo: true}
+  # NitTrans: dá 403 na nuvem (teste de 22/10); os avisos dela saem também no feed da prefeitura
+  - {nome: NitTrans (trânsito), tema: niteroi, tipo: primaria, rss: "https://nittrans.niteroi.rj.gov.br/feed/", ativo: false}
   - {nome: Águas de Niterói, tema: niteroi, tipo: primaria, rss: "https://www.grupoaguasdobrasil.com.br/aguas-niteroi/feed/", ativo: true}
   - {nome: UFF, tema: niteroi, tipo: primaria, rss: "https://www.uff.br/feed/", filtro: [Niterói, Antônio Pedro], ativo: true}
   - {nome: Câmara Municipal de Niterói, tema: niteroi, tipo: primaria, pagina: "https://www.camaraniteroi.rj.gov.br/site/noticias/", ativo: true}
@@ -63,4 +64,5 @@ fontes:
   - {nome: G1 Região dos Lagos, tema: buzios, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/regiao-dos-lagos/", filtro: [Búzios], janela_horas: 168, ativo: true}
   - {nome: Folha dos Lagos, tema: buzios, tipo: imprensa, rss: "https://www.folhadoslagos.com/ultimas-noticias/rss/", filtro: [Búzios], janela_horas: 168, ativo: true}
   - {nome: RC24h, tema: buzios, tipo: imprensa, rss: "https://rc24h.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: true}
-  - {nome: Clique Diário, tema: buzios, tipo: imprensa, rss: "https://cliquediario.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: true}
+  # Clique Diário: anti-robô (403) na nuvem (teste de 22/10)
+  - {nome: Clique Diário, tema: buzios, tipo: imprensa, rss: "https://cliquediario.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: false}
