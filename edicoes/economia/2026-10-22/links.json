@@ -1,0 +1,147 @@
+{
+  "data": "2026-10-22",
+  "verificado_em": "2026-10-22T15:07:03-03:00",
+  "total": 22,
+  "resumo": {
+    "ok": 20,
+    "quebrado": 0,
+    "inconclusivo": 2
+  },
+  "links": [
+    {
+      "url": "https://www.bcb.gov.br/controleinflacao/historicotaxasjuros",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theguardian.com/business/2026/oct/21/inflation-rises-middle-east-conflict-drives-up-fuel-prices",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/fitch-independentemente-do-resultado-das-urnas-pib-deve-perder-forca-em-2027-selic-fica-1350-2026-jcav/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www1.folha.uol.com.br/mercado/2026/10/grupo-propoe-a-lula-e-flavio-medidas-para-derrubar-a-taxa-selic-a-75-em-2027.shtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/petrobras-petr3-petr4-pode-ter-subir-diesel-ate-cinquenta-porcento-goldman-sachs-quais-impactos-acoes-inflacao/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/arrecadacao-bate-recorde-setembro-perde-folego-acende-alerta-para-meta-fiscal-xp-jcav/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://oglobo.globo.com/economia/noticia/2026/10/22/imposto-sobre-dividendos-rende-r-53-bilhoes-ate-setembro-metade-da-previsao-do-governo-para-2026.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/brasil/noticia/2026/10/22/insatisfacao-dos-empresarios-da-industria-com-margem-de-lucro-e-a-maior-desde-a-pandemia-diz-cni.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://braziljournal.com/piso-do-frete-sai-pela-culatra-caminhoneiro-autonomo-perde-mercado",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/empresas/noticia/2026/10/22/leilo-de-gs-da-unio-termina-com-todos-os-lotes-arrematados-por-23-empresas.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/financas/noticia/2026/10/22/banco-central-da-turquia-corta-taxa-de-juros-para-36percent-ao-ano.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/mundo/noticia/2026/10/22/confianca-do-consumidor-na-zona-do-euro-recua-mais-que-o-esperado-na-leitura-preliminar-de-outubro.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.quintoandar.com.br/guias/reajuste-de-aluguel-calculadora-igpm-2026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/brasil/noticia/2026/10/21/igp-m-sobe-159-pontos-percentuais-na-segunda-prvia-de-outubro-informa-fgv.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/ministro-preve-renegociacao-de-r-90-bi-em-3a-fase-do-desenrola",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.ft.com/content/443ce2f3-ba36-4dc7-aa0b-a2bc593fa563",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://www.euronews.com/business/2026/06/11/ecb-raises-interest-rates-for-the-first-time-in-three-years-as-iran-war-fuels-inflation",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.euronews.com/2026/06/11/ecb-raises-interest-rates-for-the-first-time-in-three-years-as-iran-war-fuels-inflation"
+    },
+    {
+      "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.ibge.gov.br/calendario-de-divulgacoes",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://www.bcb.gov.br/controleinflacao/calendarioreunioescopom",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

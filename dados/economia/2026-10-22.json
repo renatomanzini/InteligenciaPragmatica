@@ -1,0 +1,114 @@
+{
+  "gerado_em": "2026-10-22T14:24:57-03:00",
+  "itens": {
+    "selic": {
+      "valor": 13.75,
+      "desde": "2026-09-17",
+      "antes": 14.0,
+      "proximo_copom": "2026-11-04",
+      "ref": "2026-09-17",
+      "fonte": "SGS"
+    },
+    "ipca": {
+      "mes": 0.82,
+      "doze": 4.58,
+      "doze_antes": 4.22,
+      "ref": "2026-09",
+      "fonte": "SGS"
+    },
+    "ibcbr": {
+      "var": 0.3402286682732347,
+      "ref": "2026-08",
+      "fonte": "SGS"
+    },
+    "desemprego": {
+      "valor": 5.3,
+      "antes": 5.3,
+      "ano_antes": 5.6,
+      "menor_da_serie": false,
+      "ref": "2026-08",
+      "fonte": "SGS"
+    },
+    "divida": {
+      "valor": 82.87,
+      "antes": 82.55,
+      "ref": "2026-08",
+      "fonte": "SGS"
+    },
+    "primario": {
+      "valor": 0.62,
+      "antes": 0.67,
+      "ref": "2026-08",
+      "fonte": "SGS"
+    },
+    "dolar": {
+      "valor": 5.0383,
+      "data": "2026-10-22",
+      "fonte": "SGS",
+      "ref": "2026-10-22",
+      "var_ano": -8.434501308519927
+    },
+    "pib": {
+      "tri": 0.5,
+      "ano": 2.0,
+      "ref": "202602",
+      "fonte": "SIDRA"
+    },
+    "focus": {
+      "data": "2026-10-16",
+      "antes_data": "2026-09-18",
+      "anos": [
+        "2026",
+        "2027"
+      ],
+      "valores": {
+        "Câmbio": {
+          "2026": {
+            "agora": 5.132,
+            "antes": 5.2
+          },
+          "2027": {
+            "agora": 5.2213,
+            "antes": 5.275
+          }
+        },
+        "IPCA": {
+          "2026": {
+            "agora": 5.219,
+            "antes": 4.9205
+          },
+          "2027": {
+            "agora": 4.3206,
+            "antes": 4.3
+          }
+        },
+        "PIB Total": {
+          "2026": {
+            "agora": 1.8301,
+            "antes": 1.8805
+          },
+          "2027": {
+            "agora": 1.3246,
+            "antes": 1.4334
+          }
+        },
+        "Selic": {
+          "2026": {
+            "agora": 13.25,
+            "antes": 13.5
+          },
+          "2027": {
+            "agora": 12.0,
+            "antes": 12.0
+          }
+        }
+      },
+      "ref": "2026-10-16",
+      "fonte": "Focus"
+    }
+  },
+  "falhas": {},
+  "fora_do_ar": [],
+  "novos": [],
+  "anterior": null
+}
