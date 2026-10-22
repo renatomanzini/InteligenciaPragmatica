@@ -418,6 +418,8 @@ def testar_cadernos(tmp: Path):
              "página e arquivo do caderno em docs/")
     conferir('href="mercado.html"' in (docs / "index.html").read_text(encoding="utf-8"),
              "o arquivo da geral tem link para o caderno")
+    conferir("Mercado" not in json.loads((docs / "manifest.webmanifest").read_text(encoding="utf-8"))["name"],
+             "o nome do app instalado continua o da geral depois de montar um caderno")
     pagina = (docs / "mercado-2026-01-15.html").read_text(encoding="utf-8")
     conferir('href="mercado.html"' in pagina, "a página volta para o arquivo do caderno")
     conferir("ip/mercado-2026-01-15.html" in (pasta / "curta.txt").read_text(encoding="utf-8"),

@@ -774,7 +774,9 @@ def montar(data: str, raiz: Path, config: dict, caderno: str = cadernos.GERAL) -
     _escrever_indices(raiz, docs)
     indice = docs / nome_indice
 
-    (docs / "manifest.webmanifest").write_text(_manifest(nome), encoding="utf-8")
+    # O app instalado é um só (a geral e os cadernos): o nome dele não muda com o caderno montado por último.
+    nome_app = cadernos.config(raiz).get("nome") or NOME_PADRAO
+    (docs / "manifest.webmanifest").write_text(_manifest(nome_app), encoding="utf-8")
     (docs / "sw.js").write_text(SW_JS, encoding="utf-8")
     (docs / "icon.svg").write_text(gerar_svg(), encoding="utf-8")
     (docs / "icon-192.png").write_bytes(gerar_png(192))
