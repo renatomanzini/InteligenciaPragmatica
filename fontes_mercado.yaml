@@ -1,0 +1,38 @@
+# Fontes do caderno Mercado. Mesmo formato do fontes.yaml da geral.
+# Os NÚMEROS do painel (cotações, Medo & Ganância) não vêm daqui: vêm do comando
+# "python main.py mercado-painel", direto das fontes de dados (ferramentas/mercado.py).
+#
+# tema: bolsa_br | bolsa_eua | moedas | juros | cripto | empresas | macro
+
+janela_horas:
+  padrao: 24      # da manhã de ontem até agora
+  segunda: 72     # pega a sexta e o fim de semana
+  sabado: 24
+  domingo: 24
+
+limite_por_fonte: 12
+
+fontes:
+  # ───────────── Brasil ─────────────
+  - {nome: Valor Investe, tema: bolsa_br, tipo: imprensa, rss: "https://pox.globo.com/rss/valorinveste/", ativo: true}
+  - {nome: Valor Finanças, tema: juros, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/financas", ativo: true}
+  - {nome: Money Times, tema: bolsa_br, tipo: imprensa, rss: "https://www.moneytimes.com.br/feed/", ativo: true}
+  - {nome: InfoMoney, tema: bolsa_br, tipo: imprensa, rss: "https://www.infomoney.com.br/feed/", ativo: true}
+  - {nome: Seu Dinheiro, tema: bolsa_br, tipo: imprensa, rss: "https://www.seudinheiro.com/feed/", ativo: true}
+  - {nome: Exame Invest, tema: bolsa_br, tipo: imprensa, rss: "https://exame.com/invest/feed/", ativo: true}
+  - {nome: InvestNews, tema: bolsa_br, tipo: imprensa, rss: "https://investnews.com.br/feed/", ativo: true}
+  - {nome: Brazil Journal, tema: empresas, tipo: imprensa, rss: "https://braziljournal.com/feed/", ativo: true}
+  - {nome: Bloomberg Línea Brasil, tema: empresas, tipo: imprensa, rss: "https://www.bloomberglinea.com.br/arc/outboundfeeds/rss/?outputType=xml", ativo: true}
+  - {nome: Investing.com Brasil, tema: bolsa_br, tipo: imprensa, rss: "https://br.investing.com/rss/news.rss", ativo: true}
+
+  # ───────────── EUA e mundo ─────────────
+  - {nome: CNBC Mercados, tema: bolsa_eua, tipo: imprensa, rss: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258", ativo: true}
+  - {nome: CNBC Destaques, tema: bolsa_eua, tipo: imprensa, rss: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", ativo: true}
+  - {nome: WSJ Mercados, tema: bolsa_eua, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain", ativo: true}
+  - {nome: MarketWatch, tema: bolsa_eua, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/mw_topstories", ativo: true}
+  - {nome: Federal Reserve, tema: juros, tipo: primaria, rss: "https://www.federalreserve.gov/feeds/press_all.xml", ativo: true}
+
+# Newsletters que o leitor já recebe: servem para não repetir, nunca para citar.
+radar:
+  - {nome: the news, rss: "https://rss.beehiiv.com/feeds/j9teVW9Qmi.xml", ativo: true}
+  - {nome: MoneyDrops, sitemap: "https://www.moneydrops.com.br/sitemap.xml", ativo: true}

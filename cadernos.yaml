@@ -1,0 +1,18 @@
+# Cadernos: newsletters especializadas, ao lado da geral (que continua no config.yaml).
+# Cada caderno herda o config.yaml (site_url, horario_entrega...) e troca o que estiver aqui.
+#
+# Campos:
+#   nome       — aparece no e-mail e no site
+#   remetente  — nome de quem envia (o endereço é o mesmo da geral)
+#   envio      — ligado | desligado (comece desligado e ligue depois das edições de teste)
+#   fontes     — arquivo de fontes do caderno
+#   manual     — manual de redação do caderno (complementa o da geral)
+#   roteiro    — passo a passo da rotina do caderno
+
+mercado:
+  nome: "Inteligência Pragmática · Mercado"
+  remetente: "IP · Mercado"
+  envio: desligado
+  fontes: fontes_mercado.yaml
+  manual: manual/MANUAL_MERCADO.md
+  roteiro: manual/ROTINA_MERCADO.md
