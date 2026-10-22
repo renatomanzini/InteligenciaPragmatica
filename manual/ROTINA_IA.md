@@ -23,7 +23,7 @@ python3 main.py historico --caderno ia --dias 14
 python3 main.py historico --dias 5
 ```
 - Defina **DATA**, que é a data de hoje em Brasília.
-- Se hoje não for segunda nem quinta, a rotina foi disparada à mão (Run now): faça **só o teste de fontes**, sem edição e sem commit, e termine.
+- Se hoje não for segunda nem quinta, ou se `edicoes/ia/DATA/edicao.md` já existir (a edição de hoje já saiu), a rotina foi disparada à mão (Run now): faça **só o teste de fontes**, sem edição e sem commit, e termine.
 ```bash
 python3 main.py coletar --caderno ia
 cat dados/candidatos/ia-DATA-fontes.log
