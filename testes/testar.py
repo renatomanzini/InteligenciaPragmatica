@@ -629,6 +629,22 @@ def testar_caderno_economia(tmp: Path):
                  "Selic: desde, antes e próxima decisão (%s)" % s)
     finally:
         economia._sgs = original
+    # segunda tentativa: a fonte que falhou na rajada tenta de novo, sozinha, antes das reservas
+    fontes_orig, reservas_orig = economia._fontes, economia._reservas
+    tentativas = []
+    try:
+        def ibcbr_instavel():
+            tentativas.append(1)
+            if len(tentativas) == 1:
+                raise RuntimeError("respondeu 0")
+            return {"ibcbr": {"var": 0.34, "ref": "2026-08", "fonte": "SGS"}}
+        economia._fontes = lambda h: [("IBC-Br (BC)", ibcbr_instavel, ["ibcbr"])]
+        economia._reservas = lambda h: []
+        p = economia.coletar_painel(date(2026, 10, 22))
+        conferir("ibcbr" in p["itens"] and not p["falhas"] and not p["fora_do_ar"] and len(tentativas) == 2,
+                 "a fonte que não respondeu na rajada entra na segunda tentativa")
+    finally:
+        economia._fontes, economia._reservas = fontes_orig, reservas_orig
     serie = [("2012-%02d" % m, 7.0) for m in range(3, 13)] + [("2026-%02d" % m, 5.4 - m / 100) for m in range(1, 9)]
     conferir(economia._desemprego_de(serie, "SGS")["menor_da_serie"], "desemprego: menor da série")
     conferir(not economia._desemprego_de(serie + [("2026-09", 6.0)], "SGS")["menor_da_serie"], "subiu: não é o menor")

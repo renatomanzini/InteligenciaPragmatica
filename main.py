@@ -300,6 +300,17 @@ def cmd_mercado_alarme(args) -> int:
 
 def cmd_economia_painel(args) -> int:
     from ferramentas import economia
+    if args.sem_gravar:  # teste de fontes: não mexe na edição de hoje, que pode já estar publicada
+        from datetime import timedelta
+        painel = economia.coletar_painel()
+        print(economia.painel_md(painel))
+        hoje = util.hoje_brasilia()
+        _, falhas_apoio = economia.apoio(painel, hoje - timedelta(days=7), hoje)
+        print("Fontes do painel que falharam: %s" % ("; ".join("%s (%s)" % kv for kv in sorted(painel["falhas"].items()))
+                                                    or "nenhuma"))
+        print("Apoio da pauta (IBGE): %s" % ("; ".join(falhas_apoio) or "ok"))
+        print("Nada foi gravado (--sem-gravar).")
+        return 0
     pasta = args.pasta or str(util.hoje_brasilia())
     res = economia.gravar_painel(pasta, RAIZ)
     print(res["texto"])
@@ -455,6 +466,7 @@ def criar_parser() -> argparse.ArgumentParser:
 
     c = sub.add_parser("economia-painel", help="caderno Economia: coleta os números oficiais e grava o painel da edição")
     c.add_argument("pasta", nargs="?", type=_pasta, metavar="AAAA-MM-DD", help="padrão: hoje")
+    c.add_argument("--sem-gravar", action="store_true", help="teste de fontes: só mostra, não grava nada")
     c.set_defaults(func=cmd_economia_painel)
 
     c = sub.add_parser("configurar-email", help="guarda a chave do Resend no .env (pede sem mostrar na tela)")

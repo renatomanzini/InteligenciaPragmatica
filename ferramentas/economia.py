@@ -255,9 +255,9 @@ def _reservas(hoje: date) -> list:
     ]
 
 
-def _rodar(fontes) -> tuple:
+def _rodar(fontes, trabalhadores: int = 4) -> tuple:
     dados, falhas = {}, {}
-    with ThreadPoolExecutor(4) as pool:  # poucos de cada vez: o SGS do BC derruba pedidos em rajada
+    with ThreadPoolExecutor(trabalhadores) as pool:  # poucos de cada vez: o SGS do BC derruba pedidos em rajada
         futuros = [(nome, pool.submit(fn)) for nome, fn, _ in fontes]
         for nome, fut in futuros:
             try:
@@ -270,7 +270,17 @@ def _rodar(fontes) -> tuple:
 def coletar_painel(hoje: Optional[date] = None) -> dict:
     """Lê as fontes em paralelo e, onde a principal falhou, a reserva. O que faltar só some do painel."""
     hoje = hoje or agora_brasilia().date()
-    dados, falhas = _rodar(_fontes(hoje))
+    fontes = _fontes(hoje)
+    dados, falhas = _rodar(fontes)
+    # Na nuvem, o SGS às vezes não responde quando recebe vários pedidos juntos (22/10, o IBC-Br):
+    # as que falharam tentam mais uma vez, uma de cada vez, antes das reservas.
+    de_novo = [f for f in fontes if f[0] in falhas]
+    if de_novo:
+        extras, falhas_de_novo = _rodar(de_novo, 1)
+        dados.update(extras)
+        for nome, _, _ in de_novo:
+            falhas.pop(nome, None)
+        falhas.update(falhas_de_novo)
     precisa = [r for r in _reservas(hoje) if any(c not in dados for c in r[2])]
     if precisa:
         extras, falhas_res = _rodar(precisa)

@@ -27,9 +27,11 @@ python3 main.py historico --caderno economia --dias 30
 ```bash
 python3 main.py coletar --caderno economia
 cat dados/candidatos/economia-DATA-fontes.log
-python3 main.py economia-painel DATA
+grep "^## " dados/candidatos/economia-DATA.md
+python3 main.py economia-painel --sem-gravar
+git checkout -q -- dados/ edicoes/ docs/ && git status --short
 ```
-  Responda com a contagem de candidatos por seção (`grep "^## " dados/candidatos/economia-DATA.md`), as fontes que falharam, com o motivo, as linhas do painel que saíram e as que ficaram "fora do ar".
+  O `--sem-gravar` não mexe na edição de hoje, e o `git checkout` desfaz o que a coleta regravou: o teste não deixa nada para commit (se a nuvem pedir commit no fim, não faça). Responda com a contagem de candidatos por seção, as fontes que falharam, com o motivo, as linhas do painel que saíram, as que ficaram "fora do ar" e se o apoio do IBGE respondeu.
 - Pegue o **número** da próxima edição ("próxima: nº").
 - Veja as histórias em andamento e a seção "Nos outros cadernos": ela mostra o que a geral, o Mercado e os outros cadernos publicaram desde a última edição deste.
 
@@ -39,7 +41,7 @@ python3 main.py coletar --caderno economia
 python3 main.py economia-painel DATA
 ```
 - O painel fica em `edicoes/economia/DATA/painel.md`. Leia, mas **não edite**. Se uma fonte do painel falhar, siga sem ela: o rodapé do painel já avisa.
-- Leia `edicoes/economia/DATA/oficiais.md`: os dados do painel que saíram desde a última edição (🆕), os releases do IBGE do período e a agenda dos próximos dias.
+- Leia `edicoes/economia/DATA/oficiais.md`: os dados do painel que saíram desde a última edição (🆕), os releases do IBGE do período e a agenda dos próximos dias. Se o IBGE estiver "fora do ar" (aconteceu na nuvem em 22/10), procure a agenda da semana com WebSearch ("agenda econômica da semana IBGE BC") e os resultados na imprensa.
 - Leia a curadoria (`dados/economia/curadoria.md`) e os candidatos sem os já cobertos, só o começo de cada linha, e o radar à parte:
 ```bash
 grep -E "^## |^- \[" dados/candidatos/economia-DATA.md | grep -v "JÁ COBERTO" | cut -c1-230
@@ -55,7 +57,12 @@ sed -n '/^## Radar/,/^## Fontes sem RSS/p' dados/candidatos/economia-DATA.md | c
 ```bash
 python3 main.py guardar DATA --caderno economia -m "Economia: curadoria de DATA"
 ```
-  3. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens você guardou e quantos há na curadoria. **Não** rode `montar`, `registrar`, `enviar` nem `publicar`.
+  3. Apague o que só servia para hoje, para não sobrar nada sem commit (a curadoria já está na main):
+```bash
+rm -rf edicoes/economia/DATA dados/economia/DATA.json dados/candidatos/economia-DATA*
+git status --short
+```
+  4. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens você guardou e quantos há na curadoria. **Não** rode `montar`, `registrar`, `enviar` nem `publicar`, e não faça outro commit, mesmo que a nuvem peça.
 
 ## Passo 3: pauta
 - **Dia fixo:** junte a curadoria e os candidatos de hoje e escolha (MANUAL_ECONOMIA, seção 5):
