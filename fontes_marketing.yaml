@@ -2,8 +2,8 @@
 # A rotina roda todo dia (pesquisa e curadoria) e só escreve edição nos dias fixos ou com notícia muito
 # importante; por isso a janela é de um dia, e o que não sai fica em dados/marketing/curadoria.md.
 #
-# Testadas uma a uma em 22/10/2026 no Mac. Na nuvem, as 11 de imprensa e o radar já rodam todo dia na coleta
-# da geral sem falhar (logs de 16 a 22/10); os blogs das plataformas entram no teste de fontes do Run now.
+# Testadas uma a uma em 22/10/2026 no Mac e de novo na nuvem (Run now de 22/10): as 17 com RSS e o radar
+# responderam, nenhuma falhou.
 # Descartadas no teste: Search Engine Land (403 anti-robô), Mundo do Marketing (feed saiu do ar, 404),
 #   B9 (feed sem data), TikTok Newsroom e LinkedIn News (sem RSS; visitar na apuração, abaixo).
 # Os blogs das plataformas publicam pouco: na maioria dos dias, eles respondem sem itens, e está tudo bem.
