@@ -35,11 +35,15 @@ ia:
   manual: manual/MANUAL_IA.md
   roteiro: manual/ROTINA_IA.md
 
+# ENCERRADO em 22/10/2026: a Economia se juntou ao Mercado. Nas segundas, quartas e sextas, a edição do Mercado
+# ganha o bloco "#### ECONOMIA" (macro do Brasil, micro, mundo e um explicador), com o painel oficial do BC e do IBGE
+# (python main.py economia-painel DATA --caderno mercado). As edições antigas e as páginas do site continuam aqui;
+# o manual, o roteiro e as fontes ficam só como histórico (o que vale está no MANUAL_MERCADO, seção 9).
 economia:
   nome: "Inteligência Pragmática · Economia"
   remetente: "IP · Economia"
-  envio: ligado
-  dias_envio: [segunda, quarta, sexta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição urgente
+  envio: desligado
+  dias_envio: [segunda, quarta, sexta]   # (histórico) eram os dias fixos; hoje são os dias do bloco ECONOMIA do Mercado
   fontes: fontes_economia.yaml
   manual: manual/MANUAL_ECONOMIA.md
   roteiro: manual/ROTINA_ECONOMIA.md

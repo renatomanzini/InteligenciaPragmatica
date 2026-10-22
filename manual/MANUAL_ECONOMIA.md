@@ -1,5 +1,7 @@
 # Manual do caderno Economia
 
+> **Caderno encerrado em 22/10/2026.** A Economia virou o bloco "#### ECONOMIA" do Mercado, às segundas, quartas e sextas. Este manual fica só como histórico; o que vale está no `manual/MANUAL_MERCADO.md`, seção 9.
+
 O caderno Economia é a newsletter de economia da Inteligência Pragmática. A rotina **pesquisa todo dia** de madrugada e guarda o que vale na curadoria. A edição sai **segunda, quarta e sexta**, e num outro dia só quando há notícia muito importante (seção 2). Quando sai, chega às 06:00, junto com as outras.
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz (seção 2), números com escala e a cadeia `»` (seção 9), política (seção 12), radar e não repetição (seção 13), o rigor (seção 14) e as convenções de formato (seção 15). Este arquivo diz só o que muda.

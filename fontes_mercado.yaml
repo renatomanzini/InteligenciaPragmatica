@@ -2,7 +2,16 @@
 # Os NÚMEROS do painel (cotações, Medo & Ganância) não vêm daqui: vêm do comando
 # "python main.py mercado-painel", direto das fontes de dados (ferramentas/mercado.py).
 #
-# tema: bolsa_br | bolsa_eua | moedas | juros | cripto | empresas | macro
+# A partir de 22/10/2026, o caderno Economia se juntou ao Mercado: as fontes dele estão no fim da lista, com
+# os temas economia_brasil, economia_empresas e economia_mundo. Elas alimentam o bloco "#### ECONOMIA" das
+# segundas, quartas e sextas (manual/MANUAL_MERCADO.md, seção 9). As que já existiam aqui (Valor Finanças,
+# InfoMoney, Brazil Journal, Bloomberg Línea Brasil, Federal Reserve, CNBC e o radar) não foram repetidas.
+# O painel de números oficiais (Selic, IPCA, PIB, desemprego, dívida, dólar e Focus) vem do comando
+# "python main.py economia-painel DATA --caderno mercado" (ferramentas/economia.py), que também grava os
+# releases e a agenda do IBGE em edicoes/mercado/DATA/oficiais.md.
+#
+# tema do Mercado: bolsa_br | bolsa_eua | juros | empresas
+# tema do bloco Economia: economia_brasil | economia_empresas | economia_mundo
 
 janela_horas:
   padrao: 24      # da manhã de ontem até agora
@@ -11,6 +20,16 @@ janela_horas:
   domingo: 24
 
 limite_por_fonte: 12
+
+# Ordem e nome das seções no arquivo de candidatos.
+temas:
+  bolsa_br: "Bolsa e mercado no Brasil"
+  bolsa_eua: "EUA e mundo"
+  empresas: "Empresas"
+  juros: "Juros"
+  economia_brasil: "ECONOMIA (bloco de segunda, quarta e sexta) · Brasil: juros, inflação, fiscal, câmbio, emprego e crescimento"
+  economia_empresas: "ECONOMIA (bloco de segunda, quarta e sexta) · Empresas, setores, preços e consumo"
+  economia_mundo: "ECONOMIA (bloco de segunda, quarta e sexta) · Economia global"
 
 fontes:
   # ───────────── Brasil ─────────────
@@ -31,6 +50,61 @@ fontes:
   - {nome: WSJ Mercados, tema: bolsa_eua, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain", ativo: true}
   - {nome: MarketWatch, tema: bolsa_eua, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/mw_topstories", ativo: true}
   - {nome: Federal Reserve, tema: juros, tipo: primaria, rss: "https://www.federalreserve.gov/feeds/press_all.xml", ativo: true}
+
+  # ═════════════ Bloco ECONOMIA (segunda, quarta e sexta) ═════════════
+  # Janela de cada fonte: 48 h (da edição anterior até hoje) e 72 h na segunda (sexta, sábado e domingo).
+  # Nas terças e quintas elas também são coletadas, mas o Mercado não lê estas seções.
+  # Testadas uma a uma em 22/10/2026 no Mac, com janela de 96 h. Descartadas no teste do caderno Economia:
+  #   InfoMoney Economia (feed vazio; fica o geral), Exame Economia e Negócios (404; o feed geral é quase só eleição),
+  #   CNN Brasil Economia (404), Poder360 (XML inválido; o geral é política), Agência Gov (feed vazio),
+  #   IBGE Agência de Notícias (anti-robô; entra pela API, no oficiais.md),
+  #   Ministério da Fazenda e Tesouro (RSS com erro; ficam como página), Blog do IBRE (XML inválido),
+  #   IFI do Senado (sem RSS), FMI (403 no RSS; fica como página), Banco Mundial (RSS 404; fica como página),
+  #   Reuters (sem RSS aberto), AP (anti-robô), OCDE (anti-robô), Caixin (403),
+  #   Mercado & Consumo (feed parado em agosto), Valor Agronegócios (parado desde 12/10), Calculated Risk (parado em janeiro).
+
+  # ───────────── Economia · Brasil: fontes oficiais ─────────────
+  - {nome: BC · notas à imprensa, tema: economia_brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/notasImprensa", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: BC · notícias, tema: economia_brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/noticias", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: BC · comunicados do Copom, tema: economia_brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/comunicadoscopom", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: BC · atas do Copom, tema: economia_brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/atascopom", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: Ipea · Carta de Conjuntura, tema: economia_brasil, tipo: analise, rss: "https://www.ipea.gov.br/cartadeconjuntura/index.php/feed/", janela_horas: 168, limite: 15, ativo: true}
+  - {nome: IBGE (releases e calendário), tema: economia_brasil, tipo: primaria, pagina: "edicoes/mercado/DATA/oficiais.md, gravado pelo economia-painel --caderno mercado (o site do IBGE dá 403 a robôs)", ativo: true}
+  - {nome: Ministério da Fazenda, tema: economia_brasil, tipo: primaria, pagina: "https://www.gov.br/fazenda/pt-br/assuntos/noticias", ativo: true}
+  - {nome: Tesouro Nacional, tema: economia_brasil, tipo: primaria, pagina: "https://www.gov.br/tesouronacional/pt-br/noticias", ativo: true}
+  - {nome: IFI do Senado, tema: economia_brasil, tipo: analise, pagina: "https://www12.senado.leg.br/ifi", ativo: true}
+
+  # ───────────── Economia · Brasil: imprensa ─────────────
+  - {nome: Valor Brasil, tema: economia_brasil, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/brasil", janela_horas: {padrao: 48, segunda: 72}, limite: 25, ativo: true}
+  - {nome: Folha Mercado, tema: economia_brasil, tipo: imprensa, rss: "https://feeds.folha.uol.com.br/mercado/rss091.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 25, ativo: true}
+  - {nome: Estadão Economia, tema: economia_brasil, tipo: imprensa, rss: "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/", janela_horas: {padrao: 48, segunda: 72}, limite: 20, ativo: true}
+  - {nome: O Globo Economia, tema: economia_brasil, tipo: imprensa, rss: "https://pox.globo.com/rss/oglobo/economia", janela_horas: {padrao: 48, segunda: 72}, limite: 20, ativo: true}
+  - {nome: G1 Economia, tema: economia_brasil, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/economia/", janela_horas: {padrao: 48, segunda: 72}, limite: 20, ativo: true}
+  - {nome: Agência Brasil Economia, tema: economia_brasil, tipo: imprensa, rss: "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: Money Times Economia, tema: economia_brasil, tipo: imprensa, rss: "https://www.moneytimes.com.br/economia/feed/", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: InvestNews Economia, tema: economia_brasil, tipo: imprensa, rss: "https://investnews.com.br/economia/feed/", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+
+  # ───────────── Economia · Empresas, setores, preços e consumo ─────────────
+  - {nome: Valor Empresas, tema: economia_empresas, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/empresas", janela_horas: {padrao: 48, segunda: 72}, limite: 25, ativo: true}
+  - {nome: NeoFeed, tema: economia_empresas, tipo: imprensa, rss: "https://neofeed.com.br/feed/", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+
+  # ───────────── Economia · Economia global ─────────────
+  - {nome: Banco Central Europeu, tema: economia_mundo, tipo: primaria, rss: "https://www.ecb.europa.eu/rss/press.html", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: FMI (blog), tema: economia_mundo, tipo: primaria, pagina: "https://www.imf.org/en/Blogs (o RSS dá 403; a página abre pelo WebFetch)", ativo: true}
+  - {nome: Banco Mundial, tema: economia_mundo, tipo: primaria, pagina: "https://www.worldbank.org/ext/en/news e https://blogs.worldbank.org/en/home", ativo: true}
+  - {nome: Valor Mundo, tema: economia_mundo, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/mundo", janela_horas: {padrao: 48, segunda: 72}, limite: 20, ativo: true}
+  - {nome: The Economist Finanças, tema: economia_mundo, tipo: imprensa, rss: "https://www.economist.com/finance-and-economics/rss.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: The Economist Editoriais, tema: economia_mundo, tipo: analise, rss: "https://www.economist.com/leaders/rss.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: The Economist Américas, tema: economia_mundo, tipo: imprensa, rss: "https://www.economist.com/the-americas/rss.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: FT Economia global, tema: economia_mundo, tipo: imprensa, rss: "https://www.ft.com/global-economy?format=rss", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: Bloomberg Economia, tema: economia_mundo, tipo: imprensa, rss: "https://feeds.bloomberg.com/economics/news.rss", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: WSJ Economia, tema: economia_mundo, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/socialeconomyfeed", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: NYT Economia, tema: economia_mundo, tipo: imprensa, rss: "https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: BBC Negócios, tema: economia_mundo, tipo: imprensa, rss: "https://feeds.bbci.co.uk/news/business/rss.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: Guardian Economia, tema: economia_mundo, tipo: imprensa, rss: "https://www.theguardian.com/business/economics/rss", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: SCMP Economia (China), tema: economia_mundo, tipo: imprensa, rss: "https://www.scmp.com/rss/318421/feed", janela_horas: {padrao: 48, segunda: 72}, limite: 10, ativo: true}
+  - {nome: PIIE, tema: economia_mundo, tipo: analise, rss: "https://www.piie.com/rss/update.xml", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
+  - {nome: Noahpinion, tema: economia_mundo, tipo: analise, rss: "https://www.noahpinion.blog/feed", janela_horas: {padrao: 48, segunda: 72}, limite: 15, ativo: true}
 
 # Newsletters que o leitor já recebe: servem para não repetir, nunca para citar.
 radar:

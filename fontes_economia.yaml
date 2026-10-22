@@ -1,3 +1,5 @@
+# ENCERRADO em 22/10/2026: o caderno Economia se juntou ao Mercado. Estas fontes foram para o fontes_mercado.yaml
+# (temas economia_brasil, economia_empresas e economia_mundo); este arquivo fica só como histórico.
 # Fontes do caderno Economia. Mesmo formato do fontes.yaml da geral.
 # Os NÚMEROS do painel (Selic, IPCA, PIB, desemprego, dívida, dólar e Focus) não vêm daqui: vêm do comando
 # "python main.py economia-painel", direto das APIs do Banco Central e do IBGE (ferramentas/economia.py).
