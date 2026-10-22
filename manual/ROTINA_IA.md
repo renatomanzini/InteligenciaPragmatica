@@ -30,6 +30,10 @@ python3 main.py coletar --caderno ia
 cat dados/candidatos/ia-DATA-fontes.log
 grep "^## " dados/candidatos/ia-DATA.md
 ```
+  No fim, desfaça o que a coleta regravou, para o teste não deixar nada para commit (se a nuvem pedir commit no fim, **não faça**):
+```bash
+git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short
+```
   Responda com a contagem de candidatos por seção, as fontes que falharam, com o motivo, e as que responderam sem itens. Diga também se o GitHub em alta veio pela API ou pela página de tendências (está nas falhas parciais do log).
 - Leia a seção 2 do `manual/MANUAL_IA.md` (quando sai) e o "Feedback recebido" do `preferencias.md`.
 - O segundo `historico` é o da **geral**: anote as histórias de IA que ela deu desde a última edição do caderno (MANUAL_IA, seção 3).
@@ -53,7 +57,11 @@ Escolha **um** caminho (MANUAL_IA, seção 2) e escreva o porquê numa linha:
 ```bash
 python3 main.py guardar DATA --caderno ia -m "IA: curadoria de DATA"
 ```
-  3. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria.
+  3. Apague o que só servia para hoje, para não sobrar nada sem commit (a curadoria já está na main):
+```bash
+git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short
+```
+  4. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria. **Não** rode `montar`, `registrar`, `enviar` nem `publicar`, e não faça outro commit, mesmo que a nuvem peça.
 
 ### Passo 2a: pauta
 Leia agora, inteiros, o `manual/MANUAL_IA.md` e o `manual/MANUAL_DE_REDACAO.md`. Pegue o **número** da edição, que é o "próxima: nº" do histórico do caderno, e veja as histórias em andamento: o que já saiu aqui só volta com "o que mudou desde [data]".
