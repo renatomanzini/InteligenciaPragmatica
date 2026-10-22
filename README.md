@@ -107,6 +107,11 @@ Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e 
 - Todos os comandos aceitam `--caderno`. Por exemplo: `python main.py montar 2026-10-22 --caderno mercado`.
 - No `fontes_niteroi.yaml`, cada fonte pode ter um **filtro** (só entram as notícias que citam a cidade), uma **janela própria** (o bloco de Vassouras e Búzios olha a semana inteira) e **páginas** (quantas páginas do feed ler, para prefeituras que publicam muito).
 - No Mercado, os números do painel vêm de `python main.py mercado-painel` e entram na edição por código, sem passar pela IA. O `python main.py mercado-alarme` confere os gatilhos da edição extra.
+- **Cadernos com dias fixos** (`dias_envio` no bloco do caderno, em `cadernos.yaml`, por exemplo `dias_envio: [segunda, quarta, sexta]`):
+  - a rotina pesquisa todo dia e guarda o que vale em `dados/<caderno>/curadoria.md`;
+  - a edição sai nos dias fixos, com o que foi guardado, ou num dia qualquer quando há notícia muito importante (o critério fica no manual do caderno);
+  - nos outros dias, `python main.py guardar --caderno X -m "..."` publica só a curadoria na main;
+  - o `python main.py historico --caderno X` diz se hoje é dia fixo e quantos itens há na curadoria, e o "Nos outros cadernos" olha desde a última edição do caderno.
 - No IA, o caderno não repete a geral: antes da pauta, ele lê o que a geral publicou desde a última edição e só volta a um assunto com valor novo (manual, seção 2). Quando a busca do GitHub falha (na nuvem ela dá 403), o "GitHub em alta" usa a página de tendências do GitHub. E, no filtro de fonte, palavra de até 3 letras (como "IA") só conta inteira, para não pegar "dia" ou "mídia".
 
 **Para pausar só o e-mail de um caderno:** troque `envio: ligado` por `envio: desligado` no bloco dele, em `cadernos.yaml`.

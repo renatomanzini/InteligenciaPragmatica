@@ -12,6 +12,8 @@ A solução:
 3. Se o push for recusado porque alguém publicou no meio, ela descarta o segundo commit e repete.
 4. Se desistir, guarda a edição no ramo pendente/<caderno>-<data> e avisa (o clone da nuvem some no fim).
 
+O guardar é a versão curta, para os dias sem edição dos cadernos com dias fixos: publica só a curadoria.
+
 Atenção: o publicar descarta mudanças sem commit em docs/ e em dados/historico.json, que ele mesmo refaz.
 Correção feita à mão nesses arquivos precisa de commit antes.
 """
@@ -46,19 +48,21 @@ def arquivos_proprios(raiz: Path, data: str, caderno: str = cadernos.GERAL) -> L
     candidatos += sorted((raiz / "dados" / "candidatos").glob("%s%s*" % (prefixo, dia)))
     if caderno != cadernos.GERAL:
         candidatos += sorted((raiz / "dados" / caderno).glob("%s*" % data))
+        candidatos.append(cadernos.arquivo_curadoria(raiz, caderno))  # o que sobrou da curadoria vai junto
     candidatos.append(raiz / "docs" / ("%s%s.html" % (prefixo, data)))  # a página da edição no site
     # Na geral, o glob "AAAA-MM-DD*" não pega candidatos de caderno, que começam com o nome do caderno.
     return [c.relative_to(raiz).as_posix() for c in candidatos if c.exists()]
 
 
-def _resgatar(raiz: Path, remoto: str, caderno: str, data: str, motivo: str) -> ErroPublicacao:
+def _resgatar(raiz: Path, remoto: str, caderno: str, data: str, motivo: str,
+              oque: str = "a edição") -> ErroPublicacao:
     """Quando desiste, guarda a edição num ramo próprio: o clone da rotina na nuvem é descartado no fim."""
     ramo = "pendente/%s-%s" % (caderno, data)
     p = _git(raiz, "push", "-q", remoto, "+HEAD:refs/heads/%s" % ramo, checar=False)
     if p.returncode == 0:
-        return ErroPublicacao("%s. A edição NÃO entrou na main: ficou guardada no ramo %s." % (motivo, ramo))
-    return ErroPublicacao("%s. Também não consegui guardar a edição no ramo %s: ela só existe neste clone."
-                          % (motivo, ramo))
+        return ErroPublicacao("%s. %s NÃO entrou na main: ficou guardada no ramo %s." % (motivo, oque.capitalize(), ramo))
+    return ErroPublicacao("%s. Também não consegui guardar %s no ramo %s: ela só existe neste clone."
+                          % (motivo, oque, ramo))
 
 
 def _rastreado(raiz: Path, caminho: str) -> bool:
@@ -119,3 +123,31 @@ def publicar(data: str, raiz: Path, mensagem: str, caderno: str = cadernos.GERAL
         time.sleep(espera * tentativa)
     raise _resgatar(raiz, remoto, caderno, data, "o push foi recusado %d vezes seguidas (último erro: %s)"
                     % (tentativas, p.stdout.strip()[-300:]))
+
+
+def guardar(data: str, raiz: Path, mensagem: str, caderno: str, remoto: str = "origin", ramo: str = "main",
+            tentativas: int = 6, espera: float = 4.0) -> dict:
+    """Publica só a curadoria do caderno (dados/<caderno>/curadoria.md), no dia em que não há edição.
+    Ninguém mais mexe nesse arquivo, então o rebase nunca conflita. Devolve {'commit': ..., 'tentativas': n};
+    commit None quando a curadoria não mudou."""
+    raiz = Path(raiz)
+    arq = cadernos.arquivo_curadoria(raiz, caderno)
+    if caderno == cadernos.GERAL or not arq.exists():
+        raise ErroPublicacao("não achei a curadoria do caderno %s (%s)" % (caderno, arq.relative_to(raiz).as_posix()))
+    _git(raiz, "add", "--", arq.relative_to(raiz).as_posix())
+    if not _ha_mudanca_preparada(raiz):
+        return {"commit": None, "tentativas": 0}
+    _git(raiz, "commit", "-q", "-m", mensagem)
+    p = None
+    for tentativa in range(1, tentativas + 1):
+        p = _git(raiz, "pull", "-q", "--rebase", "--autostash", remoto, ramo, checar=False)
+        if p.returncode != 0:
+            _git(raiz, "rebase", "--abort", checar=False)
+            raise _resgatar(raiz, remoto, caderno, "curadoria-" + str(data),
+                            "o pull --rebase falhou: %s" % p.stdout.strip()[-400:], "a curadoria")
+        p = _git(raiz, "push", "-q", remoto, "HEAD:%s" % ramo, checar=False)
+        if p.returncode == 0:
+            return {"tentativas": tentativa, "commit": _git(raiz, "log", "-1", "--format=%h").stdout.strip()}
+        time.sleep(espera * tentativa)
+    raise _resgatar(raiz, remoto, caderno, "curadoria-" + str(data), "o push foi recusado %d vezes seguidas "
+                    "(último erro: %s)" % (tentativas, p.stdout.strip()[-300:]), "a curadoria")

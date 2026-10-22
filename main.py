@@ -221,6 +221,28 @@ def cmd_publicar(args) -> int:
     return 0
 
 
+def cmd_guardar(args) -> int:
+    """Dia sem edição de um caderno com dias fixos: publica só a curadoria (dados/<caderno>/curadoria.md)."""
+    from ferramentas import publicar
+    caderno = _caderno(args)
+    if caderno == cadernos.GERAL:
+        print("Erro: o guardar é para os cadernos com curadoria; use --caderno.")
+        return 1
+    data = args.data or str(util.hoje_brasilia())
+    try:
+        res = publicar.guardar(data, RAIZ, args.mensagem, caderno)
+    except publicar.ErroPublicacao as e:
+        print("Erro ao guardar a curadoria: %s" % e)
+        return 1
+    if not res["commit"]:
+        print("A curadoria não mudou: nada a publicar.")
+    else:
+        print("Curadoria guardada na main (commit %s, %d tentativa%s): %d itens."
+              % (res["commit"], res["tentativas"], "" if res["tentativas"] == 1 else "s",
+                 cadernos.itens_curadoria(RAIZ, caderno)))
+    return 0
+
+
 def cmd_enviar_pendentes(args) -> int:
     """Rotina de envio: manda, na ordem (geral e depois os cadernos), as edições de hoje ainda não enviadas."""
     from ferramentas import envio
@@ -273,6 +295,22 @@ def cmd_mercado_alarme(args) -> int:
         print("Fontes fora do ar: %s" % "; ".join("%s (%s)" % kv for kv in sorted(painel["falhas"].items())))
     if painel.get("reservas_usadas"):
         print("Reservas usadas: %s" % ", ".join(painel["reservas_usadas"]))
+    return 0
+
+
+def cmd_economia_painel(args) -> int:
+    from ferramentas import economia
+    pasta = args.pasta or str(util.hoje_brasilia())
+    res = economia.gravar_painel(pasta, RAIZ)
+    print(res["texto"])
+    print("Painel gravado em %s. Apoio da pauta (releases e agenda do IBGE) em %s." % (res["arquivo"], res["apoio"]))
+    novos = res["painel"]["novos"]
+    print("Dados novos desde a última edição: %s." % (", ".join(novos) if novos else "nenhum"))
+    if res["painel"]["falhas"]:
+        print("Atenção: estas fontes falharam: %s"
+              % "; ".join("%s (%s)" % kv for kv in sorted(res["painel"]["falhas"].items())))
+    if res["falhas_apoio"]:
+        print("Atenção: o apoio da pauta saiu incompleto: %s" % "; ".join(res["falhas_apoio"]))
     return 0
 
 
@@ -399,6 +437,12 @@ def criar_parser() -> argparse.ArgumentParser:
     c.add_argument("-m", "--mensagem", required=True, help='mensagem do commit, por ex. "Edição nº 9 — 2026-10-23: ..."')
     c.set_defaults(func=cmd_publicar)
 
+    c = sub.add_parser("guardar", help="dia sem edição: publica só a curadoria do caderno (dados/<caderno>/curadoria.md)")
+    c.add_argument("data", nargs="?", type=_data, metavar="AAAA-MM-DD", help="padrão: hoje")
+    c.add_argument("--caderno", required=True, help="caderno com dias fixos (cadernos.yaml)")
+    c.add_argument("-m", "--mensagem", required=True, help='mensagem do commit, por ex. "Economia: curadoria de 2026-10-23"')
+    c.set_defaults(func=cmd_guardar)
+
     c = sub.add_parser("enviar-pendentes", help="rotina de envio: manda juntas as edições de hoje ainda não enviadas")
     c.set_defaults(func=cmd_enviar_pendentes)
 
@@ -408,6 +452,10 @@ def criar_parser() -> argparse.ArgumentParser:
 
     c = sub.add_parser("mercado-alarme", help="caderno Mercado: confere os gatilhos de preço da edição extra")
     c.set_defaults(func=cmd_mercado_alarme)
+
+    c = sub.add_parser("economia-painel", help="caderno Economia: coleta os números oficiais e grava o painel da edição")
+    c.add_argument("pasta", nargs="?", type=_pasta, metavar="AAAA-MM-DD", help="padrão: hoje")
+    c.set_defaults(func=cmd_economia_painel)
 
     c = sub.add_parser("configurar-email", help="guarda a chave do Resend no .env (pede sem mostrar na tela)")
     c.set_defaults(func=cmd_configurar_email)

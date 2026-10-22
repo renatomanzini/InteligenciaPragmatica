@@ -1,7 +1,8 @@
 """Memória da newsletter: o que já saiu, histórias em andamento e formatos usados."""
 import json
-from datetime import timedelta
+from datetime import date, timedelta
 from pathlib import Path
+from typing import List, Optional
 
 from . import cadernos
 from .util import hoje_brasilia, ler_front_matter, normalizar_url
@@ -49,6 +50,15 @@ def proximo_numero(raiz: Path, caderno: str = cadernos.GERAL) -> int:
     return (max(numeros) if numeros else 0) + 1
 
 
+def ultima_data(raiz: Path, caderno: str = cadernos.GERAL, antes_de: Optional[str] = None) -> Optional[str]:
+    """Dia (AAAA-MM-DD) da última edição registrada do caderno, ou None. A edição extra conta pelo dia.
+    Com antes_de, só olha as edições de dias anteriores a ele."""
+    dias = [str(e["data"])[:10] for e in carregar(raiz, caderno)]
+    if antes_de:
+        dias = [d for d in dias if d < str(antes_de)[:10]]
+    return max(dias) if dias else None
+
+
 def urls_cobertas(raiz: Path) -> set:
     urls = set()
     for e in carregar(raiz):
@@ -58,15 +68,39 @@ def urls_cobertas(raiz: Path) -> set:
     return urls
 
 
+NOMES_DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
+
+
+def situacao(raiz: Path, caderno: str, hoje: Optional[date] = None) -> List[str]:
+    """Para os cadernos com dias fixos: se hoje é dia fixo, a última edição e o tamanho da curadoria."""
+    dias = cadernos.dias_envio(raiz, caderno)
+    if not dias:
+        return []
+    hoje = hoje or hoje_brasilia()
+    fixos = [NOMES_DIAS[cadernos.DIAS.index(d)] for d in dias]
+    fixos_txt = fixos[0] if len(fixos) == 1 else ", ".join(fixos[:-1]) + " e " + fixos[-1]
+    eh = cadernos.dia_de_envio(raiz, caderno, hoje)
+    ultima = ultima_data(raiz, caderno)
+    arq = cadernos.arquivo_curadoria(raiz, caderno)
+    return [
+        "## Hoje: %s, %s · %s (os dias fixos de envio são %s)"
+        % (NOMES_DIAS[hoje.weekday()], hoje.strftime("%d/%m"), "DIA FIXO DE ENVIO" if eh else "não é dia fixo", fixos_txt),
+        "Última edição: %s · curadoria guardada: %d itens em %s"
+        % (ultima or "nenhuma", cadernos.itens_curadoria(raiz, caderno), arq.relative_to(raiz).as_posix()),
+        "",
+    ]
+
+
 def resumo(dias: int = 14, raiz: Path = Path("."), caderno: str = cadernos.GERAL) -> str:
     edicoes = carregar(raiz, caderno)
-    outros = _outros_cadernos(raiz, caderno)
+    outros = _outros_cadernos(raiz, caderno, _dias_outros(raiz, caderno))
+    hoje = situacao(raiz, caderno)
     if not edicoes:
-        return "\n".join(["Nenhuma edição registrada ainda neste caderno. Esta será a edição nº 1.", ""] + outros)
+        return "\n".join(hoje + ["Nenhuma edição registrada ainda neste caderno. Esta será a edição nº 1.", ""] + outros)
     limite = str(hoje_brasilia() - timedelta(days=dias))
     recentes = [e for e in edicoes if e["data"] >= limite] or edicoes[-3:]
     nome = "" if caderno == cadernos.GERAL else f" do caderno {caderno}"
-    linhas = [f"# Histórico{nome}: últimas {len(recentes)} edições (próxima: nº {proximo_numero(raiz, caderno)})", ""]
+    linhas = hoje + [f"# Histórico{nome}: últimas {len(recentes)} edições (próxima: nº {proximo_numero(raiz, caderno)})", ""]
     for e in reversed(recentes):
         marca = " 🚨" if e.get("breakthrough") else ""
         linhas.append(f"## {e['data']} · {e.get('tipo')} · nº {e.get('numero')} · dia {e.get('dia')}{marca}")
@@ -93,6 +127,15 @@ def resumo(dias: int = 14, raiz: Path = Path("."), caderno: str = cadernos.GERAL
         datas = [e["data"] for e in recentes if "filosofia" in (e.get("formatos") or [])]
         linhas.append(f"Filosofia usada em: {', '.join(datas)}. Máximo uma vez por semana.")
     return "\n".join(linhas + outros)
+
+
+def _dias_outros(raiz: Path, caderno: str) -> int:
+    """Quantos dias olhar nos outros cadernos: desde a última edição deste, com no mínimo 3 e no máximo 14.
+    Um caderno que não sai todo dia precisa ver tudo o que a geral publicou desde a edição anterior dele."""
+    ultima = ultima_data(raiz, caderno)
+    if not ultima:
+        return 3
+    return max(3, min((hoje_brasilia() - date.fromisoformat(ultima)).days + 1, 14))
 
 
 def _outros_cadernos(raiz: Path, caderno: str, dias: int = 3) -> list:

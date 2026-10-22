@@ -6,13 +6,20 @@ Cada caderno (por exemplo, "mercado") tem:
 - as fontes no arquivo indicado em cadernos.yaml;
 - as páginas do site em docs/<caderno>-DATA.html e o arquivo em docs/<caderno>.html;
 - o próprio número de edição no histórico (que é um só, para nenhum caderno repetir o outro).
+
+Cadernos que não saem todo dia (dias_envio no cadernos.yaml) pesquisam todo dia e guardam o que vale em
+dados/<caderno>/curadoria.md. A edição sai nos dias fixos, com o que foi guardado, ou num dia qualquer
+quando há notícia muito importante (o critério fica no manual de cada caderno).
 """
+import unicodedata
+from datetime import date
 from pathlib import Path
 from typing import List
 
 from .util import ler_yaml
 
 GERAL = "geral"
+DIAS = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"]  # na ordem de date.weekday()
 
 
 def _todos(raiz: Path) -> dict:
@@ -70,3 +77,40 @@ def indice_site(caderno: str = GERAL) -> str:
 def padrao_pastas(caderno: str = GERAL) -> str:
     """Glob das pastas de edição. Os cadernos aceitam DATA-extra (edição extra no mesmo dia)."""
     return "????-??-??" if caderno == GERAL else "????-??-??*"
+
+
+def _dia(nome) -> str:
+    """'Terça', 'terca-feira' → 'terca'."""
+    s = unicodedata.normalize("NFD", str(nome)).encode("ascii", "ignore").decode().lower().strip()
+    return s.split("-")[0]
+
+
+def dias_envio(raiz: Path, caderno: str = GERAL) -> List[str]:
+    """Os dias fixos de envio do caderno (vazio: o caderno sai todo dia que tiver edição)."""
+    if caderno == GERAL:
+        return []
+    dias = config(raiz, caderno).get("dias_envio") or []
+    normais = [_dia(d) for d in dias]
+    errados = [d for d, n in zip(dias, normais) if n not in DIAS]
+    if errados:
+        raise ValueError("dias_envio do caderno %s com dia desconhecido: %s (use %s)"
+                         % (caderno, ", ".join(map(str, errados)), ", ".join(DIAS)))
+    return sorted(set(normais), key=DIAS.index)
+
+
+def dia_de_envio(raiz: Path, caderno: str, data: date) -> bool:
+    """Hoje é dia fixo de envio? Caderno sem dias_envio: sempre."""
+    dias = dias_envio(raiz, caderno)
+    return not dias or DIAS[data.weekday()] in dias
+
+
+def arquivo_curadoria(raiz: Path, caderno: str) -> Path:
+    """Onde o caderno guarda, dia a dia, o que vale para a próxima edição."""
+    return Path(raiz) / "dados" / caderno / "curadoria.md"
+
+
+def itens_curadoria(raiz: Path, caderno: str) -> int:
+    arq = arquivo_curadoria(raiz, caderno)
+    if not arq.exists():
+        return 0
+    return sum(1 for linha in arq.read_text(encoding="utf-8").splitlines() if linha.startswith("- "))

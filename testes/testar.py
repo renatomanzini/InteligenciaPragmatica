@@ -562,6 +562,130 @@ def testar_coleta_ia():
             conferir((RAIZ_PROJETO / cadernos.config(RAIZ_PROJETO, "ia")[chave]).exists(), "caderno IA: %s existe" % chave)
 
 
+PAINEL_ECONOMIA_FALSO = {
+    "gerado_em": "2026-10-22T05:16:00-03:00",
+    "itens": {
+        "selic": {"valor": 13.75, "desde": "2026-09-17", "antes": 14.0, "proximo_copom": "2026-11-04",
+                  "ref": "2026-09-17", "fonte": "SGS"},
+        "ipca": {"mes": 0.82, "doze": 4.58, "doze_antes": 4.22, "ref": "2026-09", "fonte": "SGS"},
+        "pib": {"tri": 0.5, "ano": 2.0, "ref": "202602", "fonte": "SIDRA"},
+        "desemprego": {"valor": 5.3, "antes": 5.3, "ano_antes": 5.6, "menor_da_serie": True, "ref": "2026-08",
+                       "fonte": "SGS"},
+        "divida": {"valor": 82.87, "antes": 82.55, "ref": "2026-08", "fonte": "SGS"},
+        "primario": {"valor": 0.62, "antes": -0.1, "ref": "2026-08", "fonte": "SGS"},
+        "dolar": {"valor": 5.0383, "data": "2026-10-22", "var_ano": -8.42, "ref": "2026-10-22", "fonte": "PTAX"},
+        "focus": {"data": "2026-10-16", "antes_data": "2026-09-18", "anos": ["2026", "2027"], "ref": "2026-10-16",
+                  "fonte": "Focus", "valores": {"IPCA": {"2026": {"agora": 5.219, "antes": 4.92},
+                                                         "2027": {"agora": 4.3206}},
+                                                "Câmbio": {"2026": {"agora": 5.13, "antes": 5.2}}}},
+    },
+    "falhas": {"IBC-Br (BC)": "respondeu 0"}, "fora_do_ar": ["IBC-Br (BC)"], "novos": [], "anterior": None,
+}
+
+
+def testar_caderno_economia(tmp: Path):
+    secao("caderno Economia: painel oficial, dias fixos, curadoria e histórico")
+    import copy
+    from datetime import timedelta
+    from ferramentas import cadernos, economia
+    texto = economia.painel_md(PAINEL_ECONOMIA_FALSO)
+    conferir("13,75% ao ano · desde 17/09, quando caiu de 14,00% · próxima decisão do Copom: 04/11" in texto,
+             "Selic com a data da mudança, a taxa anterior e a próxima decisão")
+    conferir("0,82% em setembro · 4,58% em 12 meses (até agosto: 4,22%) · a meta é 3%, com teto de 4,5%" in texto,
+             "IPCA do mês, de 12 meses e a meta")
+    conferir("▲ 0,5% no 2º tri de 2026 sobre o trimestre anterior" in texto, "PIB com o trimestre por extenso")
+    conferir("o menor da série, que começa em 2012" in texto, "desemprego diz quando é o menor da série")
+    conferir("82,9% do PIB em agosto (julho: 82,6%)" in texto, "arredonda como as notas oficiais (82,55 → 82,6)")
+    conferir("déficit de 0,62% do PIB até agosto (até julho: superávit de 0,10%)" in texto,
+             "primário: positivo é déficit, negativo é superávit")
+    conferir("R$ 5,0383 em 22/10 · ▼ 8,4% no ano" in texto, "dólar PTAX com a variação no ano")
+    conferir("→ **IPCA**: 5,22% em 2026 (4,92%) · 4,32% em 2027" in texto and "R$ 5,13 em 2026 (R$ 5,20)" in texto,
+             "Focus com a mediana de 4 semanas antes entre parênteses")
+    conferir("Fora do ar hoje: IBC-Br (BC)" in texto and "IBC-Br (a prévia" not in texto,
+             "fonte que falhou some do painel e aparece no rodapé")
+    conferir("🆕" not in texto, "sem painel anterior, nada é marcado como novo")
+
+    # 🆕: o período de referência mudou desde o painel da última edição
+    novo = copy.deepcopy(PAINEL_ECONOMIA_FALSO)
+    antigo = copy.deepcopy(PAINEL_ECONOMIA_FALSO)
+    antigo["itens"]["ipca"]["ref"] = "2026-08"
+    antigo["itens"]["dolar"]["ref"] = "2026-10-20"
+    conferir(economia._novos(novo, antigo) == ["ipca"], "só o IPCA é novo (o dólar muda todo dia e não conta)")
+    novo["novos"], novo["anterior"] = ["ipca"], "2026-10-20"
+    t = economia.painel_md(novo)
+    conferir("teto de 4,5% · 🆕" in t and "saiu desde a última edição (20/10)" in t, "o dado novo ganha 🆕 e o rodapé explica")
+
+    # Selic: acha a última mudança e a próxima decisão (os dias até ela já vêm na série)
+    original = economia._sgs
+    try:
+        dias = [date(2026, 9, 1) + timedelta(days=i) for i in range(70)]
+        economia._sgs = lambda *a: [(d, 14.0 if d < date(2026, 9, 17) else 13.75) for d in dias]
+        s = economia._selic(date(2026, 10, 22))
+        conferir(s["desde"] == "2026-09-17" and s["antes"] == 14.0 and s["proximo_copom"] == "2026-11-09",
+                 "Selic: desde, antes e próxima decisão (%s)" % s)
+    finally:
+        economia._sgs = original
+    serie = [("2012-%02d" % m, 7.0) for m in range(3, 13)] + [("2026-%02d" % m, 5.4 - m / 100) for m in range(1, 9)]
+    conferir(economia._desemprego_de(serie, "SGS")["menor_da_serie"], "desemprego: menor da série")
+    conferir(not economia._desemprego_de(serie + [("2026-09", 6.0)], "SGS")["menor_da_serie"], "subiu: não é o menor")
+
+    # histórico: última edição do caderno e quantos dias olhar nos outros cadernos
+    raiz = preparar_raiz(tmp / "economia")
+    hoje = util.hoje_brasilia()
+    (raiz / "cadernos.yaml").write_text('economia:\n  nome: "IP · Economia"\n  envio: desligado\n'
+                                        '  dias_envio: [segunda, Quarta, sexta-feira]\n'
+                                        'mercado:\n  nome: "IP · Mercado"\n', encoding="utf-8")
+    conferir(cadernos.dias_envio(raiz, "economia") == ["segunda", "quarta", "sexta"], "dias fixos aceitam acento e '-feira'")
+    conferir(cadernos.dia_de_envio(raiz, "economia", date(2026, 10, 23))
+             and not cadernos.dia_de_envio(raiz, "economia", date(2026, 10, 22)), "sexta é dia fixo; quinta não")
+    conferir(cadernos.dia_de_envio(raiz, "mercado", date(2026, 10, 22)) and cadernos.dias_envio(raiz, cadernos.GERAL) == [],
+             "caderno sem dias fixos sai todo dia")
+    sit = "\n".join(historico.situacao(raiz, "economia", date(2026, 10, 22)))
+    conferir("quinta, 22/10 · não é dia fixo (os dias fixos de envio são segunda, quarta e sexta)" in sit
+             and "curadoria guardada: 0 itens em dados/economia/curadoria.md" in sit, "a situação do dia sai no histórico")
+    conferir("DIA FIXO DE ENVIO" in "\n".join(historico.situacao(raiz, "economia", date(2026, 10, 23))), "sexta: dia fixo")
+    conferir(historico.situacao(raiz, "mercado") == [], "caderno sem dias fixos não ganha a linha")
+    conferir(historico.ultima_data(raiz, "economia") is None and historico._dias_outros(raiz, "economia") == 3,
+             "sem edição: nenhuma data e 3 dias nos outros cadernos")
+    dia_antigo = (hoje - timedelta(days=6)).isoformat()
+    for pasta in (dia_antigo, dia_antigo + "-extra"):
+        (raiz / "edicoes" / "economia" / pasta).mkdir(parents=True)
+        (raiz / "edicoes" / "economia" / pasta / "edicao.md").write_text(
+            EDICAO_MERCADO.replace("data: 2026-01-15", "data: " + dia_antigo), encoding="utf-8")
+        historico.registrar(pasta, raiz, "economia")
+    conferir(historico.ultima_data(raiz, "economia") == dia_antigo, "a extra conta pelo dia")
+    conferir(historico.ultima_data(raiz, "economia", antes_de=dia_antigo) is None, "antes_de olha só os dias anteriores")
+    conferir(historico._dias_outros(raiz, "economia") == 7, "seis dias depois, olha 7 dias nos outros cadernos")
+
+    # gravação: painel.md, oficiais.md e o JSON, com o 🆕 contra o painel da última edição
+    (raiz / "dados" / "economia").mkdir(parents=True)
+    (raiz / "dados" / "economia" / ("%s.json" % dia_antigo)).write_text(json.dumps(antigo), encoding="utf-8")
+    original = economia.apoio
+    try:
+        economia.apoio = lambda painel, desde, h: ("# apoio desde %s\n" % desde.isoformat(), [])
+        res = economia.gravar_painel(hoje.isoformat(), raiz, copy.deepcopy(PAINEL_ECONOMIA_FALSO), hoje)
+    finally:
+        economia.apoio = original
+    pasta = raiz / "edicoes" / "economia" / hoje.isoformat()
+    conferir(res["painel"]["novos"] == ["ipca"] and "🆕" in (pasta / "painel.md").read_text(encoding="utf-8"),
+             "o IPCA novo desde a última edição ganha 🆕 no painel gravado")
+    conferir((pasta / "oficiais.md").read_text(encoding="utf-8") == "# apoio desde %s\n" % dia_antigo,
+             "o apoio da pauta começa na última edição")
+    conferir((raiz / "dados" / "economia" / ("%s.json" % hoje.isoformat())).exists(), "o JSON do painel fica em dados/economia")
+    curadoria = cadernos.arquivo_curadoria(raiz, "economia")
+    curadoria.write_text("# Curadoria\n\n## 2026-10-22\n- [juros] Item um (https://a)\n- [mundo] Item dois (https://b)\n",
+                         encoding="utf-8")
+    proprios = publicar_arquivos(raiz, hoje.isoformat(), "economia")
+    conferir(("dados/economia/%s.json" % hoje.isoformat()) in proprios and "dados/economia/curadoria.md" in proprios,
+             "o publicar leva o JSON do painel e a curadoria junto com a edição")
+    conferir(cadernos.itens_curadoria(raiz, "economia") == 2, "conta os itens da curadoria")
+
+
+def publicar_arquivos(raiz, data, caderno):
+    from ferramentas import publicar
+    return publicar.arquivos_proprios(raiz, data, caderno)
+
+
 def testar_horario_de_entrega(raiz):
     secao("envio junto no horário de entrega")
     from datetime import datetime as _dt
@@ -666,6 +790,52 @@ def testar_publicar_em_paralelo(tmp: Path):
     conferir(all(("%s nº 1 — teste" % c) in log for c in clones), "os commits das três rotinas estão na main")
 
 
+def testar_guardar_curadoria(tmp: Path):
+    secao("guardar: a curadoria do dia sem edição vai para a main, mesmo com outra rotina publicando")
+    from ferramentas import cadernos, publicar
+
+    def git(cwd, *args):
+        return subprocess.run(["git", "-c", "init.defaultBranch=main"] + list(args), cwd=str(cwd),
+                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+
+    origem, base = tmp / "guardar" / "origem.git", tmp / "guardar" / "base"
+    origem.mkdir(parents=True)
+    git(origem, "init", "-q", "--bare")
+    base.mkdir()
+    git(base, "init", "-q")
+    (base / "cadernos.yaml").write_text("economia:\n  dias_envio: [segunda, quarta, sexta]\n", encoding="utf-8")
+    (base / "docs").mkdir()
+    (base / "docs" / "index.html").write_text("vazio\n", encoding="utf-8")
+    for cmd in (["config", "user.email", "t@t"], ["config", "user.name", "Teste"], ["add", "-A"],
+                ["commit", "-q", "-m", "base"], ["remote", "add", "origin", str(origem)], ["push", "-q", "origin", "HEAD:main"]):
+        git(base, *cmd)
+    clones = {}
+    for nome in ("economia", "geral"):
+        c = tmp / "guardar" / nome
+        git(tmp / "guardar", "clone", "-q", str(origem), str(c))
+        git(c, "config", "user.email", "t@t")
+        git(c, "config", "user.name", "Teste")
+        clones[nome] = c
+    # a geral publica no meio: a main andou, e o push da curadoria precisa de rebase
+    (clones["geral"] / "docs" / "index.html").write_text("geral nº 9\n", encoding="utf-8")
+    git(clones["geral"], "commit", "-q", "-am", "geral nº 9")
+    git(clones["geral"], "push", "-q", "origin", "HEAD:main")
+    eco = clones["economia"]
+    arq = cadernos.arquivo_curadoria(eco, "economia")
+    arq.parent.mkdir(parents=True)
+    arq.write_text("# Curadoria\n\n## 2026-10-22\n- [juros] Selic (https://a)\n", encoding="utf-8")
+    (eco / "dados" / "candidatos.md").write_text("não vai junto\n", encoding="utf-8")
+    res = publicar.guardar("2026-10-22", eco, "Economia: curadoria de 2026-10-22", "economia", espera=0.1)
+    final = tmp / "guardar" / "final"
+    git(tmp / "guardar", "clone", "-q", str(origem), str(final))
+    conferir(res["commit"] and (final / "dados" / "economia" / "curadoria.md").exists()
+             and (final / "docs" / "index.html").read_text(encoding="utf-8") == "geral nº 9\n",
+             "a curadoria chegou à main sem desfazer a geral publicada no meio")
+    conferir(not (final / "dados" / "candidatos.md").exists(), "o guardar publica só a curadoria")
+    conferir(publicar.guardar("2026-10-22", eco, "de novo", "economia", espera=0.1)["commit"] is None,
+             "sem mudança na curadoria, não faz commit")
+
+
 def cadernos_cfg(raiz, caderno):
     from ferramentas import cadernos as _c
     return _c.config(raiz, caderno)
@@ -695,6 +865,8 @@ def main():
         testar_publicar_em_paralelo(tmp)
         testar_coleta_filtros()
         testar_coleta_ia()
+        testar_caderno_economia(tmp)
+        testar_guardar_curadoria(tmp)
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
     print("\n" + ("TUDO CERTO" if not falhas else "%d FALHA(S):\n  - " % len(falhas) + "\n  - ".join(falhas)))
