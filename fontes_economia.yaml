@@ -1,0 +1,87 @@
+# Fontes do caderno Economia. Mesmo formato do fontes.yaml da geral.
+# Os NÚMEROS do painel (Selic, IPCA, PIB, desemprego, dívida, dólar e Focus) não vêm daqui: vêm do comando
+# "python main.py economia-painel", direto das APIs do Banco Central e do IBGE (ferramentas/economia.py).
+# O mesmo comando grava os releases e a agenda do IBGE em edicoes/economia/DATA/oficiais.md.
+#
+# Testadas uma a uma em 22/10/2026 no Mac, com janela de 96 h. Descartadas no teste:
+#   InfoMoney Economia (feed vazio; fica o geral), Exame Economia e Negócios (404; o feed geral é quase só eleição),
+#   CNN Brasil Economia (404), Poder360 (XML inválido; o geral é política), Agência Gov (feed vazio),
+#   IBGE Agência de Notícias (anti-robô; entra pela API, no oficiais.md),
+#   Ministério da Fazenda e Tesouro (RSS com erro; ficam como página), Blog do IBRE (XML inválido),
+#   IFI do Senado (sem RSS), FMI (403 no RSS; fica como página), Banco Mundial (RSS 404; fica como página),
+#   Reuters (sem RSS aberto), AP (anti-robô), OCDE (anti-robô), Caixin (403),
+#   Mercado & Consumo (feed parado em agosto), Valor Agronegócios (parado desde 12/10), Calculated Risk (parado em janeiro).
+#
+# tema: brasil | empresas | mundo
+
+# A rotina roda todo dia e guarda o que vale na curadoria (dados/economia/curadoria.md),
+# então cada coleta só precisa do último dia, com folga.
+janela_horas:
+  padrao: 30
+  segunda: 30
+  sabado: 30
+  domingo: 30
+
+limite_por_fonte: 15
+
+# Ordem e nome das seções no arquivo de candidatos.
+temas:
+  brasil: "Brasil: juros, inflação, fiscal, câmbio, emprego e crescimento"
+  empresas: "Empresas, setores, preços e consumo"
+  mundo: "Economia global"
+
+fontes:
+  # ───────────── Brasil: fontes oficiais ─────────────
+  - {nome: BC · notas à imprensa, tema: brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/notasImprensa", ativo: true}
+  - {nome: BC · notícias, tema: brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/noticias", ativo: true}
+  - {nome: BC · comunicados do Copom, tema: brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/comunicadoscopom", ativo: true}
+  - {nome: BC · atas do Copom, tema: brasil, tipo: primaria, rss: "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/atascopom", ativo: true}
+  - {nome: Ipea · Carta de Conjuntura, tema: brasil, tipo: analise, rss: "https://www.ipea.gov.br/cartadeconjuntura/index.php/feed/", janela_horas: 168, ativo: true}
+  - {nome: IBGE (releases e calendário), tema: brasil, tipo: primaria, pagina: "edicoes/economia/DATA/oficiais.md, gravado pelo economia-painel (o site do IBGE dá 403 a robôs)", ativo: true}
+  - {nome: Ministério da Fazenda, tema: brasil, tipo: primaria, pagina: "https://www.gov.br/fazenda/pt-br/assuntos/noticias", ativo: true}
+  - {nome: Tesouro Nacional, tema: brasil, tipo: primaria, pagina: "https://www.gov.br/tesouronacional/pt-br/noticias", ativo: true}
+  - {nome: IFI do Senado, tema: brasil, tipo: analise, pagina: "https://www12.senado.leg.br/ifi", ativo: true}
+
+  # ───────────── Brasil: imprensa ─────────────
+  - {nome: Valor Brasil, tema: brasil, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/brasil", limite: 25, ativo: true}
+  - {nome: Valor Finanças, tema: brasil, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/financas", ativo: true}
+  - {nome: Folha Mercado, tema: brasil, tipo: imprensa, rss: "https://feeds.folha.uol.com.br/mercado/rss091.xml", limite: 25, ativo: true}
+  - {nome: Estadão Economia, tema: brasil, tipo: imprensa, rss: "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/", limite: 20, ativo: true}
+  - {nome: O Globo Economia, tema: brasil, tipo: imprensa, rss: "https://pox.globo.com/rss/oglobo/economia", limite: 20, ativo: true}
+  - {nome: G1 Economia, tema: brasil, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/economia/", limite: 20, ativo: true}
+  - {nome: Agência Brasil Economia, tema: brasil, tipo: imprensa, rss: "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml", ativo: true}
+  - {nome: InfoMoney, tema: brasil, tipo: imprensa, rss: "https://www.infomoney.com.br/feed/", ativo: true}
+  - {nome: Money Times Economia, tema: brasil, tipo: imprensa, rss: "https://www.moneytimes.com.br/economia/feed/", ativo: true}
+  - {nome: InvestNews Economia, tema: brasil, tipo: imprensa, rss: "https://investnews.com.br/economia/feed/", ativo: true}
+
+  # ───────────── Empresas, setores, preços e consumo ─────────────
+  - {nome: Valor Empresas, tema: empresas, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/empresas", limite: 25, ativo: true}
+  - {nome: Brazil Journal, tema: empresas, tipo: imprensa, rss: "https://braziljournal.com/feed/", ativo: true}
+  - {nome: NeoFeed, tema: empresas, tipo: imprensa, rss: "https://neofeed.com.br/feed/", ativo: true}
+  - {nome: Bloomberg Línea Brasil, tema: empresas, tipo: imprensa, rss: "https://www.bloomberglinea.com.br/arc/outboundfeeds/rss/?outputType=xml", ativo: true}
+
+  # ───────────── Economia global ─────────────
+  - {nome: Federal Reserve, tema: mundo, tipo: primaria, rss: "https://www.federalreserve.gov/feeds/press_all.xml", ativo: true}
+  - {nome: Banco Central Europeu, tema: mundo, tipo: primaria, rss: "https://www.ecb.europa.eu/rss/press.html", ativo: true}
+  - {nome: FMI (blog), tema: mundo, tipo: primaria, pagina: "https://www.imf.org/en/Blogs (o RSS dá 403; a página abre pelo WebFetch)", ativo: true}
+  - {nome: Banco Mundial, tema: mundo, tipo: primaria, pagina: "https://www.worldbank.org/ext/en/news e https://blogs.worldbank.org/en/home", ativo: true}
+  - {nome: Valor Mundo, tema: mundo, tipo: imprensa, rss: "https://pox.globo.com/rss/valor/mundo", limite: 20, ativo: true}
+  - {nome: The Economist Finanças, tema: mundo, tipo: imprensa, rss: "https://www.economist.com/finance-and-economics/rss.xml", ativo: true}
+  - {nome: The Economist Editoriais, tema: mundo, tipo: analise, rss: "https://www.economist.com/leaders/rss.xml", ativo: true}
+  - {nome: The Economist Américas, tema: mundo, tipo: imprensa, rss: "https://www.economist.com/the-americas/rss.xml", ativo: true}
+  - {nome: FT Economia global, tema: mundo, tipo: imprensa, rss: "https://www.ft.com/global-economy?format=rss", ativo: true}
+  - {nome: Bloomberg Economia, tema: mundo, tipo: imprensa, rss: "https://feeds.bloomberg.com/economics/news.rss", ativo: true}
+  - {nome: WSJ Economia, tema: mundo, tipo: imprensa, rss: "https://feeds.content.dowjones.io/public/rss/socialeconomyfeed", ativo: true}
+  - {nome: NYT Economia, tema: mundo, tipo: imprensa, rss: "https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml", ativo: true}
+  - {nome: BBC Negócios, tema: mundo, tipo: imprensa, rss: "https://feeds.bbci.co.uk/news/business/rss.xml", ativo: true}
+  - {nome: Guardian Economia, tema: mundo, tipo: imprensa, rss: "https://www.theguardian.com/business/economics/rss", ativo: true}
+  - {nome: SCMP Economia (China), tema: mundo, tipo: imprensa, rss: "https://www.scmp.com/rss/318421/feed", limite: 10, ativo: true}
+  - {nome: PIIE, tema: mundo, tipo: analise, rss: "https://www.piie.com/rss/update.xml", ativo: true}
+  - {nome: Noahpinion, tema: mundo, tipo: analise, rss: "https://www.noahpinion.blog/feed", ativo: true}
+  # CNBC: os feeds da CNBC dão 403 na nuvem (a geral e o Mercado já viram isso)
+  - {nome: CNBC Economia, tema: mundo, tipo: imprensa, rss: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258", ativo: false}
+
+# Newsletters que o leitor já recebe: servem para não repetir, nunca para citar.
+radar:
+  - {nome: the news, rss: "https://rss.beehiiv.com/feeds/j9teVW9Qmi.xml", ativo: true}
+  - {nome: MoneyDrops, sitemap: "https://www.moneydrops.com.br/sitemap.xml", ativo: true}

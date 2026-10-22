@@ -99,6 +99,7 @@ Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e 
 | **Mercado** | Dias úteis, de manhã. Sai também uma **edição extra** quando o pregão tem gatilho (ver o manual). | `fontes_mercado.yaml` + o painel de cotações (B3, CNBC, AwesomeAPI, CNN, alternative.me) | `manual/MANUAL_MERCADO.md` e `manual/ROTINA_MERCADO.md` |
 | **Niterói** | Segunda, quarta e sexta, de manhã. Na sexta, traz também o **bloco semanal de Vassouras e Búzios**. | `fontes_niteroi.yaml` (prefeituras, NitTrans, Águas de Niterói e a imprensa local) | `manual/MANUAL_NITEROI.md` e `manual/ROTINA_NITEROI.md` |
 | **IA** | Pesquisa todo dia e sai segunda, quarta e sexta, de manhã (os dias fixos). Fora deles, só sai **edição extra** com notícia muito importante. Vai mais fundo que a geral: o que mudou de verdade, modelos novos, open source, ferramentas e agentes, regulação e o IA na prática. | `fontes_ia.yaml` (laboratórios, open source, ferramentas, regulação, China e Brasil) + Hacker News, GitHub em alta, Hugging Face e Reddit | `manual/MANUAL_IA.md` e `manual/ROTINA_IA.md` |
+| **Economia** | Pesquisa todo dia e sai segunda, quarta e sexta, de manhã (os dias fixos). Fora deles, só sai **edição urgente** com notícia muito importante. Um explicador por edição, números sempre com escala e "O que muda no bolso". | `fontes_economia.yaml` (BC, Ipea, Fazenda, Tesouro e a imprensa daqui e de fora) + o painel de números oficiais do Banco Central e do IBGE | `manual/MANUAL_ECONOMIA.md` e `manual/ROTINA_ECONOMIA.md` |
 
 **Como funciona por dentro:**
 - As edições de um caderno ficam em `edicoes/<caderno>/AAAA-MM-DD/`. A edição extra fica em `AAAA-MM-DD-extra/`.
@@ -107,6 +108,7 @@ Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e 
 - Todos os comandos aceitam `--caderno`. Por exemplo: `python main.py montar 2026-10-22 --caderno mercado`.
 - No `fontes_niteroi.yaml`, cada fonte pode ter um **filtro** (só entram as notícias que citam a cidade), uma **janela própria** (o bloco de Vassouras e Búzios olha a semana inteira) e **páginas** (quantas páginas do feed ler, para prefeituras que publicam muito).
 - No Mercado, os números do painel vêm de `python main.py mercado-painel` e entram na edição por código, sem passar pela IA. O `python main.py mercado-alarme` confere os gatilhos da edição extra.
+- Na Economia, os números oficiais (Selic, IPCA, PIB, desemprego, dívida, dólar e Focus) vêm de `python main.py economia-painel`, direto das APIs do Banco Central e do IBGE, e entram na edição por código. O 🆕 marca o dado que saiu desde a última edição. O mesmo comando grava `oficiais.md`, com os releases e a agenda do IBGE, para a pauta.
 - **Cadernos com dias fixos** (`dias_envio` no bloco do caderno, em `cadernos.yaml`, por exemplo `dias_envio: [segunda, quarta, sexta]`):
   - a rotina pesquisa todo dia e guarda o que vale em `dados/<caderno>/curadoria.md`;
   - a edição sai nos dias fixos, com o que foi guardado, ou num dia qualquer quando há notícia muito importante (o critério fica no manual do caderno);

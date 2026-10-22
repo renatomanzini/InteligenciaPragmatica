@@ -34,3 +34,12 @@ ia:
   fontes: fontes_ia.yaml
   manual: manual/MANUAL_IA.md
   roteiro: manual/ROTINA_IA.md
+
+economia:
+  nome: "Inteligência Pragmática · Economia"
+  remetente: "IP · Economia"
+  envio: desligado
+  dias_envio: [segunda, quarta, sexta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição urgente
+  fontes: fontes_economia.yaml
+  manual: manual/MANUAL_ECONOMIA.md
+  roteiro: manual/ROTINA_ECONOMIA.md

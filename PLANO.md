@@ -47,7 +47,10 @@ O passo a passo completo está em `manual/ROTINA.md`.
   - [ ] **IA:** pesquisa diária com curadoria, edição nos dias fixos (segunda, quarta e sexta) e extra só com notícia muito importante; mais fundo que a geral (modelos, open source, ferramentas, regulação e IA na prática).
     - Pronto: fontes testadas no Mac, manual, roteiro e a edição nº 1 (teste) de 22/10.
     - Falta: a aprovação do leitor, a rotina na nuvem e ligar o envio.
-  - [ ] **Economia** (2 vezes por semana) e **Marketing digital** (semanal).
+  - [ ] **Economia:** pesquisa todo dia e sai segunda, quarta e sexta (os dias fixos, escolhidos pelo leitor em 22/10/2026); fora deles, só edição urgente. Tem o painel de números oficiais do BC e do IBGE, gerado por código.
+    - Pronto: fontes testadas, código, manual, roteiro e a edição de teste nº 1.
+    - Falta: a aprovação da edição de teste, a rotina e ligar o envio.
+  - [ ] **Marketing digital** (semanal).
 
 ## Custos
 - Nenhum além da assinatura do Claude. A rotina gasta do limite de uso, e o consumo será medido nos testes.
