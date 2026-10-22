@@ -386,6 +386,22 @@ def testar_cadernos(tmp: Path):
     conferir(len(motivos) == 1 and "Bitcoin" in motivos[0], "alarme dispara com bitcoin -11,2%% hoje (%s)" % motivos)
     conferir(mercado.alarme(PAINEL_FALSO, hoje=date(2026, 1, 16)) == [], "variação de outro dia não dispara alarme")
 
+    # reservas: se a principal falha, a reserva cobre só as chaves que faltaram
+    fontes_orig, reservas_orig = mercado.FONTES, mercado.RESERVAS
+    try:
+        def cai():
+            raise RuntimeError("respondeu 403")
+        mercado.FONTES = [("B3", lambda: {"ibov": PAINEL_FALSO["itens"]["ibov"]}), ("CNBC", cai)]
+        mercado.RESERVAS = [("FRED", lambda: {"sp500": dict(PAINEL_FALSO["itens"]["sp500"], fonte="FRED")},
+                             ["sp500"], "CNBC")]
+        p = mercado.coletar_painel()
+        conferir("sp500" in p["itens"] and p["itens"]["sp500"]["fonte"] == "FRED" and p["reservas_usadas"] == ["FRED"],
+                 "a reserva entra quando a principal falha")
+        conferir("FRED" in mercado.painel_md(p) and "Fora do ar hoje: CNBC" in mercado.painel_md(p),
+                 "o rodapé cita a reserva e a principal fora do ar")
+    finally:
+        mercado.FONTES, mercado.RESERVAS = fontes_orig, reservas_orig
+
     # montagem do caderno: painel no lugar do marcador, setas coloridas, páginas próprias e navegação
     pasta = raiz / "edicoes" / "mercado" / "2026-01-15"
     pasta.mkdir(parents=True)

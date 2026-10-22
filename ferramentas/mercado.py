@@ -5,12 +5,16 @@ Os números entram na edição por código, nunca pela IA. Todas as fontes são 
 - índices dos EUA, VIX, juros de 10 anos, Brent, ouro e bitcoin em dólar: CNBC (quote.cnbc.com);
 - moedas: AwesomeAPI (economia.awesomeapi.com.br);
 - Medo & Ganância: CNN (ações dos EUA) e alternative.me (cripto).
-Se uma fonte falhar, o painel sai sem aquela linha e avisa; nunca inventa número.
+Reservas, para quando a fonte principal falha (na nuvem, a CNBC dá 403 e a AwesomeAPI dá 429):
+- índices dos EUA, VIX e juros de 10 anos: FRED, do Fed de St. Louis (fechamento do último pregão);
+- dólar, euro e libra: PTAX do Banco Central (fechamento do último dia útil);
+- bitcoin: CoinGecko.
+Se nem a reserva funcionar, o painel sai sem aquela linha e avisa; nunca inventa número.
 """
 import json
 import re
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import List, Optional
 
@@ -25,6 +29,25 @@ URL_CNBC = ("https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/s
 URL_MOEDAS = "https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,EUR-USD,GBP-USD,BTC-BRL"
 URL_CNN = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
 URL_CRIPTO = "https://api.alternative.me/fng/?limit=2"
+URL_FRED = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=%s"
+URL_PTAX = ("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo("
+            "moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?@moeda='%s'"
+            "&@dataInicial='%s'&@dataFinalCotacao='%s'&$format=json"
+            "&$filter=tipoBoletim%%20eq%%20'Fechamento'&$select=cotacaoVenda,dataHoraCotacao")
+URL_COINGECKO = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true"
+
+# série do FRED → chave do painel
+FRED = [("SP500", "sp500"), ("NASDAQCOM", "nasdaq"), ("DJIA", "dow"), ("VIXCLS", "vix"), ("DGS10", "juros10")]
+LINKS = {
+    "B3": "[B3](https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/ibovespa.htm)",
+    "CNBC": "[CNBC](https://www.cnbc.com/markets/)",
+    "FRED": "[FRED](https://fred.stlouisfed.org/)",
+    "AwesomeAPI": "[AwesomeAPI](https://docs.awesomeapi.com.br/api-de-moedas)",
+    "PTAX": "[PTAX do Banco Central](https://www.bcb.gov.br/estabilidadefinanceira/historicocotacoes)",
+    "CoinGecko": "[CoinGecko](https://www.coingecko.com/pt/moedas/bitcoin)",
+    "CNN": "[CNN](https://edition.cnn.com/markets/fear-and-greed)",
+    "alternative.me": "[alternative.me](https://alternative.me/crypto/fear-and-greed-index/)",
+}
 
 # símbolo da CNBC → (chave, nome no painel, unidade)
 CNBC = [
@@ -48,10 +71,6 @@ MOEDAS = [
 ]
 ROTULO_MEDO = {"extreme fear": "medo extremo", "fear": "medo", "neutral": "neutro",
                "greed": "ganância", "extreme greed": "ganância extrema"}
-FONTES_LINKS = ("[B3](https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/ibovespa.htm) · "
-                "[CNBC](https://www.cnbc.com/markets/) · [AwesomeAPI](https://docs.awesomeapi.com.br/api-de-moedas) · "
-                "[CNN](https://edition.cnn.com/markets/fear-and-greed) · "
-                "[alternative.me](https://alternative.me/crypto/fear-and-greed-index/)")
 
 # Gatilhos numéricos da edição extra (variação do dia, em %).
 GATILHOS = {
@@ -125,6 +144,8 @@ def _cnbc() -> dict:
             continue
         item = {"nome": nome, "valor": valor, "var": _numero(q.get("change_pct")), "unidade": unidade,
                 "data": _data_cnbc(q.get("last_time") or ""), "fonte": "CNBC"}
+        if len(q.get("last_time") or "") > 10:  # cotação ao vivo (com horário), não fechamento
+            item["hora"] = agora_brasilia().strftime("%H:%M")
         if chave == "juros10":  # para juros, a variação que importa é em pontos percentuais
             item["var_pp"] = _numero(q.get("change"))
         saida[chave] = item
@@ -163,21 +184,108 @@ def _medo_cripto() -> dict:
                             "ontem": int(ontem["value"]) if ontem else None, "fonte": "alternative.me"}}
 
 
+def _fred_serie(serie: str):
+    """Os dois últimos valores de uma série diária do FRED: [(data, valor), (data, valor)]."""
+    # O FRED trava pedidos com cara de navegador; identificação simples passa. Duas tentativas.
+    status, corpo = 0, b""
+    for ua in ("InteligenciaPragmatica/1.0", "curl/8.7.1"):
+        status, corpo, _ = http_get(URL_FRED % serie, timeout=20, cabecalhos={"User-Agent": ua})
+        if status == 200:
+            break
+    if status != 200:
+        raise RuntimeError("respondeu %s" % status)
+    pontos = []
+    for linha in corpo.decode("utf-8", "replace").splitlines()[1:]:
+        partes = linha.split(",")
+        if len(partes) == 2 and partes[1].strip() not in ("", "."):
+            pontos.append((partes[0].strip(), float(partes[1])))
+    if len(pontos) < 2:
+        raise RuntimeError("série %s sem dados" % serie)
+    return pontos[-2:]
+
+
+def _fred() -> dict:
+    """Reserva da CNBC para os EUA: fechamento do último pregão no FRED."""
+    nomes = {chave: (nome, unidade) for _, chave, nome, unidade in CNBC}
+    saida = {}
+    for serie, chave in FRED:
+        (_, anterior), (data, valor) = _fred_serie(serie)
+        nome, unidade = nomes[chave]
+        item = {"nome": nome, "valor": valor, "var": (valor / anterior - 1) * 100 if anterior else None,
+                "unidade": unidade, "data": data, "fonte": "FRED"}
+        if chave == "juros10":
+            item["var_pp"] = valor - anterior
+        saida[chave] = item
+    return saida
+
+
+def _ptax() -> dict:
+    """Reserva da AwesomeAPI: PTAX de fechamento do Banco Central (último dia útil e o anterior)."""
+    hoje = agora_brasilia().date()
+    ini = (hoje - timedelta(days=10)).strftime("%m-%d-%Y")
+    fim = hoje.strftime("%m-%d-%Y")
+    cot = {}
+    for moeda in ("USD", "EUR", "GBP"):
+        valores = _json(URL_PTAX % (moeda, ini, fim)).get("value") or []
+        if len(valores) < 2:
+            raise RuntimeError("PTAX de %s sem dados" % moeda)
+        cot[moeda] = [(v["dataHoraCotacao"][:10], float(v["cotacaoVenda"])) for v in valores[-2:]]
+    saida = {}
+    for moeda, chave, nome in (("USD", "dolar", "Dólar"), ("EUR", "euro", "Euro"), ("GBP", "libra", "Libra")):
+        (_, antes), (data, agora) = cot[moeda]
+        saida[chave] = {"nome": nome, "valor": agora, "var": (agora / antes - 1) * 100, "unidade": "R$",
+                        "data": data, "fonte": "PTAX"}
+    for moeda, chave, nome in (("EUR", "euro_usd", "Euro em dólar"), ("GBP", "libra_usd", "Libra em dólar")):
+        antes = cot[moeda][0][1] / cot["USD"][0][1]
+        agora = cot[moeda][1][1] / cot["USD"][1][1]
+        saida[chave] = {"nome": nome, "valor": agora, "var": (agora / antes - 1) * 100, "unidade": "US$",
+                        "data": cot["USD"][1][0], "fonte": "PTAX"}
+    return saida
+
+
+def _coingecko() -> dict:
+    d = _json(URL_COINGECKO)["bitcoin"]
+    return {"btc_usd": {"nome": "Bitcoin", "valor": float(d["usd"]), "var": float(d["usd_24h_change"]),
+                        "unidade": "US$", "data": agora_brasilia().date().isoformat(),
+                        "hora": agora_brasilia().strftime("%H:%M"), "fonte": "CoinGecko"}}
+
+
 FONTES = [("B3", _b3), ("CNBC", _cnbc), ("AwesomeAPI", _moedas), ("CNN", _medo_cnn),
           ("alternative.me", _medo_cripto)]
+# reserva → (chaves que ela cobre, principal que ela substitui)
+RESERVAS = [
+    ("FRED", _fred, ["sp500", "nasdaq", "dow", "vix", "juros10"], "CNBC"),
+    ("PTAX", _ptax, ["dolar", "euro", "libra", "euro_usd", "libra_usd"], "AwesomeAPI"),
+    ("CoinGecko", _coingecko, ["btc_usd"], "CNBC"),
+]
 
 
-def coletar_painel() -> dict:
-    """Lê todas as fontes em paralelo. Uma fonte que falha só some do painel (e entra em 'falhas')."""
+def _rodar(fontes) -> tuple:
     dados, falhas = {}, {}
-    with ThreadPoolExecutor(len(FONTES)) as pool:
-        futuros = [(nome, pool.submit(fn)) for nome, fn in FONTES]
+    with ThreadPoolExecutor(max(1, len(fontes))) as pool:
+        futuros = [(nome, pool.submit(fn)) for nome, fn in fontes]
         for nome, fut in futuros:
             try:
                 dados.update(fut.result())
             except Exception as e:  # uma fonte nunca derruba o painel
-                falhas[nome] = str(e)[:120] or type(e).__name__
-    return {"gerado_em": agora_brasilia().isoformat(timespec="seconds"), "itens": dados, "falhas": falhas}
+                falhas[nome] = str(e)[:160] or type(e).__name__
+    return dados, falhas
+
+
+def coletar_painel() -> dict:
+    """Lê as fontes em paralelo e, onde a principal falhou, a reserva. O que faltar só some do painel."""
+    dados, falhas = _rodar(FONTES)
+    precisa = [(nome, fn) for nome, fn, chaves, _ in RESERVAS if any(c not in dados for c in chaves)]
+    if precisa:
+        extras, falhas_res = _rodar(precisa)
+        for nome, fn, chaves, _ in RESERVAS:
+            for c in chaves:
+                if c not in dados and c in extras:
+                    dados[c] = extras[c]
+        falhas.update(falhas_res)
+    reservas = sorted({i["fonte"] for i in dados.values()} & {nome for nome, _, _, _ in RESERVAS})
+    return {"gerado_em": agora_brasilia().isoformat(timespec="seconds"), "itens": dados, "falhas": falhas,
+            "reservas_usadas": reservas}
 
 
 # ───────────────────────── painel em markdown ─────────────────────────
@@ -230,22 +338,30 @@ def painel_md(painel: dict) -> str:
     hora = painel["gerado_em"][11:16]
     blocos = []
 
-    def bloco(titulo, chaves, quando=""):
+    def quando(chaves):
+        """Rótulo de tempo do bloco, pelo primeiro item: ao vivo (hora), fechamento (data) ou último fechamento."""
+        primeiro = next((it[c] for c in chaves if c in it), None)
+        if not primeiro:
+            return ""
+        if primeiro.get("hora"):
+            return "às %s" % primeiro["hora"]
+        if primeiro.get("data"):
+            prefixo = "PTAX de " if primeiro.get("fonte") == "PTAX" else "fechamento de "
+            return prefixo + _dia(primeiro["data"])
+        return "último fechamento"
+
+    def bloco(titulo, chaves):
         linhas = [_linha(it[c]) for c in chaves if c in it]
         if linhas:
-            cab = "**%s**%s" % (titulo, (" · " + quando) if quando else "")
+            rotulo = quando(chaves)
+            cab = "**%s**%s" % (titulo, (" · " + rotulo) if rotulo else "")
             blocos.append("\n\n".join([cab] + linhas))
 
-    def fechamento(chave):
-        if chave not in it:
-            return ""
-        return ("fechamento de %s" % _dia(it[chave]["data"])) if it[chave].get("data") else "último fechamento"
-
-    bloco("🇧🇷 Bolsa brasileira", ["ibov"], fechamento("ibov"))
-    bloco("🇺🇸 Bolsas americanas", ["sp500", "nasdaq", "dow", "vix", "juros10"], fechamento("sp500"))
-    bloco("💱 Moedas", ["dolar", "euro", "libra", "euro_usd", "libra_usd"], "às %s" % hora)
+    bloco("🇧🇷 Bolsa brasileira", ["ibov"])
+    bloco("🇺🇸 Bolsas americanas", ["sp500", "nasdaq", "dow", "vix", "juros10"])
+    bloco("💱 Moedas", ["dolar", "euro", "libra", "euro_usd", "libra_usd"])
     # O bitcoin em real (AwesomeAPI) mede a variação numa janela diferente da CNBC; mostrar os dois confunde.
-    bloco("🛢️ Petróleo, ouro e bitcoin", ["brent", "ouro", "btc_usd"], "às %s" % hora)
+    bloco("🛢️ Petróleo, ouro e bitcoin", ["brent", "ouro", "btc_usd"])
 
     medos = []
     for chave in ("medo_acoes", "medo_cripto"):
@@ -261,9 +377,11 @@ def painel_md(painel: dict) -> str:
     if medos:
         blocos.append("\n\n".join(["**😨 Medo & Ganância** · de 0 (medo extremo) a 100 (ganância extrema)"] + medos))
 
-    rodape = "🔗 Números coletados às %s, sem passar pela IA: %s." % (hora, FONTES_LINKS)
-    if painel.get("falhas"):
-        rodape += " Fora do ar hoje: %s." % ", ".join(sorted(painel["falhas"]))
+    usadas = [LINKS[f] for f in LINKS if f in {i.get("fonte") for i in it.values()}]
+    rodape = "🔗 Números coletados às %s, sem passar pela IA: %s." % (hora, " · ".join(usadas))
+    fora = sorted(f for f in painel.get("falhas") or {} if f not in {i.get("fonte") for i in it.values()})
+    if fora:
+        rodape += " Fora do ar hoje: %s." % ", ".join(fora)
     return "#### 📊 PAINEL\n\n" + "\n\n".join(blocos) + "\n\n" + rodape + "\n"
 
 

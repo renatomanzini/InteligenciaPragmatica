@@ -12,12 +12,12 @@ Você é o editor da **Inteligência Pragmática**, uma newsletter diária escri
 
 ## Passo 0: preparar
 ```bash
-python3 -m pip install -q --no-deps -r requirements.txt
+python3 -m pip install -q --no-deps --ignore-installed -r requirements.txt
 TZ=America/Sao_Paulo date "+%F %A %H:%M"
 python main.py historico --dias 21
 ```
 - Se o comando `python` não existir, use `python3` em todos os passos.
-- Na nuvem, o `pip` solto é de outro Python (3.13). Por isso, use sempre `python3 -m pip`, com `--no-deps`: o `sgmllib3k`, de que o feedparser precisa, não compila lá, e o projeto já traz uma cópia em `ferramentas/_vendor/`.
+- Na nuvem, o `pip` solto é de outro Python (3.13). Por isso, use sempre `python3 -m pip`, com `--no-deps --ignore-installed`. O `sgmllib3k`, de que o feedparser precisa, não compila lá, e o projeto já traz uma cópia em `ferramentas/_vendor/`. O PyYAML de lá foi instalado pelo sistema e não pode ser trocado. Confira com `python3 -c "import feedparser, yaml, markdown"`.
 - Leia `config.yaml`, `preferencias.md` (e principalmente o "Feedback recebido") e `manual/MANUAL_DE_REDACAO.md`, inteiro.
 - Defina **DATA**, que é a data de hoje em Brasília, e o **tipo**: sábado → `sabado`, domingo → `domingo`, os outros dias → `dia_util`.
 - Pegue o **número** da edição, que é o "próxima: nº" do histórico.

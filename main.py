@@ -213,8 +213,10 @@ def cmd_mercado_painel(args) -> int:
     print(res["texto"])
     print("Painel gravado em %s." % res["arquivo"])
     if res["painel"]["falhas"]:
-        print("Atenção: estas fontes falharam e ficaram fora do painel: %s"
+        print("Atenção: estas fontes falharam: %s"
               % "; ".join("%s (%s)" % kv for kv in sorted(res["painel"]["falhas"].items())))
+    if res["painel"].get("reservas_usadas"):
+        print("Reservas usadas no lugar delas: %s" % ", ".join(res["painel"]["reservas_usadas"]))
     return 0
 
 
@@ -231,6 +233,8 @@ def cmd_mercado_alarme(args) -> int:
         print("SEM ALARME NUMÉRICO: nenhum gatilho de preço disparou hoje.")
     if painel["falhas"]:
         print("Fontes fora do ar: %s" % "; ".join("%s (%s)" % kv for kv in sorted(painel["falhas"].items())))
+    if painel.get("reservas_usadas"):
+        print("Reservas usadas: %s" % ", ".join(painel["reservas_usadas"]))
     return 0
 
 
