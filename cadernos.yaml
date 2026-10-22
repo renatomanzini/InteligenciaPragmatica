@@ -29,6 +29,7 @@ ia:
   nome: "Inteligência Pragmática · IA"
   remetente: "IP · IA"
   envio: desligado
+  dias_envio: [segunda, quinta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra
   fontes: fontes_ia.yaml
   manual: manual/MANUAL_IA.md
   roteiro: manual/ROTINA_IA.md

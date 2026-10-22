@@ -13,11 +13,10 @@
 #
 # tema: as seções do arquivo de candidatos, na ordem de "temas" abaixo.
 
+# A rotina roda todo dia e guarda o que acha na curadoria (dados/ia/curadoria.md),
+# então a coleta só precisa do último dia, com folga.
 janela_horas:
-  padrao: 72      # quinta: desde a edição de segunda
-  segunda: 96     # segunda: desde a edição de quinta
-  sabado: 72
-  domingo: 72
+  padrao: 30
 
 limite_por_fonte: 10
 
