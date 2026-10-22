@@ -1027,5 +1027,154 @@
       "vassouras_buzios"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-10-22",
+    "tipo": "regular",
+    "numero": 1,
+    "assunto": "a deepseek abriu a cozinha, mas não toda",
+    "previa": "+ como deixar um agente entrar na conta sem dar a senha",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "deepseek-deepinfer",
+        "titulo": "DeepSeek abre o DeepInfer, o motor que serve o próprio modelo",
+        "tema": "open_source",
+        "urls": [
+          "https://github.com/deepseek-ai/DeepInfer",
+          "https://technode.com/2026/10/21/deepseek-open-sources-inference-framework-with-support-for-nvidia-and-huawei-chips/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "dhs-deepseek-ordem",
+        "titulo": "DHS manda tirar a DeepSeek dos sistemas das agências civis dos EUA",
+        "tema": "regulacao",
+        "urls": [
+          "https://www.govinfo.gov/app/details/FR-2026-10-20/2026-21447"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "deepseek-rodada-15-bi",
+        "titulo": "DeepSeek levantaria cerca de US$ 15 bi, segundo a Bloomberg",
+        "tema": "negocios_ia",
+        "urls": [
+          "https://techcrunch.com/2026/10/22/deepseek-reportedly-raises-15b-days-after-us-restrictions/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "recursive-flint",
+        "titulo": "Recursive lança o Flint, modelo aberto de 39,8 bi de parâmetros feito com ajuda de IA",
+        "tema": "modelos",
+        "urls": [
+          "https://huggingface.co/RecursiveSI/flint"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "inception-mercury-3",
+        "titulo": "Inception lança o Mercury 3, modelo de difusão de mais de 1.000 tokens por segundo",
+        "tema": "modelos",
+        "urls": [
+          "https://www.inceptionlabs.ai/blog/introducing-mercury-3"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "kitten-tts-2",
+        "titulo": "Kitten-TTS 2: modelo de voz que clona com 5 segundos de áudio, com licença de uso comercial restrito",
+        "tema": "open_source",
+        "urls": [
+          "https://github.com/KittenML/KittenTTS"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "granite-speech-5",
+        "titulo": "IBM abre o Granite Speech 5.0, de transcrição com português",
+        "tema": "open_source",
+        "urls": [
+          "https://huggingface.co/blog/ibm-granite/granite-speech-5"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "openai-google-cloud",
+        "titulo": "Google Cloud passa a oferecer modelos da OpenAI ao lado de Gemini e Claude",
+        "tema": "ferramentas",
+        "urls": [
+          "https://the-decoder.com/google-cloud-now-offers-openai-models-alongside-gemini-and-claude-becoming-the-only-major-provider-with-all-three/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "lovable-certificacoes-app",
+        "titulo": "Lovable explica que as certificações dela não cobrem o app do cliente",
+        "tema": "ferramentas",
+        "urls": [
+          "https://lovable.dev/blog/lovable-compliance-and-your-app"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "ai-act-norma-en-18286",
+        "titulo": "Sai a primeira norma harmonizada do AI Act, a EN 18286",
+        "tema": "regulacao",
+        "urls": [
+          "https://digital-strategy.ec.europa.eu/en/library/first-harmonised-standard-supporting-ai-act-published-official-journal"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "china-mofcom-exportacao-ia",
+        "titulo": "China propõe licença para exportar pesos de modelos de fronteira",
+        "tema": "regulacao",
+        "urls": [
+          "https://www.chinatalk.media/p/mofcoms-new-ai-rules"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "1password-agentes",
+        "titulo": "1Password for Agents deixa o agente fazer login sem ver a senha",
+        "tema": "agentes",
+        "urls": [
+          "https://1password.com/press/2026/october/1password-for-agents-trust-layer-personal-ai-agents"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "linux-foundation-pr-lixo-ia",
+        "titulo": "Mantenedores estimam que 25% dos pull requests são lixo de IA",
+        "tema": "open_source",
+        "urls": [
+          "https://www.linuxfoundation.org/press/new-lf-research-survey-shows-generative-ai-cuts-open-source-coding-time-in-half-but-25-of-incoming-pull-requests-are-considered-ai-slop"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "citrini-antiveneno-claude",
+        "titulo": "Claude desenha proteínas contra veneno de escorpião, longe de um remédio",
+        "tema": "pesquisa",
+        "urls": [
+          "https://www.theverge.com/ai-artificial-intelligence/1016443/anthropic-claude-citrini-vibecoding-scorpion-antivenom"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "o_que_mudou",
+      "modelos_novos",
+      "open_source",
+      "ferramentas",
+      "regulacao",
+      "ia_na_pratica",
+      "radar",
+      "pergunta"
+    ],
+    "caderno": "ia"
   }
 ]
