@@ -544,8 +544,27 @@ def testar_coleta_ia():
         _, stat_falha = coleta._github_em_alta({"limite": 15}, date(2026, 10, 22))
         conferir(not stat_falha["ok"] and "HTTP 429" in stat_falha["erro"],
                  "quando as duas falham, o log diz o motivo da página também (%s)" % stat_falha["erro"])
+        proxy = b'{"message": "GitHub access to x/y is not enabled for this session"}'
+        coleta._baixar = lambda url, *a, **k: (403, proxy if "api.github.com" in url else b"<html>", url)
+        _, stat_proxy = coleta._github_em_alta({"limite": 15}, date(2026, 10, 22))
+        conferir("HTTP 403 (GitHub access to x/y is not enabled" in stat_proxy["erro"]
+                 and "tendências: HTTP 403" in stat_proxy["erro"],
+                 "o log traz a mensagem do 403 da API, que diz quem barrou (%s)" % stat_proxy["erro"])
     finally:
         coleta._baixar = original
+    from ferramentas import github
+    guardado = {v: os.environ.pop(v, None) for v in ("GITHUB_TOKEN_LEITURA", "GITHUB_TOKEN")}
+    try:
+        os.environ["GITHUB_TOKEN"] = "proxy-injected"
+        conferir("Authorization" not in github.cabecalhos_api(), "o marcador 'proxy-injected' da nuvem não vira chave")
+        os.environ["GITHUB_TOKEN_LEITURA"] = "github_pat_teste"
+        conferir(github.cabecalhos_api().get("Authorization") == "Bearer github_pat_teste",
+                 "a chave de leitura (GITHUB_TOKEN_LEITURA) vai no Authorization")
+    finally:
+        for v, valor in guardado.items():
+            os.environ.pop(v, None)
+            if valor is not None:
+                os.environ[v] = valor
     conferir(stat["ok"] and "tendências" in (stat["erro"] or ""), "API com 403 cai na página de tendências (%s)" % stat)
     conferir([c["titulo"] for c in itens] == ["dono/agente", "outro/sem-descricao"], "lê os repositórios da página")
     primeiro = itens[0] if itens else {"extra": {}, "resumo": ""}

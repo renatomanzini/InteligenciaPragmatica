@@ -6,7 +6,6 @@ Nenhuma falha de fonte derruba a coleta: o erro vai para o log e a coleta segue.
 import hashlib
 import html
 import json
-import os
 import re
 import threading
 import time
@@ -25,7 +24,7 @@ except ImportError:
     sys.path.insert(0, str(Path(__file__).resolve().parent / "_vendor"))
 import feedparser  # noqa: E402
 
-from . import cadernos, historico
+from . import cadernos, github, historico
 from .util import FUSO, agora_brasilia, hoje_brasilia, http_get, ler_yaml, normalizar_url
 
 WORKERS = 8
@@ -324,20 +323,14 @@ def _ler_feed(nome: str, url: str, tema: str, tipo: str, inicio: datetime, fim: 
 
 # ───────────────────────── Especiais ─────────────────────────
 
-def _json(url: str, cabecalhos: Optional[dict] = None):
+def _json(url: str, cabecalhos: Optional[dict] = None, descrever=None):
     status, corpo, _ = _baixar(url, cabecalhos=cabecalhos)
     if status != 200:
-        raise RuntimeError(_descricao_erro(status, corpo))
+        raise RuntimeError(descrever(status, corpo) if descrever and status else _descricao_erro(status, corpo))
     try:
         return json.loads(corpo.decode("utf-8"))
     except ValueError:
         raise RuntimeError("resposta não é JSON válido")
-
-
-def _cabecalho_github() -> dict:
-    token = os.environ.get("GITHUB_TOKEN")
-    return {"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json"} if token else {
-        "Accept": "application/vnd.github+json"}
 
 
 def _hacker_news(cfg: dict) -> Tuple[List[dict], dict]:
@@ -367,7 +360,8 @@ def _github_em_alta(cfg: dict, data: date) -> Tuple[List[dict], dict]:
         q = quote("created:>" + desde, safe="")
         url = ("https://api.github.com/search/repositories?q=%s&sort=stars&order=desc&per_page=%d"
                % (q, int(cfg.get("limite", 15))))
-        dados = _json(url, cabecalhos=_cabecalho_github())
+        # o motivo do erro diz se quem barrou foi o limite do GitHub ou o proxy da nuvem
+        dados = _json(url, cabecalhos=github.cabecalhos_api(), descrever=github.motivo)
         itens = []
         for r in dados.get("items") or []:
             itens.append(_candidato(
@@ -379,7 +373,7 @@ def _github_em_alta(cfg: dict, data: date) -> Tuple[List[dict], dict]:
             raise RuntimeError("a busca voltou vazia")
         return itens, _stat(True, len(itens), None, t0, "api")
     except Exception as ex:
-        # Na nuvem, a busca da API dá 403 (limite por IP, que é dividido com outros usuários).
+        # Na nuvem, sem GITHUB_TOKEN_LEITURA, a busca dá 403 (o proxy só libera o repositório da newsletter).
         # A página de tendências não usa a API: os repositórios com mais estrelas na semana.
         itens, motivo = _github_tendencias(cfg)
         if itens:
@@ -396,7 +390,9 @@ def _github_tendencias(cfg: dict) -> Tuple[List[dict], Optional[str]]:
     """github.com/trending da semana: (itens, motivo da falha). Sem data de criação: os itens ficam 'sem data'."""
     status, corpo, _ = _baixar("https://github.com/trending?since=weekly", tentativas=2)
     if status != 200:
-        return [], _descricao_erro(status, corpo)
+        anti_robo = b"Just a moment" in corpo[:4000]
+        return [], github.motivo(status, corpo) if status in (403, 429) and not anti_robo else _descricao_erro(
+            status, corpo)
     texto = corpo.decode("utf-8", "replace")
     itens = []
     for bloco in re.findall(r'<article class="Box-row">(.*?)</article>', texto, re.S):

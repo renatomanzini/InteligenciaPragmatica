@@ -7,6 +7,33 @@ from typing import Optional
 
 from .util import http_get
 
+# Na nuvem, GITHUB_TOKEN e GH_TOKEN valem "proxy-injected": o proxy do GitHub da Anthropic troca esse
+# marcador pela credencial do app do Claude, que só alcança o repositório da newsletter (o resto dá 403).
+# A chave de leitura do leitor fica em GITHUB_TOKEN_LEITURA, para não mexer na credencial que publica.
+MARCADOR_PROXY = "proxy-injected"
+
+
+def cabecalhos_api() -> dict:
+    """Cabeçalhos da API do GitHub, com a chave de leitura se houver (o marcador do proxy não conta)."""
+    h = {"Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+    for var in ("GITHUB_TOKEN_LEITURA", "GITHUB_TOKEN"):
+        token = os.environ.get(var, "").strip()
+        if token and token != MARCADOR_PROXY:
+            h["Authorization"] = "Bearer " + token
+            break
+    return h
+
+
+def motivo(status: int, corpo: bytes) -> str:
+    """'HTTP 403 (mensagem do GitHub ou do proxy)', para o log dizer quem bloqueou e por quê."""
+    texto = (corpo or b"")[:2000].decode("utf-8", "replace")
+    try:
+        msg = str(json.loads(texto).get("message") or "")
+    except (ValueError, AttributeError):
+        msg = "" if "<" in texto[:200] else texto  # página HTML não ajuda
+    msg = re.sub(r"\s+", " ", msg).strip()[:160]
+    return "HTTP %d (%s)" % (status, msg) if msg else "HTTP %d" % status
+
 
 def _limpar(repo: str) -> Optional[str]:
     """Aceita 'dono/repo' ou uma URL do GitHub e devolve 'dono/repo' (ou None se não der)."""
@@ -27,10 +54,7 @@ def info(repo: str) -> dict:
     nome = _limpar(repo)
     if not nome:
         return {"repo": repo, "erro": "nome inválido (use DONO/REPO)"}
-    cabecalhos = {"Accept": "application/vnd.github+json"}
-    token = os.environ.get("GITHUB_TOKEN")
-    if token:
-        cabecalhos["Authorization"] = "Bearer " + token
+    cabecalhos = cabecalhos_api()
     url = "https://api.github.com/repos/" + nome
     status, corpo = 0, b""
     for tentativa in range(2):
@@ -42,9 +66,10 @@ def info(repo: str) -> dict:
     if status == 404:
         return {"repo": nome, "erro": "repositório não encontrado (HTTP 404)"}
     if status in (403, 429):
-        return {"repo": nome, "erro": "HTTP %d: limite da API do GitHub? Tente depois ou defina GITHUB_TOKEN" % status}
+        return {"repo": nome, "erro": "%s: limite da API ou bloqueio do proxy? Tente depois ou defina "
+                                      "GITHUB_TOKEN_LEITURA" % motivo(status, corpo)}
     if status != 200:
-        return {"repo": nome, "erro": "sem resposta (timeout, DNS ou conexão)" if status == 0 else "HTTP %d" % status}
+        return {"repo": nome, "erro": "sem resposta (timeout, DNS ou conexão)" if status == 0 else motivo(status, corpo)}
     try:
         d = json.loads(corpo.decode("utf-8"))
     except ValueError:
