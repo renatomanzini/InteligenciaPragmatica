@@ -1,0 +1,181 @@
+{
+  "data": "2026-10-22",
+  "verificado_em": "2026-10-22T14:52:57-03:00",
+  "total": 28,
+  "resumo": {
+    "ok": 28,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://github.com/deepseek-ai/DeepInfer",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://technode.com/2026/10/21/deepseek-open-sources-inference-framework-with-support-for-nvidia-and-huawei-chips/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.govinfo.gov/app/details/FR-2026-10-20/2026-21447",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://techcrunch.com/2026/10/22/deepseek-reportedly-raises-15b-days-after-us-restrictions/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/RecursiveSI/flint",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.inceptionlabs.ai/blog/introducing-mercury-3",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://github.com/KittenML/KittenTTS",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/blog/ibm-granite/granite-speech-5",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://the-decoder.com/google-cloud-now-offers-openai-models-alongside-gemini-and-claude-becoming-the-only-major-provider-with-all-three/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://lovable.dev/blog/lovable-compliance-and-your-app",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/library/first-harmonised-standard-supporting-ai-act-published-official-journal",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.chinatalk.media/p/mofcoms-new-ai-rules",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://1password.com/press/2026/october/1password-for-agents-trust-layer-personal-ai-agents",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.linuxfoundation.org/press/new-lf-research-survey-shows-generative-ai-cuts-open-source-coding-time-in-half-but-25-of-incoming-pull-requests-are-considered-ai-slop",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1016443/anthropic-claude-citrini-vibecoding-scorpion-antivenom",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "url": "https://www.latent.space/p/ainews-deepseek-deepinfer-open-source",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.interconnects.ai/p/latest-open-artifacts-25-deepseek",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://the-decoder.com/recursive-shows-first-result-of-its-ai-driven-research-process-with-flint/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://docs.recursive.com/edge/rec",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://the-decoder.com/inceptions-mercury-3-diffusion-model-claims-to-beat-gpt-6-luna-and-claude-haiku-5-5-at-a-fraction-of-the-wait/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/KittenML/kitten-tts-2/blob/main/LICENSE.md",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.mofcom.gov.cn/zfxxgk/gkml/art/2026/art_ccd0391072a94c809ae7e820abe2536b.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1016399/1password-ai-agent-password-sign-in",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://1password.com/personal-ai-agent-integrations",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
