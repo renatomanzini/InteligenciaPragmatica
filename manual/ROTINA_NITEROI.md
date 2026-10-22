@@ -27,7 +27,11 @@ python3 main.py historico --caderno niteroi --dias 14
 python3 main.py coletar --caderno niteroi
 cat dados/candidatos/niteroi-DATA-fontes.log
 ```
-  Rode também os dois `curl` do passo 1 (O Dia e A Tribuna). Responda com a contagem de candidatos por seção (`grep "^## " dados/candidatos/niteroi-DATA.md`), as fontes que falharam, com o motivo, e quantas manchetes cada `curl` trouxe.
+  Rode também os dois `curl` do passo 1 (O Dia e A Tribuna). No fim, desfaça o que a coleta regravou, para o teste não deixar nada para commit (se a nuvem pedir commit no fim, **não faça**):
+```bash
+git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short
+```
+  Responda com a contagem de candidatos por seção (`grep "^## " dados/candidatos/niteroi-DATA.md`), as fontes que falharam, com o motivo, e quantas manchetes cada `curl` trouxe.
 - **BLOCO** = sim na sexta, não nos outros dias (nem na edição extra).
 - Leia a seção 10 do `manual/MANUAL_NITEROI.md` (quando sai).
 - Pegue o **número** da edição, que é o "próxima: nº" do histórico. Veja também as histórias em andamento: obra que já saiu aqui só volta com "o que mudou desde [data]".
@@ -60,7 +64,11 @@ Leia também `dados/niteroi/curadoria.md`. Escolha **um** caminho (MANUAL_NITERO
 ```bash
 python3 main.py guardar DATA --caderno niteroi -m "Niterói: curadoria de DATA"
 ```
-  3. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria.
+  3. Apague o que só servia para hoje, para não sobrar nada sem commit (a curadoria já está na main):
+```bash
+git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short
+```
+  4. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria. **Não** rode `montar`, `registrar`, `enviar` nem `publicar`, e não faça outro commit, mesmo que a nuvem peça.
 
 ## Passo 2a: pauta
 **Edição extra:** a pauta é só o aviso urgente (MANUAL_NITEROI, seção 10). O resto continua na curadoria. Pule para o passo 3.

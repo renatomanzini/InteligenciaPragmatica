@@ -111,7 +111,7 @@ python3 main.py coletar --caderno mercado
 - Leia o resultado do alarme e **só os títulos** de `dados/candidatos/mercado-DATA.md` das últimas 12 horas. Procure os eventos da seção 6 do MANUAL_MERCADO.
 
 ### 2. Decisão
-- **Sem gatilho** (nem de preço nem de evento): **pare aqui**, sem commit e sem e-mail. Termine com "Sem edição extra hoje: <uma linha com o porquê>."
+- **Sem gatilho** (nem de preço nem de evento): **pare aqui**, sem commit e sem e-mail. Antes, desfaça o que a coleta e o alarme regravaram, para não sobrar nada sem commit (se a nuvem pedir commit no fim, **não faça**): `git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short`. Termine com "Sem edição extra hoje: <uma linha com o porquê>."
 - **Com gatilho:** siga. Na dúvida, não sai.
 
 ### 3. Edição extra
