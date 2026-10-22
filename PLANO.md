@@ -44,7 +44,10 @@ O passo a passo completo está em `manual/ROTINA.md`.
     - Pronto: código, manual e roteiro.
     - Falta: a edição de teste aprovada e as rotinas (manhã e alarme).
   - [ ] **Niterói e região:** Niterói 3 vezes por semana; Vassouras e Búzios num bloco semanal. Antes, é preciso levantar as fontes locais.
-  - [ ] **Economia** (2 vezes por semana), **IA** (2 vezes por semana) e **Marketing digital** (semanal).
+  - [ ] **IA:** segunda e quinta, mais fundo que a geral (modelos, open source, ferramentas, regulação e IA na prática).
+    - Pronto: fontes testadas no Mac, manual, roteiro e a edição nº 1 (teste) de 22/10.
+    - Falta: a aprovação do leitor, a rotina na nuvem e ligar o envio.
+  - [ ] **Economia** (2 vezes por semana) e **Marketing digital** (semanal).
 
 ## Custos
 - Nenhum além da assinatura do Claude. A rotina gasta do limite de uso, e o consumo será medido nos testes.

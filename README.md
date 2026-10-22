@@ -98,6 +98,7 @@ Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e 
 |---|---|---|---|
 | **Mercado** | Dias úteis, de manhã. Sai também uma **edição extra** quando o pregão tem gatilho (ver o manual). | `fontes_mercado.yaml` + o painel de cotações (B3, CNBC, AwesomeAPI, CNN, alternative.me) | `manual/MANUAL_MERCADO.md` e `manual/ROTINA_MERCADO.md` |
 | **Niterói** | Segunda, quarta e sexta, de manhã. Na sexta, traz também o **bloco semanal de Vassouras e Búzios**. | `fontes_niteroi.yaml` (prefeituras, NitTrans, Águas de Niterói e a imprensa local) | `manual/MANUAL_NITEROI.md` e `manual/ROTINA_NITEROI.md` |
+| **IA** | Segunda e quinta, de manhã. Vai mais fundo que a geral: o que mudou de verdade, modelos novos, open source, ferramentas e agentes, regulação e o IA na prática. | `fontes_ia.yaml` (laboratórios, open source, ferramentas, regulação, China e Brasil) + Hacker News, GitHub em alta, Hugging Face e Reddit | `manual/MANUAL_IA.md` e `manual/ROTINA_IA.md` |
 
 **Como funciona por dentro:**
 - As edições de um caderno ficam em `edicoes/<caderno>/AAAA-MM-DD/`. A edição extra fica em `AAAA-MM-DD-extra/`.
@@ -106,5 +107,6 @@ Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e 
 - Todos os comandos aceitam `--caderno`. Por exemplo: `python main.py montar 2026-10-22 --caderno mercado`.
 - No `fontes_niteroi.yaml`, cada fonte pode ter um **filtro** (só entram as notícias que citam a cidade), uma **janela própria** (o bloco de Vassouras e Búzios olha a semana inteira) e **páginas** (quantas páginas do feed ler, para prefeituras que publicam muito).
 - No Mercado, os números do painel vêm de `python main.py mercado-painel` e entram na edição por código, sem passar pela IA. O `python main.py mercado-alarme` confere os gatilhos da edição extra.
+- No IA, o caderno não repete a geral: antes da pauta, ele lê o que a geral publicou desde a última edição e só volta a um assunto com valor novo (manual, seção 2). Quando a busca do GitHub falha (na nuvem ela dá 403), o "GitHub em alta" usa a página de tendências do GitHub. E, no filtro de fonte, palavra de até 3 letras (como "IA") só conta inteira, para não pegar "dia" ou "mídia".
 
 **Para pausar só o e-mail de um caderno:** troque `envio: ligado` por `envio: desligado` no bloco dele, em `cadernos.yaml`.
