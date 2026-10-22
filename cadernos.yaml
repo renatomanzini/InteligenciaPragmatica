@@ -47,7 +47,7 @@ economia:
 marketing:
   nome: "Inteligência Pragmática · Marketing"
   remetente: "IP · Marketing"
-  envio: desligado
+  envio: ligado
   dias_envio: [terca, quinta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra (aprovado pelo leitor em 22/10)
   fontes: fontes_marketing.yaml
   manual: manual/MANUAL_MARKETING.md

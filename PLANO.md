@@ -51,8 +51,7 @@ O passo a passo completo está em `manual/ROTINA.md`.
     - Pronto: fontes testadas, código, manual, roteiro e a edição de teste nº 1.
     - Falta: a aprovação da edição de teste, a rotina e ligar o envio.
   - [ ] **Marketing:** pesquisa todo dia e sai terça e quinta (os dias fixos, escolhidos pelo leitor em 22/10/2026); fora deles, só edição extra com notícia muito importante.
-    - Pronto: fontes testadas, manual, roteiro e a edição de teste nº 1, aprovada pelo leitor.
-    - Falta: a rotina e ligar o envio.
+    - Pronto: fontes testadas, manual, roteiro, a edição de teste nº 1 (aprovada pelo leitor em 22/10), a rotina diária na nuvem (05:15, Opus, sem conectores) e o envio ligado.
 
 ## Custos
 - Nenhum além da assinatura do Claude. A rotina gasta do limite de uso, e o consumo será medido nos testes.
