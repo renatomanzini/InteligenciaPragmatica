@@ -645,6 +645,14 @@ def testar_caderno_economia(tmp: Path):
                  "a fonte que não respondeu na rajada entra na segunda tentativa")
     finally:
         economia._fontes, economia._reservas = fontes_orig, reservas_orig
+    # resposta em gzip sem pedir (o IBGE fez isso em 22/10)
+    import gzip as _gzip
+    http_orig = economia.http_get
+    try:
+        economia.http_get = lambda *a, **k: (200, _gzip.compress(b'{"items": [1, 2]}'), "")
+        conferir(economia._json("https://servicodados.ibge.gov.br/x") == {"items": [1, 2]}, "lê JSON que vem em gzip")
+    finally:
+        economia.http_get = http_orig
     serie = [("2012-%02d" % m, 7.0) for m in range(3, 13)] + [("2026-%02d" % m, 5.4 - m / 100) for m in range(1, 9)]
     conferir(economia._desemprego_de(serie, "SGS")["menor_da_serie"], "desemprego: menor da série")
     conferir(not economia._desemprego_de(serie + [("2026-09", 6.0)], "SGS")["menor_da_serie"], "subiu: não é o menor")

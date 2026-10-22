@@ -11,6 +11,7 @@ Reservas, para quando o SGS falha: o SIDRA para o IPCA e o desemprego, e a PTAX 
 Se nem a reserva funcionar, o painel sai sem aquela linha e avisa; nunca inventa número.
 O painel marca com 🆕 o dado que saiu desde a última edição (o período de referência mudou).
 """
+import gzip
 import json
 import re
 import time
@@ -65,6 +66,8 @@ def _json(url: str, tentativas: int = 3):
         status, corpo, _ = http_get(url, timeout=25, cabecalhos={"User-Agent": _UA_NAVEGADOR,
                                                                  "Accept": "application/json"})
         if status == 200:
+            if corpo[:2] == b"\x1f\x8b":  # o IBGE às vezes manda gzip sem a gente pedir
+                corpo = gzip.decompress(corpo)
             return json.loads(corpo.decode("utf-8"))
         if status not in (0, 429) and status < 500:
             break
