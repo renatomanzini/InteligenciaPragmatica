@@ -540,6 +540,10 @@ def testar_coleta_ia():
                                                      else TENDENCIAS_FALSAS.encode()), url)
         vazia, _ = coleta._github_em_alta({"limite": 15}, date(2026, 10, 22))
         conferir(len(vazia) == 2, "busca da API vazia também cai na página de tendências")
+        coleta._baixar = lambda url, *a, **k: (403 if "api.github.com" in url else 429, b"", url)
+        _, stat_falha = coleta._github_em_alta({"limite": 15}, date(2026, 10, 22))
+        conferir(not stat_falha["ok"] and "HTTP 429" in stat_falha["erro"],
+                 "quando as duas falham, o log diz o motivo da página também (%s)" % stat_falha["erro"])
     finally:
         coleta._baixar = original
     conferir(stat["ok"] and "tendências" in (stat["erro"] or ""), "API com 403 cai na página de tendências (%s)" % stat)

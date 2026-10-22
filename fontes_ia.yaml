@@ -8,8 +8,8 @@
 #   Qwen blog (parado em 2025), Ahead of AI (quase parado), The Shift, Every, LangChain e Stanford HAI
 #   (feed vazio), iyiou (desafio anti-robô), arXiv (370 papers por semana: os papers do dia do
 #   Hugging Face já fazem essa triagem), The Information (paywall: não dá para confirmar o fato).
-#   Na nuvem (registros da geral), a CNBC dá 403 e a busca do GitHub dá 403; o GitHub em alta passa
-#   a usar a página de tendências quando a API falha.
+#   Na nuvem (registros da geral e Run now de 22/10), a CNBC e o Tecnoblog dão 403, e o GitHub em alta falha
+#   pela API e pela página de tendências (o Mac usa a página quando a API falha). O r/ClaudeAI às vezes dá 429.
 #
 # tema: as seções do arquivo de candidatos, na ordem de "temas" abaixo.
 
@@ -71,7 +71,8 @@ fontes:
 
   # ───────────── IA no Brasil ─────────────
   - {nome: MIT Technology Review Brasil, tema: brasil, tipo: imprensa, rss: "https://mittechreview.com.br/feed/", filtro: [inteligência artificial, IA, IAs, agente, modelo, ChatGPT, Claude, Gemini, algoritmo], ativo: true}
-  - {nome: Tecnoblog, tema: brasil, tipo: imprensa, rss: "https://tecnoblog.net/feed/", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Claude, Anthropic, DeepSeek, LLM], ativo: true}
+  # o Tecnoblog dá 403 (anti-robô) na nuvem (teste de 22/10); no Mac funciona
+  - {nome: Tecnoblog, tema: brasil, tipo: imprensa, rss: "https://tecnoblog.net/feed/", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Claude, Anthropic, DeepSeek, LLM], ativo: false}
   - {nome: Folha Tec, tema: brasil, tipo: imprensa, rss: "https://feeds.folha.uol.com.br/tec/rss091.xml", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Claude, Anthropic, DeepSeek], ativo: true}
   - {nome: Exame, tema: brasil, tipo: imprensa, rss: "https://exame.com/feed/", filtro: [inteligência artificial, IA, ChatGPT, OpenAI, Gemini, Anthropic, agentes], ativo: true}
   - {nome: Startups.com.br, tema: brasil, tipo: imprensa, rss: "https://startups.com.br/feed/", filtro: [inteligência artificial, IA, agente, LLM], ativo: true}

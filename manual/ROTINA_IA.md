@@ -48,7 +48,7 @@ Escolha **um** caminho (MANUAL_IA, seção 2) e escreva o porquê numa linha:
 - **Dia fixo:** siga para o passo 2a. A edição sai sempre.
 - **Fora do dia fixo, com algo que passa no critério de muito importante:** siga para o passo 2a, como **edição extra** (`tipo: extra`). Na dúvida, não é extra.
 - **Fora do dia fixo, sem nada urgente:** guarde e pare.
-  1. Acrescente em `dados/ia/curadoria.md` a seção `## DATA`, com de 0 a 8 linhas `- [tema] Título — por que importa (url)`. Tire o que ficou velho ou foi superado.
+  1. Acrescente em `dados/ia/curadoria.md` (crie o arquivo se ele ainda não existir) a seção `## DATA`, com de 0 a 8 linhas `- [tema] Título — por que importa (url)`. Tire o que ficou velho ou foi superado.
   2. Publique só a curadoria:
 ```bash
 python3 main.py guardar DATA --caderno ia -m "IA: curadoria de DATA"
@@ -72,7 +72,7 @@ Para cada item que a geral já deu, escreva o valor novo que justifica a volta, 
 
 ## Passo 3: apuração e redação (você mesmo)
 - Abra a fonte de cada fato que vai usar, com WebFetch ou `curl -sL`, e confirme número, data, nome e disponibilidade. Prefira a fonte primária: o comunicado, o model card, o repositório, o paper, o texto da lei.
-- Para cada repositório citado, rode `python3 main.py github dono/repo` e use as estrelas e a data que ele devolve.
+- Para cada repositório citado, rode `python3 main.py github dono/repo` e use as estrelas e a data que ele devolve. Se a consulta falhar (na nuvem, a API costuma dar 403), não cite estrelas.
 - Para modelo aberto, confira o tamanho (parâmetros totais) e a licença no model card antes do "roda no seu Mac?".
 - Abra só as fontes dos itens que vão entrar (de 15 a 25 páginas).
 - Escreva `edicoes/ia/DATA/edicao.md` seguindo o MANUAL_IA (seções 6 e 7) e o front matter da seção 15 do manual geral. Releia contra o checklist (MANUAL_IA, seção 8).
@@ -99,7 +99,7 @@ Cada um grava `edicoes/ia/DATA/verificacao_parteN.md`. Depois, junte os dois em 
 
 > Você é o checador de fatos do caderno IA, PARTE N. Leia `edicoes/ia/DATA/edicao.md` e `manual/MANUAL_IA.md` e confira só a sua parte. A edição é de DATA.
 > Para cada afirmação factual (número, data, nome, cargo, preço, disponibilidade, "lançou", "anunciou", estrelas, licença, tamanho do modelo), abra o link citado e confira se a fonte diz exatamente aquilo. Número arredondado diferente da fonte é erro; fonte que não menciona o fato é "não confirmada".
-> Para estrelas de repositório, rode `python3 main.py github dono/repo`.
+> Para estrelas de repositório, rode `python3 main.py github dono/repo`. Se a consulta falhar, número de estrelas citado é "não confirmado" e sai.
 > Cace também:
 > - *benchmark* do laboratório sem "segundo o laboratório", ou comparação entre *benchmarks* medidos de jeitos diferentes;
 > - anúncio sem produto disponível tratado como lançamento;

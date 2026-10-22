@@ -381,10 +381,10 @@ def _github_em_alta(cfg: dict, data: date) -> Tuple[List[dict], dict]:
     except Exception as ex:
         # Na nuvem, a busca da API dá 403 (limite por IP, que é dividido com outros usuários).
         # A página de tendências não usa a API: os repositórios com mais estrelas na semana.
-        itens = _github_tendencias(cfg)
+        itens, motivo = _github_tendencias(cfg)
         if itens:
             return itens, _stat(True, len(itens), "API: %s; usei a página de tendências" % ex, t0, "api")
-        return [], _stat(False, 0, str(ex), t0, "api")
+        return [], _stat(False, 0, "API: %s; página de tendências: %s" % (ex, motivo), t0, "api")
 
 
 def _numero(s: str) -> Optional[int]:
@@ -392,11 +392,11 @@ def _numero(s: str) -> Optional[int]:
     return int(s) if s else None
 
 
-def _github_tendencias(cfg: dict) -> List[dict]:
-    """github.com/trending da semana. Sem data de criação: os itens ficam 'sem data'."""
+def _github_tendencias(cfg: dict) -> Tuple[List[dict], Optional[str]]:
+    """github.com/trending da semana: (itens, motivo da falha). Sem data de criação: os itens ficam 'sem data'."""
     status, corpo, _ = _baixar("https://github.com/trending?since=weekly", tentativas=2)
     if status != 200:
-        return []
+        return [], _descricao_erro(status, corpo)
     texto = corpo.decode("utf-8", "replace")
     itens = []
     for bloco in re.findall(r'<article class="Box-row">(.*?)</article>', texto, re.S):
@@ -413,7 +413,7 @@ def _github_tendencias(cfg: dict) -> List[dict]:
         itens.append(_candidato(nome.group(1), "https://github.com/" + nome.group(1), "GitHub em alta",
                                 "comunidade", "comunidade", None, _texto(desc.group(1)) if desc else "",
                                 extra={k: v for k, v in extra.items() if v is not None}))
-    return itens[:int(cfg.get("limite", 15))]
+    return itens[:int(cfg.get("limite", 15))], (None if itens else "nenhum repositório na página")
 
 
 def _hugging_face(cfg: dict) -> Tuple[List[dict], dict]:

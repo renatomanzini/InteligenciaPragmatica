@@ -54,7 +54,7 @@ A geral sai todo dia e fala muito de IA. O caderno **não é uma segunda geral d
 - se a fonte diz o contrário (um teste real num Mac de 8 GB), vale a fonte.
 
 **Open source.**
-- Estrelas e data só com `python3 main.py github dono/repo`, e com a data da consulta ("**12,3 mil** estrelas em 22/10").
+- Estrelas e data só com `python3 main.py github dono/repo`, e com a data da consulta ("**12,3 mil** estrelas em 22/10"). Na nuvem, a API do GitHub costuma dar 403: se a consulta falhar, não cite o número de estrelas.
 - Diga o que o projeto faz em uma frase de leigo, a licença e se precisa de programação para usar.
 - Repositório com muitas estrelas em pouco tempo não é prova de qualidade: procure quem testou (Hacker News, Simon Willison, uma issue com resultado).
 
