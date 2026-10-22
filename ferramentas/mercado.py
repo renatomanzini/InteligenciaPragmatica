@@ -243,7 +243,8 @@ def painel_md(painel: dict) -> str:
     bloco("🇧🇷 Bolsa brasileira", ["ibov"], fechamento("ibov"))
     bloco("🇺🇸 Bolsas americanas", ["sp500", "nasdaq", "dow", "vix", "juros10"], fechamento("sp500"))
     bloco("💱 Moedas", ["dolar", "euro", "libra", "euro_usd", "libra_usd"], "às %s" % hora)
-    bloco("🛢️ Petróleo, ouro e bitcoin", ["brent", "ouro", "btc_usd", "btc_brl"], "às %s" % hora)
+    # O bitcoin em real (AwesomeAPI) mede a variação numa janela diferente da CNBC; mostrar os dois confunde.
+    bloco("🛢️ Petróleo, ouro e bitcoin", ["brent", "ouro", "btc_usd"], "às %s" % hora)
 
     medos = []
     for chave in ("medo_acoes", "medo_cripto"):

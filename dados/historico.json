@@ -856,5 +856,53 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-22",
+    "tipo": "dia_util",
+    "numero": 1,
+    "assunto": "o petróleo subiu e a ia virou dúvida",
+    "previa": "+ o juro da frança passou o dos eua",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "petroleo-ormuz-ia-capex",
+        "titulo": "Brent volta a US$ 111,95 e a Ásia cai até 3,52% com petróleo e dúvida sobre o gasto em IA",
+        "tema": "macro",
+        "urls": [
+          "https://www.infomoney.com.br/mercados/ibovespa-futuro-recua-com-cautela-eleitoral-balanco-do-bradesco-e-pressao-da-ia/",
+          "https://www.moneytimes.com.br/bolsas-da-asia-fecham-em-baixa-com-alta-do-petroleo-e-temor-sobre-ia-fets/",
+          "https://www.cnbc.com/2026/10/22/american-airlines-aal-q3-2026-earnings.html"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "franca-juro-10-anos",
+        "titulo": "Juro de 10 anos da França chega a 5,113% e passa o dos EUA pela 1ª vez desde 2013",
+        "tema": "juros",
+        "urls": [
+          "https://www.cnbc.com/2026/10/22/macron-trump-france-protests.html"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "braskem-america-finance-chapter11",
+        "titulo": "Credores pedem Chapter 11 involuntário contra a Braskem America Finance",
+        "tema": "empresas",
+        "urls": [
+          "https://www.moneytimes.com.br/braskem-brkm5-credores-entram-com-pedido-de-chapter-11-involuntario-contra-subsidiaria-financeira-nos-eua-lmrs/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "painel",
+      "o_que_mexeu",
+      "historia_do_dia",
+      "agenda",
+      "radar"
+    ],
+    "caderno": "mercado"
   }
 ]

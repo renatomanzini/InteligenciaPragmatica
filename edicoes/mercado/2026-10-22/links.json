@@ -1,0 +1,90 @@
+{
+  "data": "2026-10-22",
+  "verificado_em": "2026-10-22T09:34:41-03:00",
+  "total": 13,
+  "resumo": {
+    "ok": 13,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://www.infomoney.com.br/mercados/ibovespa-futuro-recua-com-cautela-eleitoral-balanco-do-bradesco-e-pressao-da-ia/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/bolsas-da-asia-fecham-em-baixa-com-alta-do-petroleo-e-temor-sobre-ia-fets/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/22/american-airlines-aal-q3-2026-earnings.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/22/macron-trump-france-protests.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/braskem-brkm5-credores-entram-com-pedido-de-chapter-11-involuntario-contra-subsidiaria-financeira-nos-eua-lmrs/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://exame.com/invest/mercados/ibovespa-reverte-ganhos-a-quatro-dias-da-eleicao-dolar-sobe/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/financas/noticia/2026/10/22/ny-sobe-com-techs-apos-balancos-positivos.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/financas/noticia/2026/10/22/bolsas-asiaticas-caem-com-alta-do-petroleo-e-pressao-em-ia.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/22/tesla-q3-2026-earnings-analysts.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/financas/noticia/2026/10/22/agenda-do-dia-leilao-do-tesouro-e-destaque.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://exame.com/invest/mercados/balanco-do-bradesco-e-emprego-nos-eua-o-que-move-os-mercados/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/22/barclays-ai-jobs-cuts.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/bitcoin-btc-cai-a-us-819-mil-e-etfs-seguem-no-radar-apos-saidas-de-ether-e-fluxo-positivo-em-btc-rens/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

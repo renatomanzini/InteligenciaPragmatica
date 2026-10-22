@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>o petróleo subiu e a ia virou dúvida · Inteligência Pragmática · Mercado</title>
+<meta name="description" content="+ o juro da frança passou o dos eua">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="mercado.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática · Mercado</div>
+<div class="meta">quinta-feira, 22 de outubro de 2026 · Edição nº 1 · 3 min de leitura</div>
+<h1 class="assunto">o petróleo subiu e a ia virou dúvida</h1>
+</header>
+<main class="corpo">
+<p>bom dia. O urso chegou antes do café: petróleo lá em cima, Ásia no vermelho e a dúvida sobre a IA de volta. A bolsa daqui ainda nem abriu, e já vem com a <a href="https://www.infomoney.com.br/mercados/ibovespa-futuro-recua-com-cautela-eleitoral-balanco-do-bradesco-e-pressao-da-ia/">cautela de sempre às vésperas do segundo turno</a>.</p>
+<h4 class="rotulo">📊 PAINEL</h4>
+<p><strong>🇧🇷 Bolsa brasileira</strong> · último fechamento</p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Ibovespa</strong>: 206.495 pts <span class="desce">▼</span> 0,86%</p>
+</div>
+<p><strong>🇺🇸 Bolsas americanas</strong> · fechamento de 21/10</p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>S&amp;P 500</strong>: 7.757 pts <span class="sobe">▲</span> 0,58%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Nasdaq</strong>: 26.703 pts <span class="sobe">▲</span> 1,05%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Dow Jones</strong>: 52.856 pts <span class="sobe">▲</span> 0,69%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>VIX (o "medo" das opções)</strong>: 18,09 <span class="sobe">▲</span> 8,45%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Juros de 10 anos dos EUA</strong>: 5,04% <span class="desce">▼</span> 0,10 p.p.</p>
+</div>
+<p><strong>💱 Moedas</strong> · às 09:17</p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Dólar</strong>: R$ 5,05 <span class="sobe">▲</span> 0,43%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Euro</strong>: R$ 5,66 <span class="sobe">▲</span> 0,23%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Libra</strong>: R$ 6,74 <span class="sobe">▲</span> 0,18%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Euro em dólar</strong>: US$ 1,1209 <span class="desce">▼</span> 0,22%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Libra em dólar</strong>: US$ 1,3378 <span class="desce">▼</span> 0,12%</p>
+</div>
+<p><strong>🛢️ Petróleo, ouro e bitcoin</strong> · às 09:17</p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Petróleo Brent</strong>: US$ 111,95 <span class="sobe">▲</span> 2,88%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Ouro</strong>: US$ 4.080,10 <span class="desce">▼</span> 1,68%</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Bitcoin</strong>: US$ 81.778 <span class="desce">▼</span> 3,15%</p>
+</div>
+<p><strong>😨 Medo &amp; Ganância</strong> · de 0 (medo extremo) a 100 (ganância extrema)</p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Ações dos EUA (CNN)</strong>: 28, medo (ontem 31; uma semana atrás 30)</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Cripto (alternative.me)</strong>: 68, ganância (ontem 63)</p>
+</div>
+<p class="fonte"><span class="ico">🔗</span> Números coletados às 09:17, sem passar pela IA: <a href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/ibovespa.htm">B3</a> · <a href="https://www.cnbc.com/markets/">CNBC</a> · <a href="https://docs.awesomeapi.com.br/api-de-moedas">AwesomeAPI</a> · <a href="https://edition.cnn.com/markets/fear-and-greed">CNN</a> · <a href="https://alternative.me/crypto/fear-and-greed-index/">alternative.me</a>.</p>
+<hr>
+<h4 class="rotulo">O QUE MEXEU ONTEM (21/10)</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Ibovespa</strong>: caiu 0,86%, com <strong>46</strong> das 76 ações do índice no vermelho; a WEG despencou <strong>7,34%</strong> depois de um balanço abaixo do esperado, a Vale perdeu <strong>2,15%</strong>, e o dia foi de cautela com o segundo turno (<a href="https://exame.com/invest/mercados/ibovespa-reverte-ganhos-a-quatro-dias-da-eleicao-dolar-sobe/">Exame</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Wall Street</strong>: S&amp;P 500 (+0,58%), Nasdaq (+1,05%) e Dow Jones (+0,69%) subiram com os primeiros balanços de tecnologia, mas fecharam longe das máximas do dia, em meio a novos ataques no Oriente Médio (<a href="https://valor.globo.com/financas/noticia/2026/10/22/ny-sobe-com-techs-apos-balancos-positivos.ghtml">Valor</a>); o VIX (o índice do medo nas opções do S&amp;P 500) subiu 8,45% mesmo assim.</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Petróleo</strong>: o Brent ficou parado (<strong>+0,03%</strong>, a US$ 108,82), dividido entre a expectativa de avanço diplomático entre EUA e Irã e o risco de falta de oferta (<a href="https://exame.com/invest/mercados/ibovespa-reverte-ganhos-a-quatro-dias-da-eleicao-dolar-sobe/">Exame</a>). Hoje ele acordou com outra ideia.</p>
+</div>
+<hr>
+<h4 class="rotulo">A HISTÓRIA DO DIA</h4>
+<h2>Dois sustos antes do café: petróleo a US$ 111,95 e dúvida sobre a IA</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o Brent subiu com novos ataques no Oriente Médio, e os principais índices da Ásia caíram até <strong>3,52%</strong>, também por dúvida sobre o retorno do gasto em IA.</p>
+</blockquote>
+<p>O primeiro susto é o petróleo. O Brent, a referência mundial, está em <strong>US$ 111,95</strong>, depois de ataques à Arábia Saudita atribuídos a houthis do Iêmen (<a href="https://www.infomoney.com.br/mercados/ibovespa-futuro-recua-com-cautela-eleitoral-balanco-do-bradesco-e-pressao-da-ia/">InfoMoney</a>) e de um relato da TV estatal do Irã sobre sete petroleiros em chamas no Estreito de Ormuz, saída marítima do petróleo do Golfo (<a href="https://valor.globo.com/financas/noticia/2026/10/22/bolsas-asiaticas-caem-com-alta-do-petroleo-e-pressao-em-ia.ghtml">Valor</a>). Sem confirmação independente nas fontes consultadas.</p>
+<p>O segundo é a IA. O Kospi, da Coreia do Sul, caiu <strong>3,52%</strong>; o Nikkei, do Japão, <strong>2,65%</strong>; e o índice de tecnologia de Hong Kong (Hang Seng Tech), <strong>5%</strong>, o pior desde abril de 2025. O Money Times aponta o temor com o retorno dos investimentos em IA (<a href="https://www.moneytimes.com.br/bolsas-da-asia-fecham-em-baixa-com-alta-do-petroleo-e-temor-sobre-ia-fets/">Money Times</a>). Segundo analistas citados pela CNBC, a Tesla reduziu o <em>capex</em> (gasto em fábricas, chips e data centers) previsto para 2026 para cerca de <strong>US$ 20 bi</strong>, de mais de US$ 25 bi (<a href="https://www.cnbc.com/2026/10/22/tesla-q3-2026-earnings-analysts.html">CNBC</a>).</p>
+<p>Às 9h04, o Ibovespa futuro (a aposta sobre onde o índice abre) caía <strong>0,68%</strong> e o dólar futuro (a aposta para o câmbio) subia <strong>0,57%</strong> (<a href="https://www.infomoney.com.br/mercados/ibovespa-futuro-recua-com-cautela-eleitoral-balanco-do-bradesco-e-pressao-da-ia/">InfoMoney</a>).</p>
+<p><strong>E no seu bolso?</strong> Petróleo caro pesa primeiro em quem vive de combustível: a American Airlines cortou a previsão do ano, a quarta grande aérea dos EUA a fazer isso em outubro, com o gasto em combustível <strong>67,5%</strong> maior no 3º trimestre (US$ 4,64 bi, ~R$ 23 bi), e as passagens ficaram mais de <strong>20%</strong> mais caras em um ano (<a href="https://www.cnbc.com/2026/10/22/american-airlines-aal-q3-2026-earnings.html">CNBC</a>). Aqui, o dólar em alta de 0,43% tende a encarecer viagem e importado.</p>
+<hr>
+<h4 class="rotulo">AGENDA DE HOJE</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>9h30, EUA</strong>: pedidos semanais de seguro-desemprego (199 mil na semana anterior; a expectativa é de 200 mil), termômetro do mercado de trabalho que o Fed (o banco central americano) acompanha ao decidir os juros (<a href="https://valor.globo.com/financas/noticia/2026/10/22/agenda-do-dia-leilao-do-tesouro-e-destaque.ghtml">Valor</a>, <a href="https://exame.com/invest/mercados/balanco-do-bradesco-e-emprego-nos-eua-o-que-move-os-mercados/">Exame</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>11h, Brasil</strong>: a Receita Federal divulga a arrecadação de setembro; agosto rendeu R$ 235,6 bi, o melhor agosto da série (desde 1995) já descontada a inflação (<a href="https://valor.globo.com/financas/noticia/2026/10/22/agenda-do-dia-leilao-do-tesouro-e-destaque.ghtml">Valor</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Fim da manhã, Brasil</strong>: leilão de LTN e NTN-F, títulos prefixados do Tesouro (o juro é travado na compra), às 11h pelo Valor e às 11h30 pela Exame (<a href="https://valor.globo.com/financas/noticia/2026/10/22/agenda-do-dia-leilao-do-tesouro-e-destaque.ghtml">Valor</a>, <a href="https://exame.com/invest/mercados/balanco-do-bradesco-e-emprego-nos-eua-o-que-move-os-mercados/">Exame</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Depois do fechamento, Brasil</strong>: o Bradesco divulga o balanço do 3º trimestre (<a href="https://exame.com/invest/mercados/balanco-do-bradesco-e-emprego-nos-eua-o-que-move-os-mercados/">Exame</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">RADAR</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>França</strong>: o juro do título de 10 anos (o que o governo paga para se financiar) chegou a <strong>5,113%</strong>, o maior em 24 anos, e passou o dos EUA pela primeira vez desde 2013, com o investidor duvidando de que o país aprove um ajuste fiscal em meio à turbulência política (<a href="https://www.cnbc.com/2026/10/22/macron-trump-france-protests.html">CNBC</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Braskem</strong>: credores pediram nos EUA um Chapter 11 involuntário (a recuperação judicial americana, pedida por quem cobra) contra a Braskem America Finance, que deve cerca de <strong>US$ 589 mi</strong> em títulos de dívida que vencem em 2041; a empresa diz que o pedido só afeta essa subsidiária (<a href="https://www.moneytimes.com.br/braskem-brkm5-credores-entram-com-pedido-de-chapter-11-involuntario-contra-subsidiaria-financeira-nos-eua-lmrs/">Money Times</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Barclays</strong>: vai cortar <strong>5 mil</strong> empregos, cerca de <strong>5%</strong> do quadro, num plano de eficiência ligado à IA (<a href="https://www.cnbc.com/2026/10/22/barclays-ai-jobs-cuts.html">CNBC</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Bitcoin</strong>: cai 3,15%, a US$ 81.778 (no painel), mesmo com os ETFs de bitcoin dos EUA (fundos negociados em bolsa) captando <strong>US$ 528 mi</strong> numa sessão; o Money Times cita realização de lucros (gente vendendo para embolsar o ganho) (<a href="https://www.moneytimes.com.br/bitcoin-btc-cai-a-us-819-mil-e-etfs-seguem-no-radar-apos-saidas-de-ether-e-fluxo-positivo-em-btc-rens/">Money Times</a>).</p>
+</div>
+<hr>
+<p>Não é recomendação de investimento.</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="mercado.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>

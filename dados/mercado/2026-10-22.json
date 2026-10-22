@@ -1,0 +1,148 @@
+{
+  "gerado_em": "2026-10-22T09:17:06-03:00",
+  "itens": {
+    "ibov": {
+      "nome": "Ibovespa",
+      "valor": 206495.23,
+      "var": -0.86,
+      "unidade": "pts",
+      "data": "",
+      "fonte": "B3"
+    },
+    "sp500": {
+      "nome": "S&P 500",
+      "valor": 7757.17,
+      "var": 0.58,
+      "unidade": "pts",
+      "data": "2026-10-21",
+      "fonte": "CNBC"
+    },
+    "nasdaq": {
+      "nome": "Nasdaq",
+      "valor": 26702.858,
+      "var": 1.05,
+      "unidade": "pts",
+      "data": "2026-10-21",
+      "fonte": "CNBC"
+    },
+    "dow": {
+      "nome": "Dow Jones",
+      "valor": 52856.09,
+      "var": 0.69,
+      "unidade": "pts",
+      "data": "2026-10-21",
+      "fonte": "CNBC"
+    },
+    "vix": {
+      "nome": "VIX (o \"medo\" das opções)",
+      "valor": 18.09,
+      "var": 8.45,
+      "unidade": "",
+      "data": "2026-10-22",
+      "fonte": "CNBC"
+    },
+    "juros10": {
+      "nome": "Juros de 10 anos dos EUA",
+      "valor": 5.042,
+      "var": -2.021,
+      "unidade": "%",
+      "data": "2026-10-22",
+      "fonte": "CNBC",
+      "var_pp": -0.104
+    },
+    "brent": {
+      "nome": "Petróleo Brent",
+      "valor": 111.95,
+      "var": 2.88,
+      "unidade": "US$",
+      "data": "2026-10-22",
+      "fonte": "CNBC"
+    },
+    "ouro": {
+      "nome": "Ouro",
+      "valor": 4080.1,
+      "var": -1.68,
+      "unidade": "US$",
+      "data": "2026-10-22",
+      "fonte": "CNBC"
+    },
+    "btc_usd": {
+      "nome": "Bitcoin",
+      "valor": 81778.48,
+      "var": -3.15,
+      "unidade": "US$",
+      "data": "2026-10-22",
+      "fonte": "CNBC"
+    },
+    "dolar": {
+      "nome": "Dólar",
+      "valor": 5.0454,
+      "var": 0.43395,
+      "unidade": "R$",
+      "data": "2026-10-22",
+      "hora": "09:13",
+      "fonte": "AwesomeAPI"
+    },
+    "euro": {
+      "nome": "Euro",
+      "valor": 5.6565,
+      "var": 0.228578,
+      "unidade": "R$",
+      "data": "2026-10-22",
+      "hora": "09:09",
+      "fonte": "AwesomeAPI"
+    },
+    "libra": {
+      "nome": "Libra",
+      "valor": 6.74082,
+      "var": 0.177803,
+      "unidade": "R$",
+      "data": "2026-10-22",
+      "hora": "09:13",
+      "fonte": "AwesomeAPI"
+    },
+    "euro_usd": {
+      "nome": "Euro em dólar",
+      "valor": 1.12088,
+      "var": -0.21988,
+      "unidade": "US$",
+      "data": "2026-10-22",
+      "hora": "09:13",
+      "fonte": "AwesomeAPI"
+    },
+    "libra_usd": {
+      "nome": "Libra em dólar",
+      "valor": 1.33776,
+      "var": -0.122447,
+      "unidade": "US$",
+      "data": "2026-10-22",
+      "hora": "09:13",
+      "fonte": "AwesomeAPI"
+    },
+    "btc_brl": {
+      "nome": "Bitcoin em real",
+      "valor": 413421.0,
+      "var": -1.655,
+      "unidade": "R$",
+      "data": "2026-10-22",
+      "hora": "09:13",
+      "fonte": "AwesomeAPI"
+    },
+    "medo_acoes": {
+      "nome": "Ações dos EUA (CNN)",
+      "valor": 28,
+      "rotulo": "medo",
+      "ontem": 31,
+      "semana": 30,
+      "fonte": "CNN"
+    },
+    "medo_cripto": {
+      "nome": "Cripto (alternative.me)",
+      "valor": 68,
+      "rotulo": "ganância",
+      "ontem": 63,
+      "fonte": "alternative.me"
+    }
+  },
+  "falhas": {}
+}

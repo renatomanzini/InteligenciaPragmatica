@@ -14,6 +14,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Pragmática">
 <style>
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
 :root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
         --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
 @media (prefers-color-scheme: dark) {
@@ -86,6 +90,7 @@ th { background: var(--codigo); }
 <header class="topo">
 <div class="marca" style="margin-top:0">Inteligência Pragmática</div>
 <div class="meta">Arquivo de edições · 7 no total</div>
+<div class="cadernos">Cadernos: <strong>Geral</strong> · <a href="mercado.html">Mercado</a></div>
 </header>
 <main>
 <ul class="lista">
