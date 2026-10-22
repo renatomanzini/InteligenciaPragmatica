@@ -38,7 +38,7 @@ ia:
 economia:
   nome: "Inteligência Pragmática · Economia"
   remetente: "IP · Economia"
-  envio: desligado
+  envio: ligado
   dias_envio: [segunda, quarta, sexta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição urgente
   fontes: fontes_economia.yaml
   manual: manual/MANUAL_ECONOMIA.md
