@@ -38,6 +38,12 @@ O passo a passo completo está em `manual/ROTINA.md`.
   - em 20/10/2026, o envio agendado falhou ("Domain is not verified"). Desde então, o e-mail sai na hora e a rotina começa às **06:07** (cron `7 9 * * *` em UTC), com chegada por volta das 06:20.
 - [ ] **Fase 2, Telegram:** um bot com a versão curta e o link. É também por ele que entra o feedback "mais disso / menos disso".
 - [ ] **Fase 3 (opcional), WhatsApp:** pela Cloud API oficial da Meta. Antes de implementar, levantar o custo por mensagem e os requisitos (conta Meta Business, número dedicado, template aprovado). Nada de biblioteca não oficial.
+- [ ] **Cadernos** (pedido em 22/10/2026): newsletters especializadas ao lado da geral. As especializadas são escritas no Sonnet, para caber no plano Pro.
+  - [ ] **Mercado:** sai nos dias úteis, de manhã, com o painel de cotações gerado por código. Tem edição extra quando o pregão dispara um gatilho.
+    - Pronto: código, manual e roteiro.
+    - Falta: a edição de teste aprovada e as rotinas (manhã e alarme).
+  - [ ] **Niterói e região:** Niterói 3 vezes por semana; Vassouras e Búzios num bloco semanal. Antes, é preciso levantar as fontes locais.
+  - [ ] **Economia** (2 vezes por semana), **IA** (2 vezes por semana) e **Marketing digital** (semanal).
 
 ## Custos
 - Nenhum além da assinatura do Claude. A rotina gasta do limite de uso, e o consumo será medido nos testes.

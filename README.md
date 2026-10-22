@@ -90,3 +90,19 @@ Está tudo montado. Esta seção serve para você saber onde fica cada peça e c
   - Veja se a rotina rodou em [claude.ai/code/routines](https://claude.ai/code/routines). Clique na execução do dia e leia o que aconteceu.
 - **Uma fonte parou de funcionar:** a coleta registra o problema em `dados/candidatos/AAAA-MM-DD-fontes.log`. Pause a fonte no `fontes.yaml` ou peça ao Claude para achar o endereço novo.
 - **A edição veio com algo errado:** abra o `verificacao.md` daquele dia para ver o que o revisor conferiu, e me conte o erro. Dá para virar regra no manual.
+
+## 7. Cadernos (newsletters especializadas)
+Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e site próprios. A lista está em `cadernos.yaml`.
+
+| Caderno | Quando sai | Fontes | Manual e roteiro |
+|---|---|---|---|
+| **Mercado** | Dias úteis, de manhã. Sai também uma **edição extra** quando o pregão tem gatilho (ver o manual). | `fontes_mercado.yaml` + o painel de cotações (B3, CNBC, AwesomeAPI, CNN, alternative.me) | `manual/MANUAL_MERCADO.md` e `manual/ROTINA_MERCADO.md` |
+
+**Como funciona por dentro:**
+- As edições de um caderno ficam em `edicoes/<caderno>/AAAA-MM-DD/`. A edição extra fica em `AAAA-MM-DD-extra/`.
+- No site, cada caderno tem o próprio arquivo (por exemplo, `docs/mercado.html`), com links entre a geral e os cadernos.
+- O histórico (`dados/historico.json`) é um só. Cada caderno tem a própria numeração e vê o que os outros publicaram, para não repetir.
+- Todos os comandos aceitam `--caderno`. Por exemplo: `python main.py montar 2026-10-22 --caderno mercado`.
+- No Mercado, os números do painel vêm de `python main.py mercado-painel` e entram na edição por código, sem passar pela IA. O `python main.py mercado-alarme` confere os gatilhos da edição extra.
+
+**Para pausar só o e-mail de um caderno:** troque `envio: ligado` por `envio: desligado` no bloco dele, em `cadernos.yaml`.
