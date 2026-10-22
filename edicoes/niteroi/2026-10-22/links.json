@@ -1,0 +1,145 @@
+{
+  "data": "2026-10-22",
+  "verificado_em": "2026-10-22T13:14:38-03:00",
+  "total": 22,
+  "resumo": {
+    "ok": 22,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://www.cedae.com.br/Noticias/detalhe/sistema-imunana-laranjal-cedae-faz-manutencao-anual-no-dia-27-de-outubro/id/1014",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/falta-de-agua-niteroi-27-outubro-cedae/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/niteroi-repetira-operacao-especial-para-transporte-publico-no-segundo-turno-das-eleicoes-no-domingo-25/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/rede-municipal-de-educacao-divulga-calendario-de-matriculas-para-2027/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://apiprevmet3.inmet.gov.br/avisos/ativos",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/calor-chuva-e-alerta-de-tempestade-veja-a-previsao-para-o-fim-de-semana-em-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://enfoco.com.br/noticias/regiao/niteroi/festa-de-sao-judas-tadeu-tera-missas-procissao-e-angu-a-baiana-em-niteroi-veja-mudancas-no-transito/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/prefeitura-inicia-obras-para-recuperar-circulacao-de-agua-do-mar-na-lagoa-de-piratininga/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/obra-tunel-tibau-lagoa-piratininga-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/prefeito-rodrigo-neves-assina-decreto-de-desapropriacao-do-teatro-leopoldo-froes-e-anuncia-restauracao-para-2027/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/prefeitura-de-niteroi-oficializa-desapropriacao-para-reabrir-teatro-leopoldo-froes/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/niteroi-registra-menor-numero-da-serie-historica-do-isp-sobre-roubos-de-veiculos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.ispdados.rj.gov.br/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/errata-buzios-recebe-primeiro-navio-de-cruzeiro-da-temporada-2026-2027-no-dia-27-de-outubro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://prensadebabel.com.br/buzios-verao-restricoes-transito-limpeza-taxa-turistica/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/prefeitura-de-buzios-decreta-ponto-facultativo-nos-dias-28-29-e-30-de-outubro-em-alusao-ao-dia-do-servidor-publico/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/2022/variaveis/93?localidades=N6%5B3303302%5D",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET"
+    },
+    {
+      "url": "https://www.grupoaguasdobrasil.com.br/aguas-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/matriculas",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://niteroi.rj.gov.br/matriculas/"
+    },
+    {
+      "url": "https://folhadoleste.com.br/dudu-nobre-vou-zuar-show-gratuito-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/niteroi-recebe-a-3a-etapa-do-super-paddle-na-praia-de-charitas-neste-sabado-24/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/programa-niteroi-inclusivo-celebra-dois-anos-com-programacao-gratuita-no-campo-de-sao-bento-neste-sabado-24/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

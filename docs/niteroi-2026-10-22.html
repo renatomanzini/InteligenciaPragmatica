@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>terça (27/10) pode faltar água em niterói · Inteligência Pragmática · Niterói</title>
+<meta name="description" content="+ ônibus de graça no domingo (25/10), mas com aviso de tempestade">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="niteroi.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática · Niterói</div>
+<div class="meta">quinta-feira, 22 de outubro de 2026 · Edição nº 1 · 4 min de leitura</div>
+<h1 class="assunto">terça (27/10) pode faltar água em niterói</h1>
+</header>
+<main class="corpo">
+<p>bom dia, Niterói. O roteiro dos próximos dias tem guarda-chuva, ônibus de graça no domingo (25/10) e uma tarefa para segunda (26/10): encher a caixa-d'água.</p>
+<hr>
+<h4 class="rotulo">A HISTÓRIA DA CIDADE</h4>
+<h2>Terça (27/10), a água pode faltar em Niterói: a Cedae desliga o sistema por 24 horas</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> a Cedae para o Sistema Imunana-Laranjal das 4h de terça (27/10) às 4h de quarta (28/10), e Niterói está entre as cidades atendidas. A volta da água pode levar mais que isso; a concessionária de Niterói ainda não deu prazo.</p>
+</blockquote>
+<p>A Cedae faz a manutenção anual do sistema que atende cerca de <strong>2 milhões</strong> de pessoas na região, mais de quatro Niteróis (<a href="https://www.cedae.com.br/Noticias/detalhe/sistema-imunana-laranjal-cedae-faz-manutencao-anual-no-dia-27-de-outubro/id/1014">Cedae</a>; <a href="https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/2022/variaveis/93?localidades=N6%5B3303302%5D">IBGE</a>). A lista de afetados inclui Niterói, São Gonçalo, Itaboraí (só a água bruta, ainda sem tratamento), Maricá (Inoã e Itaipuaçu) e a Ilha de Paquetá, mas a Cedae não diz quais bairros ficam sem água.</p>
+<p>Atenção à volta: 4h de quarta (28/10) não garante água na torneira. Em São Gonçalo, Maricá e Paquetá, a Águas do Rio prevê <strong>até 72 horas</strong> para normalizar o abastecimento depois que a produção da Cedae voltar ao máximo (<a href="https://folhadoleste.com.br/falta-de-agua-niteroi-27-outubro-cedae/">Folha do Leste</a>). Em Niterói, a distribuidora é a Águas de Niterói, que, até o fechamento desta edição, não tinha aviso próprio em seu site (<a href="https://www.grupoaguasdobrasil.com.br/aguas-niteroi/">Águas de Niterói</a>).</p>
+<p><strong>Na prática:</strong> na segunda (26/10), encha a caixa-d'água e guarde água em recipientes limpos; lavagem de carro e de calçada fica para depois. Dúvidas: <a href="https://www.grupoaguasdobrasil.com.br/aguas-niteroi/">Águas de Niterói</a>, 0800 723 1222 ou WhatsApp (21) 97211-8064.</p>
+<hr>
+<h4 class="rotulo">SERVIÇO</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Eleição, 2º turno, domingo (25/10)</strong>: ônibus municipais gratuitos até a meia-noite, com frequência de dia útil. Durante a votação, duas linhas circulares atendem quem mudou de local de votação: a <strong>62C</strong> (Caramujo–Santa Bárbara) e a <strong>28C</strong> (Vila Ipiranga–Ponto Cem Réis). No 1º turno foram <strong>215 mil</strong> embarques, três vezes a média dos domingos de agosto e setembro (<a href="https://niteroi.rj.gov.br/niteroi-repetira-operacao-especial-para-transporte-publico-no-segundo-turno-das-eleicoes-no-domingo-25/">Prefeitura</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Matrícula</strong>: a renovação para 2027 na rede municipal vai até sexta (23/10), presencialmente, na escola onde o aluno já estuda. Vaga nova na Educação Infantil: inscrição de 23 a 27/11 em <a href="https://niteroi.rj.gov.br/matriculas">niteroi.rj.gov.br/matriculas</a> (<a href="https://niteroi.rj.gov.br/rede-municipal-de-educacao-divulga-calendario-de-matriculas-para-2027/">Prefeitura</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Tempo</strong>: aviso amarelo de tempestade do Inmet para Niterói, em vigor desde as 9h25 desta quinta (22/10) e válido até domingo (25/10), com chuva de até <strong>50 mm</strong> por dia (50 litros por metro quadrado), vento de 40 a 60 km/h e granizo. O risco de alagamento é baixo. Em rajadas, não se abrigue sob árvores; Defesa Civil: 199 (<a href="https://apiprevmet3.inmet.gov.br/avisos/ativos">Inmet</a>; <a href="https://aseguirniteroi.com.br/noticias/calor-chuva-e-alerta-de-tempestade-veja-a-previsao-para-o-fim-de-semana-em-niteroi/">A Seguir Niterói</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Trânsito</strong>: na Festa de São Judas Tadeu, a NitTrans fecha parcialmente a Av. Almirante Ary Parreiras, em Icaraí, entre a Av. Jornalista Alberto Francisco Torres e a Rua Ator Paulo Gustavo, e inverte o sentido da Rua Ator Paulo Gustavo entre a Rua Joaquim Távora e a Ary Parreiras. Vale das 8h de segunda (26/10) às 8h de quinta (29/10). Planeje o trajeto (<a href="https://enfoco.com.br/noticias/regiao/niteroi/festa-de-sao-judas-tadeu-tera-missas-procissao-e-angu-a-baiana-em-niteroi-veja-mudancas-no-transito/">Enfoco</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">NA CIDADE</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Túnel do Tibau</strong>: começou na quarta (21/10) a obra de <strong>R$ 38 milhões</strong> no túnel que leva água do mar à Lagoa de Piratininga, construído pelo Estado há mais de 20 anos e com desmoronamentos em 2018 e 2019. A prefeitura diz que assumiu a obra diante da demora na recuperação e que, em 12 meses, a entrada de água do mar mais que triplica, o que reduziria a mortandade de peixes (<a href="https://niteroi.rj.gov.br/prefeitura-inicia-obras-para-recuperar-circulacao-de-agua-do-mar-na-lagoa-de-piratininga/">Prefeitura</a>; <a href="https://folhadoleste.com.br/obra-tunel-tibau-lagoa-piratininga-niteroi/">Folha do Leste</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Teatro Leopoldo Fróes</strong>: o prefeito assinou na terça (20/10) a desapropriação do teatro da Praça da República, fechado desde <strong>1991</strong>. A prefeitura prevê começar a restauração no início de 2027; o comunicado não informa custo nem indenização (<a href="https://niteroi.rj.gov.br/prefeito-rodrigo-neves-assina-decreto-de-desapropriacao-do-teatro-leopoldo-froes-e-anuncia-restauracao-para-2027/">Prefeitura</a>; <a href="https://aseguirniteroi.com.br/noticias/prefeitura-de-niteroi-oficializa-desapropriacao-para-reabrir-teatro-leopoldo-froes/">A Seguir Niterói</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Segurança</strong>: Niterói teve <strong>4</strong> roubos de veículo em setembro, o menor número mensal desde 2003 na série do ISP (o Instituto de Segurança Pública do estado), segundo a prefeitura. São <strong>0,28%</strong> dos 1.443 casos do estado no mês. De janeiro a setembro, os roubos de rua na cidade caíram <strong>38,5%</strong> (559 casos, contra 909) (<a href="https://niteroi.rj.gov.br/niteroi-registra-menor-numero-da-serie-historica-do-isp-sobre-roubos-de-veiculos/">Prefeitura</a>; <a href="https://www.ispdados.rj.gov.br/">ISP</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">AGENDA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Sex (23/10), 18h · Mercado Municipal, Centro</strong>: Festival Samba Niterói, com Dudu Nobre e Vou Zuar. Grátis (<a href="https://folhadoleste.com.br/dudu-nobre-vou-zuar-show-gratuito-niteroi/">Folha do Leste</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Sáb (24/10), a partir das 6h · Praia de Charitas</strong>: 3ª etapa do Super Paddle, com canoa havaiana e stand up paddle. Primeira largada às 6h30, premiação às 15h (<a href="https://niteroi.rj.gov.br/niteroi-recebe-a-3a-etapa-do-super-paddle-na-praia-de-charitas-neste-sabado-24/">Prefeitura</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Sáb (24/10), 9h às 12h · Campo de São Bento, Icaraí</strong>: festa de dois anos do Niterói Inclusivo, com música ao vivo e Feira Atípica. Grátis (<a href="https://niteroi.rj.gov.br/programa-niteroi-inclusivo-celebra-dois-anos-com-programacao-gratuita-no-campo-de-sao-bento-neste-sabado-24/">Prefeitura</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">VASSOURAS E BÚZIOS</h4>
+<h3>Vassouras</h3>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span>Semana calma em Vassouras. O aviso amarelo de tempestade do Inmet vale lá também, de quinta (22/10) a domingo (25/10) (<a href="https://apiprevmet3.inmet.gov.br/avisos/ativos">Inmet</a>).</p>
+</div>
+<h3>Búzios</h3>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Cruzeiros</strong>: o Seabourn Venture, primeiro navio da temporada 2026/27, chega na terça (27/10) às 8h e sai às 15h, com desembarque no píer do Centro. Na sexta (30/10), vem o Swan Hellenic Vega, das 8h às 19h. A prefeitura prevê <strong>105</strong> escalas até abril de 2027 (<a href="https://buzios.rj.gov.br/errata-buzios-recebe-primeiro-navio-de-cruzeiro-da-temporada-2026-2027-no-dia-27-de-outubro/">Prefeitura de Búzios</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Verão</strong>: em audiência na Câmara (14/10), a prefeitura disse que quer coleta de lixo no Centro às <strong>4h</strong> e varrição às <strong>6h</strong>. Também se discutem a proibição de ônibus de turismo e veículos de carga nos corredores principal e alternativo em horário de pico (8h às 10h e 16h às 18h) e a volta da taxa turística, arquivada no ano passado a pedido do próprio prefeito. Nada virou regra ainda (<a href="https://prensadebabel.com.br/buzios-verao-restricoes-transito-limpeza-taxa-turistica/">Prensa de Babel</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Repartições</strong>: ponto facultativo de quarta (28/10) a sexta (30/10), pelo Dia do Servidor. Urgência médica, limpeza urbana e Guarda Municipal funcionam em plantão (<a href="https://buzios.rj.gov.br/prefeitura-de-buzios-decreta-ponto-facultativo-nos-dias-28-29-e-30-de-outubro-em-alusao-ao-dia-do-servidor-publico/">Prefeitura de Búzios</a>).</p>
+</div>
+<hr>
+<p>Até segunda.</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="niteroi.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>
