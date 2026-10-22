@@ -114,3 +114,9 @@ def itens_curadoria(raiz: Path, caderno: str) -> int:
     if not arq.exists():
         return 0
     return sum(1 for linha in arq.read_text(encoding="utf-8").splitlines() if linha.startswith("- "))
+
+
+def usa_curadoria(raiz: Path, caderno: str) -> bool:
+    """O caderno guarda a curadoria entre as edições? Sim, salvo `curadoria: nao` (ou false) no cadernos.yaml."""
+    valor = config(raiz, caderno).get("curadoria", True)
+    return str(valor).strip().lower() not in ("nao", "não", "false", "no", "0")

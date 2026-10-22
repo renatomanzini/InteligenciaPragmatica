@@ -313,7 +313,10 @@ def cmd_economia_painel(args) -> int:
         print("Nada foi gravado (--sem-gravar).")
         return 0
     pasta = args.pasta or str(util.hoje_brasilia())
-    res = economia.gravar_painel(pasta, RAIZ)
+    caderno = args.caderno
+    if caderno != economia.CADERNO and not cadernos.existe(RAIZ, caderno):
+        raise ValueError("caderno desconhecido: %s" % caderno)
+    res = economia.gravar_painel(pasta, RAIZ, caderno=caderno)
     print(res["texto"])
     print("Painel gravado em %s. Apoio da pauta (releases e agenda do IBGE) em %s." % (res["arquivo"], res["apoio"]))
     novos = res["painel"]["novos"]
@@ -465,8 +468,12 @@ def criar_parser() -> argparse.ArgumentParser:
     c = sub.add_parser("mercado-alarme", help="caderno Mercado: confere os gatilhos de preço da edição extra")
     c.set_defaults(func=cmd_mercado_alarme)
 
-    c = sub.add_parser("economia-painel", help="caderno Economia: coleta os números oficiais e grava o painel da edição")
+    c = sub.add_parser("economia-painel", help="números oficiais do BC e do IBGE: grava o painel da edição "
+                                              "(do caderno Economia ou do bloco ECONOMIA do Mercado)")
     c.add_argument("pasta", nargs="?", type=_pasta, metavar="AAAA-MM-DD", help="padrão: hoje")
+    c.add_argument("--caderno", default="economia", metavar="CADERNO",
+                   help="onde gravar: economia (padrão) ou mercado, para o bloco ECONOMIA de segunda, quarta e sexta "
+                        "(grava painel_economia.md e oficiais.md na pasta da edição do Mercado)")
     c.add_argument("--sem-gravar", action="store_true", help="teste de fontes: só mostra, não grava nada")
     c.set_defaults(func=cmd_economia_painel)
 

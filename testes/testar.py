@@ -503,6 +503,11 @@ def testar_coleta_filtros():
                             coleta._candidato("B", "https://a/2", "F", "niteroi", "imprensa", None)],
                            {}, [], {"niteroi": "Niterói", "buzios": "Búzios"})
     conferir(md.index("## Niterói (1)") < md.index("## Búzios (1)"), "seções com o nome e a ordem do arquivo de fontes")
+    janela = {"padrao": 48, "segunda": 72, "terca": 30}
+    conferir([coleta._horas_janela(janela, date(2026, 10, d)) for d in (26, 27, 28, 29, 30, 31)] == [72, 30, 48, 48, 48, 48],
+             "janela_horas aceita o nome de qualquer dia da semana, e os outros caem no padrao")
+    conferir(coleta._horas_janela(168, date(2026, 10, 26)) == 168 and coleta._horas_janela({}, date(2026, 10, 26)) == 30,
+             "janela_horas da fonte pode ser um número; sem nada, 30 horas")
     setas = montagem._setas("→ **Água:** falta na terça ([Cedae](https://c))\n→ **Trânsito**: rua fechada")
     conferir(setas == [("Água", "falta na terça"), ("Trânsito", "rua fechada")],
              "linha → com os dois-pontos dentro ou fora do negrito (%s)" % setas)
@@ -726,6 +731,59 @@ def testar_caderno_economia(tmp: Path):
     conferir(("dados/economia/%s.json" % hoje.isoformat()) in proprios and "dados/economia/curadoria.md" in proprios,
              "o publicar leva o JSON do painel e a curadoria junto com a edição")
     conferir(cadernos.itens_curadoria(raiz, "economia") == 2, "conta os itens da curadoria")
+
+    # caderno que não guarda curadoria (Niterói, com o radar no lugar): a linha da situação não fala dela
+    (raiz / "cadernos.yaml").write_text((raiz / "cadernos.yaml").read_text(encoding="utf-8")
+                                        + 'niteroi:\n  dias_envio: [segunda, quarta, sexta]\n  curadoria: nao\n',
+                                        encoding="utf-8")
+    sit = "\n".join(historico.situacao(raiz, "niteroi", date(2026, 10, 26)))
+    conferir("DIA FIXO DE ENVIO" in sit and "Última edição: nenhuma" in sit and "curadoria" not in sit,
+             "curadoria: nao tira a curadoria da situação do dia")
+    conferir(cadernos.usa_curadoria(raiz, "economia") and not cadernos.usa_curadoria(raiz, "niteroi"),
+             "usa_curadoria: sim por padrão, não com `curadoria: nao`")
+
+    # bloco ECONOMIA do Mercado: painel_economia.md sem o dólar, 🆕 contra o painel anterior, JSON que o publicar leva
+    texto_mercado = economia.painel_md(PAINEL_ECONOMIA_FALSO, economia.TITULO_PAINEL_MERCADO, sem=("dolar",))
+    conferir(texto_mercado.startswith("**📊 Painel oficial do Brasil") and "PTAX" not in texto_mercado
+             and "5,0383" not in texto_mercado and "Câmbio**" not in texto_mercado.replace("**Dólar no fim do ano**", ""),
+             "no Mercado, o painel oficial tem outro título e deixa o dólar para o painel de cotações")
+    conferir("13,75% ao ano" in texto_mercado and "Dólar no fim do ano" in texto_mercado,
+             "o resto do painel (Selic, Focus...) continua")
+    p1, p2 = (hoje + timedelta(days=1)).isoformat(), (hoje + timedelta(days=3)).isoformat()
+    novo_bloco = copy.deepcopy(PAINEL_ECONOMIA_FALSO)
+    novo_bloco["itens"]["selic"]["ref"] = "2026-10-28"
+    original = economia.apoio
+    try:
+        economia.apoio = lambda painel, desde, h: ("# apoio desde %s\n" % desde.isoformat(), [])
+        res1 = economia.gravar_painel(p1, raiz, copy.deepcopy(novo_bloco), hoje, caderno="mercado")
+        res2 = economia.gravar_painel(p2, raiz, copy.deepcopy(novo_bloco), hoje, caderno="mercado")
+    finally:
+        economia.apoio = original
+    pasta1 = raiz / "edicoes" / "mercado" / p1
+    conferir(res1["painel"]["anterior"] == hoje.isoformat() and res1["painel"]["novos"] == ["selic"]
+             and "🆕" in (pasta1 / "painel_economia.md").read_text(encoding="utf-8"),
+             "1º bloco no Mercado: compara com o painel do caderno Economia e marca o que saiu")
+    conferir(res2["painel"]["anterior"] == p1 and res2["painel"]["novos"] == [],
+             "2º bloco: compara com o bloco anterior do Mercado (dados/mercado/DATA-economia.json)")
+    conferir((pasta1 / "oficiais.md").exists() and not (pasta1 / "painel.md").exists()
+             and res1["arquivo"] == "edicoes/mercado/%s/painel_economia.md" % p1,
+             "grava painel_economia.md e oficiais.md, sem tocar no painel.md de cotações do Mercado")
+    conferir(("dados/mercado/%s-economia.json" % p1) in publicar_arquivos(raiz, p1, "mercado"),
+             "o publicar leva o JSON do bloco ECONOMIA junto com a edição do Mercado")
+    conferir(not (raiz / "dados" / "economia" / ("%s.json" % p1)).exists(), "o bloco do Mercado não grava no caderno Economia")
+
+    # a montagem troca os dois marcadores, cada um pelo seu arquivo, e avisa quando falta um
+    bloco = EDICAO_MERCADO.replace("<!-- painel -->", "<!-- painel -->\n\n#### ECONOMIA\n\n<!-- painel-economia -->")
+    (pasta1 / "edicao.md").write_text(bloco.replace("data: 2026-01-15", "data: " + p1), encoding="utf-8")
+    (pasta1 / "painel.md").write_text("**PAINEL DE COTACOES**", encoding="utf-8")
+    cfg = cadernos.config(raiz, "mercado")
+    res = montagem.montar(p1, raiz, cfg, "mercado")
+    email = (pasta1 / "email.html").read_text(encoding="utf-8")
+    conferir("PAINEL DE COTACOES" in email and "Painel oficial do Brasil" in email and "<!-- painel" not in email
+             and not [a for a in res["avisos"] if "painel" in a], "os dois painéis entram no lugar dos marcadores")
+    (pasta1 / "painel_economia.md").unlink()
+    res = montagem.montar(p1, raiz, cfg, "mercado")
+    conferir(any("painel_economia.md" in a for a in res["avisos"]), "sem o painel_economia.md, a montagem avisa")
 
 
 def publicar_arquivos(raiz, data, caderno):

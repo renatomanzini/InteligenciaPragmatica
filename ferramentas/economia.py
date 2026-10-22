@@ -403,9 +403,15 @@ def _linhas(it: dict) -> dict:
     return saida
 
 
-def painel_md(painel: dict) -> str:
-    """O bloco do painel que entra no lugar de <!-- painel --> na edição."""
-    it = painel["itens"]
+TITULO_PAINEL = "#### 📊 PAINEL"
+TITULO_PAINEL_MERCADO = "**📊 Painel oficial do Brasil (Banco Central e IBGE)**"
+
+
+def painel_md(painel: dict, titulo: str = TITULO_PAINEL, sem: tuple = ()) -> str:
+    """O bloco do painel que entra no lugar de <!-- painel --> na edição (ou de <!-- painel-economia -->
+    no bloco ECONOMIA do Mercado, que usa outro título e deixa de fora o dólar, que o painel dele já traz).
+    `sem` lista as chaves a omitir (por exemplo, "dolar")."""
+    it = {c: v for c, v in painel["itens"].items() if c not in sem}
     linhas = _linhas(it)
     novos = set(painel.get("novos") or [])
     blocos = []
@@ -432,7 +438,7 @@ def painel_md(painel: dict) -> str:
         rodape += " (%s)." % _dia(painel["anterior"]) if painel.get("anterior") else "."
     if painel.get("fora_do_ar"):
         rodape += " Fora do ar hoje: %s." % ", ".join(painel["fora_do_ar"])
-    return "#### 📊 PAINEL\n\n" + "\n\n".join(blocos) + "\n\n" + rodape + "\n"
+    return titulo + "\n\n" + "\n\n".join(blocos) + "\n\n" + rodape + "\n"
 
 
 # ───────────────────────── apoio da pauta (IBGE) ─────────────────────────
@@ -508,28 +514,57 @@ def _novos(painel: dict, anterior: Optional[dict]) -> List[str]:
             and painel["itens"][c].get("ref") != antigos[c].get("ref")]
 
 
-def gravar_painel(pasta_edicao: str, raiz: Path, painel: Optional[dict] = None, hoje: Optional[date] = None) -> dict:
-    """Coleta (se preciso) e grava painel.md e oficiais.md na pasta da edição e o JSON em dados/economia/."""
+def _painel_anterior(raiz: Path, pasta_edicao: str, caderno: str) -> Tuple[Optional[str], Optional[dict]]:
+    """Para o bloco ECONOMIA de outro caderno (o Mercado): o painel mais recente anterior a esta edição, venha
+    ele de uma edição do caderno Economia (dados/economia/DATA.json) ou de um bloco anterior do próprio caderno
+    (dados/<caderno>/DATA-economia.json). Devolve (data, painel), ou (None, None) se não houver."""
+    dia = pasta_edicao[:10]
+    achados = []
+    for arq in (raiz / "dados" / CADERNO).glob("????-??-??*.json"):
+        achados.append((arq.stem[:10], arq))
+    for arq in (raiz / "dados" / caderno).glob("????-??-??-economia.json"):
+        achados.append((arq.stem[:10], arq))
+    achados = sorted(a for a in achados if a[0] < dia)
+    if not achados:
+        return None, None
+    data, arq = achados[-1]
+    return data, json.loads(arq.read_text(encoding="utf-8"))
+
+
+def gravar_painel(pasta_edicao: str, raiz: Path, painel: Optional[dict] = None, hoje: Optional[date] = None,
+                  caderno: str = CADERNO) -> dict:
+    """Coleta (se preciso) e grava o painel e o oficiais.md na pasta da edição.
+
+    Caderno Economia: painel.md na edição e o JSON em dados/economia/DATA.json.
+    Outro caderno (o Mercado, no bloco ECONOMIA de segunda, quarta e sexta): painel_economia.md na edição e o
+    JSON em dados/<caderno>/DATA-economia.json, que o publicar leva junto com a edição. O 🆕 vale desde o
+    painel anterior, seja do caderno Economia ou do bloco anterior.
+    """
     raiz = Path(raiz)
     hoje = hoje or agora_brasilia().date()
     painel = painel or coletar_painel(hoje)
-    ultima = historico.ultima_data(raiz, CADERNO, antes_de=pasta_edicao)
-    anterior = None
-    if ultima and (raiz / "dados" / CADERNO / ("%s.json" % ultima)).exists():
-        anterior = json.loads((raiz / "dados" / CADERNO / ("%s.json" % ultima)).read_text(encoding="utf-8"))
+    if caderno == CADERNO:
+        ultima = historico.ultima_data(raiz, CADERNO, antes_de=pasta_edicao)
+        anterior = None
+        if ultima and (raiz / "dados" / CADERNO / ("%s.json" % ultima)).exists():
+            anterior = json.loads((raiz / "dados" / CADERNO / ("%s.json" % ultima)).read_text(encoding="utf-8"))
+        arq_painel, arq_json = "painel.md", raiz / "dados" / CADERNO / ("%s.json" % pasta_edicao)
+        texto_painel = lambda p: painel_md(p)  # noqa: E731
+    else:
+        ultima, anterior = _painel_anterior(raiz, pasta_edicao, caderno)
+        arq_painel, arq_json = "painel_economia.md", raiz / "dados" / caderno / ("%s-economia.json" % pasta_edicao)
+        texto_painel = lambda p: painel_md(p, TITULO_PAINEL_MERCADO, sem=("dolar",))  # noqa: E731
     painel["novos"] = _novos(painel, anterior)
     painel["anterior"] = ultima
-    destino = cadernos.pasta_edicoes(raiz, CADERNO) / pasta_edicao
+    destino = cadernos.pasta_edicoes(raiz, caderno) / pasta_edicao
     destino.mkdir(parents=True, exist_ok=True)
-    texto = painel_md(painel)
-    (destino / "painel.md").write_text(texto, encoding="utf-8")
+    texto = texto_painel(painel)
+    (destino / arq_painel).write_text(texto, encoding="utf-8")
     desde = date.fromisoformat(ultima) if ultima else hoje - timedelta(days=7)
     texto_apoio, falhas_apoio = apoio(painel, desde, hoje)
     (destino / "oficiais.md").write_text(texto_apoio, encoding="utf-8")
-    dados = raiz / "dados" / CADERNO
-    dados.mkdir(parents=True, exist_ok=True)
-    (dados / ("%s.json" % pasta_edicao)).write_text(json.dumps(painel, ensure_ascii=False, indent=2),
-                                                    encoding="utf-8")
+    arq_json.parent.mkdir(parents=True, exist_ok=True)
+    arq_json.write_text(json.dumps(painel, ensure_ascii=False, indent=2), encoding="utf-8")
     rel = lambda p: p.relative_to(raiz).as_posix()  # noqa: E731
-    return {"painel": painel, "texto": texto, "arquivo": rel(destino / "painel.md"),
+    return {"painel": painel, "texto": texto, "arquivo": rel(destino / arq_painel),
             "apoio": rel(destino / "oficiais.md"), "falhas_apoio": falhas_apoio}

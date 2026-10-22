@@ -209,10 +209,19 @@ def _data_entrada(e) -> Optional[datetime]:
     return None
 
 
+DIAS_JANELA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"]  # as chaves do janela_horas
+
+
+def _horas_janela(horas_cfg, data: date, padrao: int = 30) -> int:
+    """Quantas horas olhar para trás. `horas_cfg` é um número ou um dicionário com `padrao` e, se quiser,
+    o nome de um dia da semana (segunda, terca, quarta, quinta, sexta, sabado, domingo) que vale só nele."""
+    if not isinstance(horas_cfg, dict):
+        return int(horas_cfg or padrao)
+    return int(horas_cfg.get(DIAS_JANELA[data.weekday()]) or horas_cfg.get("padrao") or padrao)
+
+
 def _janela(cfg: dict, data: date) -> Tuple[datetime, datetime, int]:
-    horas_cfg = cfg.get("janela_horas") or {}
-    chave = {0: "segunda", 5: "sabado", 6: "domingo"}.get(data.weekday(), "padrao")
-    horas = int(horas_cfg.get(chave) or horas_cfg.get("padrao") or 30)
+    horas = _horas_janela(cfg.get("janela_horas") or {}, data)
     if data >= hoje_brasilia():
         fim = agora_brasilia()
     else:
@@ -705,8 +714,9 @@ def coletar(data: date, raiz: Path, caderno: str = cadernos.GERAL) -> dict:
     tarefas = []  # (nome, tipo, função)
     for f in fontes:
         if f.get("rss"):
-            # janela_horas na fonte vale só para ela (ex.: bloco semanal de outra cidade)
-            inicio_f = fim - timedelta(hours=int(f["janela_horas"])) if f.get("janela_horas") else inicio
+            # janela_horas na fonte vale só para ela (ex.: bloco semanal de outra cidade); pode ser um número
+            # ou um dicionário por dia da semana, como o janela_horas do arquivo
+            inicio_f = fim - timedelta(hours=_horas_janela(f["janela_horas"], data)) if f.get("janela_horas") else inicio
             tarefas.append((f["nome"], "rss", lambda f=f, inicio_f=inicio_f: _ler_feed(
                 f["nome"], f["rss"], f.get("tema", "outro"), f.get("tipo", "imprensa"), inicio_f, fim,
                 int(f.get("limite") or limite), filtro=f.get("filtro"), paginas=int(f.get("paginas") or 1))))

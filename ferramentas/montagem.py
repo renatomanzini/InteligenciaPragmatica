@@ -16,6 +16,7 @@ from .util import data_por_extenso, ler_front_matter
 
 NOME_PADRAO = "Inteligência Pragmática"
 MARCA_PAINEL = "<!-- painel -->"
+MARCA_PAINEL_ECONOMIA = "<!-- painel-economia -->"  # o painel oficial no bloco ECONOMIA do Mercado
 RODAPE_IA = "Feita por IA para um leitor só. Fontes linkadas em cada afirmação."
 LIMITE_CURTA = 900
 
@@ -721,13 +722,14 @@ def montar(data: str, raiz: Path, config: dict, caderno: str = cadernos.GERAL) -
     d = date.fromisoformat(data[:10])
     meta, corpo = ler_front_matter(arq)
     # O painel de números (cotações) é gerado por código e entra no lugar do marcador, sem passar pela IA.
-    painel = arq.parent / "painel.md"
     avisos_painel = []
-    if MARCA_PAINEL in corpo:
-        if painel.exists():
-            corpo = corpo.replace(MARCA_PAINEL, painel.read_text(encoding="utf-8").strip())
-        else:
-            avisos_painel.append("a edição tem o marcador do painel, mas falta painel.md na pasta")
+    for marca, nome_arq in ((MARCA_PAINEL, "painel.md"), (MARCA_PAINEL_ECONOMIA, "painel_economia.md")):
+        if marca in corpo:
+            painel = arq.parent / nome_arq
+            if painel.exists():
+                corpo = corpo.replace(marca, painel.read_text(encoding="utf-8").strip())
+            else:
+                avisos_painel.append("a edição tem o marcador %s, mas falta %s na pasta" % (marca, nome_arq))
     nome = config.get("nome") or NOME_PADRAO
     site_url = str(config.get("site_url") or "").strip()
     avisos: List[str] = list(avisos_painel)

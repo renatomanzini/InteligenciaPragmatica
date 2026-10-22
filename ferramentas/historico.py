@@ -82,11 +82,14 @@ def situacao(raiz: Path, caderno: str, hoje: Optional[date] = None) -> List[str]
     eh = cadernos.dia_de_envio(raiz, caderno, hoje)
     ultima = ultima_data(raiz, caderno)
     arq = cadernos.arquivo_curadoria(raiz, caderno)
+    linha = "Última edição: %s" % (ultima or "nenhuma")
+    if cadernos.usa_curadoria(raiz, caderno):  # `curadoria: nao` no cadernos.yaml: o caderno não guarda nada entre as edições
+        linha += " · curadoria guardada: %d itens em %s" % (cadernos.itens_curadoria(raiz, caderno),
+                                                           arq.relative_to(raiz).as_posix())
     return [
         "## Hoje: %s, %s · %s (os dias fixos de envio são %s)"
         % (NOMES_DIAS[hoje.weekday()], hoje.strftime("%d/%m"), "DIA FIXO DE ENVIO" if eh else "não é dia fixo", fixos_txt),
-        "Última edição: %s · curadoria guardada: %d itens em %s"
-        % (ultima or "nenhuma", cadernos.itens_curadoria(raiz, caderno), arq.relative_to(raiz).as_posix()),
+        linha,
         "",
     ]
 
