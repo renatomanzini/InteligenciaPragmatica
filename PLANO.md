@@ -50,7 +50,9 @@ O passo a passo completo está em `manual/ROTINA.md`.
   - [ ] **Economia:** pesquisa todo dia e sai segunda, quarta e sexta (os dias fixos, escolhidos pelo leitor em 22/10/2026); fora deles, só edição urgente. Tem o painel de números oficiais do BC e do IBGE, gerado por código.
     - Pronto: fontes testadas, código, manual, roteiro e a edição de teste nº 1.
     - Falta: a aprovação da edição de teste, a rotina e ligar o envio.
-  - [ ] **Marketing digital** (semanal).
+  - [ ] **Marketing:** pesquisa todo dia e sai terça e quinta (os dias fixos, escolhidos pelo leitor em 22/10/2026); fora deles, só edição extra com notícia muito importante.
+    - Pronto: fontes testadas, manual, roteiro e a edição de teste nº 1, aprovada pelo leitor.
+    - Falta: a rotina e ligar o envio.
 
 ## Custos
 - Nenhum além da assinatura do Claude. A rotina gasta do limite de uso, e o consumo será medido nos testes.

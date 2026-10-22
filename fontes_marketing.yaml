@@ -1,0 +1,67 @@
+# Fontes do caderno Marketing. Mesmo formato do fontes.yaml da geral.
+# A rotina roda todo dia (pesquisa e curadoria) e só escreve edição nos dias fixos ou com notícia muito
+# importante; por isso a janela é de um dia, e o que não sai fica em dados/marketing/curadoria.md.
+#
+# Testadas uma a uma em 22/10/2026 no Mac. Na nuvem, as 11 de imprensa e o radar já rodam todo dia na coleta
+# da geral sem falhar (logs de 16 a 22/10); os blogs das plataformas entram no teste de fontes do Run now.
+# Descartadas no teste: Search Engine Land (403 anti-robô), Mundo do Marketing (feed saiu do ar, 404),
+#   B9 (feed sem data), TikTok Newsroom e LinkedIn News (sem RSS; visitar na apuração, abaixo).
+# Os blogs das plataformas publicam pouco: na maioria dos dias, eles respondem sem itens, e está tudo bem.
+#
+# tema: plataformas | busca | trafego_pago | criadores | brasil | mercado
+
+janela_horas:
+  padrao: 30      # a rotina roda todo dia
+  segunda: 30
+  sabado: 30
+  domingo: 30
+
+limite_por_fonte: 12
+
+# Ordem e nome das seções no arquivo de candidatos.
+temas:
+  plataformas: "Plataformas e redes (Meta, Google, TikTok, YouTube, LinkedIn)"
+  busca: "Busca, SEO e busca com IA"
+  trafego_pago: "Tráfego pago e adtech"
+  criadores: "Criadores e vídeo"
+  brasil: "Brasil: mercado, agências e cases"
+  mercado: "Marcas e mercado lá fora"
+
+fontes:
+  # ───────────── Plataformas: o anúncio oficial ─────────────
+  - {nome: Meta Newsroom, tema: plataformas, tipo: primaria, rss: "https://about.fb.com/news/feed/", ativo: true}
+  - {nome: YouTube Official Blog, tema: plataformas, tipo: primaria, rss: "https://blog.youtube/rss/", ativo: true}
+  - {nome: Blog do Google Brasil, tema: plataformas, tipo: primaria, rss: "https://blog.google/intl/pt-br/rss/", ativo: true}
+  - {nome: Social Media Today, tema: plataformas, tipo: imprensa, rss: "https://www.socialmediatoday.com/feeds/news/", ativo: true}
+  - {nome: TikTok Newsroom, tema: plataformas, tipo: primaria, pagina: "https://newsroom.tiktok.com/ (anúncios de produto e de anúncios; também ads.tiktok.com/business/en/blog)", ativo: true}
+  - {nome: LinkedIn News, tema: plataformas, tipo: primaria, pagina: "https://news.linkedin.com/ (e o blog de marketing: business.linkedin.com/marketing-solutions/blog)", ativo: true}
+
+  # ───────────── Busca, SEO e busca com IA ─────────────
+  - {nome: Google Search Central, tema: busca, tipo: primaria, rss: "https://developers.google.com/search/blog/feed.xml", ativo: true}
+  - {nome: Search Engine Journal, tema: busca, tipo: imprensa, rss: "https://www.searchenginejournal.com/feed/", ativo: true}
+  - {nome: Search Engine Roundtable, tema: busca, tipo: imprensa, rss: "https://www.seroundtable.com/index.xml", ativo: true}
+
+  # ───────────── Tráfego pago e adtech ─────────────
+  - {nome: Google Ads & Commerce Blog, tema: trafego_pago, tipo: primaria, rss: "https://blog.google/products/ads-commerce/rss/", ativo: true}
+  - {nome: PPC Land, tema: trafego_pago, tipo: imprensa, rss: "https://ppc.land/rss/", ativo: true}  # publica mais de 100 por dia; ficam os 12 mais novos
+  - {nome: AdExchanger, tema: trafego_pago, tipo: imprensa, rss: "https://www.adexchanger.com/feed/", ativo: true}
+
+  # ───────────── Criadores e vídeo ─────────────
+  - {nome: Tubefilter, tema: criadores, tipo: imprensa, rss: "https://www.tubefilter.com/feed/", ativo: true}
+
+  # ───────────── Brasil ─────────────
+  - {nome: Meio & Mensagem, tema: brasil, tipo: imprensa, rss: "https://www.meioemensagem.com.br/feed", ativo: true}
+  - {nome: Propmark, tema: brasil, tipo: imprensa, rss: "https://propmark.com.br/feed/", ativo: true}
+  # carrega os artigos por JavaScript e o sitemap não tem data real: use para dados de consumo do Brasil
+  # quando a pauta pedir (WebFetch no artigo, ou busca "site:business.google.com/br/think <assunto>")
+  - {nome: Think with Google, tema: brasil, tipo: primaria, pagina: "https://business.google.com/br/think/", ativo: true}
+
+  # ───────────── Marcas e mercado lá fora ─────────────
+  - {nome: Digiday, tema: mercado, tipo: imprensa, rss: "https://digiday.com/feed/", ativo: true}
+  - {nome: Adweek, tema: mercado, tipo: imprensa, rss: "https://www.adweek.com/feed/", ativo: true}
+  - {nome: Marketing Dive, tema: mercado, tipo: imprensa, rss: "https://www.marketingdive.com/feeds/news/", ativo: true}
+
+# Newsletter que o leitor já recebe (MarketingDrops, que chega pelo remetente "M15"): serve para achar pauta
+# e para não repetir, nunca para citar.
+radar:
+  - {nome: MarketingDrops, sitemap: "https://www.marketingdrops.news/sitemap.xml", ativo: true}

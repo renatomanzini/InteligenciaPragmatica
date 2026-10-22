@@ -43,3 +43,12 @@ economia:
   fontes: fontes_economia.yaml
   manual: manual/MANUAL_ECONOMIA.md
   roteiro: manual/ROTINA_ECONOMIA.md
+
+marketing:
+  nome: "Inteligência Pragmática · Marketing"
+  remetente: "IP · Marketing"
+  envio: desligado
+  dias_envio: [terca, quinta]   # a rotina pesquisa todo dia; fora destes dias, só sai edição extra (aprovado pelo leitor em 22/10)
+  fontes: fontes_marketing.yaml
+  manual: manual/MANUAL_MARKETING.md
+  roteiro: manual/ROTINA_MARKETING.md
