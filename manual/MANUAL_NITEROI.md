@@ -31,6 +31,7 @@ Todo item de serviço termina com o que fazer, quando houver: prazo, endereço, 
 - O site da Prefeitura de Niterói é a **fonte primária** do que ela fez ou anunciou (valor, prazo, local). Use o link dela para o serviço.
 - Mas o texto da prefeitura é **comunicação oficial**. Conte o fato e deixe de fora os adjetivos ("histórica", "importante", "referência"). Escreva "a prefeitura diz que..." quando for promessa ou avaliação dela.
 - Quando houver crítica, atraso ou dado independente (Câmara, Tribunal de Contas, Ministério Público, imprensa), ele entra junto.
+- **Números são os da fonte.** Conta própria só se for simples e com os dois números à vista na edição ("2 milhões de pessoas, mais de quatro vezes a população de Niterói"). Nunca tire de uma base de dados (ISP, IBGE) um número que nenhuma matéria trouxe.
 - Obra longa vira **história em andamento** (Cinema Icaraí, Túnel do Tibau, Teatro Leopoldo Fróes...): quando voltar, diga "o que mudou desde [data]", com o mesmo `id`.
 
 ## 5. Política local
@@ -41,9 +42,9 @@ Todo item de serviço termina com o que fazer, quando houver: prazo, endereço, 
 ## 6. A estrutura da edição (segunda, quarta e sexta)
 1. **bom dia, Niterói.** Uma ou duas frases com o tom do dia (o que mais mexe com a cidade). Pode ter graça.
 2. **#### A HISTÓRIA DA CIDADE**: a notícia mais importante para o morador, com `## Título-gancho`, `> **TL;DR:**` e de 120 a 220 palavras. Termina com **"Na prática:"** (o que muda para quem mora aqui, em uma ou duas frases).
-3. **#### SERVIÇO**: de 3 a 6 linhas `→`, cada uma com um rótulo em negrito (`→ **Trânsito:** ...`, `→ **Água:** ...`, `→ **Saúde:** ...`, `→ **Matrícula:** ...`, `→ **Imposto:** ...`). Uma frase ou duas, com data, local e link.
+3. **#### SERVIÇO**: de 3 a 6 linhas `→`, cada uma com um rótulo em negrito e os dois-pontos fora dele (`→ **Trânsito**: ...`, `→ **Água**: ...`, `→ **Saúde**: ...`, `→ **Matrícula**: ...`, `→ **Imposto**: ...`). Uma frase ou duas, com data, local e link.
 4. **#### NA CIDADE**: de 2 a 4 linhas `→` com o resto que importa (política local que mexe com a cidade, economia local, meio ambiente, cultura). Uma frase cada, com fonte.
-5. **#### AGENDA**: de 2 a 5 linhas `→` com eventos **dos próximos dias** em Niterói, grátis ou baratos primeiro: `→ **Sáb (24/10), 9h · Campo de São Bento:** ... Grátis.` Se não houver nada bom, a seção sai.
+5. **#### AGENDA**: de 2 a 5 linhas `→` com eventos **dos próximos dias** em Niterói, grátis ou baratos primeiro: `→ **Sáb (24/10), 9h · Campo de São Bento**: ... Grátis.` Se não houver nada bom, a seção sai.
 6. **Só na sexta: #### VASSOURAS E BÚZIOS** (o bloco semanal, seção 7).
 7. **Fecho** de uma linha: "Até quarta." (na segunda), "Até sexta." (na quarta), "Até segunda." (na sexta).
 

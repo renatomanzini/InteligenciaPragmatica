@@ -501,6 +501,9 @@ def testar_coleta_filtros():
                             coleta._candidato("B", "https://a/2", "F", "niteroi", "imprensa", None)],
                            {}, [], {"niteroi": "Niterói", "buzios": "Búzios"})
     conferir(md.index("## Niterói (1)") < md.index("## Búzios (1)"), "seções com o nome e a ordem do arquivo de fontes")
+    setas = montagem._setas("→ **Água:** falta na terça ([Cedae](https://c))\n→ **Trânsito**: rua fechada")
+    conferir(setas == [("Água", "falta na terça"), ("Trânsito", "rua fechada")],
+             "linha → com os dois-pontos dentro ou fora do negrito (%s)" % setas)
 
 
 def fotografia():

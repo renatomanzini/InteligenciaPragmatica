@@ -22,7 +22,12 @@ TZ=America/Sao_Paulo date "+%F %A %H:%M"
 python3 main.py historico --caderno niteroi --dias 14
 ```
 - Defina **DATA**, que é a data de hoje em Brasília.
-- Se hoje não for segunda, quarta ou sexta, **pare aqui** e termine com "Hoje o caderno Niterói não sai." A exceção é o prompt da rotina pedir uma edição de teste.
+- Se hoje não for segunda, quarta ou sexta, a rotina foi disparada à mão (Run now): faça **só o teste de fontes**, sem edição e sem commit, e termine.
+```bash
+python3 main.py coletar --caderno niteroi
+cat dados/candidatos/niteroi-DATA-fontes.log
+```
+  Rode também os dois `curl` do passo 1 (O Dia e A Tribuna). Responda com a contagem de candidatos por seção (`grep "^## " dados/candidatos/niteroi-DATA.md`), as fontes que falharam, com o motivo, e quantas manchetes cada `curl` trouxe.
 - **BLOCO** = sim na sexta, não nos outros dias.
 - Pegue o **número** da edição, que é o "próxima: nº" do histórico. Veja também as histórias em andamento: obra que já saiu aqui só volta com "o que mudou desde [data]".
 
@@ -56,6 +61,7 @@ A mesma notícia costuma sair em várias fontes (a prefeitura e três jornais). 
 
 ## Passo 3: apuração e redação (você mesmo)
 - Abra a fonte de cada fato que vai usar, com WebFetch ou `curl -sL`, e confirme **data, dia da semana, local, horário e valor**.
+- Abra só as fontes dos itens que vão entrar (de 12 a 18 páginas). Não vá atrás de bases de dados ou APIs (ISP, IBGE, Inmet) para tirar número novo: use os números que a fonte traz.
 - Converta toda data relativa ("neste sábado") em data explícita e confira se ela ainda está no futuro na hora da entrega.
 - Escreva `edicoes/niteroi/DATA/edicao.md` seguindo o MANUAL_NITEROI (seções 6, 7 e 8) e o front matter da seção 15 do manual geral.
 

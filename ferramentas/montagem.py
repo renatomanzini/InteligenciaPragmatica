@@ -260,7 +260,8 @@ def _setas(corpo: str) -> List[Tuple[str, str]]:
         if not m:
             continue
         resto = re.sub(r"\s*\((?:\s*;?\s*\[[^\]]*\]\([^)]*\))+\s*\)", "", m.group(2))
-        saida.append((_texto_simples(m.group(1)), _texto_simples(resto)))
+        # aceita também o rótulo com os dois-pontos dentro do negrito (**Rótulo:**)
+        saida.append((_texto_simples(m.group(1)).rstrip(" :"), _texto_simples(resto)))
     return saida
 
 
