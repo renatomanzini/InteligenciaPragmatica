@@ -1,6 +1,6 @@
 # Plano vivo: Inteligência Pragmática
 
-Newsletter pessoal diária sobre IA, economia, negócios e marketing, escrita por IA para um leitor só. Ela chega por volta das 06:20 de Brasília.
+Newsletter pessoal diária sobre IA, economia, negócios e marketing, escrita por IA para um leitor só. Ela chega às 06:00 de Brasília, junto com os cadernos do dia.
 
 ## Decisões fechadas (16/10/2026)
 - **Quem escreve:** uma rotina do Claude Code na nuvem da Anthropic, paga pela assinatura do Claude (sem API). Ela roda com o Mac desligado.
@@ -35,7 +35,8 @@ O passo a passo completo está em `manual/ROTINA.md`.
   - a rotina roda sem conectores;
   - a edição nº 4 saiu pelo "Run now" em 12 minutos, e o leitor confirmou que o e-mail chegou;
   - o agendamento foi ligado: todo dia às 05:07 de Brasília, com o e-mail agendado para as 06:30;
-  - em 20/10/2026, o envio agendado falhou ("Domain is not verified"). Desde então, o e-mail sai na hora e a rotina começa às **06:07** (cron `7 9 * * *` em UTC), com chegada por volta das 06:20.
+  - em 20/10/2026, o envio agendado falhou ("Domain is not verified"). Desde então, o e-mail sai na hora e a rotina começa às **06:07** (cron `7 9 * * *` em UTC), com chegada por volta das 06:20;
+  - em 22/10/2026, o leitor pediu que todas as newsletters chegassem juntas às 06:00. As rotinas de redação agora rodam de madrugada e deixam a edição pronta, e a rotina de envio (`enviar-pendentes`, às 05:59) manda todas.
 - [ ] **Fase 2, Telegram:** um bot com a versão curta e o link. É também por ele que entra o feedback "mais disso / menos disso".
 - [ ] **Fase 3 (opcional), WhatsApp:** pela Cloud API oficial da Meta. Antes de implementar, levantar o custo por mensagem e os requisitos (conta Meta Business, número dedicado, template aprovado). Nada de biblioteca não oficial.
 - [ ] **Cadernos** (pedido em 22/10/2026): newsletters especializadas ao lado da geral. As especializadas são escritas no Sonnet, para caber no plano Pro.

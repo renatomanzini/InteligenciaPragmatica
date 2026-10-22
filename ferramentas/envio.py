@@ -1,4 +1,9 @@
-"""Envio da edição pelo Resend (agendado para o horário de entrega)."""
+"""Envio da edição pelo Resend.
+
+Todas as newsletters chegam juntas no horário de entrega (config.yaml, horario_entrega). As rotinas de
+redação rodam antes e, quando chamam `enviar`, a edição fica esperando; quem manda é a rotina de envio
+(`python main.py enviar-pendentes`), no horário. Se uma rotina terminar depois do horário, envia na hora.
+"""
 import json
 import os
 import urllib.error
@@ -72,13 +77,33 @@ def _resultado(status: str, mensagem: str, **extra) -> dict:
     return res
 
 
+def _espera_horario(data: str, config: dict) -> Optional[str]:
+    """'HH:MM' do horário de entrega se a edição é de hoje e ele ainda não chegou; senão None."""
+    try:
+        h, m = [int(x) for x in str(config.get("horario_entrega") or "").split(":")[:2]]
+    except ValueError:
+        return None
+    agora = agora_brasilia()
+    if data[:10] != agora.date().isoformat() or agora.time() >= time(h, m):
+        return None
+    return "%02d:%02d" % (h, m)
+
+
 def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: bool = False,
            caderno: str = cadernos.GERAL) -> dict:
-    """Envia a edição. Devolve {'status': 'enviado' | 'desligado' | 'erro', 'mensagem': ...}."""
+    """Envia a edição. Devolve {'status': 'enviado' | 'aguardando' | 'desligado' | 'erro', 'mensagem': ...}.
+
+    Sem `agora`, antes do horário de entrega a edição só fica pronta ('aguardando').
+    """
     data = str(data)
     config = config or {}
     if config.get("envio") != "ligado" and not forcar:
         return _resultado("desligado", "Envio desligado no config.yaml (fase de testes). Nada foi enviado.")
+    if not agora:
+        horario = _espera_horario(data, config)
+        if horario:
+            return _resultado("aguardando", "Edição pronta. O e-mail sai às %s, junto com as outras, "
+                                            "pela rotina de envio (enviar-pendentes)." % horario)
 
     chave = os.environ.get("RESEND_API_KEY", "").strip()
     via_proxy = os.environ.get("RESEND_VIA_PROXY", "") == "1"

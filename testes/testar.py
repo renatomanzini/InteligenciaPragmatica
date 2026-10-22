@@ -506,6 +506,29 @@ def testar_coleta_filtros():
              "linha → com os dois-pontos dentro ou fora do negrito (%s)" % setas)
 
 
+def testar_horario_de_entrega(raiz):
+    secao("envio junto no horário de entrega")
+    from datetime import datetime as _dt
+    original, postar = envio.agora_brasilia, envio._postar
+    envio._postar = lambda payload, chave: {"ok": False, "erro": "teste: nada sai daqui"}  # nunca envia de verdade
+    try:
+        envio.agora_brasilia = lambda: _dt(2026, 1, 15, 5, 10, tzinfo=util.FUSO)
+        cfg = {"envio": "ligado", "horario_entrega": "06:00"}
+        r = envio.enviar(DATA, raiz, cfg)
+        conferir(r["status"] == "aguardando" and "06:00" in r["mensagem"], "antes das 06:00, a edição de hoje espera")
+        r = envio.enviar(DATA, raiz, cfg, agora=True)
+        conferir(r["status"] != "aguardando", "--agora (rotina de envio) não espera")
+        r = envio.enviar("2026-01-14", raiz, cfg)
+        conferir(r["status"] != "aguardando", "edição de outro dia não espera")
+        envio.agora_brasilia = lambda: _dt(2026, 1, 15, 6, 20, tzinfo=util.FUSO)
+        r = envio.enviar(DATA, raiz, cfg)
+        conferir(r["status"] != "aguardando", "depois das 06:00 (rotina atrasada), envia na hora")
+        r = envio.enviar(DATA + "-extra", raiz, cfg)
+        conferir(r["status"] != "aguardando", "edição extra da tarde não espera")
+    finally:
+        envio.agora_brasilia, envio._postar = original, postar
+
+
 def fotografia():
     """Lista de arquivos de edicoes/ e docs/ e o estado do historico.json do projeto real."""
     arquivos = sorted(str(p.relative_to(RAIZ_PROJETO)) for pasta in ("edicoes", "docs")
@@ -526,6 +549,7 @@ def main():
         testar_envio(raiz)
         testar_cli(tmp)
         testar_cadernos(tmp)
+        testar_horario_de_entrega(raiz)
         testar_coleta_filtros()
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")

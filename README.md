@@ -1,6 +1,6 @@
 # Inteligência Pragmática
 
-Newsletter diária sobre IA, economia, negócios e marketing, escrita por IA só para você. Ela chega por volta das 06:20.
+Newsletter diária sobre IA, economia, negócios e marketing, escrita por IA só para você. Ela chega às 06:00, junto com os cadernos do dia.
 
 Este guia explica como manter a newsletter funcionando sem precisar programar.
 
@@ -13,7 +13,7 @@ Toda madrugada, um Claude roda na nuvem da Anthropic e faz o trabalho todo. Seu 
 3. Apura cada fato na fonte original.
 4. Escreve a edição.
 5. Manda um revisor independente conferir tudo.
-6. Manda o e-mail assim que a edição fica pronta (a rotina começa às 06:07, então ele chega por volta das 06:20).
+6. Deixa a edição pronta e publicada. Às 06:00, uma rotina de envio manda todas as newsletters do dia juntas.
 
 O passo a passo que ele segue está em `manual/ROTINA.md`, e as regras de estilo e de rigor em `manual/MANUAL_DE_REDACAO.md`.
 

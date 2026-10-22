@@ -7,7 +7,7 @@ nome: Inteligência Pragmática
 # "ligado"    = agenda o e-mail para o horário de entrega.
 envio: ligado
 
-horario_entrega: "06:30"        # horário de Brasília
+horario_entrega: "06:00"        # horário de Brasília
 fuso: America/Sao_Paulo
 
 # Endereço público do arquivo de edições (preenchido quando o GitHub Pages existir).

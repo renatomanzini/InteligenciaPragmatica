@@ -85,6 +85,7 @@ git commit -m "Mercado nº N — DATA: <assunto>"
 git pull --rebase origin main && git push origin HEAD:main
 ```
 - Com `envio: desligado` no `cadernos.yaml` (fase de testes), o `enviar` só avisa.
+- Antes das 06:00, o `enviar` só deixa a edição pronta ("aguardando"): quem manda o e-mail, junto com as outras newsletters, é a rotina de envio das 06:00. Se você terminar depois das 06:00, ele envia na hora.
 - O `git pull --rebase` existe porque a rotina da geral também publica na `main`.
 
 ---

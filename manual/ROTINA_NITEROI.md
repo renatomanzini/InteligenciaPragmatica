@@ -71,7 +71,7 @@ python3 main.py links DATA --caderno niteroi
 ```
 Lance **um** agente novo (`model: "sonnet"`) com este briefing:
 
-> Você é o checador de fatos do caderno Niterói. Leia `edicoes/niteroi/DATA/edicao.md` e `manual/MANUAL_NITEROI.md`. A edição é de DATA e chega ao leitor por volta das 07:30 desse dia.
+> Você é o checador de fatos do caderno Niterói. Leia `edicoes/niteroi/DATA/edicao.md` e `manual/MANUAL_NITEROI.md`. A edição é de DATA e chega ao leitor às 06:00 desse dia.
 > Para cada afirmação factual (data, dia da semana, horário, local, valor, nome, "anunciou", "aprovou"), abra o link citado e confira se a fonte diz exatamente aquilo.
 > Cace também:
 > - data relativa sem data explícita, dia da semana que não bate com a data, evento que já terá passado na hora da entrega;
@@ -95,6 +95,7 @@ git commit -m "Niterói nº N — DATA: <assunto>"
 git pull --rebase origin main && git push origin HEAD:main
 ```
 - Com `envio: desligado` no `cadernos.yaml` (fase de testes), o `enviar` só avisa.
+- Antes das 06:00, o `enviar` só deixa a edição pronta ("aguardando"): quem manda o e-mail, junto com as outras newsletters, é a rotina de envio das 06:00. Se você terminar depois das 06:00, ele envia na hora.
 - O `git pull --rebase` existe porque as rotinas da geral e do Mercado também publicam na `main`.
 
 ## Resumo final

@@ -202,8 +202,31 @@ def cmd_enviar(args) -> int:
     caderno = _caderno(args)
     data = _resolver_data(args.data, caderno)
     res = envio.enviar(data, RAIZ, _config(caderno), agora=args.agora, forcar=args.forcar, caderno=caderno)
-    # "desligado" não é erro: é o esperado na fase de testes.
+    # "desligado" e "aguardando" não são erro.
     return 1 if res["status"] == "erro" else 0
+
+
+def cmd_enviar_pendentes(args) -> int:
+    """Rotina de envio: manda, na ordem (geral e depois os cadernos), as edições de hoje ainda não enviadas."""
+    from ferramentas import envio
+    hoje = str(util.hoje_brasilia())
+    erros = 0
+    for caderno in [cadernos.GERAL] + cadernos.nomes(RAIZ):
+        pasta = cadernos.pasta_edicoes(RAIZ, caderno) / hoje
+        if not (pasta / "edicao.md").exists():
+            print("%s: sem edição hoje." % caderno)
+            continue
+        if (pasta / "envio.json").exists():
+            print("%s: já enviada." % caderno)
+            continue
+        if not (pasta / "email.html").exists():
+            print("%s: a edição existe, mas não foi montada (falta email.html). Não enviei." % caderno)
+            erros += 1
+            continue
+        print("%s: " % caderno, end="")
+        res = envio.enviar(hoje, RAIZ, _config(caderno), agora=True, caderno=caderno)
+        erros += res["status"] == "erro"
+    return 1 if erros else 0
 
 
 def cmd_mercado_painel(args) -> int:
@@ -354,6 +377,9 @@ def criar_parser() -> argparse.ArgumentParser:
     c.add_argument("--agora", action="store_true", help="envia já, sem agendar para o horário de entrega")
     c.add_argument("--forcar", action="store_true", help="envia mesmo com envio: desligado")
     c.set_defaults(func=cmd_enviar)
+
+    c = sub.add_parser("enviar-pendentes", help="rotina de envio: manda juntas as edições de hoje ainda não enviadas")
+    c.set_defaults(func=cmd_enviar_pendentes)
 
     c = sub.add_parser("mercado-painel", help="caderno Mercado: coleta as cotações e grava o painel da edição")
     c.add_argument("pasta", nargs="?", type=_pasta, metavar="AAAA-MM-DD[-extra]", help="padrão: hoje")
