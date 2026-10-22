@@ -19,7 +19,7 @@ from typing import Optional
 RAIZ = Path(__file__).resolve().parent
 sys.path.insert(0, str(RAIZ))
 
-from ferramentas import historico, util  # noqa: E402
+from ferramentas import cadernos, historico, util  # noqa: E402
 
 
 def _carregar_env() -> None:
@@ -57,6 +57,13 @@ def _data(texto: str) -> str:
         raise argparse.ArgumentTypeError("data inválida: %r. Use AAAA-MM-DD, por exemplo 2026-10-17." % texto)
 
 
+def _pasta(texto: str) -> str:
+    """Como _data, mas aceita também AAAA-MM-DD-extra (edição extra de um caderno)."""
+    if texto.lower().endswith("-extra"):
+        return _data(texto[:-6]) + "-extra"
+    return _data(texto)
+
+
 def _importar(nome: str):
     """Importa ferramentas.NOME; devolve None se o arquivo ainda não existe (outros erros sobem)."""
     try:
@@ -67,20 +74,29 @@ def _importar(nome: str):
         raise
 
 
-def _config() -> dict:
-    arq = RAIZ / "config.yaml"
-    return util.ler_yaml(arq) if arq.exists() else {}
+def _caderno(args) -> str:
+    caderno = getattr(args, "caderno", None) or cadernos.GERAL
+    if not cadernos.existe(RAIZ, caderno):
+        raise ValueError("caderno desconhecido: %s. Os que existem: %s"
+                         % (caderno, ", ".join([cadernos.GERAL] + cadernos.nomes(RAIZ))))
+    return caderno
 
 
-def _resolver_data(data: Optional[str]) -> str:
-    """Data pedida, ou a da edição mais recente. Confere se o edicao.md existe."""
+def _config(caderno: str = cadernos.GERAL) -> dict:
+    return cadernos.config(RAIZ, caderno)
+
+
+def _resolver_data(data: Optional[str], caderno: str = cadernos.GERAL) -> str:
+    """Pasta pedida, ou a da edição mais recente do caderno. Confere se o edicao.md existe."""
+    base = cadernos.pasta_edicoes(RAIZ, caderno)
+    rel = base.relative_to(RAIZ).as_posix()
     if data:
-        if not (RAIZ / "edicoes" / data / "edicao.md").exists():
-            raise FileNotFoundError("Não achei edicoes/%s/edicao.md. A edição desse dia já foi escrita?" % data)
+        if not (base / data / "edicao.md").exists():
+            raise FileNotFoundError("Não achei %s/%s/edicao.md. A edição desse dia já foi escrita?" % (rel, data))
         return data
-    recente = util.edicao_mais_recente(RAIZ)
+    recente = util.edicao_mais_recente(RAIZ, caderno)
     if not recente:
-        raise FileNotFoundError("Ainda não há nenhuma edição em edicoes/. A edição é escrita pela rotina (manual/ROTINA.md).")
+        raise FileNotFoundError("Ainda não há nenhuma edição em %s/. A edição é escrita pela rotina." % rel)
     return recente
 
 
@@ -92,12 +108,12 @@ def cmd_coletar(args) -> int:
         print("A coleta ainda não está instalada (falta ferramentas/coleta.py).")
         return 1
     data = date.fromisoformat(args.data or str(util.hoje_brasilia()))
-    coleta.coletar(data, RAIZ)
+    coleta.coletar(data, RAIZ, _caderno(args))
     return 0
 
 
 def cmd_historico(args) -> int:
-    print(historico.resumo(args.dias, RAIZ))
+    print(historico.resumo(args.dias, RAIZ, _caderno(args)))
     return 0
 
 
@@ -148,16 +164,18 @@ def cmd_github(args) -> int:
 
 def cmd_links(args) -> int:
     from ferramentas import links
-    data = _resolver_data(args.data)
-    res = links.verificar(data, RAIZ)
+    caderno = _caderno(args)
+    data = _resolver_data(args.data, caderno)
+    res = links.verificar(data, RAIZ, caderno=caderno)
     return 1 if res["resumo"]["quebrado"] else 0
 
 
 def cmd_montar(args) -> int:
     from ferramentas import montagem
-    data = _resolver_data(args.data)
-    res = montagem.montar(data, RAIZ, _config())
-    print("Edição de %s montada:" % data)
+    caderno = _caderno(args)
+    data = _resolver_data(args.data, caderno)
+    res = montagem.montar(data, RAIZ, _config(caderno), caderno)
+    print("Edição de %s montada%s:" % (data, "" if caderno == cadernos.GERAL else " (caderno %s)" % caderno))
     print("  e-mail:      %s" % res["email"])
     print("  versão curta: %s (%d caracteres)" % (res["curta"], res["caracteres_curta"]))
     print("  site:        %s e %s" % (res["pagina"], res["indice"]))
@@ -168,8 +186,9 @@ def cmd_montar(args) -> int:
 
 
 def cmd_registrar(args) -> int:
-    data = _resolver_data(args.data)
-    entrada = historico.registrar(data, RAIZ)
+    caderno = _caderno(args)
+    data = _resolver_data(args.data, caderno)
+    entrada = historico.registrar(data, RAIZ, caderno)
     historias = entrada.get("historias") or []
     print("Edição de %s registrada no histórico (nº %s, %d histórias)." % (data, entrada.get("numero"), len(historias)))
     faltando = [c for c in ("assunto", "numero", "historias", "formatos") if not entrada.get(c)]
@@ -180,10 +199,39 @@ def cmd_registrar(args) -> int:
 
 def cmd_enviar(args) -> int:
     from ferramentas import envio
-    data = _resolver_data(args.data)
-    res = envio.enviar(data, RAIZ, _config(), agora=args.agora, forcar=args.forcar)
+    caderno = _caderno(args)
+    data = _resolver_data(args.data, caderno)
+    res = envio.enviar(data, RAIZ, _config(caderno), agora=args.agora, forcar=args.forcar, caderno=caderno)
     # "desligado" não é erro: é o esperado na fase de testes.
     return 1 if res["status"] == "erro" else 0
+
+
+def cmd_mercado_painel(args) -> int:
+    from ferramentas import mercado
+    pasta = args.pasta or str(util.hoje_brasilia())
+    res = mercado.gravar_painel(pasta, RAIZ)
+    print(res["texto"])
+    print("Painel gravado em %s." % res["arquivo"])
+    if res["painel"]["falhas"]:
+        print("Atenção: estas fontes falharam e ficaram fora do painel: %s"
+              % "; ".join("%s (%s)" % kv for kv in sorted(res["painel"]["falhas"].items())))
+    return 0
+
+
+def cmd_mercado_alarme(args) -> int:
+    """Confere os gatilhos numéricos da edição extra. Sai com 0 sempre; o veredito vai no texto."""
+    from ferramentas import mercado
+    painel = mercado.coletar_painel()
+    motivos = mercado.alarme(painel)
+    if motivos:
+        print("ALARME: há gatilho numérico para edição extra.")
+        for m in motivos:
+            print("- " + m)
+    else:
+        print("SEM ALARME NUMÉRICO: nenhum gatilho de preço disparou hoje.")
+    if painel["falhas"]:
+        print("Fontes fora do ar: %s" % ", ".join(sorted(painel["falhas"])))
+    return 0
 
 
 def cmd_configurar_email(args) -> int:
@@ -246,7 +294,7 @@ def cmd_dry_run(data_arg: Optional[str]) -> int:
     if res_links["resumo"]["quebrado"]:
         print("Aviso: há link quebrado (veja acima). Sigo com a montagem.")
     print("\nMontando...")
-    cmd_montar(argparse.Namespace(data=data))
+    cmd_montar(argparse.Namespace(data=data, caderno=cadernos.GERAL))
     email = RAIZ / "edicoes" / data / "email.html"
     webbrowser.open(email.as_uri())
     print("\nAbri %s no navegador. Ensaio terminado: nenhum e-mail foi enviado." % email.relative_to(RAIZ))
@@ -272,12 +320,15 @@ def criar_parser() -> argparse.ArgumentParser:
                    help="ensaio: coleta, checa links, monta e abre o e-mail no navegador. Nunca envia.")
     sub = p.add_subparsers(dest="comando", metavar="comando")
 
+    ajuda_caderno = "caderno da newsletter (padrão: geral; os outros estão em cadernos.yaml)"
     c = sub.add_parser("coletar", help="busca as fontes e grava os candidatos do dia")
     c.add_argument("--data", type=_data, metavar="AAAA-MM-DD", help="padrão: hoje (Brasília)")
+    c.add_argument("--caderno", default=cadernos.GERAL, help=ajuda_caderno)
     c.set_defaults(func=cmd_coletar)
 
     c = sub.add_parser("historico", help="mostra as últimas edições e as histórias em andamento")
     c.add_argument("--dias", type=int, default=14, help="quantos dias olhar para trás (padrão: 14)")
+    c.add_argument("--caderno", default=cadernos.GERAL, help=ajuda_caderno)
     c.set_defaults(func=cmd_historico)
 
     c = sub.add_parser("github", help="confere estrelas e datas de repositórios")
@@ -289,14 +340,23 @@ def criar_parser() -> argparse.ArgumentParser:
             ("montar", cmd_montar, "gera email.html, curta.txt e o site em docs/"),
             ("registrar", cmd_registrar, "guarda a edição no histórico")):
         c = sub.add_parser(nome, help=ajuda)
-        c.add_argument("data", nargs="?", type=_data, metavar="AAAA-MM-DD")
+        c.add_argument("data", nargs="?", type=_pasta, metavar="AAAA-MM-DD")
+        c.add_argument("--caderno", default=cadernos.GERAL, help=ajuda_caderno)
         c.set_defaults(func=func)
 
     c = sub.add_parser("enviar", help="envia a edição por e-mail (só com envio: ligado no config.yaml)")
-    c.add_argument("data", nargs="?", type=_data, metavar="AAAA-MM-DD")
+    c.add_argument("data", nargs="?", type=_pasta, metavar="AAAA-MM-DD")
+    c.add_argument("--caderno", default=cadernos.GERAL, help=ajuda_caderno)
     c.add_argument("--agora", action="store_true", help="envia já, sem agendar para o horário de entrega")
     c.add_argument("--forcar", action="store_true", help="envia mesmo com envio: desligado")
     c.set_defaults(func=cmd_enviar)
+
+    c = sub.add_parser("mercado-painel", help="caderno Mercado: coleta as cotações e grava o painel da edição")
+    c.add_argument("pasta", nargs="?", type=_pasta, metavar="AAAA-MM-DD[-extra]", help="padrão: hoje")
+    c.set_defaults(func=cmd_mercado_painel)
+
+    c = sub.add_parser("mercado-alarme", help="caderno Mercado: confere os gatilhos de preço da edição extra")
+    c.set_defaults(func=cmd_mercado_alarme)
 
     c = sub.add_parser("configurar-email", help="guarda a chave do Resend no .env (pede sem mostrar na tela)")
     c.set_defaults(func=cmd_configurar_email)

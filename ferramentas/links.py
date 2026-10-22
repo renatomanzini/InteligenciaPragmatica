@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import List, Tuple
 from urllib.parse import urlsplit
 
+from . import cadernos
 from .util import agora_brasilia, http_get
 
 # Começa em http(s):// e vai até um espaço ou um caractere que nunca faz parte do link.
@@ -124,10 +125,10 @@ def _tabela(res: dict) -> str:
     return "\n".join(linhas)
 
 
-def verificar(data: str, raiz: Path, imprimir: bool = True) -> dict:
-    """Testa os links de edicoes/DATA/edicao.md, grava links.json e imprime a tabela."""
+def verificar(data: str, raiz: Path, imprimir: bool = True, caderno: str = cadernos.GERAL) -> dict:
+    """Testa os links do edicao.md da DATA (no caderno), grava links.json e imprime a tabela."""
     data = str(data)
-    arq = raiz / "edicoes" / data / "edicao.md"
+    arq = cadernos.pasta_edicoes(raiz, caderno) / data / "edicao.md"
     if not arq.exists():
         raise FileNotFoundError("Não achei %s" % arq.relative_to(raiz))
     urls = extrair_urls(arq.read_text(encoding="utf-8"))

@@ -7,6 +7,7 @@ from datetime import date, datetime, time
 from pathlib import Path
 from typing import Optional
 
+from . import cadernos
 from .montagem import assunto_tachado
 from .util import FUSO, USER_AGENT, agora_brasilia, ler_front_matter
 
@@ -16,6 +17,12 @@ REMETENTE = "Inteligência Pragmática <onboarding@resend.dev>"
 # "Domain is not verified" (aconteceu em 20/10/2026). Sem domínio próprio, o e-mail sai na hora
 # e o horário de chegada depende do horário da rotina.
 PODE_AGENDAR = not REMETENTE.rstrip(">").endswith("@resend.dev")
+
+
+def _remetente(config: dict) -> str:
+    """Cada caderno pode ter o próprio nome de remetente; o endereço é sempre o mesmo."""
+    nome = (config or {}).get("remetente")
+    return REMETENTE if not nome else REMETENTE.replace("Inteligência Pragmática", str(nome), 1)
 AVISO_HTML = "Versão completa no HTML."
 
 
@@ -65,7 +72,8 @@ def _resultado(status: str, mensagem: str, **extra) -> dict:
     return res
 
 
-def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: bool = False) -> dict:
+def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: bool = False,
+           caderno: str = cadernos.GERAL) -> dict:
     """Envia a edição. Devolve {'status': 'enviado' | 'desligado' | 'erro', 'mensagem': ...}."""
     data = str(data)
     config = config or {}
@@ -80,7 +88,7 @@ def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: boo
     if faltam:
         return _resultado("erro", "Faltam variáveis de ambiente: %s. Nada foi enviado." % ", ".join(faltam))
 
-    pasta = raiz / "edicoes" / data
+    pasta = cadernos.pasta_edicoes(raiz, caderno) / data
     arq_html, arq_curta = pasta / "email.html", pasta / "curta.txt"
     if not (arq_html.exists() and arq_curta.exists()):
         return _resultado("erro", "Faltam email.html e curta.txt em edicoes/%s. Rode antes: python main.py montar %s"
@@ -90,13 +98,13 @@ def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: boo
     assunto = assunto_tachado(str(meta.get("assunto") or "Inteligência Pragmática"))
     texto = arq_curta.read_text(encoding="utf-8").rstrip() + "\n\n" + AVISO_HTML + "\n"
     payload = {
-        "from": REMETENTE,
+        "from": _remetente(config),
         "to": [destino],
         "subject": assunto,
         "html": arq_html.read_text(encoding="utf-8"),
         "text": texto,
     }
-    agendado = None if (agora or not PODE_AGENDAR) else _horario_agendado(date.fromisoformat(data), config.get("horario_entrega", "06:30"))
+    agendado = None if (agora or not PODE_AGENDAR) else _horario_agendado(date.fromisoformat(data[:10]), config.get("horario_entrega", "06:30"))
     if agendado:
         payload["scheduled_at"] = agendado
 

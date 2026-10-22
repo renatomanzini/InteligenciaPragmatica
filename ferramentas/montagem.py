@@ -11,9 +11,11 @@ from typing import List, Tuple
 
 import markdown
 
+from . import cadernos
 from .util import data_por_extenso, ler_front_matter
 
 NOME_PADRAO = "Inteligência Pragmática"
+MARCA_PAINEL = "<!-- painel -->"
 RODAPE_IA = "Feita por IA para um leitor só. Fontes linkadas em cada afirmação."
 LIMITE_CURTA = 900
 
@@ -141,6 +143,7 @@ def _semantico(h: str) -> str:
     h = re.sub(r"<p>→\s*", '<p class="seta"><span class="seta-ic">→</span>', h)
     h = re.sub(r'((?:<p class="seta">.*?</p>\s*)+)',
                lambda m: '<div class="setas">\n%s\n</div>\n' % m.group(1).strip(), h, flags=re.S)
+    h = h.replace("▲", '<span class="sobe">▲</span>').replace("▼", '<span class="desce">▼</span>')
     h = re.sub(r"<p>🔗\s*", '<p class="fonte"><span class="ico">🔗</span> ', h)
     h = re.sub(r"<p><strong>\s*Opini[ãa]o\s*:?\s*</strong>\s*:?\s*",
                '<p class="opiniao"><span class="selo">Opinião</span> ', h, flags=re.I)
@@ -179,6 +182,8 @@ EST_CLASSE = {
     "seta": "margin:0 0 10px 0;padding-left:24px;text-indent:-24px;",
     "seta-ic": "display:inline-block;width:24px;text-indent:0;color:%s;font-weight:700;" % C_DEST,
     "fonte": "margin:0 0 6px 0;font-size:13.5px;line-height:1.5;color:%s;" % C_SEC,
+    "sobe": "color:#1E8E3E;",
+    "desce": "color:#D93025;",
     "ico": "margin-right:3px;",
     "opiniao": "font-style:italic;color:%s;" % C_SEC,
     "selo": ("display:inline-block;font-style:normal;font-size:11px;font-weight:700;letter-spacing:0.1em;"
@@ -268,7 +273,7 @@ def _cortar(txt: str, n: int) -> str:
     return corte.rstrip(" ,;:.-") + "…"
 
 
-def _curta(assunto: str, data_ext: str, corpo: str, site_url: str, data: str) -> str:
+def _curta(assunto: str, data_ext: str, corpo: str, site_url: str, data: str, pagina: str = "") -> str:
     # O "Nesta edição" já é escrito como chamada; só sem ele usa títulos + TL;DR.
     indice = _itens_indice(corpo)
     materias = [(i, "") for i in indice] if len(indice) >= 3 else _materias(corpo)
@@ -277,7 +282,7 @@ def _curta(assunto: str, data_ext: str, corpo: str, site_url: str, data: str) ->
     cabeca = [assunto_tachado(assunto), data_ext, ""]
     rodape = []
     if site_url:
-        rodape = ["", "Edição completa: %s/%s.html" % (site_url.rstrip("/"), data)]
+        rodape = ["", "Edição completa: %s/%s" % (site_url.rstrip("/"), pagina or (data + ".html"))]
     melhor = ""
     for n_bullets in (5, 4, 3):
         for lim_tldr in (170, 130, 100, 70, 0):
@@ -420,6 +425,10 @@ CSS_EMAIL_EXTRA = """
 """
 
 CSS_SITE = """
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
 :root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
         --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
 @media (prefers-color-scheme: dark) {
@@ -512,14 +521,14 @@ def _meta_linha(data_ext: str, numero, minutos: int) -> str:
     return " · ".join(partes)
 
 
-def _html_email(nome, assunto, previa, data_ext, numero, minutos, corpo, site_url) -> str:
+def _html_email(nome, assunto, previa, data_ext, numero, minutos, corpo, site_url, indice="") -> str:
     meta = _meta_linha(data_ext, numero, minutos)
     enchimento = "&zwnj;&nbsp;" * 80
     rodape_site = ""
     if site_url:
         rodape_site = ('<p style="margin:0 0 8px 0;font-family:%s;font-size:13px;line-height:1.5;color:%s;" class="sec">'
-                       '<a href="%s/" style="color:%s;text-decoration:underline;">Arquivo de edições</a></p>'
-                       % (F_CORPO, C_SEC, _esc(site_url.rstrip("/")), C_DEST))
+                       '<a href="%s/%s" style="color:%s;text-decoration:underline;">Arquivo de edições</a></p>'
+                       % (F_CORPO, C_SEC, _esc(site_url.rstrip("/")), _esc(indice), C_DEST))
     return """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -558,7 +567,7 @@ def _html_email(nome, assunto, previa, data_ext, numero, minutos, corpo, site_ur
            corpo=corpo, linha=C_LINHA, rodape_site=rodape_site, rodape_ia=RODAPE_IA)
 
 
-def _html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo) -> str:
+def _html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo, indice="index.html") -> str:
     return """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -572,7 +581,7 @@ def _html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo) -
 <body>
 <div class="pagina">
 <header class="topo">
-<a class="voltar" href="index.html">← todas as edições</a>
+<a class="voltar" href="{indice}">← todas as edições</a>
 <div class="marca">{nome}</div>
 <div class="meta">{meta}</div>
 <h1 class="assunto">{assunto_html}</h1>
@@ -581,7 +590,7 @@ def _html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo) -
 {corpo}
 </main>
 <footer class="rodape">
-<a class="voltar" href="index.html">← todas as edições</a>
+<a class="voltar" href="{indice}">← todas as edições</a>
 <p>{rodape_ia}</p>
 </footer>
 </div>
@@ -590,21 +599,24 @@ def _html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo) -
 </html>
 """.format(titulo=_esc(assunto_sem_marcas(assunto)), nome=_esc(nome), previa=_esc(previa),
            head_pwa=_HEAD_PWA, css=CSS_SITE, meta=_esc(_meta_linha(data_ext, numero, minutos)),
-           assunto_html=assunto_html(assunto), corpo=corpo, rodape_ia=RODAPE_IA, script=_SCRIPT_SW)
+           assunto_html=assunto_html(assunto), corpo=corpo, rodape_ia=RODAPE_IA, script=_SCRIPT_SW,
+           indice=indice)
 
 
-def _html_indice(nome, edicoes: List[dict]) -> str:
+def _html_indice(nome, edicoes: List[dict], nav: str = "") -> str:
     if edicoes:
         itens = []
         for e in edicoes:
             rotulo = data_por_extenso(date.fromisoformat(e["data"]))
             if e.get("numero"):
                 rotulo += " · nº %s" % e["numero"]
+            if e.get("extra"):
+                rotulo += " · edição extra"
             previa = '<span class="prev">%s</span>' % _esc(e["previa"]) if e.get("previa") else ""
             miolo = ('<span class="data">%s</span><span class="tit">%s</span>%s'
                      % (_esc(rotulo), assunto_html(e.get("assunto") or e["data"]), previa))
             if e["tem_pagina"]:
-                itens.append('<li><a class="item" href="%s.html">%s</a></li>' % (e["data"], miolo))
+                itens.append('<li><a class="item" href="%s">%s</a></li>' % (e["pagina"], miolo))
             else:
                 itens.append('<li><span class="sem-pagina">%s</span></li>' % miolo)
         lista = '<ul class="lista">\n%s\n</ul>' % "\n".join(itens)
@@ -625,6 +637,7 @@ def _html_indice(nome, edicoes: List[dict]) -> str:
 <header class="topo">
 <div class="marca" style="margin-top:0">{nome}</div>
 <div class="meta">Arquivo de edições · {total} no total</div>
+{nav}
 </header>
 <main>
 {lista}
@@ -635,49 +648,88 @@ def _html_indice(nome, edicoes: List[dict]) -> str:
 </body>
 </html>
 """.format(nome=_esc(nome), head_pwa=_HEAD_PWA, css=CSS_SITE, total=len(edicoes), lista=lista,
-           rodape_ia=RODAPE_IA, script=_SCRIPT_SW)
+           rodape_ia=RODAPE_IA, script=_SCRIPT_SW, nav=nav)
 
 
 # ───────────────────────── montagem ─────────────────────────
 
-def _listar_edicoes(raiz: Path, docs: Path) -> List[dict]:
-    """Todas as edições em edicoes/*/edicao.md, da mais nova para a mais antiga."""
+def _listar_edicoes(raiz: Path, docs: Path, caderno: str = cadernos.GERAL) -> List[dict]:
+    """Todas as edições do caderno, da mais nova para a mais antiga (a extra vem antes da do dia)."""
     saida = []
-    for pasta in sorted((raiz / "edicoes").glob("????-??-??"), reverse=True):
+    base = cadernos.pasta_edicoes(raiz, caderno)
+    for pasta in sorted(base.glob(cadernos.padrao_pastas(caderno)), reverse=True):
         arq = pasta / "edicao.md"
         if not arq.exists():
             continue
         try:
-            date.fromisoformat(pasta.name)
+            date.fromisoformat(pasta.name[:10])
             meta, _ = ler_front_matter(arq)
         except Exception:
             continue
+        pagina = "%s%s.html" % (cadernos.prefixo(caderno), pasta.name)
         saida.append({
-            "data": pasta.name,
+            "data": pasta.name[:10],
             "numero": meta.get("numero"),
             "assunto": meta.get("assunto"),
             "previa": meta.get("previa"),
-            "tem_pagina": (docs / ("%s.html" % pasta.name)).exists(),
+            "extra": pasta.name.endswith("-extra"),
+            "pagina": pagina,
+            "tem_pagina": (docs / pagina).exists(),
         })
     return saida
+
+
+def _nav(raiz: Path, caderno: str) -> str:
+    """Linha com os links entre a geral e os cadernos."""
+    especiais = cadernos.nomes(raiz)
+    if not especiais:
+        return ""
+    links = []
+    for c in [cadernos.GERAL] + especiais:
+        nome = cadernos.config(raiz, c).get("nome") or NOME_PADRAO
+        rotulo = nome.split("·")[-1].strip() if c != cadernos.GERAL else "Geral"
+        if c == caderno:
+            links.append("<strong>%s</strong>" % _esc(rotulo))
+        else:
+            links.append('<a href="%s">%s</a>' % (cadernos.indice_site(c), _esc(rotulo)))
+    return '<div class="cadernos">Cadernos: %s</div>' % " · ".join(links)
+
+
+def _escrever_indices(raiz: Path, docs: Path) -> None:
+    """Regrava o arquivo de edições da geral e de cada caderno (a navegação entre eles muda junto)."""
+    for c in [cadernos.GERAL] + cadernos.nomes(raiz):
+        nome = cadernos.config(raiz, c).get("nome") or NOME_PADRAO
+        (docs / cadernos.indice_site(c)).write_text(
+            _html_indice(nome, _listar_edicoes(raiz, docs, c), _nav(raiz, c)), encoding="utf-8")
 
 
 def _rel(p: Path, raiz: Path) -> str:
     return p.relative_to(raiz).as_posix()
 
 
-def montar(data: str, raiz: Path, config: dict) -> dict:
-    """Gera email.html, curta.txt e o site em docs/. Devolve um resumo do que foi feito."""
+def montar(data: str, raiz: Path, config: dict, caderno: str = cadernos.GERAL) -> dict:
+    """Gera email.html, curta.txt e o site em docs/. Devolve um resumo do que foi feito.
+
+    DATA é o nome da pasta da edição: AAAA-MM-DD, ou AAAA-MM-DD-extra nos cadernos.
+    """
     data = str(data)
-    arq = raiz / "edicoes" / data / "edicao.md"
+    arq = cadernos.pasta_edicoes(raiz, caderno) / data / "edicao.md"
     if not arq.exists():
         raise FileNotFoundError("Não achei %s" % _rel(arq, raiz))
     config = config or {}
-    d = date.fromisoformat(data)
+    d = date.fromisoformat(data[:10])
     meta, corpo = ler_front_matter(arq)
+    # O painel de números (cotações) é gerado por código e entra no lugar do marcador, sem passar pela IA.
+    painel = arq.parent / "painel.md"
+    avisos_painel = []
+    if MARCA_PAINEL in corpo:
+        if painel.exists():
+            corpo = corpo.replace(MARCA_PAINEL, painel.read_text(encoding="utf-8").strip())
+        else:
+            avisos_painel.append("a edição tem o marcador do painel, mas falta painel.md na pasta")
     nome = config.get("nome") or NOME_PADRAO
     site_url = str(config.get("site_url") or "").strip()
-    avisos: List[str] = []
+    avisos: List[str] = list(avisos_painel)
 
     if not meta:
         avisos.append("a edição não tem front matter (o bloco entre ---)")
@@ -703,20 +755,23 @@ def montar(data: str, raiz: Path, config: dict) -> dict:
     corpo_html = _semantico(_renderizar(corpo))
 
     pasta = arq.parent
+    nome_pagina = "%s%s.html" % (cadernos.prefixo(caderno), data)
+    nome_indice = cadernos.indice_site(caderno)
     email = pasta / "email.html"
     email.write_text(_html_email(nome, assunto, previa, data_ext, numero, minutos,
-                                 _inlinar(corpo_html), site_url), encoding="utf-8")
+                                 _inlinar(corpo_html), site_url,
+                                 "" if caderno == cadernos.GERAL else nome_indice), encoding="utf-8")
     curta = pasta / "curta.txt"
-    texto_curta = _curta(assunto, data_ext, corpo, site_url, data)
+    texto_curta = _curta(assunto, data_ext, corpo, site_url, data, nome_pagina)
     curta.write_text(texto_curta + "\n", encoding="utf-8")
 
     docs = raiz / "docs"
     docs.mkdir(parents=True, exist_ok=True)
-    pagina = docs / ("%s.html" % data)
-    pagina.write_text(_html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo_html),
-                      encoding="utf-8")
-    indice = docs / "index.html"
-    indice.write_text(_html_indice(nome, _listar_edicoes(raiz, docs)), encoding="utf-8")
+    pagina = docs / nome_pagina
+    pagina.write_text(_html_pagina_site(nome, assunto, previa, data_ext, numero, minutos, corpo_html,
+                                        nome_indice), encoding="utf-8")
+    _escrever_indices(raiz, docs)
+    indice = docs / nome_indice
 
     (docs / "manifest.webmanifest").write_text(_manifest(nome), encoding="utf-8")
     (docs / "sw.js").write_text(SW_JS, encoding="utf-8")

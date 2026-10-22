@@ -19,7 +19,7 @@ from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlsplit, urlunsp
 
 import feedparser
 
-from . import historico
+from . import cadernos, historico
 from .util import FUSO, agora_brasilia, hoje_brasilia, http_get, ler_yaml, normalizar_url
 
 WORKERS = 8
@@ -600,10 +600,10 @@ def _montar_log(data: date, stats: dict) -> str:
     return "\n".join(linhas) + "\n"
 
 
-def coletar(data: date, raiz: Path) -> dict:
+def coletar(data: date, raiz: Path, caderno: str = cadernos.GERAL) -> dict:
     t0 = time.time()
     raiz = Path(raiz)
-    cfg = ler_yaml(raiz / "fontes.yaml")
+    cfg = ler_yaml(cadernos.arquivo_fontes(raiz, caderno))
     inicio, fim, horas = _janela(cfg, data)
     limite = int(cfg.get("limite_por_fonte") or 15)
     especiais = cfg.get("especiais") or {}
@@ -697,13 +697,14 @@ def coletar(data: date, raiz: Path) -> dict:
 
     pasta = raiz / "dados" / "candidatos"
     pasta.mkdir(parents=True, exist_ok=True)
-    base = pasta / data.isoformat()
+    nome_base = cadernos.prefixo(caderno) + data.isoformat()
+    base = pasta / nome_base
     base.with_suffix(".json").write_text(json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8")
     base.with_suffix(".md").write_text(_montar_md(data, inicio, fim, horas, candidatos, stats, paginas),
                                        encoding="utf-8")
-    (pasta / (data.isoformat() + "-fontes.log")).write_text(_montar_log(data, stats), encoding="utf-8")
+    (pasta / (nome_base + "-fontes.log")).write_text(_montar_log(data, stats), encoding="utf-8")
 
     print("%d candidatos de %d fontes (%d falharam), em %.0f s. Arquivo: %s"
           % (len(candidatos), len(stats), resultado["fontes_falharam"], resultado["segundos"],
-             (pasta / (data.isoformat() + ".md")).relative_to(raiz)))
+             (pasta / (nome_base + ".md")).relative_to(raiz)))
     return resultado

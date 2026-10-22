@@ -78,7 +78,9 @@ def normalizar_url(u: str) -> str:
     return urlunsplit((p.scheme.lower(), p.netloc.lower().removeprefix("www."), caminho, "", ""))
 
 
-def edicao_mais_recente(raiz: Path) -> Optional[str]:
-    """Data (AAAA-MM-DD) da edição mais nova em edicoes/, ou None."""
-    pastas = sorted(p.name for p in (raiz / "edicoes").glob("????-??-??") if (p / "edicao.md").exists())
+def edicao_mais_recente(raiz: Path, caderno: str = "geral") -> Optional[str]:
+    """Pasta (AAAA-MM-DD, ou AAAA-MM-DD-extra nos cadernos) da edição mais nova do caderno, ou None."""
+    from . import cadernos  # importado aqui para não criar ciclo (cadernos usa util)
+    base = cadernos.pasta_edicoes(raiz, caderno)
+    pastas = sorted(p.name for p in base.glob(cadernos.padrao_pastas(caderno)) if (p / "edicao.md").exists())
     return pastas[-1] if pastas else None

@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import date
 from pathlib import Path
 
 RAIZ_PROJETO = Path(__file__).resolve().parent.parent
@@ -42,7 +43,9 @@ def preparar_raiz(tmp: Path, copiar_codigo: bool = False) -> Path:
     shutil.copy(RAIZ_PROJETO / "testes" / "edicao_exemplo.md", pasta / "edicao.md")
     if copiar_codigo:  # para rodar o main.py de verdade (ele usa a pasta onde está)
         shutil.copy(RAIZ_PROJETO / "main.py", raiz / "main.py")
-        shutil.copy(RAIZ_PROJETO / "config.yaml", raiz / "config.yaml")
+        cfg = (RAIZ_PROJETO / "config.yaml").read_text(encoding="utf-8")
+        # a cópia de teste nunca envia de verdade, mesmo com o envio ligado no projeto
+        (raiz / "config.yaml").write_text(re.sub(r"(?m)^envio:.*$", "envio: desligado", cfg), encoding="utf-8")
         shutil.copytree(RAIZ_PROJETO / "ferramentas", raiz / "ferramentas",
                         ignore=shutil.ignore_patterns("__pycache__", "coleta.py", "github.py"))
     return raiz
@@ -316,6 +319,115 @@ def testar_conversao():
              "assunto: tachado combinante e sem marcas")
 
 
+PAINEL_FALSO = {
+    "gerado_em": "2026-01-15T06:50:00-03:00",
+    "falhas": {"CNN": "respondeu 503"},
+    "itens": {
+        "ibov": {"nome": "Ibovespa", "valor": 206495.23, "var": -0.86, "unidade": "pts", "data": "", "fonte": "B3"},
+        "sp500": {"nome": "S&P 500", "valor": 7757.17, "var": 0.58, "unidade": "pts", "data": "2026-01-14", "fonte": "CNBC"},
+        "juros10": {"nome": "Juros de 10 anos dos EUA", "valor": 5.046, "var": -1.94, "var_pp": -0.10,
+                    "unidade": "%", "data": "2026-01-15", "fonte": "CNBC"},
+        "dolar": {"nome": "Dólar", "valor": 5.047, "var": 0.0, "unidade": "R$", "data": "2026-01-15", "fonte": "AwesomeAPI"},
+        "btc_usd": {"nome": "Bitcoin", "valor": 81689.65, "var": -11.2, "unidade": "US$", "data": "2026-01-15", "fonte": "CNBC"},
+        "medo_cripto": {"nome": "Cripto (alternative.me)", "valor": 68, "rotulo": "ganância", "ontem": 63, "fonte": "alternative.me"},
+    },
+}
+
+EDICAO_MERCADO = """---
+data: 2026-01-15
+tipo: dia_util
+numero: 1
+assunto: "o touro tropeçou"
+previa: "+ o dólar parado"
+tempo_leitura_min: 3
+dia: morno
+breakthrough: false
+historias:
+  - id: teste-mercado
+    titulo: "Teste do caderno"
+    tema: bolsa_br
+    urls: ["https://www.python.org"]
+    em_andamento: false
+formatos: [painel, radar]
+---
+bom dia. Dia de teste.
+
+<!-- painel -->
+
+#### RADAR
+→ **Teste**: uma linha com fonte ([Python](https://www.python.org)).
+
+Não é recomendação de investimento.
+"""
+
+
+def testar_cadernos(tmp: Path):
+    secao("cadernos e caderno Mercado")
+    from ferramentas import cadernos, mercado
+    raiz = preparar_raiz(tmp / "cadernos")
+    (raiz / "cadernos.yaml").write_text(
+        'mercado:\n  nome: "Inteligência Pragmática · Mercado"\n  remetente: "IP · Mercado"\n'
+        '  envio: desligado\n  fontes: fontes_mercado.yaml\n', encoding="utf-8")
+    conferir(cadernos.nomes(raiz) == ["mercado"], "cadernos.yaml lista o mercado")
+    conferir(cadernos.pasta_edicoes(raiz, "mercado") == raiz / "edicoes" / "mercado", "pasta das edições do caderno")
+    conferir(cadernos.config(raiz, "mercado")["envio"] == "desligado", "config do caderno vem do cadernos.yaml")
+
+    # painel: formato brasileiro, setas, falhas e escala
+    texto = mercado.painel_md(PAINEL_FALSO)
+    conferir("206.495 pts ▼ 0,86%" in texto, "Ibovespa com milhar e seta de queda")
+    conferir("último fechamento" in texto, "sem data da B3, diz 'último fechamento'")
+    conferir("fechamento de 14/01" in texto, "fechamento dos EUA com a data")
+    conferir("5,05% ▼ 0,10 p.p." in texto, "juros com variação em pontos percentuais")
+    conferir("R$ 5,05 · estável" in texto, "variação zero vira 'estável'")
+    conferir("Fora do ar hoje: CNN" in texto, "fonte que falhou aparece no rodapé")
+    conferir("68, ganância (ontem 63)" in texto, "Medo & Ganância com o dia anterior")
+    # alarme: só conta número de hoje
+    motivos = mercado.alarme(PAINEL_FALSO, hoje=date(2026, 1, 15))
+    conferir(len(motivos) == 1 and "Bitcoin" in motivos[0], "alarme dispara com bitcoin -11,2%% hoje (%s)" % motivos)
+    conferir(mercado.alarme(PAINEL_FALSO, hoje=date(2026, 1, 16)) == [], "variação de outro dia não dispara alarme")
+
+    # montagem do caderno: painel no lugar do marcador, setas coloridas, páginas próprias e navegação
+    pasta = raiz / "edicoes" / "mercado" / "2026-01-15"
+    pasta.mkdir(parents=True)
+    (pasta / "edicao.md").write_text(EDICAO_MERCADO, encoding="utf-8")
+    (pasta / "painel.md").write_text(texto, encoding="utf-8")
+    cfg = cadernos.config(raiz, "mercado")
+    cfg["site_url"] = "https://exemplo.github.io/ip"
+    res = montagem.montar("2026-01-15", raiz, cfg, "mercado")
+    email = (pasta / "email.html").read_text(encoding="utf-8")
+    conferir("<!-- painel -->" not in email and "206.495 pts" in email, "o painel entrou no lugar do marcador")
+    conferir('class="desce"' in email and "color:#D93025" in email, "seta de queda vermelha no e-mail")
+    docs = raiz / "docs"
+    conferir((docs / "mercado-2026-01-15.html").exists() and (docs / "mercado.html").exists(),
+             "página e arquivo do caderno em docs/")
+    conferir('href="mercado.html"' in (docs / "index.html").read_text(encoding="utf-8"),
+             "o arquivo da geral tem link para o caderno")
+    pagina = (docs / "mercado-2026-01-15.html").read_text(encoding="utf-8")
+    conferir('href="mercado.html"' in pagina, "a página volta para o arquivo do caderno")
+    conferir("ip/mercado-2026-01-15.html" in (pasta / "curta.txt").read_text(encoding="utf-8"),
+             "a versão curta aponta para a página do caderno")
+    conferir(res["pagina"] == "docs/mercado-2026-01-15.html", "montar devolve a página do caderno")
+    # edição extra no mesmo dia
+    extra = raiz / "edicoes" / "mercado" / "2026-01-15-extra"
+    extra.mkdir()
+    (extra / "edicao.md").write_text(EDICAO_MERCADO.replace("numero: 1", "numero: 2"), encoding="utf-8")
+    (extra / "painel.md").write_text(texto, encoding="utf-8")
+    montagem.montar("2026-01-15-extra", raiz, cfg, "mercado")
+    conferir("edição extra" in (docs / "mercado.html").read_text(encoding="utf-8"), "a extra aparece marcada no arquivo")
+    conferir(util.edicao_mais_recente(raiz, "mercado") == "2026-01-15-extra", "a mais recente do caderno é a extra")
+
+    # histórico: numeração separada, o mesmo arquivo
+    historico.registrar(DATA, raiz)
+    historico.registrar("2026-01-15", raiz, "mercado")
+    historico.registrar("2026-01-15-extra", raiz, "mercado")
+    historico.registrar("2026-01-15", raiz, "mercado")  # regravar não duplica
+    todas = historico.carregar(raiz)
+    conferir(len(todas) == 3, "geral + 2 do mercado no mesmo histórico (%d)" % len(todas))
+    conferir(historico.proximo_numero(raiz, "mercado") == 3 and historico.proximo_numero(raiz) == 2,
+             "cada caderno tem a própria numeração")
+    conferir(all(e.get("caderno") == "mercado" for e in historico.carregar(raiz, "mercado")), "entradas marcadas com o caderno")
+
+
 def fotografia():
     """Lista de arquivos de edicoes/ e docs/ e o estado do historico.json do projeto real."""
     arquivos = sorted(str(p.relative_to(RAIZ_PROJETO)) for pasta in ("edicoes", "docs")
@@ -335,6 +447,7 @@ def main():
         testar_historico(raiz)
         testar_envio(raiz)
         testar_cli(tmp)
+        testar_cadernos(tmp)
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
     print("\n" + ("TUDO CERTO" if not falhas else "%d FALHA(S):\n  - " % len(falhas) + "\n  - ".join(falhas)))
