@@ -30,6 +30,10 @@ python3 main.py coletar --caderno marketing
 cat dados/candidatos/marketing-DATA-fontes.log
 grep "^## " dados/candidatos/marketing-DATA.md
 ```
+  Anote o que esses três comandos mostraram e, no fim, desfaça o que a coleta regravou, para o teste não deixar nada para commit (se a nuvem pedir commit no fim, **não faça**):
+```bash
+git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short
+```
   Responda com a contagem de candidatos por seção, as fontes que falharam, com o motivo, e as que responderam sem itens (os blogs das plataformas publicam pouco: sem itens num dia é normal).
 - Leia a seção 2 do `manual/MANUAL_MARKETING.md` (quando sai) e o "Feedback recebido" do `preferencias.md`.
 - O segundo `historico` é o da **geral**: anote as histórias de marketing que ela deu desde a última edição do caderno (MANUAL_MARKETING, seção 3).
@@ -52,7 +56,11 @@ Escolha **um** caminho (MANUAL_MARKETING, seção 2) e escreva o porquê numa li
 ```bash
 python3 main.py guardar DATA --caderno marketing -m "Marketing: curadoria de DATA"
 ```
-  3. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria.
+  3. Apague o que só servia para hoje, para não sobrar nada sem commit (a curadoria já está na main):
+```bash
+git checkout -q -- dados/ edicoes/ docs/ && git clean -fdq -- dados/ edicoes/ docs/ && git status --short
+```
+  4. Termine com o resumo final: "Sem edição hoje: <uma linha com o porquê>", quantos itens guardou e quantos há na curadoria. **Não** rode `montar`, `registrar`, `enviar` nem `publicar`, e não faça outro commit, mesmo que a nuvem peça.
 
 ### Passo 2a: pauta
 Leia agora, inteiros, o `manual/MANUAL_MARKETING.md` e, do manual geral, as seções 2, 3, 5, 9, 11, 13, 14 e 15. Pegue o **número** da edição, que é o "próxima: nº" do histórico do caderno, e veja as histórias em andamento: o que já saiu aqui só volta com "o que mudou desde [data]".
