@@ -8,6 +8,10 @@
 #   fontes     — arquivo de fontes do caderno
 #   manual     — manual de redação do caderno (complementa o da geral)
 #   roteiro    — passo a passo da rotina do caderno
+#   dias_envio — (opcional) os dias fixos do caderno; o `main.py historico --caderno X` diz se hoje é um deles
+#   curadoria  — (opcional) `nao` se o caderno não guarda curadoria entre as edições (o histórico deixa de falar dela)
+#
+# Encerrados em 22/10/2026 (envio desligado): ia, economia (virou bloco do Mercado) e marketing (virou seção da geral).
 
 mercado:
   nome: "Inteligência Pragmática · Mercado"
