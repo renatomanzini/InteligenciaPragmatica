@@ -88,7 +88,7 @@ A geral sai todo dia e fala muito de IA. O caderno **não é uma segunda geral d
 8. **#### 🧠 IA NA PRÁTICA**: o arco da seção 6 do manual geral, de **300 a 500 palavras**. O ⚠️ freio de realidade é obrigatório, o advogado aparece sempre que fizer sentido, e o **Como isso vira serviço** também. O **Para testar hoje** é bem-vindo aqui, desde que caiba num Mac de 8 GB ou numa conta gratuita.
 9. **#### RADAR**: de 3 a 6 linhas `→` com o resto que importa: China, pesquisa, IA no Brasil, negócios de IA (rodada só se mudar o mercado, não rodada pequena).
 10. **Pergunta de fechamento:** uma linha que faz o leitor pensar no próprio trabalho.
-11. **Fecho** de uma linha que aponta para o próximo dia fixo: "Até quinta." ou "Até segunda."
+11. **Fecho** de uma linha que aponta para o próximo dia fixo: "Até quarta." (na segunda), "Até sexta." (na quarta) ou "Até segunda." (na sexta).
 
 Alvo: **de 1.300 a 2.000 palavras**. Período fraco é edição curta: só o bom dia, O QUE MUDOU DE VERDADE, IA NA PRÁTICA, a pergunta e o fecho já são uma edição. Seção nenhuma é preenchida para completar.
 

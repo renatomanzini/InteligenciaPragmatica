@@ -98,7 +98,7 @@ Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e 
 |---|---|---|---|
 | **Mercado** | Dias úteis, de manhã. Sai também uma **edição extra** quando o pregão tem gatilho (ver o manual). | `fontes_mercado.yaml` + o painel de cotações (B3, CNBC, AwesomeAPI, CNN, alternative.me) | `manual/MANUAL_MERCADO.md` e `manual/ROTINA_MERCADO.md` |
 | **Niterói** | Segunda, quarta e sexta, de manhã. Na sexta, traz também o **bloco semanal de Vassouras e Búzios**. | `fontes_niteroi.yaml` (prefeituras, NitTrans, Águas de Niterói e a imprensa local) | `manual/MANUAL_NITEROI.md` e `manual/ROTINA_NITEROI.md` |
-| **IA** | Pesquisa todo dia e sai segunda e quinta, de manhã (os dias fixos). Fora deles, só sai **edição extra** com notícia muito importante. Vai mais fundo que a geral: o que mudou de verdade, modelos novos, open source, ferramentas e agentes, regulação e o IA na prática. | `fontes_ia.yaml` (laboratórios, open source, ferramentas, regulação, China e Brasil) + Hacker News, GitHub em alta, Hugging Face e Reddit | `manual/MANUAL_IA.md` e `manual/ROTINA_IA.md` |
+| **IA** | Pesquisa todo dia e sai segunda, quarta e sexta, de manhã (os dias fixos). Fora deles, só sai **edição extra** com notícia muito importante. Vai mais fundo que a geral: o que mudou de verdade, modelos novos, open source, ferramentas e agentes, regulação e o IA na prática. | `fontes_ia.yaml` (laboratórios, open source, ferramentas, regulação, China e Brasil) + Hacker News, GitHub em alta, Hugging Face e Reddit | `manual/MANUAL_IA.md` e `manual/ROTINA_IA.md` |
 
 **Como funciona por dentro:**
 - As edições de um caderno ficam em `edicoes/<caderno>/AAAA-MM-DD/`. A edição extra fica em `AAAA-MM-DD-extra/`.
