@@ -41,7 +41,7 @@ python3 main.py coletar --caderno economia
 python3 main.py economia-painel DATA
 ```
 - O painel fica em `edicoes/economia/DATA/painel.md`. Leia, mas **não edite**. Se uma fonte do painel falhar, siga sem ela: o rodapé do painel já avisa.
-- Leia `edicoes/economia/DATA/oficiais.md`: os dados do painel que saíram desde a última edição (🆕), os releases do IBGE do período e a agenda dos próximos dias. Se o IBGE estiver "fora do ar" (aconteceu na nuvem em 22/10), procure a agenda da semana com WebSearch ("agenda econômica da semana IBGE BC") e os resultados na imprensa.
+- Leia `edicoes/economia/DATA/oficiais.md`: os dados do painel que saíram desde a última edição (🆕), os releases do IBGE do período e a agenda dos próximos dias. Se o IBGE estiver "fora do ar" ou vier sem nenhum item (aconteceu nos dois testes na nuvem em 22/10), procure a agenda da semana com WebSearch ("agenda econômica da semana IBGE BC") e os resultados na imprensa.
 - Leia a curadoria (`dados/economia/curadoria.md`) e os candidatos sem os já cobertos, só o começo de cada linha, e o radar à parte:
 ```bash
 grep -E "^## |^- \[" dados/candidatos/economia-DATA.md | grep -v "JÁ COBERTO" | cut -c1-230
