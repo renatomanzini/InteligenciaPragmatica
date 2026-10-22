@@ -20,7 +20,7 @@ mercado:
 niteroi:
   nome: "Inteligência Pragmática · Niterói"
   remetente: "IP · Niterói"
-  envio: desligado
+  envio: ligado
   fontes: fontes_niteroi.yaml
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md
