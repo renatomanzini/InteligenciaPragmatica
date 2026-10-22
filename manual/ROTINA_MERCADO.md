@@ -19,7 +19,7 @@ O estilo e as regras estão em `manual/MANUAL_MERCADO.md`, que complementa o `ma
 
 ## Passo 0: preparar (os dois modos)
 ```bash
-python3 -m pip install -q -r requirements.txt || python3 -m pip install -q --no-build-isolation -r requirements.txt
+python3 -m pip install -q --no-deps -r requirements.txt
 TZ=America/Sao_Paulo date "+%F %A %H:%M"
 python3 main.py historico --caderno mercado --dias 10
 ```

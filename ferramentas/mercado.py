@@ -72,7 +72,8 @@ def _json(url: str, cabecalhos: Optional[dict] = None):
     cab.update(cabecalhos or {})
     status, corpo, _ = http_get(url, timeout=20, cabecalhos=cab)
     if status != 200:
-        raise RuntimeError("respondeu %s" % status)
+        trecho = re.sub(r"\s+", " ", (corpo or b"")[:160].decode("utf-8", "replace")).strip()
+        raise RuntimeError("respondeu %s%s" % (status, (": " + trecho) if trecho else ""))
     return json.loads(corpo.decode("utf-8"))
 
 

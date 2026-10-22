@@ -230,7 +230,7 @@ def cmd_mercado_alarme(args) -> int:
     else:
         print("SEM ALARME NUMÉRICO: nenhum gatilho de preço disparou hoje.")
     if painel["falhas"]:
-        print("Fontes fora do ar: %s" % ", ".join(sorted(painel["falhas"])))
+        print("Fontes fora do ar: %s" % "; ".join("%s (%s)" % kv for kv in sorted(painel["falhas"].items())))
     return 0
 
 

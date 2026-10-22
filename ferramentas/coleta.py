@@ -17,7 +17,12 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlsplit, urlunsplit
 
-import feedparser
+try:  # o feedparser precisa do sgmllib; na nuvem o pip não compila o sgmllib3k, então usamos a cópia local
+    import sgmllib  # noqa: F401
+except ImportError:
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "_vendor"))
+import feedparser  # noqa: E402
 
 from . import cadernos, historico
 from .util import FUSO, agora_brasilia, hoje_brasilia, http_get, ler_yaml, normalizar_url
