@@ -10,6 +10,7 @@ import os
 import re
 import threading
 import time
+import unicodedata
 import zlib
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
@@ -33,6 +34,7 @@ PRAZO = 25  # tempo total máximo da 1ª tentativa (s)
 PRAZO_RETENTATIVA = 12
 RESUMO_JSON = 300
 RESUMO_MD = 160
+FILTRO_RESUMO = 400  # quanto do resumo o filtro de fonte olha
 RADAR_MAX_PAGINAS = 8
 RADAR_MAX_BYTES = 1_500_000  # o suficiente para ler os intertítulos da edição
 
@@ -158,6 +160,20 @@ def _id_curto(url: str) -> str:
     return hashlib.sha1(_chave(url).encode("utf-8")).hexdigest()[:10]
 
 
+def _sem_acento(s: str) -> str:
+    return "".join(ch for ch in unicodedata.normalize("NFKD", s) if not unicodedata.combining(ch)).lower()
+
+
+def _passa_filtro(filtro, texto: str) -> bool:
+    """Filtro de fonte: lista de palavras (ou uma só); basta uma aparecer, sem ligar para acento,
+    maiúscula ou hífen (vale também para o endereço: '.../niteroi-ganha-...' casa com 'Niterói')."""
+    if not filtro:
+        return True
+    palavras = [filtro] if isinstance(filtro, str) else filtro
+    alvo = _sem_acento(texto).replace("-", " ")
+    return any(_sem_acento(str(p)).replace("-", " ") in alvo for p in palavras)
+
+
 def _iso(dt: Optional[datetime]) -> Optional[str]:
     return dt.astimezone(FUSO).isoformat(timespec="seconds") if dt else None
 
@@ -227,8 +243,29 @@ def _stat(ok: bool, itens: int, erro: Optional[str], t0: float, tipo: str, **mai
 
 # ───────────────────────── RSS ─────────────────────────
 
+def _pagina_feed(url: str, n: int) -> str:
+    """Endereço da página N de um feed do WordPress (?paged=N)."""
+    return url if n == 1 else "%s%spaged=%d" % (url, "&" if "?" in url else "?", n)
+
+
+def _mais_paginas(url: str, primeira, paginas: int, inicio: datetime) -> list:
+    """Itens das páginas 2..N do feed, enquanto a página anterior ainda tiver item dentro da janela.
+    Serve para sites que publicam muito e só mostram os 10 últimos no feed (prefeituras)."""
+    entradas, ultima = list(primeira.entries), primeira
+    for n in range(2, paginas + 1):
+        datas = [d for d in (_data_entrada(e) for e in ultima.entries) if d]
+        if not datas or min(datas) < inicio:
+            break
+        status, corpo, _ = _baixar(_pagina_feed(url, n), tentativas=2)
+        ultima = feedparser.parse(corpo) if status == 200 else None
+        if not ultima or not ultima.entries:
+            break
+        entradas += ultima.entries
+    return entradas
+
+
 def _ler_feed(nome: str, url: str, tema: str, tipo: str, inicio: datetime, fim: datetime,
-              limite: int, radar: bool = False) -> Tuple[List[dict], dict]:
+              limite: int, radar: bool = False, filtro=None, paginas: int = 1) -> Tuple[List[dict], dict]:
     t0 = time.time()
     status, corpo, final = 0, b"", url
     d = None
@@ -248,8 +285,9 @@ def _ler_feed(nome: str, url: str, tema: str, tipo: str, inicio: datetime, fim: 
         motivo = "XML inválido" if (d and d.bozo) else "feed sem itens"
         return [], _stat(False, 0, motivo, t0, "rss")
 
+    entradas = _mais_paginas(url, d, paginas, inicio) if paginas > 1 else d.entries
     itens = []
-    for e in d.entries:
+    for e in entradas:
         link = (e.get("link") or "").strip()
         titulo = _texto(e.get("title"))
         if not link or not titulo:
@@ -261,6 +299,9 @@ def _ler_feed(nome: str, url: str, tema: str, tipo: str, inicio: datetime, fim: 
         resumo = _texto(e.get("summary"))
         if not resumo and not radar and e.get("content"):
             resumo = _texto(e["content"][0].get("value"))
+        # só o começo do resumo: em feed com o texto inteiro, a cidade citada de passagem não conta
+        if not _passa_filtro(filtro, " ".join((titulo, resumo[:FILTRO_RESUMO], link))):
+            continue
         extra = {}
         if radar:
             html = (e["content"][0].get("value") if e.get("content") else e.get("summary")) or ""
@@ -271,7 +312,7 @@ def _ler_feed(nome: str, url: str, tema: str, tipo: str, inicio: datetime, fim: 
     com_data = [c for c in itens if c["publicado_em"]]
     sem_data = [c for c in itens if not c["publicado_em"]]
     itens = (com_data + sem_data)[:limite]
-    return itens, _stat(True, len(itens), None, t0, "rss", total_no_feed=len(d.entries))
+    return itens, _stat(True, len(itens), None, t0, "rss", total_no_feed=len(entradas))
 
 
 # ───────────────────────── Especiais ─────────────────────────
@@ -551,7 +592,8 @@ def _linha_md(c: dict) -> str:
 
 
 def _montar_md(data: date, inicio: datetime, fim: datetime, horas: int, candidatos: List[dict],
-               stats: dict, paginas: List[dict]) -> str:
+               stats: dict, paginas: List[dict], rotulos: Optional[dict] = None) -> str:
+    """rotulos: {tema: rótulo} do arquivo de fontes (opcional); os temas dele vêm primeiro, nessa ordem."""
     falharam = sum(1 for s in stats.values() if not s["ok"])
     linhas = [
         "# Candidatos de %s" % data.isoformat(),
@@ -563,9 +605,10 @@ def _montar_md(data: date, inicio: datetime, fim: datetime, horas: int, candidat
         "",
     ]
     normais = [c for c in candidatos if not c["radar"]]
-    conhecidos = {t for t, _ in TEMAS}
+    ordem = [(t, r) for t, r in (rotulos or {}).items()] + [t for t in TEMAS[:-1] if t[0] not in (rotulos or {})]
+    conhecidos = {t for t, _ in ordem} | {TEMAS[-1][0]}
     outros = sorted({c["tema"] for c in normais} - conhecidos)
-    for tema, rotulo in TEMAS[:-1] + [(o, o.capitalize()) for o in outros] + TEMAS[-1:]:
+    for tema, rotulo in ordem + [(o, o.capitalize()) for o in outros] + TEMAS[-1:]:
         itens = [c for c in normais if c["tema"] == tema]
         if not itens:
             continue
@@ -621,8 +664,11 @@ def coletar(data: date, raiz: Path, caderno: str = cadernos.GERAL) -> dict:
     tarefas = []  # (nome, tipo, função)
     for f in fontes:
         if f.get("rss"):
-            tarefas.append((f["nome"], "rss", lambda f=f: _ler_feed(
-                f["nome"], f["rss"], f.get("tema", "outro"), f.get("tipo", "imprensa"), inicio, fim, limite)))
+            # janela_horas na fonte vale só para ela (ex.: bloco semanal de outra cidade)
+            inicio_f = fim - timedelta(hours=int(f["janela_horas"])) if f.get("janela_horas") else inicio
+            tarefas.append((f["nome"], "rss", lambda f=f, inicio_f=inicio_f: _ler_feed(
+                f["nome"], f["rss"], f.get("tema", "outro"), f.get("tipo", "imprensa"), inicio_f, fim,
+                int(f.get("limite") or limite), filtro=f.get("filtro"), paginas=int(f.get("paginas") or 1))))
     for r in radar_cfg:
         if r.get("rss"):
             tarefas.append((r["nome"], "radar_rss", lambda r=r: _ler_feed(
@@ -705,8 +751,8 @@ def coletar(data: date, raiz: Path, caderno: str = cadernos.GERAL) -> dict:
     nome_base = cadernos.prefixo(caderno) + data.isoformat()
     base = pasta / nome_base
     base.with_suffix(".json").write_text(json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8")
-    base.with_suffix(".md").write_text(_montar_md(data, inicio, fim, horas, candidatos, stats, paginas),
-                                       encoding="utf-8")
+    base.with_suffix(".md").write_text(_montar_md(data, inicio, fim, horas, candidatos, stats, paginas,
+                                                  cfg.get("temas")), encoding="utf-8")
     (pasta / (nome_base + "-fontes.log")).write_text(_montar_log(data, stats), encoding="utf-8")
 
     print("%d candidatos de %d fontes (%d falharam), em %.0f s. Arquivo: %s"

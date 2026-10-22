@@ -444,6 +444,65 @@ def testar_cadernos(tmp: Path):
     conferir(all(e.get("caderno") == "mercado" for e in historico.carregar(raiz, "mercado")), "entradas marcadas com o caderno")
 
 
+FEED_FALSO = """<?xml version="1.0"?><rss version="2.0"><channel><title>Jornal</title>%s</channel></rss>"""
+ITEM_FALSO = "<item><title>%s</title><link>https://jornal.exemplo/%s</link><pubDate>%s</pubDate><description>%s</description></item>"
+
+
+def testar_coleta_filtros():
+    secao("coleta: filtro por cidade e páginas extras do feed (caderno Niterói)")
+    from datetime import datetime, timedelta, timezone
+    from email.utils import format_datetime
+    from ferramentas import coleta
+    conferir(coleta._passa_filtro(["Niterói"], "Obra em NITEROI começa hoje"), "filtro ignora acento e maiúscula")
+    conferir(coleta._passa_filtro("Búzios", "https://site/policia-prende-em-buzios-x"), "filtro olha o endereço também")
+    conferir(not coleta._passa_filtro(["Niterói"], "Tiroteio em Queimados"), "filtro barra outra cidade")
+    conferir(coleta._passa_filtro(None, "qualquer coisa"), "sem filtro, tudo passa")
+    conferir(coleta._pagina_feed("https://s/feed/", 2) == "https://s/feed/?paged=2"
+             and coleta._pagina_feed("https://s/?s=X&feed=rss2", 3) == "https://s/?s=X&feed=rss2&paged=3",
+             "endereço da página N do feed")
+
+    agora = datetime.now(timezone.utc)
+
+    def item(n, horas, titulo, resumo=""):
+        return ITEM_FALSO % (titulo, "n%d" % n, format_datetime(agora - timedelta(hours=horas)), resumo)
+    # página 1: itens de 1 a 10 h atrás; página 2: de 20 a 30 h; página 3: de 100 h (fora da janela de 48 h)
+    paginas = {
+        1: [item(i, i, "Niterói abre vagas %d" % i) for i in range(1, 11)],
+        2: [item(10 + i, 20 + i, "Notícia de Niterói %d" % i) for i in range(1, 11)],
+        3: [item(30, 100, "Niterói antiga")],
+    }
+    pedidos = []
+    original = coleta._baixar
+    try:
+        def baixar_falso(url, *a, **k):
+            pedidos.append(url)
+            n = int(url.rsplit("paged=", 1)[1]) if "paged=" in url else 1
+            return 200, (FEED_FALSO % "".join(paginas.get(n, []))).encode(), url
+        coleta._baixar = baixar_falso
+        fim = agora + timedelta(minutes=1)
+        itens, stat = coleta._ler_feed("Jornal", "https://jornal.exemplo/feed/", "niteroi", "imprensa",
+                                       fim - timedelta(hours=48), fim, 50, paginas=5)
+        conferir(len(itens) == 20, "lê as páginas 1 e 2, que estão na janela (%d itens)" % len(itens))
+        conferir(len(pedidos) == 3, "para na página 3, que já sai da janela (%d pedidos)" % len(pedidos))
+        pedidos.clear()
+        itens, _ = coleta._ler_feed("Jornal", "https://jornal.exemplo/feed/", "niteroi", "imprensa",
+                                    fim - timedelta(hours=48), fim, 50)
+        conferir(len(itens) == 10 and len(pedidos) == 1, "sem 'paginas', lê só a primeira")
+        paginas[1] = [item(1, 1, "Tiroteio em Queimados", "Texto longo " * 60 + "e também em Niterói"),
+                      item(2, 2, "Obras na orla", "A prefeitura de Niterói começou as obras")]
+        itens, _ = coleta._ler_feed("Jornal", "https://jornal.exemplo/feed/", "niteroi", "imprensa",
+                                    fim - timedelta(hours=48), fim, 50, filtro=["Niterói"])
+        conferir([c["titulo"] for c in itens] == ["Obras na orla"],
+                 "filtro usa o título e o começo do resumo; cidade citada de passagem no fim não conta")
+    finally:
+        coleta._baixar = original
+    md = coleta._montar_md(date(2026, 10, 22), agora, agora, 48,
+                           [coleta._candidato("A", "https://a/1", "F", "buzios", "imprensa", None),
+                            coleta._candidato("B", "https://a/2", "F", "niteroi", "imprensa", None)],
+                           {}, [], {"niteroi": "Niterói", "buzios": "Búzios"})
+    conferir(md.index("## Niterói (1)") < md.index("## Búzios (1)"), "seções com o nome e a ordem do arquivo de fontes")
+
+
 def fotografia():
     """Lista de arquivos de edicoes/ e docs/ e o estado do historico.json do projeto real."""
     arquivos = sorted(str(p.relative_to(RAIZ_PROJETO)) for pasta in ("edicoes", "docs")
@@ -464,6 +523,7 @@ def main():
         testar_envio(raiz)
         testar_cli(tmp)
         testar_cadernos(tmp)
+        testar_coleta_filtros()
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
     print("\n" + ("TUDO CERTO" if not falhas else "%d FALHA(S):\n  - " % len(falhas) + "\n  - ".join(falhas)))

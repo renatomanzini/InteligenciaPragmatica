@@ -1,0 +1,66 @@
+# Fontes do caderno Niterói e região. Mesmo formato do fontes.yaml da geral, com 4 campos a mais por fonte:
+#   filtro       — só entram as notícias que citam uma dessas palavras (título, resumo ou endereço),
+#                  sem ligar para acento. Serve para jornais regionais que cobrem muitas cidades.
+#   janela_horas — janela própria da fonte (o bloco semanal de Vassouras e Búzios olha a semana inteira).
+#   paginas      — quantas páginas do feed ler (prefeituras publicam muito e o feed só mostra as 10 últimas).
+#   limite       — máximo de itens dessa fonte (no lugar do limite_por_fonte).
+#
+# Testadas uma a uma em 22/10/2026 (no Mac). Descartadas no teste:
+#   Câmara de Niterói (sem RSS; a página entra abaixo), O Dia (RSS parado em 2018), G1 Rio antigo (parado em 2018),
+#   O Perú Molhado (feed parado e com spam), Correio da Manhã (RSS dá 403), Diário do Rio (403),
+#   busca e tag do Diário do Vale (anti-robô; fica o feed geral),
+#   busca do O Fluminense por Vassouras (só trazia outras cidades),
+#   Univassouras (feed parado em 2022), Câmara de Búzios (não abriu), Google Notícias (links do Google, não da fonte).
+#
+# tema: niteroi | vassouras | buzios
+
+janela_horas:
+  padrao: 48      # quarta e sexta: desde a edição anterior
+  segunda: 72     # pega sexta, sábado e domingo
+  sabado: 48
+  domingo: 48
+
+limite_por_fonte: 12
+
+# Ordem e nome das seções no arquivo de candidatos.
+temas:
+  niteroi: "Niterói"
+  vassouras: "Vassouras (bloco semanal, só na sexta)"
+  buzios: "Búzios (bloco semanal, só na sexta)"
+
+fontes:
+  # ───────────── Niterói: fontes oficiais ─────────────
+  - {nome: Prefeitura de Niterói, tema: niteroi, tipo: primaria, rss: "https://niteroi.rj.gov.br/feed/", paginas: 5, limite: 40, ativo: true}
+  - {nome: NitTrans (trânsito), tema: niteroi, tipo: primaria, rss: "https://nittrans.niteroi.rj.gov.br/feed/", ativo: true}
+  - {nome: Águas de Niterói, tema: niteroi, tipo: primaria, rss: "https://www.grupoaguasdobrasil.com.br/aguas-niteroi/feed/", ativo: true}
+  - {nome: UFF, tema: niteroi, tipo: primaria, rss: "https://www.uff.br/feed/", filtro: [Niterói, Antônio Pedro], ativo: true}
+  - {nome: Câmara Municipal de Niterói, tema: niteroi, tipo: primaria, pagina: "https://www.camaraniteroi.rj.gov.br/site/noticias/", ativo: true}
+  - {nome: Diário Oficial de Niterói, tema: niteroi, tipo: primaria, pagina: "https://diariooficial.niteroi.rj.gov.br/ (PDF do dia: /do/AAAA/MM_Mês/DD.pdf, ex.: /do/2026/10_Out/22.pdf)", ativo: true}
+
+  # ───────────── Niterói: imprensa ─────────────
+  - {nome: A Seguir Niterói, tema: niteroi, tipo: imprensa, rss: "https://aseguirniteroi.com.br/categoria-de-noticia/noticias/feed/", paginas: 3, ativo: true}
+  - {nome: O São Gonçalo, tema: niteroi, tipo: imprensa, rss: "https://www.osaogoncalo.com.br/rss", filtro: [Niterói], ativo: true}
+  - {nome: Enfoco, tema: niteroi, tipo: imprensa, rss: "https://enfoco.com.br/categoria/niteroi/feed/", paginas: 3, ativo: true}
+  - {nome: O Fluminense, tema: niteroi, tipo: imprensa, rss: "https://ofluminense.com.br/category/niteroi/feed/", paginas: 3, ativo: true}
+  - {nome: Folha do Leste, tema: niteroi, tipo: imprensa, rss: "https://folhadoleste.com.br/?s=Niter%C3%B3i&feed=rss2", filtro: [Niterói], paginas: 2, ativo: true}
+  - {nome: O Globo Rio, tema: niteroi, tipo: imprensa, rss: "https://pox.globo.com/rss/oglobo/rio", filtro: [Niterói], ativo: true}
+  - {nome: G1 Rio, tema: niteroi, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/rio-de-janeiro/", filtro: [Niterói], ativo: true}
+  - {nome: Extra, tema: niteroi, tipo: imprensa, rss: "https://pox.globo.com/rss/extra/", filtro: [Niterói], ativo: true}
+  - {nome: O Dia Niterói, tema: niteroi, tipo: imprensa, pagina: "https://odia.ig.com.br/niteroi", ativo: true}
+  - {nome: A Tribuna RJ, tema: niteroi, tipo: imprensa, pagina: "https://www.atribunarj.com.br/", ativo: true}
+
+  # ───────────── Vassouras (bloco semanal) ─────────────
+  - {nome: Prefeitura de Vassouras, tema: vassouras, tipo: primaria, rss: "https://www.vassouras.rj.gov.br/feed/", janela_horas: 168, ativo: true}
+  - {nome: G1 Sul do Rio e Costa Verde, tema: vassouras, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/sul-do-rio-costa-verde/", filtro: [Vassouras], janela_horas: 168, ativo: true}
+  - {nome: Diário do Vale, tema: vassouras, tipo: imprensa, rss: "https://diariodovale.com.br/feed/", filtro: [Vassouras], janela_horas: 168, paginas: 4, ativo: true}
+  - {nome: A Voz da Cidade, tema: vassouras, tipo: imprensa, rss: "https://avozdacidade.com/wp/?s=Vassouras&feed=rss2", filtro: [Vassouras], janela_horas: 168, paginas: 2, ativo: true}
+  - {nome: Entre-Rios Jornal, tema: vassouras, tipo: imprensa, rss: "https://www.entreriosjornal.com/feeds/posts/default?alt=rss&max-results=150", filtro: [Vassouras], janela_horas: 168, ativo: true}
+  - {nome: Câmara Municipal de Vassouras, tema: vassouras, tipo: primaria, pagina: "https://www.vassouras.rj.leg.br/institucional/noticias", ativo: true}
+
+  # ───────────── Búzios (bloco semanal) ─────────────
+  - {nome: Prefeitura de Búzios, tema: buzios, tipo: primaria, rss: "https://buzios.rj.gov.br/feed/", paginas: 5, limite: 30, janela_horas: 168, ativo: true}
+  - {nome: Prensa de Babel, tema: buzios, tipo: imprensa, rss: "https://prensadebabel.com.br/category/buzios/feed/", janela_horas: 168, paginas: 3, ativo: true}
+  - {nome: G1 Região dos Lagos, tema: buzios, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/regiao-dos-lagos/", filtro: [Búzios], janela_horas: 168, ativo: true}
+  - {nome: Folha dos Lagos, tema: buzios, tipo: imprensa, rss: "https://www.folhadoslagos.com/ultimas-noticias/rss/", filtro: [Búzios], janela_horas: 168, ativo: true}
+  - {nome: RC24h, tema: buzios, tipo: imprensa, rss: "https://rc24h.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: true}
+  - {nome: Clique Diário, tema: buzios, tipo: imprensa, rss: "https://cliquediario.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: true}

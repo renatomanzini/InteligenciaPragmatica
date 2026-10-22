@@ -16,3 +16,11 @@ mercado:
   fontes: fontes_mercado.yaml
   manual: manual/MANUAL_MERCADO.md
   roteiro: manual/ROTINA_MERCADO.md
+
+niteroi:
+  nome: "Inteligência Pragmática · Niterói"
+  remetente: "IP · Niterói"
+  envio: desligado
+  fontes: fontes_niteroi.yaml
+  manual: manual/MANUAL_NITEROI.md
+  roteiro: manual/ROTINA_NITEROI.md
