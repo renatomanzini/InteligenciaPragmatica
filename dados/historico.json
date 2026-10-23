@@ -1559,5 +1559,142 @@
       "radar"
     ],
     "caderno": "mercado"
+  },
+  {
+    "data": "2026-10-23",
+    "tipo": "sexta",
+    "numero": 2,
+    "assunto": "temporal hoje à noite e água cortada na terça (27/10)",
+    "previa": "+ trilhas grátis, curso técnico do Senac e a nota fiscal de Búzios",
+    "dia": "normal",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "cedae-imunana-laranjal-2026",
+        "titulo": "Cedae detalha a parada de 24 horas do Sistema Imunana-Laranjal na terça (27/10)",
+        "tema": "niteroi",
+        "urls": [
+          "https://www.cedae.com.br/Noticias/detalhe/sistema-imunana-laranjal-cedae-faz-manutencao-anual-no-dia-27-de-outubro/id/1014"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "aviso-tempestade-inmet-22-25-out",
+        "titulo": "Temporal previsto para a noite desta sexta (23/10), com aviso amarelo do Inmet até domingo (25/10)",
+        "tema": "niteroi",
+        "urls": [
+          "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/10/23/previsao-do-tempo-hoje-para-niteroi-rj-sol-com-muitas-nuvens-e-pancadas-de-chuva-a-tarde-a-noite-ocorre-temporal.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "trilhas-neltur-outubro-2026",
+        "titulo": "Neltur faz três trilhas gratuitas até 31/10, com inscrição por e-mail",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/trilhas-gratuitas-niteroi-outubro-inscricoes/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "praia-sem-barreiras-nanismo-2026",
+        "titulo": "Praia Sem Barreiras tem edição especial em Icaraí no sábado (31/10)",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/praia-sem-barreiras-tera-edicao-especial-no-dia-31-em-icarai-com-inclusao-e-conscientizacao-sobre-o-nanismo/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "tenis-de-mesa-transpetro-niteroi",
+        "titulo": "Projeto gratuito de tênis de mesa no Cantagalo tem vagas para jovens de 6 a 17 anos",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/prefeitura-de-niteroi-e-transpetro-se-unem-em-projeto-gratuito-de-tenis-de-mesa-no-espaco-nova-geracao/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "senac-estetica-niteroi-2026",
+        "titulo": "Senac abre curso técnico gratuito de Estética em Niterói para alunos da rede estadual",
+        "tema": "niteroi",
+        "urls": [
+          "https://ofluminense.com.br/senac-niteroi-curso-tecnico-estetica-gratuito-eja-novembro/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "inspetoria-guarda-municipal-2026",
+        "titulo": "Prefeitura lança edital da Inspetoria Regional da Guarda Municipal, no Centro",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/prefeitura-de-niteroi-lanca-edital-para-construcao-da-inspetoria-regional-da-guarda-municipal-no-centro/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "moloks-clin-centro-2026",
+        "titulo": "Clin instala três moloks no Centro; cidade tem 74, e reciclagem foi 5,1% do lixo coletado em 2025",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/clin-intensifica-coleta-seletiva-com-instalacao-de-novos-moloks-no-centro-de-niteroi/",
+          "https://ofluminense.com.br/niteroi-novos-moloks-centro-reciclagem-5-por-cento/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "cinema-icarai-obras",
+        "titulo": "Cinema Icaraí: palco do salão de concertos concluído e lajes das salas de cinema prontas",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/cinema-icarai-obras-palco-salas-praca-getulio-vargas/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "fme-elevadores-escolas-2026",
+        "titulo": "FME planeja 11 elevadores e duas plataformas de acessibilidade, sem prazo nem escolas definidos",
+        "tema": "niteroi",
+        "urls": [
+          "https://enfoco.com.br/noticias/regiao/niteroi/niteroi-planeja-instalar-elevadores-e-plataformas-de-acessibilidade-em-escolas-municipais/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "buzios-nfse-nacional-nov-2026",
+        "titulo": "Búzios exige NFS-e no padrão nacional de ME e EPP do Simples a partir de 1º/11",
+        "tema": "buzios",
+        "urls": [
+          "https://buzios.rj.gov.br/prefeitura-de-buzios-informa-sobre-obrigatoriedade-da-nota-fiscal-de-servicos-eletronica-no-padrao-nacional-a-partir-de-novembro/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "buzios-catadores-lei-2247",
+        "titulo": "Lei 2.247/2026 reconhece catadores de Búzios como agentes ambientais",
+        "tema": "buzios",
+        "urls": [
+          "https://prensadebabel.com.br/buzios-lei-catadores-agentes-ambientais/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "buzios-bituqueiras-piloto",
+        "titulo": "Búzios começa em 25/11 projeto-piloto com 20 bituqueiras nas praias",
+        "tema": "buzios",
+        "urls": [
+          "https://buzios.rj.gov.br/buzios-inicia-projeto-piloto-para-instalar-20-bituqueiras-em-praias-em-parceria-com-a-prolagos/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "na_cidade",
+      "agenda",
+      "vassouras_buzios"
+    ],
+    "caderno": "niteroi"
   }
 ]
