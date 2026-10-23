@@ -1,6 +1,6 @@
 """Coleta de candidatos: RSS, fontes especiais (APIs), radar de newsletters.
 
-Uso: coletar(data, raiz) -> dict. Grava em dados/candidatos/AAAA-MM-DD.{json,md} e -fontes.log.
+Uso: coletar(data, raiz) -> dict. Grava em dados/candidatos/AAAA-MM-DD.md e -fontes.log.
 Nenhuma falha de fonte derruba a coleta: o erro vai para o log e a coleta segue.
 """
 import hashlib
@@ -801,7 +801,6 @@ def coletar(data: date, raiz: Path, caderno: str = cadernos.GERAL) -> dict:
     pasta.mkdir(parents=True, exist_ok=True)
     nome_base = cadernos.prefixo(caderno) + data.isoformat()
     base = pasta / nome_base
-    base.with_suffix(".json").write_text(json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8")
     base.with_suffix(".md").write_text(_montar_md(data, inicio, fim, horas, candidatos, stats, paginas,
                                                   cfg.get("temas")), encoding="utf-8")
     (pasta / (nome_base + "-fontes.log")).write_text(_montar_log(data, stats), encoding="utf-8")

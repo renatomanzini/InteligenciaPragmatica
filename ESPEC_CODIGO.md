@@ -32,7 +32,7 @@ ferramentas/
   envio.py                  envio pelo Resend
 dados/
   historico.json
-  candidatos/AAAA-MM-DD.json, AAAA-MM-DD.md, AAAA-MM-DD-fontes.log
+  candidatos/AAAA-MM-DD.md, AAAA-MM-DD-fontes.log
 edicoes/AAAA-MM-DD/
   edicao.md                 escrita pela rotina (formato abaixo)
   verificacao.md            log de checagem escrito pela rotina (não vai na edição)
@@ -137,7 +137,6 @@ python main.py --dry-run [AAAA-MM-DD]
    `ja_coberto` é true quando a url (sem query string e sem barra final) aparece em alguma história de `dados/historico.json`.
 6. Remove duplicatas por url normalizada.
 7. Grava:
-   - `dados/candidatos/AAAA-MM-DD.json`: a lista completa e um bloco `stats` por fonte (ok, itens, erro).
    - `dados/candidatos/AAAA-MM-DD.md`: compacto, para o Claude ler. A ordem é:
      1. cabeçalho com data, janela e totais;
      2. seções por tema (IA, China, Economia, Negócios, Marketing, Direito & Tech, Filosofia, Comunidade);
