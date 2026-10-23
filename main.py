@@ -39,11 +39,6 @@ def _carregar_env() -> None:
 
 _carregar_env()
 
-try:  # prefere IPv4 (evita esperas em redes com IPv6 quebrado); opcional
-    from ferramentas import rede  # noqa: E402,F401
-except ImportError:
-    pass
-
 
 # ───────────────────────── ajudantes ─────────────────────────
 
@@ -312,35 +307,6 @@ def cmd_economia_painel(args) -> int:
     return 0
 
 
-def cmd_configurar_email(args) -> int:
-    """Pede a chave do Resend sem mostrar na tela e grava no .env (fora do git)."""
-    import getpass
-    import os
-    print("Configuração do e-mail (Resend). Nada do que você digitar aparece na tela nem vai para o GitHub.")
-    chave = ""
-    for tentativa in range(3):
-        chave = getpass.getpass("Cole a chave do Resend (começa com re_) e aperte Enter: ").strip()
-        if chave.startswith("re_"):
-            break
-        if not chave:
-            print("Não recebi nada: o colar não funcionou. Clique dentro desta janela e use Cmd+V.")
-        else:
-            # Mostra só o começo e o tamanho, para ajudar sem expor a chave.
-            print("O que chegou começa com '%s' e tem %d caracteres. A chave do Resend começa com 're_'."
-                  % (chave[:3], len(chave)))
-            print("No Resend, a chave aparece uma vez só, logo depois de 'Create API Key'.")
-            print("Se ela sumiu, crie outra e copie com o botão de copiar.")
-    else:
-        print("Nada foi gravado. Rode o comando de novo quando tiver a chave.")
-        return 1
-    destino = input("E-mail que recebe a newsletter: ").strip() or os.environ.get("EMAIL_DESTINO", "")
-    arq = RAIZ / ".env"
-    arq.write_text("RESEND_API_KEY=%s\nEMAIL_DESTINO=%s\n" % (chave, destino), encoding="utf-8")
-    os.chmod(arq, 0o600)
-    print("Pronto: chave guardada em .env (só você lê esse arquivo). Pode voltar para o Claude.")
-    return 0
-
-
 def cmd_dry_run(data_arg: Optional[str]) -> int:
     """Ensaio: coleta, checa links, monta e abre o e-mail no navegador. Nunca envia."""
     coletou = False
@@ -455,8 +421,6 @@ def criar_parser() -> argparse.ArgumentParser:
     c.add_argument("--sem-gravar", action="store_true", help="teste de fontes: só mostra, não grava nada")
     c.set_defaults(func=cmd_economia_painel)
 
-    c = sub.add_parser("configurar-email", help="guarda a chave do Resend no .env (pede sem mostrar na tela)")
-    c.set_defaults(func=cmd_configurar_email)
     return p
 
 

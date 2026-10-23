@@ -8,7 +8,6 @@ nome: Inteligência Pragmática
 envio: ligado
 
 horario_entrega: "06:00"        # horário de Brasília
-fuso: America/Sao_Paulo
 
 # Endereço público do arquivo de edições (preenchido quando o GitHub Pages existir).
 site_url: "https://renatomanzini.github.io/InteligenciaPragmatica"

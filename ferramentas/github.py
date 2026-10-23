@@ -84,15 +84,3 @@ def info(repo: str) -> dict:
         "html_url": d.get("html_url"),
         "arquivado": d.get("archived"),
     }
-
-
-def linha(d: dict) -> str:
-    """Uma linha legível por repositório (usada pelo comando `github` do main.py)."""
-    if d.get("erro"):
-        return "%s: ERRO — %s" % (d.get("repo"), d["erro"])
-    est = d.get("estrelas")
-    estrelas = "{:,}".format(est).replace(",", ".") if isinstance(est, int) else "?"
-    return "%s · %s estrelas · %s forks · criado em %s · último push %s%s · %s · %s" % (
-        d["full_name"], estrelas, d.get("forks"), (d.get("created_at") or "?")[:10],
-        (d.get("pushed_at") or "?")[:10], " · ARQUIVADO" if d.get("arquivado") else "",
-        d.get("descricao") or "(sem descrição)", d["html_url"])

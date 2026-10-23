@@ -443,7 +443,3 @@ def gravar_painel(pasta_edicao: str, raiz: Path, painel: Optional[dict] = None) 
     (dados / ("%s.json" % pasta_edicao)).write_text(json.dumps(painel, ensure_ascii=False, indent=2),
                                                     encoding="utf-8")
     return {"painel": painel, "texto": texto, "arquivo": (destino / "painel.md").relative_to(raiz).as_posix()}
-
-
-def pasta_valida(nome: str) -> bool:
-    return bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}(-extra)?", nome or ""))
