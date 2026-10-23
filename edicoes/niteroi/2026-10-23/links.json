@@ -1,0 +1,127 @@
+{
+  "data": "2026-10-23",
+  "verificado_em": "2026-10-23T05:26:16-03:00",
+  "total": 19,
+  "resumo": {
+    "ok": 19,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://www.cedae.com.br/Noticias/detalhe/sistema-imunana-laranjal-cedae-faz-manutencao-anual-no-dia-27-de-outubro/id/1014",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/10/23/previsao-do-tempo-hoje-para-niteroi-rj-sol-com-muitas-nuvens-e-pancadas-de-chuva-a-tarde-a-noite-ocorre-temporal.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/trilhas-gratuitas-niteroi-outubro-inscricoes/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/praia-sem-barreiras-tera-edicao-especial-no-dia-31-em-icarai-com-inclusao-e-conscientizacao-sobre-o-nanismo/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/prefeitura-de-niteroi-e-transpetro-se-unem-em-projeto-gratuito-de-tenis-de-mesa-no-espaco-nova-geracao/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/senac-niteroi-curso-tecnico-estetica-gratuito-eja-novembro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/prefeitura-de-niteroi-lanca-edital-para-construcao-da-inspetoria-regional-da-guarda-municipal-no-centro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/clin-intensifica-coleta-seletiva-com-instalacao-de-novos-moloks-no-centro-de-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/niteroi-novos-moloks-centro-reciclagem-5-por-cento/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/cinema-icarai-obras-palco-salas-praca-getulio-vargas/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://enfoco.com.br/noticias/regiao/niteroi/niteroi-planeja-instalar-elevadores-e-plataformas-de-acessibilidade-em-escolas-municipais/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/prefeitura-de-buzios-informa-sobre-obrigatoriedade-da-nota-fiscal-de-servicos-eletronica-no-padrao-nacional-a-partir-de-novembro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://prensadebabel.com.br/buzios-lei-catadores-agentes-ambientais/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/buzios-inicia-projeto-piloto-para-instalar-20-bituqueiras-em-praias-em-parceria-com-a-prolagos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/previsao-tempo-niteroi-fim-semana-24-25-outubro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://oglobo.globo.com/rio/bairros/niteroi/noticia/2026/10/21/comercio-de-niteroi-preve-abertura-de-mais-vagas-temporarias-no-fim-de-ano.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.gov.br/nfse",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET",
+      "url_final": "https://www.gov.br/nfse/pt-br"
+    },
+    {
+      "url": "https://prensadebabel.com.br/inmet-emite-alerta-de-tempestade-para-sexta23-em-buzios-e-regiao-dos-lagos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/buzios-intensifica-obras-de-drenagem-e-substituicao-de-tubulacoes-antigas-em-varios-pontos-do-municipio-para-evitar-alagamentos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
