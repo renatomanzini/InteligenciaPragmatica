@@ -191,7 +191,7 @@ Lê `edicao.md` (front matter + corpo) e gera três coisas.
 **3. Site em `docs/` (GitHub Pages, PWA instalável):**
 - `docs/AAAA-MM-DD.html`: a mesma edição em versão web. Pode usar `<style>` normal, é responsiva, tem modo claro e escuro (`prefers-color-scheme`) e um link "← todas as edições".
 - `docs/index.html`: a lista de todas as edições (lendo `edicoes/*/edicao.md`), da mais nova para a mais antiga, com data, número, assunto (sem `~~`, mostrando o tachado como `<del>`) e prévia.
-- `docs/manifest.webmanifest`, `docs/sw.js` (cache das páginas visitadas, para ler offline), `docs/icon.svg` e `docs/icon-192.png` / `docs/icon-512.png`. Os PNG são gerados por código puro (zlib + struct): fundo `#0F5C6E` e um "IP" desenhado em blocos de pixel ou uma forma geométrica simples, em cor clara.
+- `docs/manifest.webmanifest`, `docs/sw.js` (cache das páginas visitadas, para ler offline), `docs/icon.svg` e `docs/icon-192.png` / `docs/icon-512.png` são arquivos fixos do repositório, que a montagem não regrava: fundo `#0F5C6E` e um "IP" desenhado em blocos de pixel, em cor clara.
 - As páginas incluem `<link rel="manifest">`, `apple-touch-icon` e `theme-color`.
 - Todos os links internos são **relativos** (o site vai morar em `usuario.github.io/repo/`).
 

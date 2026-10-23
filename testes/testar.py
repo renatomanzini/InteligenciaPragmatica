@@ -98,14 +98,16 @@ def testar_montagem(raiz):
     pasta = raiz / "edicoes" / DATA
     docs = raiz / "docs"
     conferir(res["avisos"] == [], "sem avisos de front matter/TL;DR (%s)" % res["avisos"])
-    for caminho in (pasta / "email.html", pasta / "curta.txt", docs / (DATA + ".html"), docs / "index.html",
-                    docs / "manifest.webmanifest", docs / "sw.js", docs / "icon.svg",
-                    docs / "icon-192.png", docs / "icon-512.png"):
+    for caminho in (pasta / "email.html", pasta / "curta.txt", docs / (DATA + ".html"), docs / "index.html"):
         conferir(caminho.exists() and caminho.stat().st_size > 0, "gerou %s" % caminho.relative_to(raiz))
-    conferir(png_tamanho((docs / "icon-192.png").read_bytes()) == (192, 192), "icon-192.png é um PNG 192x192")
-    conferir(png_tamanho((docs / "icon-512.png").read_bytes()) == (512, 512), "icon-512.png é um PNG 512x512")
-    json.loads((docs / "manifest.webmanifest").read_text(encoding="utf-8"))
-    conferir(True, "manifest.webmanifest é um JSON válido")
+    # o manifest, o service worker e os ícones são arquivos fixos do docs/ do projeto: a montagem não os regrava
+    fixos = RAIZ_PROJETO / "docs"
+    conferir(not (docs / "manifest.webmanifest").exists(), "a montagem não regrava o manifest nem os ícones")
+    conferir(png_tamanho((fixos / "icon-192.png").read_bytes()) == (192, 192), "docs/icon-192.png é um PNG 192x192")
+    conferir(png_tamanho((fixos / "icon-512.png").read_bytes()) == (512, 512), "docs/icon-512.png é um PNG 512x512")
+    manifest = json.loads((fixos / "manifest.webmanifest").read_text(encoding="utf-8"))
+    conferir(manifest["name"] == "Inteligência Pragmática" and (fixos / "icon.svg").exists(),
+             "docs/manifest.webmanifest é um JSON válido, com o nome da geral, e o icon.svg existe")
 
     email = (pasta / "email.html").read_text(encoding="utf-8")
     secao("email.html: convenções convertidas")
@@ -158,7 +160,7 @@ def testar_montagem(raiz):
              "índice lista a edição com data, nº e assunto com <del>")
     conferir("EXEMPLO FICTÍCIO" in indice, "índice mostra a prévia")
     conferir("serviceWorker" in pagina and "serviceWorker" in indice, "páginas registram o service worker")
-    conferir("caches.open" in (docs / "sw.js").read_text(encoding="utf-8"), "sw.js guarda páginas em cache")
+    conferir("caches.open" in (fixos / "sw.js").read_text(encoding="utf-8"), "docs/sw.js guarda páginas em cache")
 
     # segunda edição: o índice deve ordenar da mais nova para a mais antiga
     pasta2 = raiz / "edicoes" / "2026-01-16"
@@ -505,8 +507,6 @@ def testar_cadernos(tmp: Path):
              "página e arquivo do caderno em docs/")
     conferir('href="mercado.html"' in (docs / "index.html").read_text(encoding="utf-8"),
              "o arquivo da geral tem link para o caderno")
-    conferir("Mercado" not in json.loads((docs / "manifest.webmanifest").read_text(encoding="utf-8"))["name"],
-             "o nome do app instalado continua o da geral depois de montar um caderno")
     pagina = (docs / "mercado-2026-01-15.html").read_text(encoding="utf-8")
     conferir('href="mercado.html"' in pagina, "a página volta para o arquivo do caderno")
     conferir("ip/mercado-2026-01-15.html" in (pasta / "curta.txt").read_text(encoding="utf-8"),

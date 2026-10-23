@@ -1,9 +1,6 @@
-"""Montagem: edicao.md → email.html, curta.txt e site PWA em docs/."""
+"""Montagem: edicao.md → email.html, curta.txt e site PWA em docs/ (o manifest, o sw.js e os ícones são fixos)."""
 import html
-import json
 import re
-import struct
-import zlib
 from datetime import date
 from math import ceil
 from pathlib import Path
@@ -299,109 +296,6 @@ def _curta(assunto: str, data_ext: str, corpo: str, site_url: str, data: str, pa
             if len(texto) <= LIMITE_CURTA:
                 return texto
     return melhor
-
-
-# ───────────────────────── ícones do PWA ─────────────────────────
-
-_GLIFO_I = ["XXX", ".X.", ".X.", ".X.", "XXX"]
-_GLIFO_P = ["XXX", "X.X", "XXX", "X..", "X.."]
-_LINHAS_IP = [i + "." + p for i, p in zip(_GLIFO_I, _GLIFO_P)]  # 7 colunas x 5 linhas
-_RGB_FUNDO = (0x0F, 0x5C, 0x6E)
-_RGB_LETRA = (0xFA, 0xF8, 0xF5)
-
-
-def _chunk(tipo: bytes, dados: bytes) -> bytes:
-    corpo = tipo + dados
-    return struct.pack(">I", len(dados)) + corpo + struct.pack(">I", zlib.crc32(corpo) & 0xFFFFFFFF)
-
-
-def gerar_png(tamanho: int) -> bytes:
-    """PNG quadrado com 'IP' em blocos de pixel (zlib + struct, sem bibliotecas)."""
-    cel = max(tamanho // 14, 1)
-    x0 = (tamanho - 7 * cel) // 2
-    y0 = (tamanho - 5 * cel) // 2
-    fundo = bytes(_RGB_FUNDO)
-    letra = bytes(_RGB_LETRA)
-    linha_fundo = b"\x00" + fundo * tamanho
-    brutas = []
-    for y in range(tamanho):
-        if y0 <= y < y0 + 5 * cel:
-            padrao = _LINHAS_IP[(y - y0) // cel]
-            miolo = b"".join((letra if c == "X" else fundo) * cel for c in padrao)
-            resto = tamanho - x0 - 7 * cel
-            brutas.append(b"\x00" + fundo * x0 + miolo + fundo * resto)
-        else:
-            brutas.append(linha_fundo)
-    cabecalho = struct.pack(">IIBBBBB", tamanho, tamanho, 8, 2, 0, 0, 0)
-    return (b"\x89PNG\r\n\x1a\n" + _chunk(b"IHDR", cabecalho)
-            + _chunk(b"IDAT", zlib.compress(b"".join(brutas), 9)) + _chunk(b"IEND", b""))
-
-
-def gerar_svg() -> str:
-    cel, x0, y0 = 10, 35, 45
-    quadrados = []
-    for r, padrao in enumerate(_LINHAS_IP):
-        for c, ch in enumerate(padrao):
-            if ch == "X":
-                quadrados.append('<rect x="%d" y="%d" width="%d" height="%d"/>' % (x0 + c * cel, y0 + r * cel, cel, cel))
-    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">'
-            '<rect width="140" height="140" fill="%s"/><g fill="%s">%s</g></svg>\n'
-            % (C_DEST, C_FUNDO, "".join(quadrados)))
-
-
-SW_JS = """// Service worker: guarda as páginas visitadas para ler offline.
-const VERSAO = 'ip-v1';
-const BASE = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
-
-self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(VERSAO).then((c) => c.addAll(BASE)).then(() => self.skipWaiting()));
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys()
-      .then((ks) => Promise.all(ks.filter((k) => k !== VERSAO).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
-// Rede primeiro (edição sempre fresca); sem rede, usa o que já foi visitado.
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
-  e.respondWith(
-    fetch(req)
-      .then((resp) => {
-        if (resp && resp.ok) {
-          const copia = resp.clone();
-          caches.open(VERSAO).then((c) => c.put(req, copia));
-        }
-        return resp;
-      })
-      .catch(() => caches.match(req).then((r) => r || caches.match('index.html')))
-  );
-});
-"""
-
-
-def _manifest(nome: str) -> str:
-    dados = {
-        "name": nome,
-        "short_name": "Pragmática",
-        "description": "Newsletter diária feita por IA para um leitor só.",
-        "lang": "pt-BR",
-        "start_url": "./",
-        "scope": "./",
-        "display": "standalone",
-        "background_color": C_FUNDO,
-        "theme_color": C_DEST,
-        "icons": [
-            {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
-            {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"},
-            {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml"},
-        ],
-    }
-    return json.dumps(dados, ensure_ascii=False, indent=2) + "\n"
 
 
 # ───────────────────────── páginas ─────────────────────────
@@ -776,23 +670,12 @@ def montar(data: str, raiz: Path, config: dict, caderno: str = cadernos.GERAL) -
     _escrever_indices(raiz, docs)
     indice = docs / nome_indice
 
-    # O app instalado é um só (a geral e os cadernos): o nome dele não muda com o caderno montado por último.
-    nome_app = cadernos.config(raiz).get("nome") or NOME_PADRAO
-    (docs / "manifest.webmanifest").write_text(_manifest(nome_app), encoding="utf-8")
-    (docs / "sw.js").write_text(SW_JS, encoding="utf-8")
-    (docs / "icon.svg").write_text(gerar_svg(), encoding="utf-8")
-    (docs / "icon-192.png").write_bytes(gerar_png(192))
-    (docs / "icon-512.png").write_bytes(gerar_png(512))
-    (docs / ".nojekyll").write_text("", encoding="utf-8")
-
     return {
         "data": data,
         "email": _rel(email, raiz),
         "curta": _rel(curta, raiz),
         "pagina": _rel(pagina, raiz),
         "indice": _rel(indice, raiz),
-        "pwa": ["docs/manifest.webmanifest", "docs/sw.js", "docs/icon.svg",
-                "docs/icon-192.png", "docs/icon-512.png"],
         "caracteres_curta": len(texto_curta),
         "minutos": minutos,
         "avisos": avisos,
