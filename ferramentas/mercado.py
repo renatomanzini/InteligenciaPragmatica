@@ -350,12 +350,20 @@ def painel_md(painel: dict) -> str:
             return prefixo + _dia(primeiro["data"])
         return "último fechamento"
 
+    def marca(item, ref):
+        """A linha que não bate com o rótulo do bloco diz a dela: outro pregão (reserva FRED) ou ao vivo × fechamento."""
+        data, hora = item.get("data"), item.get("hora")
+        if (data, bool(hora)) == ref:
+            return ""
+        dia = _dia(data) if data and data != ref[0] else ""
+        if hora:
+            return " (%sàs %s)" % (dia + " " if dia else "", hora)
+        return " (%s)" % _dia(data) if data else ""
+
     def bloco(titulo, chaves):
         itens = [it[c] for c in chaves if c in it]
-        # O rótulo do bloco vem do primeiro item; na reserva FRED, cada série pode ser de um pregão diferente.
-        ref = itens[0].get("data") if itens else None
-        linhas = [_linha(i).rstrip() + (" (%s)" % _dia(i["data"]) if i.get("data") and i["data"] != ref else "")
-                  for i in itens]
+        ref = (itens[0].get("data"), bool(itens[0].get("hora"))) if itens else None
+        linhas = [_linha(i).rstrip() + marca(i, ref) for i in itens]
         if linhas:
             rotulo = quando(chaves)
             cab = "**%s**%s" % (titulo, (" · " + rotulo) if rotulo else "")

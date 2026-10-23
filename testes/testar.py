@@ -465,6 +465,20 @@ def testar_cadernos(tmp: Path):
     conferir("Bolsas americanas** · fechamento de 13/01" in t and "24.000 pts ▼ 5,00% (14/01)" in t
              and "46.000 pts ▼ 5,00%\n" in t and "VIX**: 40,00 ▲ 20,00%\n" in t,
              "datas mistas no bloco: só a Nasdaq, de outro pregão, ganha (14/01)")
+    misto = {"gerado_em": "2026-10-23T18:37:00-03:00", "falhas": {}, "itens": {
+        "brent": {"nome": "Petróleo Brent", "valor": 70.0, "var": 1.0, "unidade": "US$", "data": "2026-10-22", "fonte": "CNBC"},
+        "btc_usd": {"nome": "Bitcoin", "valor": 100000.0, "var": 2.0, "unidade": "US$", "data": "2026-10-22",
+                    "hora": "09:17", "fonte": "CoinGecko"},
+        "dolar": {"nome": "Dólar", "valor": 5.4, "var": 0.5, "unidade": "R$", "data": "2026-10-23", "fonte": "PTAX"},
+        "euro": {"nome": "Euro", "valor": 6.3, "var": 0.4, "unidade": "R$", "data": "2026-10-23", "hora": "18:30",
+                 "fonte": "AwesomeAPI"},
+        "libra": {"nome": "Libra", "valor": 7.2, "var": 0.3, "unidade": "R$", "data": "2026-10-24", "hora": "08:00",
+                  "fonte": "AwesomeAPI"}}}
+    t = mercado.painel_md(misto)
+    conferir("Petróleo, ouro e bitcoin** · fechamento de 22/10" in t and "▲ 2,00% (às 09:17)" in t,
+             "bitcoin ao vivo num bloco de fechamento ganha (às HH:MM)")
+    conferir("Moedas** · PTAX de 23/10" in t and "R$ 5,40 ▲ 0,50%\n" in t and "▲ 0,40% (às 18:30)" in t
+             and "▲ 0,30% (24/10 às 08:00)" in t, "cotação ao vivo num bloco de PTAX ganha a hora (e a data, se for outra)")
     conferir(mercado.alarme(fred, hoje=date(2026, 1, 15)) == [], "FRED velho (nem o VIX de 40) não dispara alarme")
     faltam = mercado.nao_conferidos(fred, hoje=date(2026, 1, 15))
     conferir({"S&P 500", "Nasdaq", "Dow Jones", "VIX", "Ibovespa", "Dólar", "Petróleo Brent"} <= set(faltam),
