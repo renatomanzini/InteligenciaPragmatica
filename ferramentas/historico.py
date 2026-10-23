@@ -121,6 +121,9 @@ def resumo(dias: int = 14, raiz: Path = Path("."), caderno: str = cadernos.GERAL
                 ultima[h["id"]] = (e["data"], h.get("titulo"))
             elif h.get("id") in ultima:
                 ultima.pop(h["id"])
+    # Sem menção há 45 dias, a história esfriou: a lista entra no contexto de toda rotina e só cresceria.
+    corte = str(hoje_brasilia() - timedelta(days=45))
+    ultima = {hid: v for hid, v in ultima.items() if v[0] >= corte}
     if ultima:
         linhas.append("## Histórias em andamento (data da última menção)")
         for hid, (d, titulo) in sorted(ultima.items(), key=lambda x: x[1][0], reverse=True):

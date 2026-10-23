@@ -14,7 +14,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 RAIZ_PROJETO = Path(__file__).resolve().parent.parent
@@ -197,7 +197,16 @@ def testar_historico(raiz):
     conferir(len(json.loads(arq.read_text(encoding="utf-8"))) == 1, "registrar de novo substitui, não duplica")
     texto = historico.resumo(36500, raiz)
     conferir("exemplo-agente-de-contratos" in texto and "(em andamento)" in texto, "resumo lista as histórias e o 'em andamento'")
-    conferir("Histórias em andamento" in texto and DATA in texto, "resumo tem a seção de histórias em andamento")
+    # a seção "Histórias em andamento" mostra só as citadas nos últimos 45 dias
+    raiz45 = raiz.parent / "hist45"
+    (raiz45 / "dados").mkdir(parents=True)
+    hoje = util.hoje_brasilia()
+    (raiz45 / "dados" / "historico.json").write_text(json.dumps([
+        {"data": str(hoje - timedelta(days=50)), "numero": 1, "historias": [{"id": "velha", "em_andamento": True}]},
+        {"data": str(hoje - timedelta(days=10)), "numero": 2, "historias": [{"id": "nova", "em_andamento": True}]},
+    ]), encoding="utf-8")
+    andamento = historico.resumo(60, raiz45).split("## Histórias em andamento")[-1]
+    conferir("- nova:" in andamento and "velha" not in andamento, "em andamento: some a história sem menção há mais de 45 dias")
     conferir(historico.proximo_numero(raiz) == 2, "próximo número é 2")
     conferir("https://www.python.org" in {u.rstrip("/") for u in historico.urls_cobertas(raiz)} or len(historico.urls_cobertas(raiz)) >= 3,
              "urls_cobertas devolve as URLs das histórias")
