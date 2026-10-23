@@ -210,8 +210,6 @@ def testar_historico(raiz):
     andamento = historico.resumo(60, raiz45).split("## Histórias em andamento")[-1]
     conferir("- nova:" in andamento and "velha" not in andamento, "em andamento: some a história sem menção há mais de 45 dias")
     conferir(historico.proximo_numero(raiz) == 2, "próximo número é 2")
-    conferir("https://www.python.org" in {u.rstrip("/") for u in historico.urls_cobertas(raiz)} or len(historico.urls_cobertas(raiz)) >= 3,
-             "urls_cobertas devolve as URLs das histórias")
 
 
 def testar_envio(raiz):
@@ -537,7 +535,7 @@ FEED_FALSO = """<?xml version="1.0"?><rss version="2.0"><channel><title>Jornal</
 ITEM_FALSO = "<item><title>%s</title><link>https://jornal.exemplo/%s</link><pubDate>%s</pubDate><description>%s</description></item>"
 
 
-def testar_coleta_filtros():
+def testar_coleta_filtros(tmp: Path):
     secao("coleta: filtro por cidade e páginas extras do feed (caderno Niterói)")
     from datetime import datetime, timedelta, timezone
     from email.utils import format_datetime
@@ -598,6 +596,27 @@ def testar_coleta_filtros():
     setas = montagem._setas("→ **Água:** falta na terça ([Cedae](https://c))\n→ **Trânsito**: rua fechada")
     conferir(setas == [("Água", "falta na terça"), ("Trânsito", "rua fechada")],
              "linha → com os dois-pontos dentro ou fora do negrito (%s)" % setas)
+
+    # coletar de ponta a ponta, com o feed falso: JÁ COBERTO pela chave (sem utm) ou pela URL sem query
+    raiz = tmp / "coleta"
+    (raiz / "dados").mkdir(parents=True)
+    (raiz / "fontes.yaml").write_text('fontes:\n  - nome: Jornal\n    rss: "https://jornal.exemplo/feed/"\n'
+                                      '    tema: outro\n', encoding="utf-8")
+    (raiz / "dados" / "historico.json").write_text(json.dumps([{"data": "2026-01-01", "historias": [
+        {"id": "a", "urls": ["https://www.jornal.exemplo/n1/?utm_source=x", "https://jornal.exemplo/n2?pagina=2"]}]}]),
+        encoding="utf-8")
+    feed = (FEED_FALSO % "".join([item(1, 1, "Saiu um"), item(2, 2, "Saiu dois"), item(3, 3, "Novidade")])).encode()
+    try:
+        coleta._baixar = lambda url, *a, **k: (200, feed, url)
+        hoje = util.hoje_brasilia()
+        res = coleta.coletar(hoje, raiz)
+    finally:
+        coleta._baixar = original
+    cobertos = {c["titulo"]: c["ja_coberto"] for c in res["candidatos"]}
+    conferir(cobertos == {"Saiu um": True, "Saiu dois": True, "Novidade": False},
+             "coletar marca JÁ COBERTO o que o histórico já deu (%s)" % cobertos)
+    conferir(sorted(a.name for a in (raiz / "dados" / "candidatos").iterdir()) == ["%s-fontes.log" % hoje, "%s.md" % hoje],
+             "coletar grava só o .md e o log (sem o .json)")
 
 
 TENDENCIAS_FALSAS = """<html><body>
@@ -1060,7 +1079,7 @@ def main():
         testar_cadernos(tmp)
         testar_horario_de_entrega(raiz)
         testar_publicar_em_paralelo(tmp)
-        testar_coleta_filtros()
+        testar_coleta_filtros(tmp)
         testar_coleta_ia()
         testar_caderno_economia(tmp)
         testar_arquivos_do_projeto()

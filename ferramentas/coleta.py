@@ -775,11 +775,12 @@ def coletar(data: date, raiz: Path, caderno: str = cadernos.GERAL) -> dict:
 
     candidatos = _deduplicar(candidatos)
 
-    cobertas_norm = historico.urls_cobertas(raiz)
-    cobertas_chave = set()
+    cobertas_norm, cobertas_chave = set(), set()
     for ed in historico.carregar(raiz):
         for h in ed.get("historias") or []:
-            cobertas_chave.update(_chave(u) for u in h.get("urls") or [])
+            for u in h.get("urls") or []:
+                cobertas_norm.add(normalizar_url(u))
+                cobertas_chave.add(_chave(u))
     for c in candidatos:
         c["ja_coberto"] = _coberto(c["url"], cobertas_chave, cobertas_norm)
 

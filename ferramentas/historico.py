@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from . import cadernos
-from .util import hoje_brasilia, ler_front_matter, normalizar_url
+from .util import hoje_brasilia, ler_front_matter
 
 CAMPOS = ["data", "tipo", "numero", "assunto", "previa", "dia", "breakthrough", "historias", "formatos"]
 
@@ -57,15 +57,6 @@ def ultima_data(raiz: Path, caderno: str = cadernos.GERAL, antes_de: Optional[st
     if antes_de:
         dias = [d for d in dias if d < str(antes_de)[:10]]
     return max(dias) if dias else None
-
-
-def urls_cobertas(raiz: Path) -> set:
-    urls = set()
-    for e in carregar(raiz):
-        for h in e.get("historias") or []:
-            for u in h.get("urls") or []:
-                urls.add(normalizar_url(u))
-    return urls
 
 
 NOMES_DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]

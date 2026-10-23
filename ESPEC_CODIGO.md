@@ -154,7 +154,6 @@ Chama `https://api.github.com/repos/DONO/REPO` → full_name, estrelas, forks, c
 - `registrar(data, raiz)`: lê o front matter de `edicoes/DATA/edicao.md`. Insere ou substitui a entrada daquela data com data, tipo, numero, assunto, previa, dia, breakthrough, historias e formatos. Ordena por data e grava com `ensure_ascii=False, indent=2`.
 - `resumo(dias=14, raiz) -> str`: um texto legível com as últimas N edições, contendo a data, o tipo, o assunto e uma linha por história (id, título, tema e "(em andamento)"). Inclui também uma seção "Histórias em andamento", com a data da última menção (só as citadas nos últimos 45 dias), e os formatos usados por dia, para variar. É isso que o comando `historico` imprime.
 - `proximo_numero(raiz) -> int`.
-- `urls_cobertas(raiz) -> set`.
 
 ## `links.py`: `verificar(data, raiz) -> dict`
 - Extrai todas as URLs http(s) do `edicao.md`: links Markdown e URLs soltas, inclusive no front matter (`historias[].urls`).
