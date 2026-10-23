@@ -1415,5 +1415,98 @@
       "pergunta"
     ],
     "caderno": "marketing"
+  },
+  {
+    "data": "2026-10-23",
+    "tipo": "dia_util",
+    "numero": 8,
+    "assunto": "a ia que tenta provar que o código não quebra",
+    "previa": "+ a receita que já roda em 70 agentes",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "verificacao-formal-llm",
+        "titulo": "Anthropic usa o Claude para provar formalmente 239 pontos de entrada de 123 bibliotecas abertas",
+        "tema": "ia",
+        "urls": [
+          "https://www.anthropic.com/research/formal-verification"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "agent-skills-aaif",
+        "titulo": "Anthropic doa o padrão Agent Skills à Agentic AI Foundation",
+        "tema": "ia",
+        "urls": [
+          "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "bradesco-3t-2026",
+        "titulo": "Lucro do Bradesco fica estável no 3º tri com inadimplência a 4,6%",
+        "tema": "economia",
+        "urls": [
+          "https://www.bloomberglinea.com.br/negocios/lucro-do-bradesco-perde-folego-no-3-tri-com-alta-da-inadimplencia-e-das-provisoes/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "petroleo-brent-2026",
+        "titulo": "Brent chega a cerca de US$ 114, perto da máxima de 4 anos",
+        "tema": "economia",
+        "urls": [
+          "https://tradingeconomics.com/commodity/brent-crude-oil"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "tractian-unicornio",
+        "titulo": "Tractian capta US$ 130 mi e vira unicórnio",
+        "tema": "negocios",
+        "urls": [
+          "https://www.bloomberglinea.com.br/startups/tractian-capta-us-130-milhoes-e-se-torna-o-mais-novo-unicornio-de-ia-brasileiro/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "openai-rodada-ipo",
+        "titulo": "OpenAI negocia US$ 30 bi a US$ 1,25 tri, abaixo do valor reportado antes",
+        "tema": "negocios",
+        "urls": [
+          "https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-termos-comerciais-ia",
+        "titulo": "Anunciantes tiram anúncios alterados pela IA da Meta antes dos termos de 30/10",
+        "tema": "marketing",
+        "urls": [
+          "https://www.adweek.com/media/advertisers-pull-meta-ads-that-had-unwanted-ai-glow-ups/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "ai-overviews-buscas-comerciais",
+        "titulo": "AI Overviews aparecem em 88% das buscas comerciais monitoradas pela Semrush",
+        "tema": "marketing",
+        "urls": [
+          "https://www.semrush.com/blog/ai-overviews-commercial-modifiers-study/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "explicador",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
