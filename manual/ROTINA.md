@@ -24,6 +24,7 @@ python main.py historico --dias 21
 - Na nuvem, o `pip` solto é de outro Python (3.13). Por isso, use sempre `python3 -m pip`, com `--no-deps --ignore-installed`. O `sgmllib3k`, de que o feedparser precisa, não compila lá, e o projeto já traz uma cópia em `ferramentas/_vendor/`. O PyYAML de lá foi instalado pelo sistema e não pode ser trocado. Confira com `python3 -c "import feedparser, yaml, markdown"`.
 - Leia `config.yaml`, `preferencias.md` (e principalmente o "Feedback recebido") e `manual/MANUAL_DE_REDACAO.md`, inteiro.
 - Defina **DATA**, que é a data de hoje em Brasília, e o **tipo**: sábado → `sabado`, domingo → `domingo`, os outros dias → `dia_util`.
+- Se `edicoes/DATA/envio.json` já existir, a edição já saiu: não gere outra nem reenvie. **Pare aqui** e termine com "Edição de hoje já enviada."
 - O `%u` é o número do dia da semana: 1 = segunda, 2 = terça, 3 = quarta, 4 = quinta, 5 = sexta, 6 = sábado, 7 = domingo.
 - **MARKETING** = sim se o `%u` for 2 ou 4 (terça ou quinta): a edição leva a seção `#### MARKETING DIGITAL` (manual, seção 17). Nos outros dias, não.
 - Pegue o **número** da edição, que é o "próxima: nº" do histórico.
