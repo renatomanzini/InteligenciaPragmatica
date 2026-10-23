@@ -285,12 +285,17 @@ def cmd_mercado_alarme(args) -> int:
     from ferramentas import mercado
     painel = mercado.coletar_painel()
     motivos = mercado.alarme(painel)
+    faltam = mercado.nao_conferidos(painel)
     if motivos:
         print("ALARME: há gatilho numérico para edição extra.")
         for m in motivos:
             print("- " + m)
+    elif faltam:
+        print("SEM ALARME NUMÉRICO nos itens conferidos (os outros estão abaixo).")
     else:
         print("SEM ALARME NUMÉRICO: nenhum gatilho de preço disparou hoje.")
+    if faltam:
+        print("NÃO CONFERIDO (sem número de hoje): %s. Confira pelas manchetes antes de decidir." % ", ".join(faltam))
     if painel["falhas"]:
         print("Fontes fora do ar: %s" % "; ".join("%s (%s)" % kv for kv in sorted(painel["falhas"].items())))
     if painel.get("reservas_usadas"):

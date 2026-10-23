@@ -386,6 +386,25 @@ def testar_cadernos(tmp: Path):
     conferir(len(motivos) == 1 and "Bitcoin" in motivos[0], "alarme dispara com bitcoin -11,2%% hoje (%s)" % motivos)
     conferir(mercado.alarme(PAINEL_FALSO, hoje=date(2026, 1, 16)) == [], "variação de outro dia não dispara alarme")
 
+    # reserva FRED: cada série pode ser de um pregão; a linha fora da data do bloco ganha a data dela
+    conferir("Juros de 10 anos dos EUA**: 5,05% ▼ 0,10 p.p. (15/01)" in texto, "item com data diferente da do bloco ganha (DD/MM)")
+    fred = {"gerado_em": "2026-01-15T18:37:00-03:00", "falhas": {"CNBC": "respondeu 403"}, "itens": {
+        c: {"nome": n, "valor": v, "var": -5.0, "unidade": "pts", "data": d, "fonte": "FRED"}
+        for c, n, v, d in (("sp500", "S&P 500", 7700.0, "2026-01-13"), ("nasdaq", "Nasdaq", 24000.0, "2026-01-14"),
+                           ("dow", "Dow Jones", 46000.0, "2026-01-13"))}}
+    fred["itens"]["vix"] = {"nome": "VIX", "valor": 40.0, "var": 20.0, "unidade": "", "data": "2026-01-13", "fonte": "FRED"}
+    t = mercado.painel_md(fred)
+    conferir("Bolsas americanas** · fechamento de 13/01" in t and "24.000 pts ▼ 5,00% (14/01)" in t
+             and "46.000 pts ▼ 5,00%\n" in t and "VIX**: 40,00 ▲ 20,00%\n" in t,
+             "datas mistas no bloco: só a Nasdaq, de outro pregão, ganha (14/01)")
+    conferir(mercado.alarme(fred, hoje=date(2026, 1, 15)) == [], "FRED velho (nem o VIX de 40) não dispara alarme")
+    faltam = mercado.nao_conferidos(fred, hoje=date(2026, 1, 15))
+    conferir({"S&P 500", "Nasdaq", "Dow Jones", "VIX", "Ibovespa", "Dólar", "Petróleo Brent"} <= set(faltam),
+             "nao_conferidos lista os gatilhos sem número de hoje (%s)" % faltam)
+    conferir(len(mercado.alarme(fred, hoje=date(2026, 1, 13))) == 3, "o mesmo VIX, no dia dele, dispara")
+    conferir(mercado.nao_conferidos(PAINEL_FALSO, hoje=date(2026, 1, 15)) == ["S&P 500", "Nasdaq", "Dow Jones", "Petróleo Brent", "VIX"],
+             "conferidos: Ibovespa sem data (B3), dólar e bitcoin de hoje")
+
     # reservas: se a principal falha, a reserva cobre só as chaves que faltaram
     fontes_orig, reservas_orig = mercado.FONTES, mercado.RESERVAS
     try:

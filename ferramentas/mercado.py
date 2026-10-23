@@ -351,7 +351,11 @@ def painel_md(painel: dict) -> str:
         return "último fechamento"
 
     def bloco(titulo, chaves):
-        linhas = [_linha(it[c]) for c in chaves if c in it]
+        itens = [it[c] for c in chaves if c in it]
+        # O rótulo do bloco vem do primeiro item; na reserva FRED, cada série pode ser de um pregão diferente.
+        ref = itens[0].get("data") if itens else None
+        linhas = [_linha(i).rstrip() + (" (%s)" % _dia(i["data"]) if i.get("data") and i["data"] != ref else "")
+                  for i in itens]
         if linhas:
             rotulo = quando(chaves)
             cab = "**%s**%s" % (titulo, (" · " + rotulo) if rotulo else "")
@@ -387,21 +391,36 @@ def painel_md(painel: dict) -> str:
 
 # ───────────────────────── alarme da edição extra ─────────────────────────
 
+def _de_hoje(item: Optional[dict], campo: str, hoje: date) -> bool:
+    """O item tem o número de hoje? Sem data (a B3 antes das 10h), vale como atual."""
+    return bool(item) and item.get(campo) is not None and (item.get("data") or "") in ("", hoje.isoformat())
+
+
+def nao_conferidos(painel: dict, hoje: Optional[date] = None) -> List[str]:
+    """Gatilhos de preço sem número de hoje (fonte fora do ar, ou só o fechamento de outro dia): o alarme não os viu."""
+    hoje = hoje or agora_brasilia().date()
+    it = painel["itens"]
+    nomes = {c: n for _, c, n, _ in CNBC + MOEDAS}
+    nomes.update(ibov="Ibovespa", vix="VIX")
+    faltam = [c for c in GATILHOS if not _de_hoje(it.get(c), "var", hoje)]
+    if not _de_hoje(it.get("vix"), "valor", hoje):
+        faltam.append("vix")
+    return [nomes[c] for c in faltam]
+
+
 def alarme(painel: dict, hoje: Optional[date] = None) -> List[str]:
-    """Motivos numéricos para uma edição extra. Só conta variação de pregão de hoje."""
+    """Motivos numéricos para uma edição extra. Só conta número de pregão de hoje (os outros: nao_conferidos)."""
     hoje = hoje or agora_brasilia().date()
     it = painel["itens"]
     motivos = []
     for chave, limite in GATILHOS.items():
         item = it.get(chave)
-        if not item or item.get("var") is None:
-            continue
-        if item.get("data") and item["data"] != hoje.isoformat():
-            continue  # número de outro dia (feriado, mercado fechado)
+        if not _de_hoje(item, "var", hoje):
+            continue  # sem número ou número de outro dia (feriado, mercado fechado, reserva FRED de ontem)
         if abs(item["var"]) >= limite:
             motivos.append("%s %s no dia (gatilho: %s%%)" % (item["nome"], _seta(item["var"]), _br(limite, 1)))
     vix = it.get("vix")
-    if vix and vix["valor"] >= VIX_ALARME:
+    if _de_hoje(vix, "valor", hoje) and vix["valor"] >= VIX_ALARME:
         motivos.append("VIX em %s (gatilho: %s)" % (_br(vix["valor"]), _br(VIX_ALARME, 0)))
     medo = it.get("medo_acoes")
     if medo and (medo["valor"] <= MEDO_EXTREMO or medo["valor"] >= GANANCIA_EXTREMA):
