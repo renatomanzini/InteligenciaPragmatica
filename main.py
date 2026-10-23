@@ -221,28 +221,6 @@ def cmd_publicar(args) -> int:
     return 0
 
 
-def cmd_guardar(args) -> int:
-    """Dia sem edição de um caderno com dias fixos: publica só a curadoria (dados/<caderno>/curadoria.md)."""
-    from ferramentas import publicar
-    caderno = _caderno(args)
-    if caderno == cadernos.GERAL:
-        print("Erro: o guardar é para os cadernos com curadoria; use --caderno.")
-        return 1
-    data = args.data or str(util.hoje_brasilia())
-    try:
-        res = publicar.guardar(data, RAIZ, args.mensagem, caderno)
-    except publicar.ErroPublicacao as e:
-        print("Erro ao guardar a curadoria: %s" % e)
-        return 1
-    if not res["commit"]:
-        print("A curadoria não mudou: nada a publicar.")
-    else:
-        print("Curadoria guardada na main (commit %s, %d tentativa%s): %d itens."
-              % (res["commit"], res["tentativas"], "" if res["tentativas"] == 1 else "s",
-                 cadernos.itens_curadoria(RAIZ, caderno)))
-    return 0
-
-
 def cmd_enviar_pendentes(args) -> int:
     """Rotina de envio: manda, na ordem (geral e depois os cadernos), as edições de hoje ainda não enviadas."""
     from ferramentas import envio
@@ -457,12 +435,6 @@ def criar_parser() -> argparse.ArgumentParser:
     c.add_argument("-m", "--mensagem", required=True, help='mensagem do commit, por ex. "Edição nº 9 — 2026-10-23: ..."')
     c.set_defaults(func=cmd_publicar)
 
-    c = sub.add_parser("guardar", help="dia sem edição: publica só a curadoria do caderno (dados/<caderno>/curadoria.md)")
-    c.add_argument("data", nargs="?", type=_data, metavar="AAAA-MM-DD", help="padrão: hoje")
-    c.add_argument("--caderno", required=True, help="caderno com dias fixos (cadernos.yaml)")
-    c.add_argument("-m", "--mensagem", required=True, help='mensagem do commit, por ex. "Economia: curadoria de 2026-10-23"')
-    c.set_defaults(func=cmd_guardar)
-
     c = sub.add_parser("enviar-pendentes", help="rotina de envio: manda juntas as edições de hoje ainda não enviadas")
     c.set_defaults(func=cmd_enviar_pendentes)
 
@@ -473,12 +445,13 @@ def criar_parser() -> argparse.ArgumentParser:
     c = sub.add_parser("mercado-alarme", help="caderno Mercado: confere os gatilhos de preço da edição extra")
     c.set_defaults(func=cmd_mercado_alarme)
 
-    c = sub.add_parser("economia-painel", help="números oficiais do BC e do IBGE: grava o painel da edição "
-                                              "(do caderno Economia ou do bloco ECONOMIA do Mercado)")
+    c = sub.add_parser("economia-painel", help="números oficiais do BC e do IBGE: grava o painel do bloco "
+                                              "ECONOMIA do Mercado")
     c.add_argument("pasta", nargs="?", type=_pasta, metavar="AAAA-MM-DD", help="padrão: hoje")
-    c.add_argument("--caderno", default="economia", metavar="CADERNO",
-                   help="onde gravar: economia (padrão) ou mercado, para o bloco ECONOMIA de segunda, quarta e sexta "
-                        "(grava painel_economia.md e oficiais.md na pasta da edição do Mercado)")
+    c.add_argument("--caderno", default="mercado", metavar="CADERNO",
+                   help="onde gravar: mercado (padrão), para o bloco ECONOMIA de segunda, quarta e sexta (grava "
+                        "painel_economia.md e oficiais.md na pasta da edição do Mercado), ou economia, o caderno "
+                        "encerrado em 22/10/2026 (o jeito antigo)")
     c.add_argument("--sem-gravar", action="store_true", help="teste de fontes: só mostra, não grava nada")
     c.set_defaults(func=cmd_economia_painel)
 

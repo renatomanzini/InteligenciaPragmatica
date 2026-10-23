@@ -9,7 +9,6 @@
 #   manual     — manual de redação do caderno (complementa o da geral)
 #   roteiro    — passo a passo da rotina do caderno
 #   dias_envio — (opcional) os dias fixos do caderno; o `main.py historico --caderno X` diz se hoje é um deles
-#   curadoria  — (opcional) `nao` se o caderno não guarda curadoria entre as edições (o histórico deixa de falar dela)
 #
 # Encerrados em 22/10/2026 (envio desligado): ia, economia (virou bloco do Mercado) e marketing (virou seção da geral).
 
@@ -26,7 +25,6 @@ niteroi:
   remetente: "IP · Niterói"
   envio: ligado
   dias_envio: [segunda, quarta, sexta]   # dias de EDIÇÃO (Sonnet). Nos outros dias roda o RADAR (Haiku), que só publica uma edição extra se houver aviso urgente
-  curadoria: nao                         # sem curadoria entre as edições: a coleta do dia fixo cobre desde a última edição (48 h; 72 na segunda)
   fontes: fontes_niteroi.yaml
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md

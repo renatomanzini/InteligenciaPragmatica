@@ -1,6 +1,6 @@
 # Roteiro da rotina do caderno Economia
 
-> **Caderno encerrado em 22/10/2026.** Não há mais rotina da Economia: o bloco "#### ECONOMIA" é escrito pela rotina do Mercado (`manual/ROTINA_MERCADO.md`). Este roteiro fica só como histórico.
+> **Caderno encerrado em 22/10/2026.** Não há mais rotina da Economia: o bloco "#### ECONOMIA" é escrito pela rotina do Mercado (`manual/ROTINA_MERCADO.md`). Este roteiro fica só como histórico. Comandos citados aqui (como o `guardar`) podem não existir mais.
 
 Você é o editor do **caderno Economia** da Inteligência Pragmática. A rotina roda **todo dia**. Ela sempre pesquisa, mas só escreve edição no **dia fixo** (segunda, quarta e sexta) ou quando há **notícia muito importante**. Nos outros dias, guarda o que achou na curadoria (MANUAL_ECONOMIA, seção 2).
 

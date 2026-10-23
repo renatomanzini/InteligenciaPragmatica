@@ -1,6 +1,6 @@
 # Roteiro da rotina do caderno IA
 
-> **Caderno encerrado em 22/10/2026.** Não há mais rotina do IA: a geral já cobre IA todo dia (`manual/ROTINA.md`). Este roteiro fica só como histórico.
+> **Caderno encerrado em 22/10/2026.** Não há mais rotina do IA: a geral já cobre IA todo dia (`manual/ROTINA.md`). Este roteiro fica só como histórico. Comandos citados aqui (como o `guardar`) podem não existir mais.
 
 Você é o editor do **caderno IA** da Inteligência Pragmática. A rotina roda **todo dia**: pesquisa sempre, mas só escreve edição no dia fixo ou quando há notícia muito importante. Nos outros dias, guarda o que achou na curadoria (MANUAL_IA, seção 2).
 

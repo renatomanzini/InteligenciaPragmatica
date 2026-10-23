@@ -72,7 +72,7 @@ NOMES_DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domi
 
 
 def situacao(raiz: Path, caderno: str, hoje: Optional[date] = None) -> List[str]:
-    """Para os cadernos com dias fixos: se hoje é dia fixo, a última edição e o tamanho da curadoria."""
+    """Para os cadernos com dias fixos: se hoje é dia fixo e a data da última edição."""
     dias = cadernos.dias_envio(raiz, caderno)
     if not dias:
         return []
@@ -80,16 +80,10 @@ def situacao(raiz: Path, caderno: str, hoje: Optional[date] = None) -> List[str]
     fixos = [NOMES_DIAS[cadernos.DIAS.index(d)] for d in dias]
     fixos_txt = fixos[0] if len(fixos) == 1 else ", ".join(fixos[:-1]) + " e " + fixos[-1]
     eh = cadernos.dia_de_envio(raiz, caderno, hoje)
-    ultima = ultima_data(raiz, caderno)
-    arq = cadernos.arquivo_curadoria(raiz, caderno)
-    linha = "Última edição: %s" % (ultima or "nenhuma")
-    if cadernos.usa_curadoria(raiz, caderno):  # `curadoria: nao` no cadernos.yaml: o caderno não guarda nada entre as edições
-        linha += " · curadoria guardada: %d itens em %s" % (cadernos.itens_curadoria(raiz, caderno),
-                                                           arq.relative_to(raiz).as_posix())
     return [
         "## Hoje: %s, %s · %s (os dias fixos de envio são %s)"
         % (NOMES_DIAS[hoje.weekday()], hoje.strftime("%d/%m"), "DIA FIXO DE ENVIO" if eh else "não é dia fixo", fixos_txt),
-        linha,
+        "Última edição: %s" % (ultima_data(raiz, caderno) or "nenhuma"),
         "",
     ]
 

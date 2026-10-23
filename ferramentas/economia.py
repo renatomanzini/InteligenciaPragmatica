@@ -532,7 +532,7 @@ def _painel_anterior(raiz: Path, pasta_edicao: str, caderno: str) -> Tuple[Optio
 
 
 def gravar_painel(pasta_edicao: str, raiz: Path, painel: Optional[dict] = None, hoje: Optional[date] = None,
-                  caderno: str = CADERNO) -> dict:
+                  caderno: str = "mercado") -> dict:
     """Coleta (se preciso) e grava o painel e o oficiais.md na pasta da edição.
 
     Caderno Economia: painel.md na edição e o JSON em dados/economia/DATA.json.

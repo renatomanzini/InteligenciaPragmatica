@@ -699,7 +699,7 @@ PAINEL_ECONOMIA_FALSO = {
 
 
 def testar_caderno_economia(tmp: Path):
-    secao("caderno Economia: painel oficial, dias fixos, curadoria e histórico")
+    secao("caderno Economia: painel oficial, dias fixos e histórico")
     import copy
     from datetime import timedelta
     from ferramentas import cadernos, economia
@@ -781,7 +781,7 @@ def testar_caderno_economia(tmp: Path):
              "caderno sem dias fixos sai todo dia")
     sit = "\n".join(historico.situacao(raiz, "economia", date(2026, 10, 22)))
     conferir("quinta, 22/10 · não é dia fixo (os dias fixos de envio são segunda, quarta e sexta)" in sit
-             and "curadoria guardada: 0 itens em dados/economia/curadoria.md" in sit, "a situação do dia sai no histórico")
+             and "Última edição: nenhuma" in sit and "curadoria" not in sit, "a situação do dia sai no histórico")
     conferir("DIA FIXO DE ENVIO" in "\n".join(historico.situacao(raiz, "economia", date(2026, 10, 23))), "sexta: dia fixo")
     conferir(historico.situacao(raiz, "mercado") == [], "caderno sem dias fixos não ganha a linha")
     conferir(historico.ultima_data(raiz, "economia") is None and historico._dias_outros(raiz, "economia") == 3,
@@ -802,7 +802,8 @@ def testar_caderno_economia(tmp: Path):
     original = economia.apoio
     try:
         economia.apoio = lambda painel, desde, h: ("# apoio desde %s\n" % desde.isoformat(), [])
-        res = economia.gravar_painel(hoje.isoformat(), raiz, copy.deepcopy(PAINEL_ECONOMIA_FALSO), hoje)
+        res = economia.gravar_painel(hoje.isoformat(), raiz, copy.deepcopy(PAINEL_ECONOMIA_FALSO), hoje,
+                                     caderno=economia.CADERNO)
     finally:
         economia.apoio = original
     pasta = raiz / "edicoes" / "economia" / hoje.isoformat()
@@ -811,23 +812,8 @@ def testar_caderno_economia(tmp: Path):
     conferir((pasta / "oficiais.md").read_text(encoding="utf-8") == "# apoio desde %s\n" % dia_antigo,
              "o apoio da pauta começa na última edição")
     conferir((raiz / "dados" / "economia" / ("%s.json" % hoje.isoformat())).exists(), "o JSON do painel fica em dados/economia")
-    curadoria = cadernos.arquivo_curadoria(raiz, "economia")
-    curadoria.write_text("# Curadoria\n\n## 2026-10-22\n- [juros] Item um (https://a)\n- [mundo] Item dois (https://b)\n",
-                         encoding="utf-8")
-    proprios = publicar_arquivos(raiz, hoje.isoformat(), "economia")
-    conferir(("dados/economia/%s.json" % hoje.isoformat()) in proprios and "dados/economia/curadoria.md" in proprios,
-             "o publicar leva o JSON do painel e a curadoria junto com a edição")
-    conferir(cadernos.itens_curadoria(raiz, "economia") == 2, "conta os itens da curadoria")
-
-    # caderno que não guarda curadoria (Niterói, com o radar no lugar): a linha da situação não fala dela
-    (raiz / "cadernos.yaml").write_text((raiz / "cadernos.yaml").read_text(encoding="utf-8")
-                                        + 'niteroi:\n  dias_envio: [segunda, quarta, sexta]\n  curadoria: nao\n',
-                                        encoding="utf-8")
-    sit = "\n".join(historico.situacao(raiz, "niteroi", date(2026, 10, 26)))
-    conferir("DIA FIXO DE ENVIO" in sit and "Última edição: nenhuma" in sit and "curadoria" not in sit,
-             "curadoria: nao tira a curadoria da situação do dia")
-    conferir(cadernos.usa_curadoria(raiz, "economia") and not cadernos.usa_curadoria(raiz, "niteroi"),
-             "usa_curadoria: sim por padrão, não com `curadoria: nao`")
+    conferir(("dados/economia/%s.json" % hoje.isoformat()) in publicar_arquivos(raiz, hoje.isoformat(), "economia"),
+             "o publicar leva o JSON do painel junto com a edição")
 
     # bloco ECONOMIA do Mercado: painel_economia.md sem o dólar, 🆕 contra o painel anterior, JSON que o publicar leva
     texto_mercado = economia.painel_md(PAINEL_ECONOMIA_FALSO, economia.TITULO_PAINEL_MERCADO, sem=("dolar",))
@@ -940,7 +926,6 @@ def testar_arquivos_do_projeto():
                  "Niterói: 72 horas na segunda e 48 na quarta e na sexta (dias de edição)")
         conferir(all(horas[d] == 30 for d in ("terca", "quinta", "sabado", "domingo")),
                  "Niterói: 30 horas nos dias de radar")
-        conferir(not cadernos.usa_curadoria(raiz, "niteroi"), "Niterói não guarda curadoria entre as edições")
 
 
 def testar_horario_de_entrega(raiz):
@@ -1047,52 +1032,6 @@ def testar_publicar_em_paralelo(tmp: Path):
     conferir(all(("%s nº 1 — teste" % c) in log for c in clones), "os commits das três rotinas estão na main")
 
 
-def testar_guardar_curadoria(tmp: Path):
-    secao("guardar: a curadoria do dia sem edição vai para a main, mesmo com outra rotina publicando")
-    from ferramentas import cadernos, publicar
-
-    def git(cwd, *args):
-        return subprocess.run(["git", "-c", "init.defaultBranch=main"] + list(args), cwd=str(cwd),
-                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
-
-    origem, base = tmp / "guardar" / "origem.git", tmp / "guardar" / "base"
-    origem.mkdir(parents=True)
-    git(origem, "init", "-q", "--bare")
-    base.mkdir()
-    git(base, "init", "-q")
-    (base / "cadernos.yaml").write_text("economia:\n  dias_envio: [segunda, quarta, sexta]\n", encoding="utf-8")
-    (base / "docs").mkdir()
-    (base / "docs" / "index.html").write_text("vazio\n", encoding="utf-8")
-    for cmd in (["config", "user.email", "t@t"], ["config", "user.name", "Teste"], ["add", "-A"],
-                ["commit", "-q", "-m", "base"], ["remote", "add", "origin", str(origem)], ["push", "-q", "origin", "HEAD:main"]):
-        git(base, *cmd)
-    clones = {}
-    for nome in ("economia", "geral"):
-        c = tmp / "guardar" / nome
-        git(tmp / "guardar", "clone", "-q", str(origem), str(c))
-        git(c, "config", "user.email", "t@t")
-        git(c, "config", "user.name", "Teste")
-        clones[nome] = c
-    # a geral publica no meio: a main andou, e o push da curadoria precisa de rebase
-    (clones["geral"] / "docs" / "index.html").write_text("geral nº 9\n", encoding="utf-8")
-    git(clones["geral"], "commit", "-q", "-am", "geral nº 9")
-    git(clones["geral"], "push", "-q", "origin", "HEAD:main")
-    eco = clones["economia"]
-    arq = cadernos.arquivo_curadoria(eco, "economia")
-    arq.parent.mkdir(parents=True)
-    arq.write_text("# Curadoria\n\n## 2026-10-22\n- [juros] Selic (https://a)\n", encoding="utf-8")
-    (eco / "dados" / "candidatos.md").write_text("não vai junto\n", encoding="utf-8")
-    res = publicar.guardar("2026-10-22", eco, "Economia: curadoria de 2026-10-22", "economia", espera=0.1)
-    final = tmp / "guardar" / "final"
-    git(tmp / "guardar", "clone", "-q", str(origem), str(final))
-    conferir(res["commit"] and (final / "dados" / "economia" / "curadoria.md").exists()
-             and (final / "docs" / "index.html").read_text(encoding="utf-8") == "geral nº 9\n",
-             "a curadoria chegou à main sem desfazer a geral publicada no meio")
-    conferir(not (final / "dados" / "candidatos.md").exists(), "o guardar publica só a curadoria")
-    conferir(publicar.guardar("2026-10-22", eco, "de novo", "economia", espera=0.1)["commit"] is None,
-             "sem mudança na curadoria, não faz commit")
-
-
 def cadernos_cfg(raiz, caderno):
     from ferramentas import cadernos as _c
     return _c.config(raiz, caderno)
@@ -1124,7 +1063,6 @@ def main():
         testar_coleta_filtros()
         testar_coleta_ia()
         testar_caderno_economia(tmp)
-        testar_guardar_curadoria(tmp)
         testar_arquivos_do_projeto()
     secao("projeto real")
     conferir(fotografia() == antes, "o teste não criou nem mexeu em nada de edicoes/, docs/ e dados/historico.json")
