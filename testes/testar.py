@@ -266,6 +266,59 @@ def testar_envio(raiz):
                 os.environ[k] = v
 
 
+def testar_enviar_pendentes(tmp: Path):
+    secao("enviar-pendentes (a rotina das 06:00, com o Resend falso)")
+    import contextlib
+    import io
+    from ferramentas import cadernos
+    nomes_env = ("RESEND_API_KEY", "EMAIL_DESTINO", "RESEND_VIA_PROXY")
+    guardadas = {k: os.environ.get(k) for k in nomes_env}  # antes do import: o main.py lê o .env do projeto
+    import main as cli
+    hoje = str(util.hoje_brasilia())
+    raiz = tmp / "pendentes"
+    raiz.mkdir()
+    (raiz / "config.yaml").write_text("envio: ligado\n", encoding="utf-8")
+    (raiz / "cadernos.yaml").write_text("mercado:\n  envio: ligado\nniteroi:\n  envio: ligado\n", encoding="utf-8")
+    pastas = {c: cadernos.pasta_edicoes(raiz, c) / hoje for c in ("geral", "mercado", "niteroi")}
+    for c, pasta in pastas.items():
+        pasta.mkdir(parents=True)
+        (pasta / "edicao.md").write_text('---\nassunto: "%s de hoje"\n---\ncorpo\n' % c, encoding="utf-8")
+        if c != "niteroi":  # o Niterói foi escrito, mas não montado
+            (pasta / "email.html").write_text("<!DOCTYPE html><p>%s</p>" % c, encoding="utf-8")
+            (pasta / "curta.txt").write_text(c, encoding="utf-8")
+    (pastas["mercado"] / "envio.json").write_text('{"id": "id-antigo"}', encoding="utf-8")
+
+    chamadas = []
+    postar, raiz_cli = envio._postar, cli.RAIZ
+    envio._postar = lambda payload, chave: chamadas.append(payload) or {"ok": True, "dados": {"id": "id-pendente"}}
+    cli.RAIZ = raiz
+    os.environ.pop("RESEND_VIA_PROXY", None)
+    os.environ.update(RESEND_API_KEY="chave-de-teste", EMAIL_DESTINO="leitor@exemplo.test")
+    try:
+        saida = io.StringIO()
+        with contextlib.redirect_stdout(saida):
+            codigo = cli.cmd_enviar_pendentes(None)
+        saida = saida.getvalue()
+        conferir([p["subject"] for p in chamadas] == ["geral de hoje"], "só a pendente montada saiu, uma vez (%s)"
+                 % [p["subject"] for p in chamadas])
+        conferir(json.loads((pastas["geral"] / "envio.json").read_text(encoding="utf-8"))["id"] == "id-pendente",
+                 "a pendente gravou o envio.json")
+        conferir("mercado: já enviada" in saida and json.loads(
+            (pastas["mercado"] / "envio.json").read_text(encoding="utf-8"))["id"] == "id-antigo",
+                 "caderno com envio.json é pulado")
+        conferir("niteroi: a edição existe, mas não foi montada" in saida and codigo == 1
+                 and not (pastas["niteroi"] / "envio.json").exists(), "edição sem email.html conta como erro e não envia")
+        with contextlib.redirect_stdout(io.StringIO()):
+            cli.cmd_enviar_pendentes(None)
+        conferir(len(chamadas) == 1, "a segunda rodada não manda nada de novo")
+    finally:
+        envio._postar, cli.RAIZ = postar, raiz_cli
+        for k, v in guardadas.items():
+            os.environ.pop(k, None)
+            if v is not None:
+                os.environ[k] = v
+
+
 def testar_cli(tmp):
     secao("main.py (linha de comando, numa cópia temporária)")
     raiz = preparar_raiz(tmp / "cli", copiar_codigo=True)
@@ -1063,6 +1116,7 @@ def main():
         testar_conversao()
         testar_historico(raiz)
         testar_envio(raiz)
+        testar_enviar_pendentes(tmp)
         testar_cli(tmp)
         testar_cadernos(tmp)
         testar_horario_de_entrega(raiz)
