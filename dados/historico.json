@@ -1508,5 +1508,56 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-23",
+    "tipo": "dia_util",
+    "numero": 2,
+    "assunto": "a meta gastou, a nasdaq pagou",
+    "previa": "+ por que a renda fixa também balança antes da eleição",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "meta-capex-nasdaq-treasuries",
+        "titulo": "Nasdaq tem a maior queda desde junho com o gasto da Meta em IA, e o juro de 10 anos dos EUA cai a 4,96%",
+        "tema": "bolsa_eua",
+        "urls": [
+          "https://valorinveste.globo.com/mercados/renda-variavel/bolsas-e-indices/noticia/2026/10/22/as-magnificas-meta-e-tesla-derretem-em-ny-e-arrastam-nasdaq-entenda.ghtml",
+          "https://investnews.com.br/investimentos/reta-final-da-eleicao-ibovespa-cai-mais-de-1-pressionado-por-pesquisas-dolar-sobe/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "marcacao-a-mercado-prefixados-eleicao",
+        "titulo": "Explicador: por que o prefixado do Tesouro sobe antes da eleição e como a renda fixa perde valor",
+        "tema": "juros",
+        "urls": [
+          "https://valorinveste.globo.com/produtos/renda-fixa/tesouro-direto/noticia/2026/10/22/tesouro-direto-hoje-22-de-outubro-taxas-acompanhe.ghtml",
+          "https://www1.folha.uol.com.br/blogs/de-grao-em-grao/2026/10/como-voce-pode-perder-30-investindo-em-renda-fixa.shtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "newcastle-sc-frango",
+        "titulo": "Foco de Newcastle em SC leva a emergência de 60 dias e a restrições de 5 países ao frango brasileiro",
+        "tema": "setores",
+        "urls": [
+          "https://g1.globo.com/sc/santa-catarina/noticia/2026/10/22/governo-federal-emergencia-sanitaria-em-sc-doenca-de-newcastle.ghtml",
+          "https://exame.com/invest/mercados/doenca-de-newcastle-derruba-acoes-da-mbrf-dona-da-sadia-o-que-dizem-os-bancos/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "painel",
+      "o_que_mexeu",
+      "historia_do_dia",
+      "economia",
+      "explicador",
+      "agenda",
+      "radar"
+    ],
+    "caderno": "mercado"
   }
 ]
