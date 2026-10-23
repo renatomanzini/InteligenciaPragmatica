@@ -202,7 +202,7 @@ def cmd_enviar(args) -> int:
     caderno = _caderno(args)
     data = _resolver_data(args.data, caderno)
     res = envio.enviar(data, RAIZ, _config(caderno), agora=args.agora, forcar=args.forcar, caderno=caderno)
-    # "desligado" e "aguardando" não são erro.
+    # "desligado", "aguardando" e "ja_enviada" não são erro.
     return 1 if res["status"] == "erro" else 0
 
 
@@ -448,7 +448,7 @@ def criar_parser() -> argparse.ArgumentParser:
     c.add_argument("data", nargs="?", type=_pasta, metavar="AAAA-MM-DD")
     c.add_argument("--caderno", default=cadernos.GERAL, help=ajuda_caderno)
     c.add_argument("--agora", action="store_true", help="envia já, sem agendar para o horário de entrega")
-    c.add_argument("--forcar", action="store_true", help="envia mesmo com envio: desligado")
+    c.add_argument("--forcar", action="store_true", help="envia mesmo com envio: desligado ou com a edição já enviada")
     c.set_defaults(func=cmd_enviar)
 
     c = sub.add_parser("publicar", help="grava e publica a edição na main (seguro com várias rotinas ao mesmo tempo)")

@@ -198,6 +198,7 @@ Lê `edicao.md` (front matter + corpo) e gera três coisas.
 
 ## `envio.py`: `enviar(data, raiz, config, agora=False, forcar=False)`
 - Se `config.envio != "ligado"` e não houver `forcar`, recusa com a mensagem "Envio desligado no config.yaml (fase de testes)".
+- Se `edicoes/DATA/envio.json` já existir e não houver `forcar`, não envia de novo (status `ja_enviada`, com o ID antigo).
 - Precisa das variáveis de ambiente `RESEND_API_KEY` e `EMAIL_DESTINO`. Se faltar alguma, avisa qual.
 - Faz `POST https://api.resend.com/emails` com JSON:
   - `from`: "Inteligência Pragmática <onboarding@resend.dev>"

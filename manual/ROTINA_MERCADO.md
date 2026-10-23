@@ -35,6 +35,7 @@ python3 main.py historico --caderno mercado --dias 10
 ## Modo MANHÃ
 
 ### 1. Painel e coleta
+Se `edicoes/mercado/DATA/envio.json` já existir, a edição já saiu: não gere outra nem reenvie. Pare e termine com "Edição de hoje já enviada."
 ```bash
 python3 main.py mercado-painel DATA
 python3 main.py coletar --caderno mercado

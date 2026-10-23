@@ -95,14 +95,20 @@ def _espera_horario(data: str, config: dict) -> Optional[str]:
 
 def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: bool = False,
            caderno: str = cadernos.GERAL) -> dict:
-    """Envia a edição. Devolve {'status': 'enviado' | 'aguardando' | 'desligado' | 'erro', 'mensagem': ...}.
+    """Envia a edição. Devolve {'status': 'enviado' | 'aguardando' | 'ja_enviada' | 'desligado' | 'erro', ...}.
 
     Sem `agora`, antes do horário de entrega a edição só fica pronta ('aguardando').
+    Edição que já tem envio.json não sai de novo (um "Run now" depois das 06:00), salvo com `forcar`.
     """
     data = str(data)
     config = config or {}
     if config.get("envio") != "ligado" and not forcar:
         return _resultado("desligado", "Envio desligado no config.yaml (fase de testes). Nada foi enviado.")
+    pasta = cadernos.pasta_edicoes(raiz, caderno) / data
+    if (pasta / "envio.json").exists() and not forcar:
+        antigo = json.loads((pasta / "envio.json").read_text(encoding="utf-8")).get("id", "?")
+        return _resultado("ja_enviada", "Esta edição já foi enviada (ID do Resend: %s). Nada foi enviado de novo; "
+                                        "para reenviar de propósito, use --forcar." % antigo)
     if not agora:
         horario = _espera_horario(data, config)
         if horario:
@@ -117,7 +123,6 @@ def enviar(data: str, raiz: Path, config: dict, agora: bool = False, forcar: boo
     if faltam:
         return _resultado("erro", "Faltam variáveis de ambiente: %s. Nada foi enviado." % ", ".join(faltam))
 
-    pasta = cadernos.pasta_edicoes(raiz, caderno) / data
     arq_html, arq_curta = pasta / "email.html", pasta / "curta.txt"
     if not (arq_html.exists() and arq_curta.exists()):
         return _resultado("erro", "Faltam email.html e curta.txt em edicoes/%s. Rode antes: python main.py montar %s"

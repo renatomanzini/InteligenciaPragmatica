@@ -159,6 +159,8 @@ Confira se o `edicoes/DATA/email.html` foi gerado sem erro.
 ```bash
 python main.py enviar DATA
 ```
+Se `edicoes/DATA/envio.json` já existir, a edição já saiu: não gere outra nem reenvie (o `enviar` responde "já foi enviada" e não manda nada).
+
 Antes das 05:55 (5 minutos antes do `horario_entrega` do `config.yaml`), o `enviar` só deixa a edição pronta ("aguardando"). O e-mail sai às 06:00, junto com o das outras newsletters, pela rotina de envio (`python main.py enviar-pendentes`). De 05:55 em diante, ele envia na hora; nesse caso, anote no resumo final o ID que o Resend devolveu. Com `envio: desligado`, o comando só avisa.
 
 ## Passo 8: publicar

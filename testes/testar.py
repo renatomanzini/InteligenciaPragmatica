@@ -242,6 +242,12 @@ def testar_envio(raiz):
         futura = envio._horario_agendado(util.hoje_brasilia().replace(year=util.hoje_brasilia().year + 1), "06:30")
         conferir(futura is not None and futura.endswith("T06:30:00-03:00"), "horário futuro agenda com -03:00 (%s)" % futura)
         conferir(envio._horario_agendado(util.hoje_brasilia().replace(year=2020), "06:30") is None, "horário passado não agenda")
+        # já enviada (um "Run now" depois das 06:00): não manda de novo; com --forcar, manda
+        r = envio.enviar(DATA, raiz, {"envio": "ligado"}, agora=True)
+        conferir(r["status"] == "ja_enviada" and "id-de-teste" in r["mensagem"] and len(chamadas) == 1,
+                 "com envio.json, não envia de novo e mostra o ID antigo")
+        r = envio.enviar(DATA, raiz, {"envio": "ligado"}, agora=True, forcar=True)
+        conferir(r["status"] == "enviado" and len(chamadas) == 2, "--forcar reenvia mesmo com envio.json")
         (raiz / "edicoes" / DATA / "envio.json").unlink()
     finally:
         envio._postar = original_postar
