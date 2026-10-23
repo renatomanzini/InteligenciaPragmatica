@@ -4,10 +4,10 @@ Este arquivo diz à newsletter o que eu gosto e o que eu não gosto. A rotina l�
 Para dar feedback, acrescente uma linha em **Feedback recebido** (a mais nova em cima). Exemplos: "mais disso: casos de agentes em escritório de advocacia", "menos disso: rodada de investimento de startup gringa pequena".
 
 ## Quem lê
-- Estudante de Direito no Rio de Janeiro.
+- Estudante de Direito.
 - Está entrando no mundo de criação de apps e sites e de venda de serviços.
 - Não é programador, mas usa IA para construir coisas (Claude Code).
-- Usa um MacBook Pro M2 com 8 GB de RAM. Leve isso em conta quando sugerir ferramenta para rodar no computador.
+- Usa um computador com 8 GB de RAM. Leve isso em conta quando sugerir ferramenta para rodar no computador.
 - Quer profundidade, não volume.
 
 ## Prioridade dos temas

@@ -49,7 +49,7 @@ A geral sai todo dia e fala muito de IA. O caderno **não é uma segunda geral d
 - **Preço** por milhão de tokens com uma régua do mundo real ("ler um contrato de 30 páginas custa uns R$ 0,10"), quando a conta for simples e com os números à vista.
 - **Pesos abertos** só com a licença: MIT e Apache 2.0 deixam usar comercialmente; licença própria tem restrições, e isso vale uma linha.
 
-**Roda no seu Mac?** O leitor tem um MacBook M2 com 8 GB de memória. Quando o modelo for aberto e a fonte der o tamanho, diga se roda:
+**Roda no seu Mac?** O leitor tem um Mac com 8 GB de memória. Quando o modelo for aberto e a fonte der o tamanho, diga se roda:
 - regra de bolso, sempre como **estimativa**: em 4 bits, cada bilhão de parâmetros ocupa uns 0,6 GB, e o Mac de 8 GB deixa uns 5 GB livres para o modelo;
 - **roda bem** até uns 4B; **apertado** de 7B a 8B (só com o resto fechado); **não roda** acima de uns 9B;
 - em modelo MoE (vários especialistas, só alguns ativos por vez), o que pesa na memória é o total de parâmetros, não os ativos;
