@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a ia que tenta provar que o código não quebra · Inteligência Pragmática</title>
+<meta name="description" content="+ a receita que já roda em 70 agentes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="index.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática</div>
+<div class="meta">sexta-feira, 23 de outubro de 2026 · Edição nº 8 · 7 min de leitura</div>
+<h1 class="assunto">a ia que tenta provar que o código não quebra</h1>
+</header>
+<main class="corpo">
+<p>bom dia. Ontem a gente contou como a IA ajudou a achar um furo de mais de uma década no PHP. Hoje a notícia é a IA tentando provar que o código <strong>não</strong> tem furo. Achar um erro é uma coisa; garantir que não existe nenhum é outra, bem mais cara.</p>
+<p><strong>Hoje eu aprendi:</strong> segundo Charlie Precourt, ex-astronauta e membro do painel de segurança da NASA, a última estimativa é de cerca de <strong>22 voos</strong> da Starship para um pouso da Artemis IV na Lua, contra algo como uma dúzia pelo que a NASA deixou entender em 2023, porque a nave precisa ser reabastecida em órbita várias vezes; Musk diz que serão "6 a 8" (<a href="https://arstechnica.com/space/2026/10/latest-estimate-for-starship-launches-required-to-support-a-moon-landing-22/">Ars Technica</a>).</p>
+<p><strong>Nesta edição:</strong></p>
+<ul>
+<li>A IA que tenta provar que o código não quebra (e por que "provar" não é "testar")</li>
+<li>A "receita" que vale para 70 agentes de IA, e o serviço que dá para vender com ela</li>
+<li>Bradesco, Ibovespa e um petróleo acima de US$ 114</li>
+<li>Tractian vira unicórnio; a OpenAI baixa a pedida</li>
+<li>88%: o resumo do Google já aparece em quase toda busca de compra</li>
+</ul>
+<hr>
+<h4 class="rotulo">IA</h4>
+<h2>E se a IA provasse que o código não quebra?</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> a Anthropic diz ter usado o Claude para <strong>provar matematicamente</strong> que <strong>239</strong> pontos de entrada de <strong>123</strong> bibliotecas abertas não falham com nenhuma entrada de menos de 64 MB, num trabalho de poucas semanas.</p>
+</blockquote>
+<p>Em pesquisa publicada na quinta (22), a Frontier Red Team da Anthropic, com a empresa Theorem, diz que o Claude provou <strong>239</strong> pontos de entrada de <strong>123</strong> bibliotecas abertas, sem falha para entradas de menos de 64 MB, em algumas semanas (<a href="https://www.anthropic.com/research/formal-verification">Anthropic</a>).</p>
+<p><strong>O que é isso.</strong> Teste é conferir alguns casos, como ouvir três testemunhas. Prova formal é demonstrar que vale para <strong>todos</strong>, como a escritura registrada. A conferência roda no Rocq, programa que confere provas matemáticas.</p>
+<p><strong>Por que era cara.</strong> O seL4, um núcleo de sistema verificado, levou <strong>2</strong> pessoas-ano para ser escrito e <strong>20</strong> para ser verificado, <strong>10 vezes</strong> mais (dado citado pela Anthropic). Aqui são cerca de <strong>180 milhões</strong> de linhas de prova, <strong>600 mil</strong> numa prova típica.</p>
+<p>O fio com ontem: no PHP2Shell, falhas escondidas por mais de uma década foram achadas com IA da OpenAI e do Google (não da Anthropic), e a Amazon viu tentativa de ataque <strong>4 dias</strong> antes do aviso público (<a href="https://arstechnica.com/security/2026/10/hackers-got-a-four-day-head-start-on-epic-php2shell-vulnerability/">Ars Technica</a>).</p>
+<p>No caminho, "centenas" de bugs apareceram. A conta é em tokens, os pedaços de palavra que o modelo processa: provas podem gastar "centenas de milhões".</p>
+<p><strong>Os otimistas:</strong> Jason Gross, coautor do estudo (logo, parte interessada), diz no Hacker News que, na verificação de software, o gargalo "é só escala" (<a href="https://news.ycombinator.com/item?id=50202217">HN</a>).</p>
+<p><strong>Os pessimistas:</strong> a própria Anthropic avisa que "formalmente verificado" não é "sem bug": o erro pode estar na especificação, a descrição do que o código deveria fazer. As provas principais valem para binários RISC-V estáticos e de uma thread só; houve um caso em x86, e a empresa diz que ampliar o escopo está ao alcance. No HN, a pergunta seca: "Formal verification against what?" (contra o quê?).</p>
+<p>⚖️ <strong>Opinião:</strong> em contrato de software, "verificado formalmente" tende a virar argumento de qualidade e de responsabilidade, mas só prova o que a especificação disse.</p>
+<p><strong>Por que isso importa pra você:</strong> <strong>Opinião:</strong> quem vende sites e apps feitos com IA deve ouvir do cliente, cada vez mais, "como você sabe que funciona?". Por enquanto é pesquisa de ponta, não recurso do dia a dia; o passo prático é pedir testes à IA e conferir o que ela diz que testou.</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://www.anthropic.com/research/formal-verification">Anthropic: LLMs are making formal software verification feasible at a much larger scale</a></p>
+<hr>
+<h4 class="rotulo">🧠 IA NA PRÁTICA</h4>
+<h2>A receita que o seu agente lê virou padrão de todo mundo</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> a Anthropic doou o padrão Agent Skills à Agentic AI Foundation em 22/10; segundo ela, mais de <strong>70</strong> plataformas de agentes já o usam.</p>
+</blockquote>
+<p>Pense no manual que o escritório dá ao estagiário novo: ele lê o capítulo certo quando o caso chega. Uma <em>skill</em> é isso para o agente: uma pasta com um arquivo SKILL.md (nome, quando usar, instruções) e, se quiser, scripts. O agente carrega só nome e descrição, cerca de <strong>100</strong> tokens, e abre o resto quando precisa (<a href="https://agentskills.io/specification">especificação</a>).</p>
+<p>O que mudou: em 22/10, a Anthropic doou o padrão à Agentic AI Foundation, braço da Linux Foundation que já guarda o MCP. Segundo ela, <strong>mais de 70</strong> plataformas, como ChatGPT, Cursor e GitHub Copilot, o usam, com <strong>1 milhão</strong> de skills publicadas e quase <strong>280 milhões</strong> de instalações; a receita feita para o Claude Code serve em outras ferramentas (<a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">Anthropic</a>).</p>
+<p><strong>O caso real.</strong> Yusuke Kaji, gerente-geral de IA da Rakuten, diz que um processo de contabilidade que levava um dia passou a levar uma hora; é depoimento no material de lançamento da Anthropic (<a href="https://claude.com/blog/skills">Claude</a>). E, segundo o Artificial Lawyer, o advogado Zack Shapiro, de um escritório pequeno nos EUA, montou skills para revisar contratos e padronizar citações (<a href="https://www.artificiallawyer.com/2026/03/02/lawyer-uses-claude-skills-legal-world-loses-it/">Artificial Lawyer</a>).</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">Anthropic: Agent Skills na Agentic AI Foundation</a></p>
+<p>⚠️ <strong>Freio de realidade:</strong> skill pode trazer script que o agente executa, e a Anthropic manda instalar só de fonte confiável (<a href="https://claude.com/blog/skills">Claude</a>). A Snyk, que vende segurança, analisou <strong>3.984</strong> skills de marketplaces abertos: <strong>534</strong> (cerca de 13 em cada 100) tinham ao menos um problema crítico e <strong>76</strong> eram maliciosas (<a href="https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub">Snyk</a>). E o guia de segurança do padrão ainda é só proposta.</p>
+<p><strong>Agora aplica no mundo real:</strong></p>
+<ul>
+<li><strong>Advogado:</strong> skill de petição inicial no padrão da casa, com checklist de prazos e o modelo de procuração.</li>
+<li><strong>Dono de restaurante ou clínica:</strong> skill para responder avaliações no tom do lugar.</li>
+<li><strong>Professor:</strong> skill para corrigir redação com a rubrica da escola.</li>
+</ul>
+<p><strong>Como isso vira serviço:</strong> montar e manter a biblioteca de skills de um escritório pequeno: entrevistar quem faz o trabalho, escrever os procedimentos e testar com casos reais. <strong>Opinião:</strong> o cliente pagaria agora porque o mesmo pacote passa a rodar em várias ferramentas, e quem documenta o processo do cliente vende algo que sobrevive à troca de ferramenta.</p>
+<hr>
+<h4 class="rotulo">ECONOMIA</h4>
+<p><strong>🇧🇷 Por aqui</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Ibovespa</strong>: caiu <strong>1,15%</strong> na quinta (22), a <strong>204.120</strong> pontos, o menor fechamento desde 2/10; o dólar subiu <strong>0,22%</strong>, a <strong>R$ 5,04</strong>, na reta final do 2º turno (<a href="https://investnews.com.br/investimentos/reta-final-da-eleicao-ibovespa-cai-mais-de-1-pressionado-por-pesquisas-dolar-sobe/">InvestNews</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Bradesco</strong>: lucro recorrente de <strong>R$ 7,11 bi</strong> no 3º tri, <strong>+0,8%</strong> sobre o 2º e <strong>+14,6%</strong> em um ano, mas a inadimplência acima de 90 dias subiu a <strong>4,6%</strong> (era <strong>4,1%</strong> um ano antes), segundo a Bloomberg Línea (<a href="https://www.bloomberglinea.com.br/negocios/lucro-do-bradesco-perde-folego-no-3-tri-com-alta-da-inadimplencia-e-das-provisoes/">fonte</a>).</p>
+</div>
+<p><strong>🌎 Lá fora</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>França</strong>: o PMI composto (termômetro de empresas; abaixo de 50 é encolhimento) caiu a <strong>48,4</strong> em outubro, de <strong>51,1</strong>, o menor em 4 meses (<a href="https://tradingeconomics.com/france/composite-pmi">Trading Economics</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Petróleo</strong>: o Brent chegou a cerca de <strong>US$ 114</strong> nesta sexta (23), perto da máxima de 4 anos (US$ 114,44, em maio), com ataques houthis à Arábia Saudita; está cerca de <strong>75%</strong> acima de um ano atrás (<a href="https://tradingeconomics.com/commodity/brent-crude-oil">Trading Economics</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">🇧🇷 BRASIL ADENTRO</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Tractian</strong>: Série D de <strong>US$ 130 mi</strong>, com avaliação de <strong>US$ 1,4 bi</strong>, <strong>94%</strong> acima da rodada anterior; a empresa, de sensores para prever quebra de máquina, diz ter passado de <strong>US$ 100 mi</strong> de receita anualizada, contra US$ 40 mi em 2024 (<a href="https://www.bloomberglinea.com.br/startups/tractian-capta-us-130-milhoes-e-se-torna-o-mais-novo-unicornio-de-ia-brasileiro/">Bloomberg Línea</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>iFood</strong>: a Superintendência-Geral do Cade recomendou arquivar a queixa da Aiqfome sobre exclusividade; o acordo de 2023 limita a exclusividade a <strong>25%</strong> do valor vendido na plataforma, e é recomendação, não decisão final (<a href="https://www.bloomberglinea.com.br/tech/cade-recomenda-arquivar-queixa-da-aiqfome-contra-o-ifood-sobre-exclusividade-no-interior/">Bloomberg Línea</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Carrefour</strong>: vendeu <strong>22</strong> imóveis ao fundo Pátria Renda Urbana e passa a pagar aluguel neles; o valor não foi divulgado e a venda depende do Cade (<a href="https://investnews.com.br/negocios/carrefour-vende-imoveis-ao-patria-e-passara-a-pagar-aluguel-pelas-lojas/">InvestNews</a>).</p>
+</div>
+<h4 class="rotulo">🌎 MUNDO AFORA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>OpenAI</strong>: negocia até <strong>US$ 30 bi</strong> a <strong>US$ 1,25 tri</strong> antes do dinheiro entrar, segundo a CNBC; um mês antes, a Bloomberg falava em <strong>US$ 1,4 tri</strong> (<a href="https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/">TechCrunch</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Barclays</strong>: vai cortar cerca de <strong>5.000</strong> vagas (<strong>5%</strong> do quadro) até o fim de 2026 e liga os cortes à produtividade com IA, segundo a Reuters (<a href="https://www.business-standard.com/amp/companies/news/barclays-to-cut-5-000-jobs-in-ai-led-cost-drive-as-q3-profit-rises-12-126102201741_1.html">Business Standard</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Meta</strong>: a Bookshop.org desligou todos os recursos de IA da Meta e agências como a Exverus tiraram anúncios do ar para desfazer alterações, antes dos termos de 30/10 que deixam o anunciante "solely responsible" pelo que a IA cria; a agência AdCellerant diz que desliga a automação padrão em toda campanha (<a href="https://www.adweek.com/media/advertisers-pull-meta-ads-that-had-unwanted-ai-glow-ups/">Adweek</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">📊 STATS</h4>
+<h2>88%</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o resumo de IA do Google apareceu em <strong>88%</strong> das buscas comerciais testadas pela Semrush, quase o dobro de 11 meses antes.</p>
+</blockquote>
+<p>Os AI Overviews (o resumo de IA no topo do Google) apareceram em <strong>88%</strong> de 400 buscas comerciais nos EUA, no desktop, em agosto, contra <strong>45,75%</strong> em setembro de 2025 (<a href="https://www.semrush.com/blog/ai-overviews-commercial-modifiers-study/">Semrush</a>). A Semrush vende ferramenta de SEO e mede só aparição, não clique.</p>
+<p>Contraponto: em 100 sites, as visitas vindas do ChatGPT foram <strong>0,62%</strong> do volume do Google orgânico, segundo estudo citado pelo PPC Land (amostra pequena) (<a href="https://ppc.land/google-ai-overviews-reach-88-of-commercial-searches-as-ai-clicks-stay-thin/">PPC Land</a>).</p>
+<p class="opiniao"><span class="selo">Opinião</span> a leitura é esta: resumo no topo de quase toda busca de compra » parte de quem busca resolve sem clicar (hipótese da própria Semrush, não medida) » ficar em 1º rende menos visita » o site do cliente precisa ser citado no resumo, não só ranquear.</p>
+<hr>
+<p><strong>Para ler, ouvir ou assistir:</strong></p>
+<ul>
+<li>[Para ler] <a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD667.html">On the foolishness of "natural language programming"</a>, de Dijkstra: a linguagem formal protege de erro bobo; a "naturalidade" do idioma facilita dizer absurdo sem perceber.</li>
+<li>[Curiosidade] <a href="https://techcrunch.com/2026/10/22/left-alone-with-nothing-to-do-ai-agents-started-playing/">Agentes de IA soltos numa ilha digital</a>: 13 agentes, 30 horas e nenhuma tarefa renderam jogos e um memorial para um anel (paper do MIT, sem revisão).</li>
+<li>[Para assistir] <a href="https://www.youtube.com/watch?v=-jHONLQgE-s">What can you actually put in a robots.txt?</a>, do Google Search Central: o robots.txt controla o acesso do robô, não o que acontece com o conteúdo depois.</li>
+</ul>
+<hr>
+<p><strong>Pergunta do dia:</strong> se você tivesse que escrever hoje o manual do seu próprio trabalho para um agente seguir, quantas regras ainda não saberia explicar?</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="index.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>
