@@ -81,13 +81,13 @@ Está tudo montado. Esta seção serve para você saber onde fica cada peça e c
 - **Mudar o horário:** peça ao Claude ("muda a rotina da newsletter para começar às 4h"). O cron da rotina usa o horário de Londres (UTC), que fica 3 h à frente de Brasília.
 - **Trocar a chave do Resend:** crie uma chave nova no Resend. No ambiente, apague o secret antigo e adicione o novo: Bearer, `api.resend.com`, `Authorization`.
 - **Trocar a chave do GitHub** (`GITHUB_TOKEN_LEITURA`, que dá as estrelas e o GitHub em alta na nuvem): em github.com/settings/personal-access-tokens, crie ou regenere a chave "Inteligencia Pragmatica - leitura", só com **Public repositories** e sem permissões. No ambiente, troque o valor da linha `GITHUB_TOKEN_LEITURA=`. Ela fica numa variável, e não num *network secret*, porque a nuvem nunca anexa secret a pedidos ao GitHub. Por isso a chave só lê o que é público.
-- **Parar só o e-mail** (a edição continua saindo no site): troque `envio: ligado` por `envio: desligado` no `config.yaml`.
+- **Parar só o e-mail** (a edição continua saindo no site): troque `envio: ligado` por `envio: desligado` no `config.yaml`. Isso vale só para a geral: cada caderno tem o próprio `envio` no `cadernos.yaml` (veja o fim da seção 7).
 - **Quanto da assinatura isso gasta:** veja em https://claude.ai/settings/usage. A rotina usa o mesmo limite das suas conversas com o Claude.
 
 ## 6. Problemas comuns
 - **O e-mail não chegou:**
   - Olhe a pasta Spam ou Promoções.
-  - Confira que o `config.yaml` está com `envio: ligado`.
+  - Confira o `envio: ligado`: o da geral fica no `config.yaml`, e o de cada caderno, no bloco dele em `cadernos.yaml`.
   - Veja se a rotina rodou em [claude.ai/code/routines](https://claude.ai/code/routines). Clique na execução do dia e leia o que aconteceu.
 - **Uma fonte parou de funcionar:** a coleta registra o problema em `dados/candidatos/AAAA-MM-DD-fontes.log`. Pause a fonte no `fontes.yaml` ou peça ao Claude para achar o endereço novo.
 - **A edição veio com algo errado:** abra o `verificacao.md` daquele dia para ver o que o revisor conferiu, e me conte o erro. Dá para virar regra no manual.
