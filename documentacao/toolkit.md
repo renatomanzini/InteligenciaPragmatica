@@ -188,7 +188,9 @@ A nota externa e a memória automática não vão para a nuvem. O `AGENTS.md` va
 4. **O ramo `pendente/`:** falta um procedimento escrito para levar uma edição guardada de volta à `main`.
 5. **Avaliação de harness** (prompt 14, com a fixture do toolkit): não rodou, porque exige o avaliador do toolkit (um script Node), e esta adoção vetou rodar scripts do toolkit.
 6. **Sem verificação em sessão limpa:** a descoberta do `AGENTS.md` numa sessão nova do Claude Code ou do Codex.
-7. **As rotinas e o `AGENTS.md`:** depois da integração na `main`, confirmar se as rotinas carregam o `AGENTS.md` (com `/context` numa sessão na nuvem ou no log de uma execução de rotina). Veja a seção (c).
+7. **As rotinas e o `AGENTS.md`:** depois da integração na `main`, confirmar se as rotinas carregam o `AGENTS.md`. Veja a seção (c).
+   - **24/10/2026:** as quatro rotinas do dia (geral, radar do Niterói, envio e repescagem) rodaram com o `AGENTS.md` no clone e terminaram normalmente. Não houve efeito visível: nenhuma hesitou em `enviar`, `enviar-pendentes`, `publicar` ou `git push`, e nenhuma abriu o arquivo. O carregamento continua sem confirmação, porque o log da rotina (`get_run_log`) não lista os arquivos de instrução carregados.
+   - **Teste definitivo:** rodar `/context` numa sessão na nuvem e procurar o `AGENTS.md` em "Memory files".
 8. **Roteiros encerrados:** `manual/ROTINA_IA.md`, `manual/ROTINA_ECONOMIA.md` e `manual/ROTINA_MARKETING.md` ainda mandam rodar `main.py guardar`, comando que foi removido. Só importa se um desses cadernos voltar.
 9. **Decisões para rever, com o gatilho de cada uma:**
    - lint de Python (por exemplo, ruff): só se os erros de estilo ou de tipo começarem a escapar do `testar.py`;
