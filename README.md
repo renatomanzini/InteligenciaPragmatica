@@ -59,6 +59,7 @@ Para ver a coleta de hoje e a última edição no navegador, sem enviar nada:
   - `verificacao.md`: **o log de checagem**, com cada afirmação, a fonte e se foi confirmada.
 - `docs/` é o site com todas as edições, que pode ser instalado no celular.
 - `dados/historico.json` é a memória da newsletter: o que já saiu e as histórias em andamento.
+- `PRODUCT.md` resume o produto, `AGENTS.md` traz as regras para agentes de IA que mexem no código, e `documentacao/toolkit.md` registra as ferramentas e os testes.
 
 ## 5. Configuração da nuvem
 Está tudo montado. Esta seção serve para você saber onde fica cada peça e como mexer nela.
