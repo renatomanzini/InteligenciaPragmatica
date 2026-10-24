@@ -1696,5 +1696,126 @@
       "vassouras_buzios"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-10-24",
+    "tipo": "sabado",
+    "numero": 9,
+    "assunto": "nenhum breakthrough, muitos remendos",
+    "previa": "+ a at&t põe a ia no jurídico, com freio",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "kimi-k3-1-pro",
+        "titulo": "Moonshot lança o Kimi K3.1 Pro e promete os pesos até 4/11",
+        "tema": "china",
+        "urls": [
+          "https://www.kimi.ai/blog/kimi-k3-1-pro",
+          "https://artificialanalysis.ai/models/kimi-k3-1-pro"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "php2shell-ia",
+        "titulo": "PHP2Shell tira sites públicos do ar, e a HTTP2Shell atinge o Brotli",
+        "tema": "ia",
+        "urls": [
+          "https://www.wiz.io/blog/php2shell-php-rce",
+          "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "openai-treino-sem-internet",
+        "titulo": "OpenAI passa a treinar modelos de fronteira sem internet ao vivo",
+        "tema": "ia",
+        "urls": [
+          "https://techcrunch.com/2026/10/23/openai-says-it-will-no-longer-train-its-ai-models-on-the-live-internet-citing-significant-risks/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-termos-comerciais-ia",
+        "titulo": "Meta adia os novos termos comerciais para 20/11",
+        "tema": "marketing",
+        "urls": [
+          "https://www.theverge.com/tech/1017450/meta-business-terms-delayed-ai-scraping"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "google-anuncios-dados-pessoais",
+        "titulo": "Google pode usar Gmail e Fotos em anúncios para quem liga o Personal Intelligence",
+        "tema": "direito_tech",
+        "urls": [
+          "https://policies.google.com/privacy"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-muse-compartilhamento",
+        "titulo": "Meta religa o compartilhamento do Muse",
+        "tema": "ia",
+        "urls": [
+          "https://www.theverge.com/tech/1017066/meta-muse-sharing-back-on-artifiacts"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "descompilacao-ia",
+        "titulo": "Ports de jogos feitos com IA chegam ao mainstream",
+        "tema": "ia",
+        "urls": [
+          "https://www.theverge.com/ai-artificial-intelligence/1015430/ai-retro-games-decomp-recomp-port"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "china-controle-exportacao-ia",
+        "titulo": "MiniMax confirma registro de exportação; DeepSeek é aprovada, segundo conta ligada à CCTV",
+        "tema": "china",
+        "urls": [
+          "https://www.centraloregondaily.com/news/consumer/chinas-deepseek-minimax-win-approval-for-ai-global-use-state-media-affiliated-entity-says/article_0f11277d-f534-5cf6-9ab2-06be36f22b57.html"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "petroleo-brent-2026",
+        "titulo": "Brent fecha perto de US$ 117, com alta de mais de 6% na semana",
+        "tema": "economia",
+        "urls": [
+          "https://investnews.com.br/economia/petroleo-fecha-a-us-117-na-maxima-desde-abril-apos-ataques-a-arabia-saudita/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-novo-mexico-multa",
+        "titulo": "Tribunal impõe multa de US$ 25 bi à Meta; ela vai recorrer",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.sec.gov/Archives/edgar/data/0001326801/000162828026066773/meta-20260930.htm"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "att-openai-juridico",
+        "titulo": "AT&T e OpenAI desenvolvem fluxos de IA para o jurídico interno",
+        "tema": "direito_tech",
+        "urls": [
+          "https://artificiallawyer.com/2026/10/08/att-openai-partner-for-legal-ai-workflows"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "semana_em_revista",
+      "breakthroughs",
+      "historias_em_andamento",
+      "numeros",
+      "ia_na_pratica",
+      "links",
+      "pergunta"
+    ]
   }
 ]
