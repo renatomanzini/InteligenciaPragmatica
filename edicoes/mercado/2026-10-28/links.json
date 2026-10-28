@@ -1,0 +1,126 @@
+{
+  "data": "2026-10-28",
+  "verificado_em": "2026-10-28T05:19:48-03:00",
+  "total": 19,
+  "resumo": {
+    "ok": 19,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/dolar-sobe-821-e-bolsa-cai-1388-apos-reeleicao-de-lula",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/renda-variavel/bolsas-e-indices/noticia/2026/10/27/ibovespa-e-dolar-hoje-27-de-outubro-de-2026.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/bancos-reduzem-exposicao-ao-brasil-apos-eleicao-e-buscam-protecoes-na-bolsa/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/moedas-e-juros/noticia/2026/10/27/mercado-muda-apostas-para-selic-apos-reeleicao-de-lula-e-agora-preve-pausa-nos-cortes.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/produtos/renda-fixa/tesouro-direto/noticia/2026/10/27/tesouro-direto-hoje-27-de-outubro-de-2026.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://c-level.folha.uol.com.br/agro/2026/10/ministerio-da-agricultura-identifica-terceiro-foco-da-doenca-de-newcastle-em-santa-catarina.shtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.estadao.com.br/economia/agronegocios/uruguai-suspende-importacao-de-aves-do-brasil-por-doenca-de-newcastle/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/ibovespa-27-10-26-lils/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.moneytimes.com.br/tesouro-cancela-todos-os-leiloes-da-semana-durigan-ve-ajuste-de-posicoes-e-fala-em-nova-intervencao-jcav/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://g1.globo.com/economia/noticia/2026/10/27/ministro-da-fazenda-anuncia-projeto-para-mirar-centro-da-meta-fiscal-e-diz-que-espera-racionalidade-do-mercado.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/governo-enviara-mp-do-imposto-seletivo-e-renova-subvencao-ao-diesel",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/numero-de-superendividados-no-brasil-cresceu-75-em-cinco-anos-diz-bc",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://c-level.folha.uol.com.br/negocios/2026/10/caneta-emagrecedora-faz-lucro-da-hypera-pharma-subir-161-no-3o-trimestre.shtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/economia/juros-eua-decisao-fed-fomc-impacto-selic-copom/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://g1.globo.com/economia/noticia/2026/10/27/acordo-fmi-argentina.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/renda-variavel/bolsas-e-indices/noticia/2026/10/27/estresse-foi-troca-posicao-e-nao-de-fundamento-diz-durigan-sobre-reacao-do-mercado-a-lula.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/santander-sanb11-divulga-balanco-nesta-quarta-o-que-esperar-do-banco/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/empresas/noticia/2026/10/28/lucro-operacional-da-sk-hynix-cresce-sete-vezes-no-3-trimestre-em-base-anual-para-us-63-bilhes.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/financas/b3-novo-horario-funcionamento/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
