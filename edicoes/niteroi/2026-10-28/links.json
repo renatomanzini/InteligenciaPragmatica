@@ -1,0 +1,91 @@
+{
+  "data": "2026-10-28",
+  "verificado_em": "2026-10-28T05:28:52-03:00",
+  "total": 13,
+  "resumo": {
+    "ok": 13,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://niteroi.rj.gov.br/prefeitura-de-niteroi-inicia-obras-de-macrodrenagem-em-icarai/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.atribunarj.com.br/materia/niteroi-inicia-obras-para-acabar-com-alagamentos-em-icarai",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/transito-tera-alteracoes-em-icarai-para-a-festa-de-sao-judas-tadeu/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/previsao-tempo-niteroi-27-outubro-2026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/enel-troca-lampadas-led-gratis-horto-fonseca-29-30-outubro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/mulheres-construtoras-niteroi-200-vagas-gratuitas-senai-barreto/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/detran-rj-retoma-atendimento-transferencia-isencao-multa-greve/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.atribunarj.com.br/materia/niteroi-cria-linha-de-onibus-gratuita-para-moradores-do-badu",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/icarai-ubs-perto-conclusao-acesso-horarios-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://oglobo.globo.com/rio/bairros/niteroi/noticia/2026/10/26/gilberto-gil-em-niteroi-aniversario-da-cidade-tera-show-gratuito.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://g1.globo.com/guia/guia-rj/noticia/2026/10/26/niteroi-anuncia-show-de-gilberto-gil-no-aniversario-da-cidade-e-joao-gomes-no-reveillon.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/niteroi/179899/niteroi-recebe-o-maior-festival-de-culinaria-e-cultura-italiana-do-estado-com-entrada",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.osaogoncalo.com.br/niteroi/179899/niteroi-recebe-o-maior-festival-de-culinaria-e-cultura-italiana-do-estado-com-entrada-gratuita"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/corrida-da-guarda-municipal-de-niteroi-promete-movimentar-piratininga-com-esporte-e-solidariedade/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
