@@ -1817,5 +1817,116 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-28",
+    "tipo": "dia_util",
+    "numero": 10,
+    "assunto": "o prejuízo bilionário que quase não saiu do caixa",
+    "previa": "+ um modelo de 1 gb que cabe no seu notebook",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "anthropic-receita-ipo",
+        "titulo": "S-1 da Anthropic confirma US$ 16,3 bi de receita e US$ 80,7 bi de prejuízo, quase todo contábil",
+        "tema": "ia",
+        "urls": [
+          "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "lfm3-modelos-locais",
+        "titulo": "Liquid AI lança a família LFM3, modelos de ~2B que rodam em ~1 GB",
+        "tema": "ia",
+        "urls": [
+          "https://www.liquid.ai/blog/lfm3"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "tesouro-recompra-eleicao",
+        "titulo": "Tesouro recompra R$ 31,6 bi em dois dias após o 2º turno",
+        "tema": "economia",
+        "urls": [
+          "https://investnews.com.br/investimentos/tesouro-faz-terceira-intervencao-em-dois-dias-e-anuncia-nova-recompra-de-ntn-bs/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "petroleo-brent-2026",
+        "titulo": "Brent chega a cerca de US$ 116, ~80% acima de um ano antes",
+        "tema": "economia",
+        "urls": [
+          "https://tradingeconomics.com/commodity/brent-crude-oil"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "itau-neospace",
+        "titulo": "Itaú compra a NeoSpace por R$ 2,9 bi",
+        "tema": "negocios",
+        "urls": [
+          "https://www.sec.gov/Archives/edgar/data/1132597/000113259726000245/materialfact_neospace.htm"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "ifood-99food-publicidade",
+        "titulo": "TJSP mantém condenação da 99Food por campanhas contra o iFood",
+        "tema": "direito_tech",
+        "urls": [
+          "https://startups.com.br/negocios/99food-perde-no-tj-sp-e-segue-proibida-de-veicular-campanhas-contra-o-ifood/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "delaware-empresa-ia",
+        "titulo": "Delaware propõe empresa administrada por agente de IA; Congresso dos EUA pede documentos",
+        "tema": "direito_tech",
+        "urls": [
+          "https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "agentes-responsabilidade-banco",
+        "titulo": "Bank of America diz que o cliente responde pelo que o agente de IA fizer com a senha",
+        "tema": "direito_tech",
+        "urls": [
+          "https://techcrunch.com/2026/10/27/bank-of-america-kindly-asks-that-you-dont-share-your-banking-password-with-your-ai-assistant/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "meta-pixel-dispositivo",
+        "titulo": "Meta Pixel passa a contar conversões no aparelho a partir de 12/11",
+        "tema": "marketing",
+        "urls": [
+          "https://ppc.land/meta-pixel-will-count-more-conversions-from-nov-12-unless-advertisers-opt-out/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "chatgpt-uso-signals",
+        "titulo": "Escrita cai de 34% para 21% do uso do ChatGPT, segundo a OpenAI",
+        "tema": "ia",
+        "urls": [
+          "https://ppc.land/writing-drops-from-34-to-21-of-chatgpt-requests-since-july-2024/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "continuacao",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
