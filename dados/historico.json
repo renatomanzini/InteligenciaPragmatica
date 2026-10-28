@@ -1928,5 +1928,57 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-28",
+    "tipo": "dia_util",
+    "numero": 3,
+    "assunto": "depois do tombo, o mercado cobra a conta",
+    "previa": "+ por que a aposta virou pausa na Selic em um dia",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "ressaca-eleicao-ibovespa-dolar",
+        "titulo": "Depois de cair 13,88% na segunda, o Ibovespa recua 0,51% na terça; bancos cortam o peso do Brasil nas carteiras",
+        "tema": "bolsa_br",
+        "urls": [
+          "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/dolar-sobe-821-e-bolsa-cai-1388-apos-reeleicao-de-lula",
+          "https://valorinveste.globo.com/mercados/renda-variavel/bolsas-e-indices/noticia/2026/10/27/ibovespa-e-dolar-hoje-27-de-outubro-de-2026.ghtml",
+          "https://www.infomoney.com.br/mercados/bancos-reduzem-exposicao-ao-brasil-apos-eleicao-e-buscam-protecoes-na-bolsa/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "selic-pausa-pos-eleicao",
+        "titulo": "Explicador: por que a aposta de pausa na Selic em 04/11 saltou de 17,5% para 62% depois da eleição",
+        "tema": "juros",
+        "urls": [
+          "https://valorinveste.globo.com/mercados/moedas-e-juros/noticia/2026/10/27/mercado-muda-apostas-para-selic-apos-reeleicao-de-lula-e-agora-preve-pausa-nos-cortes.ghtml",
+          "https://valorinveste.globo.com/produtos/renda-fixa/tesouro-direto/noticia/2026/10/27/tesouro-direto-hoje-27-de-outubro-de-2026.ghtml"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "newcastle-sc-frango",
+        "titulo": "Terceiro foco de Newcastle em SC; Uruguai suspende a compra de aves do Brasil",
+        "tema": "setores",
+        "urls": [
+          "https://c-level.folha.uol.com.br/agro/2026/10/ministerio-da-agricultura-identifica-terceiro-foco-da-doenca-de-newcastle-em-santa-catarina.shtml",
+          "https://www.estadao.com.br/economia/agronegocios/uruguai-suspende-importacao-de-aves-do-brasil-por-doenca-de-newcastle/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "painel",
+      "o_que_mexeu",
+      "historia_do_dia",
+      "economia",
+      "explicador",
+      "agenda",
+      "radar"
+    ],
+    "caderno": "mercado"
   }
 ]
