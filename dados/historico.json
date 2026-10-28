@@ -1980,5 +1980,124 @@
       "radar"
     ],
     "caderno": "mercado"
+  },
+  {
+    "data": "2026-10-28",
+    "tipo": "quarta",
+    "numero": 3,
+    "assunto": "obra contra alagamentos em Icaraí e chuva a partir de quinta (29/10)",
+    "previa": "+ troca de lâmpadas grátis, 200 vagas para mulheres e linha de ônibus sem tarifa no Badu",
+    "dia": "normal",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "macrodrenagem-icarai-caio-martins",
+        "titulo": "Prefeitura dá ordem de início à macrodrenagem do Rio Icaraí, com reservatório no Caio Martins",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/prefeitura-de-niteroi-inicia-obras-de-macrodrenagem-em-icarai/",
+          "https://www.atribunarj.com.br/materia/niteroi-inicia-obras-para-acabar-com-alagamentos-em-icarai"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "festa-sao-judas-transito-2026",
+        "titulo": "Festa de São Judas Tadeu muda o trânsito em Icaraí até quinta (29/10), 8h",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/transito-tera-alteracoes-em-icarai-para-a-festa-de-sao-judas-tadeu/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "previsao-chuva-29-30-out",
+        "titulo": "Previsão de chuva e possível temporal à noite na quinta (29/10), com mais chuva na sexta (30/10)",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/previsao-tempo-niteroi-27-outubro-2026/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "enel-troca-lampadas-horto-fonseca",
+        "titulo": "Enel troca até cinco lâmpadas por LED no Horto do Fonseca, em 29 e 30/10",
+        "tema": "niteroi",
+        "urls": [
+          "https://ofluminense.com.br/enel-troca-lampadas-led-gratis-horto-fonseca-29-30-outubro/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "mulheres-construtoras-niteroi-2026",
+        "titulo": "Mulheres Construtoras abre 200 vagas gratuitas no Senai Barreto até 13/11",
+        "tema": "niteroi",
+        "urls": [
+          "https://ofluminense.com.br/mulheres-construtoras-niteroi-200-vagas-gratuitas-senai-barreto/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "detran-pos-greve-2026",
+        "titulo": "Detran-RJ retoma atendimento e isenta multa de transferência perdida na greve",
+        "tema": "niteroi",
+        "urls": [
+          "https://ofluminense.com.br/detran-rj-retoma-atendimento-transferencia-isencao-multa-greve/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "linha-al01-badu-tarifa-zero",
+        "titulo": "Linha AL01 liga o Jardim das Paineiras ao Badu sem tarifa, em até 45 dias",
+        "tema": "niteroi",
+        "urls": [
+          "https://www.atribunarj.com.br/materia/niteroi-cria-linha-de-onibus-gratuita-para-moradores-do-badu"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "ubs-icarai-2026",
+        "titulo": "UBS de Icaraí está em fase final, sem data de abertura",
+        "tema": "niteroi",
+        "urls": [
+          "https://ofluminense.com.br/icarai-ubs-perto-conclusao-acesso-horarios-niteroi/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "aniversario-niteroi-gil-reveillon-2026",
+        "titulo": "Gilberto Gil faz show gratuito em Icaraí em 22/11; João Gomes e Alceu Valença no réveillon",
+        "tema": "niteroi",
+        "urls": [
+          "https://oglobo.globo.com/rio/bairros/niteroi/noticia/2026/10/26/gilberto-gil-em-niteroi-aniversario-da-cidade-tera-show-gratuito.ghtml",
+          "https://g1.globo.com/guia/guia-rj/noticia/2026/10/26/niteroi-anuncia-show-de-gilberto-gil-no-aniversario-da-cidade-e-joao-gomes-no-reveillon.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "la-dolce-vita-piratininga-2026",
+        "titulo": "Festival La Dolce Vita ocupa a Praça do Descobrimento, em Piratininga, de 6 a 8/11",
+        "tema": "niteroi",
+        "urls": [
+          "https://www.osaogoncalo.com.br/niteroi/179899/niteroi-recebe-o-maior-festival-de-culinaria-e-cultura-italiana-do-estado-com-entrada"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "corrida-guarda-municipal-2026",
+        "titulo": "5ª Corrida da Guarda Municipal sai de Piratininga em 22/11",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/corrida-da-guarda-municipal-de-niteroi-promete-movimentar-piratininga-com-esporte-e-solidariedade/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "na_cidade",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
