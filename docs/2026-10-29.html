@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>o imposto novo veio maior que a encomenda · Inteligência Pragmática</title>
+<meta name="description" content="+ 16 IAs tentaram fazer o trabalho do contador">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="index.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática</div>
+<div class="meta">quinta-feira, 29 de outubro de 2026 · Edição nº 11 · 10 min de leitura</div>
+<h1 class="assunto">o imposto novo veio maior que a encomenda</h1>
+</header>
+<main class="corpo">
+<p>bom dia. A reforma tributária prometia não aumentar a carga, e a primeira conta oficial veio maior que a previsão. Os agentes de IA que poderiam ajudar a fazer essa conta ainda falham em quase <strong>9</strong> de cada <strong>10</strong> tarefas de imposto, mesmo o melhor deles (<a href="https://surgehq.ai/blog/dayjob-tax">Surge AI</a>).</p>
+<p><strong>Hoje eu aprendi:</strong> o ganso-de-cabeça-listrada tem fama de sobrevoar o Everest, mas, segundo pesquisadores da Universidade de Bangor, o GPS em <strong>42</strong> gansos registrou voo máximo de <strong>7.290 m</strong>: eles atravessam o Himalaia pelos vales (<a href="https://wetlands.bangor.ac.uk/news/high-flying-geese-take-low-profile-over-himalayas-11065">Universidade de Bangor</a>).</p>
+<p><strong>Nesta edição:</strong></p>
+<ul>
+<li>O imposto novo saiu mais caro que o previsto, e o que isso muda para quem vende serviço</li>
+<li><strong>16</strong> modelos de IA tentaram fazer trabalho de contador; o melhor passou em <strong>10,8%</strong></li>
+<li>Fed parado, bolsa caindo, escritório quase centenário prestes a fechar</li>
+<li>MARKETING: anúncios no Modo IA a caminho do Brasil e a Lush, que largou o anúncio em rede social</li>
+<li>O site que respondia dúvida de programador e quase parou de receber perguntas</li>
+</ul>
+<hr>
+<h4 class="rotulo">ECONOMIA</h4>
+<h2>O imposto novo chegou mais caro que a encomenda</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o TCU fixou em <strong>11,3%</strong> a alíquota de referência da CBS para 2027, contra <strong>9,21%</strong> estimados; quem vende serviço é quem mais sente.</p>
+</blockquote>
+<p>Em 28/10, o TCU aprovou <strong>11,3%</strong> como alíquota de referência da CBS, o imposto federal que substitui PIS e Cofins em janeiro de 2027. A estimativa anterior era de <strong>9,21%</strong>, ou seja, cerca de <strong>23%</strong> a mais (<a href="https://investnews.com.br/economia/aliquota-cbs-tcu-2027/">InvestNews</a>; <a href="https://braziljournal.com/prepare-o-bolso-e-o-caixa-vem-ai-o-iva-de-pelo-menos-30">Brazil Journal</a>).</p>
+<p><strong>O que é isso.</strong> A CBS é a parte federal do IVA, o imposto sobre valor agregado: cada etapa paga sobre o que acrescentou e desconta o que já foi pago antes. A parte de estados e municípios é o IBS, em teste a <strong>0,1%</strong> em 2027 e 2028 (<a href="https://investnews.com.br/economia/aliquota-cbs-tcu-2027/">InvestNews</a>). A "alíquota de referência" é a calculada para manter a arrecadação. O Senado a fixa por resolução até 15/12; sem decisão, vale a do TCU. Para o advogado Daniel Loria, ela sobe porque falta a lei do Imposto Seletivo, que dividiria a conta (<a href="https://www.estadao.com.br/economia/aliquota-de-novo-imposto-da-reforma-tributaria-assusta-e-carga-tributaria-pode-subir-em-2027/">Estadão</a>).</p>
+<p><strong>Os números.</strong> Somada ao IBS, a projeção do Brazil Journal é de um IVA de cerca de <strong>30%</strong>, acima dos <strong>27%</strong> da Hungria, hoje o maior, segundo o veículo (<a href="https://braziljournal.com/prepare-o-bolso-e-o-caixa-vem-ai-o-iva-de-pelo-menos-30">Brazil Journal</a>). O teto prometido pela reforma era <strong>26,5%</strong> (<a href="https://c-level.folha.uol.com.br/negocios/2026/10/tributo-da-reforma-maior-que-o-previsto-obriga-empresas-a-rever-planejamento-para-2027.shtml">Folha</a>).</p>
+<p><strong>Quem defende diz:</strong> a Fazenda afirma que a alíquota efetiva deve ficar em cerca de <strong>8,5%</strong>, por causa da cesta zerada e do cashback, e que <strong>11,3%</strong> é o máximo (<a href="https://c-level.folha.uol.com.br/negocios/2026/10/tributo-da-reforma-maior-que-o-previsto-obriga-empresas-a-rever-planejamento-para-2027.shtml">Folha</a>). Bernard Appy diz que 2027 é a alíquota menos precisa da transição e que a tendência é de queda; o TCU diz que, na média dos anos-base, a carga não muda (<a href="https://www.estadao.com.br/economia/aliquota-de-novo-imposto-da-reforma-tributaria-assusta-e-carga-tributaria-pode-subir-em-2027/">Estadão</a>).</p>
+<p><strong>Quem critica diz:</strong> Paulo Skaf, da Fiesp, diz que a decisão rompe a promessa de manter a carga e tira mais de <strong>R$ 100 bi</strong> da economia em 2027 (<a href="https://c-level.folha.uol.com.br/negocios/2026/10/tributo-da-reforma-maior-que-o-previsto-obriga-empresas-a-rever-planejamento-para-2027.shtml">Folha</a>). No Estadão, Bichara pergunta: "Você já viu imposto cair no Brasil?" (<a href="https://www.estadao.com.br/economia/aliquota-de-novo-imposto-da-reforma-tributaria-assusta-e-carga-tributaria-pode-subir-em-2027/">Estadão</a>).</p>
+<p><strong>Por que isso importa pra você:</strong> no lucro presumido, o PIS/Cofins hoje é <strong>3,65%</strong> da receita; a CBS cheia é <strong>11,3%</strong> e serviço gera pouco crédito, então, na conta do tributarista Luiz Gustavo Bichara, a carga vira "mais do que o triplo" (<a href="https://braziljournal.com/prepare-o-bolso-e-o-caixa-vem-ai-o-iva-de-pelo-menos-30">Brazil Journal</a>). Há atenuantes: profissionais liberais teriam redução de <strong>30%</strong>, e quem está no Simples pode seguir no regime ou optar pelo regime híbrido, o que muda o peso do imposto para clientes que aproveitam crédito, segundo o InvestNews (<a href="https://investnews.com.br/economia/aliquota-cbs-tcu-2027/">InvestNews</a>).</p>
+<p>⚖️ Quem é advogado precisa checar, com a lei regulamentadora em mãos, se o próprio escritório se encaixa nessa redução.</p>
+<p class="opiniao"><span class="selo">Opinião</span> quem vende serviço deve refazer agora a conta de preço de 2027, não em dezembro, com a alíquota do TCU como cenário-base e a da Fazenda como cenário otimista.</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://www.estadao.com.br/economia/aliquota-de-novo-imposto-da-reforma-tributaria-assusta-e-carga-tributaria-pode-subir-em-2027/">Estadão: alíquota de novo imposto da reforma assusta</a></p>
+<hr>
+<h4 class="rotulo">🧠 IA NA PRÁTICA</h4>
+<h2>O agente que ainda não passou na auditoria</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> no DAYJOB: Tax, teste da Surge AI com tarefas reais de imposto, o melhor de <strong>16</strong> modelos cumpriu o critério em <strong>10,8%</strong> dos casos.</p>
+</blockquote>
+<p>Prova de múltipla escolha mede quem sabe a matéria. O DAYJOB: Tax é o estágio no escritório: pasta com 30 documentos, recibo faltando e cliente que esqueceu de contar o principal. Passa quem cumpre <strong>95%</strong> da rubrica.</p>
+<p><strong>O caso.</strong> Em 27/10, a Surge AI publicou <strong>50</strong> tarefas em 8 áreas, com <strong>1.789</strong> arquivos (mediana de 30 por tarefa), feitas por especialistas em tributação com passagem por PwC, Deloitte e EY. Resultado: Claude Sonnet 5.5 com <strong>10,8%</strong>, Claude Fable 5.1 com <strong>9,6%</strong>, Claude Opus 5.5 com <strong>9,2%</strong>, GPT 6 Astra com <strong>4,8%</strong>, Gemini 4 Argon com <strong>3,2%</strong>; três modelos ficaram em <strong>0%</strong>. No teste de programação do mesmo site, o líder faz <strong>50,6%</strong> (<a href="https://surgehq.ai/blog/dayjob-tax">Surge AI</a>; <a href="https://surgehq.ai/benchmarks/dayjob-tax">placar</a>).</p>
+<p>Na venda de um imóvel, o Astra não achou, em 5 tentativas, o prazo que fazia o cliente perder uma isenção; o Opus achou nas 5. Já num caso de casal, o Opus assumiu nas 5 que eles não eram casados, apesar dos indícios. A conclusão da Surge: "Agents haven't yet passed the audit."</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://surgehq.ai/blog/dayjob-tax">Surge AI: DAYJOB: Tax</a></p>
+<p>⚠️ <strong>Freio de realidade:</strong> é imposto dos EUA, e <strong>95%</strong> é um limiar duríssimo: nota baixa não é o mesmo que inútil. São só <strong>50</strong> tarefas e a Surge não publica intervalo de confiança, então a diferença entre os três primeiros pode ser ruído, como notaram comentaristas no <a href="https://news.ycombinator.com/item?id=50275626">Hacker News</a>. E o teste completo só é liberado sob pedido, o que dificulta a conferência por terceiros (<a href="https://surgehq.ai/blog/dayjob-tax">Surge AI</a>).</p>
+<p><strong>Agora aplica no mundo real:</strong></p>
+<ul>
+<li><strong>Advogado tributarista:</strong> o agente faz o primeiro levantamento da pasta; o julgamento fica com o humano.</li>
+<li><strong>Contador:</strong> checagem de documento citado no razão e ausente da pasta, que é uma das armadilhas do teste.</li>
+<li><strong>Dono de pequena empresa:</strong> organizar os papéis antes de mandar ao contador.</li>
+</ul>
+<p><strong>Como isso vira serviço:</strong> revisão humana de trabalho feito por IA para escritórios contábeis pequenos. O agente tria os documentos e um profissional confere o que o teste mostra que a IA erra: fato que o cliente não contou e papel ausente. O cliente pagaria agora porque a CBS de 2027 vai gerar demanda por recalcular preço e carga.</p>
+<p><strong>Para testar hoje:</strong> dê a um assistente 5 documentos de uma pendência real, sem dados sensíveis, peça a lista do que falta e confira você mesmo.</p>
+<hr>
+<h4 class="rotulo">ECONOMIA EM 3 LINHAS</h4>
+<p><strong>🇧🇷 Por aqui</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Ibovespa</strong>: caiu <strong>2,68%</strong> em 28/10, a <strong>171.006</strong> pontos, e acumula <strong>−16,6%</strong> em três pregões desde o 2º turno (<a href="https://www.cnnbrasil.com.br/economia/money/mercado/mercado-financeiro-ibovespa-dolar-28-outubro-2026/">CNN Brasil</a>; <a href="https://braziljournal.com/a-bolsa-caiu-16-com-lula-ate-agora-mas-o-estrago-e-maior-do-que-parece">Brazil Journal</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Petrobras</strong>: produção recorde de <strong>3,51 mi</strong> de barris de óleo equivalente por dia no 3º tri, <strong>+11,7%</strong> em um ano (<a href="https://valor.globo.com/empresas/noticia/2026/10/28/petrobras-tem-producao-media-de-oleo-lgn-e-gas-recorde-no-terceiro-trimestre.ghtml">Valor</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Santander Brasil</strong>: lucro de <strong>R$ 2,9 bi</strong> no 3º tri, <strong>−28%</strong> em um ano e <strong>7%</strong> abaixo do consenso (<a href="https://braziljournal.com/lucro-do-santander-cai-28-e-fica-abaixo-do-consenso-roe-vai-a-11-9">Brazil Journal</a>).</p>
+</div>
+<p><strong>🌎 Lá fora</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Fed</strong>: manteve os juros em <strong>3,75%–4,00%</strong> em 28/10, por 10 votos a 2; Lisa Cook e Beth Hammack queriam alta de 0,25 ponto (<a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm">Federal Reserve</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Microsoft</strong>: o Azure faturou <strong>US$ 33,2 bi</strong> no trimestre, <strong>+48%</strong>, e é a primeira vez que a empresa abre o número em dólares (<a href="https://techcrunch.com/2026/10/28/microsoft-just-shared-azures-actual-revenue-in-dollars-33-2-billion/">TechCrunch</a>).</p>
+</div>
+<p>O que observar: a assembleia da Raízen, sexta (30/10) (<a href="https://investnews.com.br/negocios/raizen-acordo-tributario-com-a-uniao/">InvestNews</a>), e o Senado, que decide a CBS até 15/12.</p>
+<hr>
+<h4 class="rotulo">🇧🇷 BRASIL ADENTRO</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Raízen</strong>: acordo com a União regulariza <strong>R$ 22,4 bi</strong> em débitos, com <strong>R$ 8,5 bi</strong> de desconto na parte da empresa; é uma das condições para reestruturar cerca de <strong>R$ 65 bi</strong> (<a href="https://investnews.com.br/negocios/raizen-acordo-tributario-com-a-uniao/">InvestNews</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Vivo</strong>: avalia comprar a Vero, de <strong>1,3 mi</strong> de clientes, sem acordo assinado, segundo fontes da Coluna do Broadcast (<a href="https://www.estadao.com.br/economia/coluna-da-broad/vivo-negocia-compra-da-vero-provedora-de-banda-larga/">Estadão</a>).</p>
+<p class="seta"><span class="seta-ic">→</span>⚖️ <strong>DeltaAI</strong>: a legaltech que tenta prever decisões de juízes lançou três produtos em março e, segundo a fundadora, Patrícia Carvalho dos Santos, está perto de <strong>R$ 1 mi</strong> de faturamento; o número é autodeclarado (<a href="https://startups.com.br/negocios/legaltech/legaltech-apoiada-pela-aleve-quer-prever-decisoes-de-juizes/">Startups</a>).</p>
+</div>
+<h4 class="rotulo">🌎 MUNDO AFORA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span>⚖️ <strong>Weil Gotshal</strong>: o comitê do escritório quase centenário, de cerca de <strong>US$ 2,1 bi</strong> de receita, recomendou aos sócios encerrar as atividades, segundo a Bloomberg Law em 28/10; a votação é nos próximos dias (<a href="https://news.bloomberglaw.com/business-and-practice/weil-gotshal-to-wind-down-in-stunning-fall-for-heavyweight-firm">Bloomberg Law</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Microsoft</strong>: registrou <strong>US$ 10 bi</strong> de receita com a OpenAI no trimestre até 30/09, incluindo repasses, quase <strong>11%</strong> dos US$ 92,3 bi (<a href="https://techcrunch.com/2026/10/28/microsoft-recorded-10-billion-in-revenue-from-openai/">TechCrunch</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Google</strong>: anunciou em 28/10 o Gemini 4 Carbon, por ora só para um grupo restrito de defensores de cibersegurança; para o público e os desenvolvedores, em breve, sem data (<a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/">Google</a>; <a href="https://arstechnica.com/ai/2026/10/google-announces-gemini-4-carbon-its-latest-frontier-ai-model-that-you-cant-use/">Ars Technica</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Anthropic</strong>: depois do S-1 que a gente destrinchou em 28/10, a senadora Elizabeth Warren enviou carta de 4 páginas a Dario Amodei sobre riscos citados no S-1, com prazo de resposta até 3/11 (<a href="https://aiweekly.co/alerts/warren-gives-anthropic-until-november-3-to-answer-four-pages-of-s-1-existential">AI Weekly</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">MARKETING DIGITAL</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Google</strong>: anunciou em 28/10 anúncios no Modo IA (a busca conversacional do Google) em 10 novos mercados, como Canadá, Índia e Austrália; os anúncios em perguntas de acompanhamento estreiam nos EUA. Para o Brasil, o Google diz que planeja a expansão "ainda este ano", sem data (<a href="https://blog.google/intl/pt-br/produtos/estamos-expandindo-os-anuncios-no-modo-ia-para-novos-mercados/">Google</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Meta</strong>: anunciou em 28/10 três mudanças no ranqueamento de anúncios, entre elas um sistema baseado em LLM (modelo de linguagem), o GenRecs; a Meta diz que ele deu quase <strong>2%</strong> mais conversões (vendas ou cadastros vindos do anúncio) em segmentos-alvo no Feed do Facebook no 3º tri e que as mudanças chegam às contas sem configuração; o número é da própria Meta, sem auditoria, e ela não diz em que países vale (<a href="https://www.facebook.com/business/news/three-new-ai-innovations-in-ads-ranking">Meta</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Meta</strong>: Andy Stone disse que os novos termos comerciais de IA podem ser adiados de novo, além de 20/11; até lá valem os atuais (<a href="https://www.theverge.com/tech/1020769/meta-updated-business-terms-delay-indefinitely">The Verge</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Busca do Google</strong>: a receita da busca cresceu <strong>12%</strong> no 3º tri, (<a href="https://www.sec.gov/Archives/edgar/data/0001652044/000165204426000080/googexhibit991q32026.htm">Alphabet</a>), contra <strong>17%</strong> no 2º e <strong>19%</strong> no 1º (<a href="https://www.searchenginejournal.com/google-search-growth-slows-again-ai-mode/594862/">Search Engine Journal</a>). Na teleconferência, a monetização menor do Modo IA foi citada como um de três fatores, atrás do câmbio (<a href="https://www.searchenginejournal.com/google-search-growth-slows-again-ai-mode/594862/">Search Engine Journal</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Busca com IA</strong>: estudo da TJ Digital, agência que vende GEO (otimizar para aparecer na resposta das IAs), com <strong>193.507</strong> respostas: páginas citadas abriam com a resposta direta em <strong>20%</strong> dos casos, contra <strong>5%</strong> das páginas do top 10 do Google que a IA nem consultou. É associação, não causa (<a href="https://www.searchenginejournal.com/ai-cited-pages-more-often-got-straight-to-the-answer/594781/">Search Engine Journal</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Mercado Livre</strong>: projeta mais de <strong>R$ 100 mi</strong> por dia em cupons ativados no 11.11 e na Black Friday; é projeção da empresa (<a href="https://www.meioemensagem.com.br/marketing/mercado-livre-explorara-cupons-para-11-11-e-black-friday">Meio &amp; Mensagem</a>).</p>
+</div>
+<h3>A Lush largou o anúncio em rede social. E não quebrou.</h3>
+<p>Em 2021, a marca de cosméticos saiu de Instagram, Facebook, TikTok e Snapchat; em 2023, do X. A verba foi para app próprio, e-mail, colaborações, criadores e eventos (<a href="https://digiday.com/marketing/how-lush-quit-social-media-ads-and-still-drove-growth/">Digiday</a>). A receita foi de £ 736,2 mi no ano fiscal até junho de 2025, contra £ 672,7 mi no anterior (<a href="https://www.cosmeticsbusiness.com/lush-reports-full-year-2025-results">Cosmetics Business</a>; <a href="https://digiday.com/marketing/how-lush-quit-social-media-ads-and-still-drove-growth/">Digiday</a>). A Lush diz que o app tem 2,8 mi de usuários.</p>
+<p><strong>O que dá para copiar:</strong> montar lista própria de e-mail ou WhatsApp para clínica ou restaurante, em vez de depender só do alcance pago; fazer ação conjunta com negócio vizinho; apostar em evento presencial.</p>
+<p>⚠️ <strong>Freio de realidade:</strong> é uma marca global, com lojas próprias e base fiel, longe da realidade de um negócio de bairro. A Lush não revela quanto gastava em redes, então não dá para saber quanto do resultado veio da troca de canal.</p>
+<h3>Reescrever o site para a IA citar</h3>
+<p><strong>O que vender:</strong> revisão das páginas de serviço para abrir com a resposta direta. <strong>Para quem:</strong> escritórios de advocacia e clínicas. <strong>Por que agora:</strong> o Google planeja levar os anúncios do Modo IA ao Brasil ainda este ano, e quem não aparecer na resposta da IA perde uma vitrine. <strong>Como entregar:</strong> listar as 20 perguntas que o cliente mais faz, reescrever o começo de cada página com a resposta em uma ou duas frases e conferir no ChatGPT e no Modo IA, antes e depois.</p>
+<p>⚠️ <strong>O limite:</strong> o estudo mostra associação, não garantia, então não prometa posição. Advocacia segue o Provimento 205/2021 da OAB, que restringe promessa de resultado e captação; clínicas seguem as regras de publicidade do próprio conselho profissional.</p>
+<hr>
+<h4 class="rotulo">📊 STATS</h4>
+<h2>1.442</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o Stack Overflow recebeu <strong>1.442</strong> perguntas em julho de 2026, contra <strong>207.204</strong> em março de 2014, queda de <strong>99%</strong>.</p>
+</blockquote>
+<p>Os dados vêm do Data Explorer do site, segundo o PPC Land (<a href="https://ppc.land/stack-overflow-drops-to-1-442-questions-in-july-down-99-from-2014-peak/">PPC Land</a>). Na conta da newsletter, dá cerca de <strong>6.700</strong> perguntas por dia no pico, contra cerca de <strong>46</strong> agora.</p>
+<p class="opiniao"><span class="selo">Opinião</span> assistente de IA responde na hora » ninguém posta a dúvida » menos respostas públicas » menos material novo para treinar a próxima IA. A queda, porém, começou antes do ChatGPT, segundo o PPC Land, então a IA explica só parte dela.</p>
+<hr>
+<p><strong>Para ler, ouvir ou assistir:</strong></p>
+<ul>
+<li>[Para ler] <a href="https://simonwillison.net/2026/Oct/28/vibe-game-development/">Simon Willison</a>: para ele, o desenvolvimento de jogos com IA chegou a um ponto de virada.</li>
+<li>[Para ler] <a href="https://www.technologyreview.com/2026/10/20/1145399/emacs-turns-50/">Emacs faz 50 anos</a>, na MIT Technology Review: como nasceu, no laboratório de IA do MIT, o editor de texto que ajudou a inspirar o software livre.</li>
+<li>[Curiosidade] <a href="https://www.quantamagazine.org/how-spiders-spin-silk-dope-into-natures-toughest-material-20261028/">Como a aranha fia a fibra mais resistente da natureza</a>, na Quanta: como uma proteína embolada vira fio.</li>
+</ul>
+<hr>
+<p><strong>Pergunta do dia:</strong> se a carga de imposto sobre o seu serviço subisse em janeiro, quem pagaria a diferença: você ou o cliente?</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="index.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>
