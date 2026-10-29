@@ -2099,5 +2099,109 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-10-29",
+    "tipo": "dia_util",
+    "numero": 11,
+    "assunto": "o imposto novo veio maior que a encomenda",
+    "previa": "+ 16 IAs tentaram fazer o trabalho do contador",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "cbs-aliquota-2027",
+        "titulo": "TCU fixa CBS de 11,3% para 2027, acima dos 9,21% previstos",
+        "tema": "economia",
+        "urls": [
+          "https://www.estadao.com.br/economia/aliquota-de-novo-imposto-da-reforma-tributaria-assusta-e-carga-tributaria-pode-subir-em-2027/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "dayjob-tax-benchmark",
+        "titulo": "Melhor agente de IA passa em 10,8% das tarefas tributárias do DAYJOB: Tax",
+        "tema": "ia",
+        "urls": [
+          "https://surgehq.ai/blog/dayjob-tax"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "weil-gotshal-encerramento",
+        "titulo": "Comitê da Weil Gotshal recomenda encerrar o escritório",
+        "tema": "direito_tech",
+        "urls": [
+          "https://news.bloomberglaw.com/business-and-practice/weil-gotshal-to-wind-down-in-stunning-fall-for-heavyweight-firm"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "anthropic-receita-ipo",
+        "titulo": "Elizabeth Warren cobra a Anthropic sobre riscos citados no S-1",
+        "tema": "ia",
+        "urls": [
+          "https://aiweekly.co/alerts/warren-gives-anthropic-until-november-3-to-answer-four-pages-of-s-1-existential"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "google-ai-mode-anuncios",
+        "titulo": "Anúncios no Modo IA chegam a 10 países; Brasil ainda este ano",
+        "tema": "marketing",
+        "urls": [
+          "https://blog.google/intl/pt-br/produtos/estamos-expandindo-os-anuncios-no-modo-ia-para-novos-mercados/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "meta-ranking-anuncios-llm",
+        "titulo": "Meta põe LLM no ranqueamento de anúncios",
+        "tema": "marketing",
+        "urls": [
+          "https://www.facebook.com/business/news/three-new-ai-innovations-in-ads-ranking"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "meta-termos-comerciais-ia",
+        "titulo": "Meta diz que pode adiar os novos termos de novo, além de 20/11",
+        "tema": "marketing",
+        "urls": [
+          "https://www.theverge.com/tech/1020769/meta-updated-business-terms-delay-indefinitely"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "lush-sem-anuncio-social",
+        "titulo": "Lush cresce depois de largar anúncios em redes sociais",
+        "tema": "marketing",
+        "urls": [
+          "https://digiday.com/marketing/how-lush-quit-social-media-ads-and-still-drove-growth/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "stack-overflow-perguntas",
+        "titulo": "Stack Overflow cai a 1.442 perguntas por mês, −99% desde 2014",
+        "tema": "ia",
+        "urls": [
+          "https://ppc.land/stack-overflow-drops-to-1-442-questions-in-july-down-99-from-2014-peak/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "explicador",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "marketing_digital",
+      "case",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
