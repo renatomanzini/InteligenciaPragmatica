@@ -47,6 +47,7 @@ O passo a passo completo está em `manual/ROTINA.md`.
     - **Niterói** passou a ter edição completa só na segunda, quarta e sexta, e um radar barato nos outros dias.
     - **Geral**: o Opus planeja e um Sonnet escreve.
     - Os agentes de apuração (de 2 a 4) e os dois checadores ficaram como estavam: o leitor recusou cortá-los.
+  - **Só breakthrough (29/10/2026)**, decidido pelo leitor ("cancele todas as adjacentes e mantenha a principal"): Mercado e Niterói perderam a edição regular (as rotinas da manhã do Mercado e da edição do Niterói foram desligadas). Só sai edição extra com breakthrough, muito bem explicada e expandida: o alarme do Mercado (18:37, dias úteis) e o radar do Niterói (05:22, todo dia). A geral continua igual.
   - [ ] **Geral:** diária, às 06:00. O Opus faz a triagem, a pauta e a apuração e escreve o plano de redação; um agente Sonnet escreve; o Opus revisa; dois checadores conferem. Na terça e na quinta, leva a seção **MARKETING DIGITAL**.
   - [ ] **Mercado e Economia:** dias úteis, de manhã, no Opus, com o painel de cotações gerado por código. Nas **segundas, quartas e sextas**, leva o bloco **ECONOMIA** (painel oficial do BC e do IBGE, Brasil, empresas e preços, mundo e um explicador). Tem edição extra quando o pregão dispara um gatilho, e o alarme das 18:37 continua.
     - Pronto: código, manual e roteiro (o bloco ECONOMIA está na seção 9 do manual).

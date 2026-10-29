@@ -14,16 +14,10 @@
 #
 # tema: niteroi | vassouras | buzios
 
-# A coleta cobre desde a última edição (que sai segunda, quarta e sexta, às 06:00), porque não há mais curadoria
-# entre as edições: 48 horas e, na segunda, 72 (pega a sexta e o fim de semana).
-# Nos outros dias roda só o radar (terça, quinta, sábado e domingo), que olha o último dia: 30 horas.
+# Desde 29/10/2026 não há edição regular: o radar roda todo dia e olha o último dia (30 horas).
+# As fontes de Vassouras e Búzios têm janela própria e ficam como estão; o radar ignora essas seções.
 janela_horas:
-  padrao: 48
-  segunda: 72
-  terca: 30       # radar
-  quinta: 30      # radar
-  sabado: 30      # radar
-  domingo: 30     # radar
+  padrao: 30      # o radar roda todo dia e olha o último dia (desde 29/10/2026 não há edição regular)
 
 limite_por_fonte: 12
 

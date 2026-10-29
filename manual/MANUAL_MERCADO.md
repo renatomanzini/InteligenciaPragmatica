@@ -1,6 +1,6 @@
 # Manual do caderno Mercado
 
-O caderno Mercado é a newsletter de mercado financeiro e de economia da Inteligência Pragmática. Sai **de segunda a sexta, por volta das 07:00**, antes da abertura da bolsa. Nas **segundas, quartas e sextas**, a edição ganha o bloco **ECONOMIA** (seção 9), que era o caderno Economia até 22/10/2026. Quando acontece algo grande no pregão, sai também uma **edição extra** no fim do dia.
+O caderno Mercado é a newsletter de mercado financeiro da Inteligência Pragmática. **Desde 29/10/2026, por decisão do leitor, ele só sai quando há um breakthrough de mercado:** uma **edição extra** no fim do dia, muito bem explicada e expandida (seção 6). Fora isso, não manda nada. A edição da manhã (seção 5) e o bloco ECONOMIA (seção 9) estão suspensos e ficam aqui só como histórico.
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz, o rigor (seção 14), números com escala (seção 9), radar e não repetição (seção 13) e as convenções de formato (seção 15). Este arquivo diz só o que muda.
 
@@ -29,7 +29,9 @@ Em **3 a 4 minutos de leitura** (**5 a 6** nos dias do bloco ECONOMIA), o leitor
 - Mas o **efeito da eleição no preço** entra: "a bolsa caiu com a cautela antes do segundo turno". Diga o movimento e a explicação do mercado, com fonte, **sem** dizer quem está na frente nem os números das pesquisas.
 - No bloco ECONOMIA, política só entra quando mexe com a economia (a seção 12 do manual geral), e a eleição só pelo efeito econômico ("o mercado cobra prêmio de risco antes do segundo turno"), sem pesquisa e sem candidato como protagonista. Para medida de governo, use Quem defende diz / Quem critica diz, com números.
 
-## 5. A estrutura da edição da manhã (dias úteis)
+## 5. A estrutura da edição da manhã (suspensa desde 29/10/2026)
+_Histórico: a edição da manhã não sai mais. Vale só a seção 6._
+
 1. **bom dia.** Uma ou duas frases com o humor do mercado (subiu, caiu, de lado) e o tema do dia. Pode ter graça. Nos dias do bloco ECONOMIA, pode citar também o tema do explicador.
 2. **Painel** (`<!-- painel -->`, sozinho numa linha). O código preenche.
 3. **#### O QUE MEXEU ONTEM**: 2 ou 3 linhas `→` explicando o porquê dos movimentos do painel, uma no Brasil e uma ou duas nos EUA. Cada uma com fonte.
@@ -42,8 +44,8 @@ Em **3 a 4 minutos de leitura** (**5 a 6** nos dias do bloco ECONOMIA), o leitor
 
 Alvo: **de 450 a 750 palavras** fora os painéis. Nos dias do bloco ECONOMIA, **de 1.000 a 1.400 palavras**. Dia fraco é edição curta, sem encher linguiça.
 
-## 6. A edição extra (o 🚨 do Mercado)
-Sai **só** quando há um gatilho. O `python main.py mercado-alarme` confere os gatilhos de preço:
+## 6. A edição extra (o 🚨 do Mercado): a única que sai
+Sai **só** quando há um gatilho: é o breakthrough do caderno. O `python main.py mercado-alarme` confere os gatilhos de preço:
 - Ibovespa, S&P 500 ou Dow Jones variando 3% ou mais no dia;
 - Nasdaq variando 4% ou mais;
 - dólar variando 2,5% ou mais;
@@ -60,15 +62,21 @@ Também conta como gatilho um **evento**, mesmo sem número extremo, quando é g
 - fusão ou aquisição acima de US$ 10 bilhões envolvendo empresa brasileira;
 - mudança de regra que mexe com o investidor comum (IR sobre investimentos, poupança, FGC).
 
-**Na dúvida, não sai.** A edição extra é rara; edição extra toda semana vira ruído. Desde que a Economia virou bloco, não existe mais edição urgente de economia: o que não passa por um destes gatilhos espera o próximo bloco ECONOMIA.
+**Na dúvida, não sai.** A edição extra é rara; edição extra toda semana vira ruído. O que não passa por um destes gatilhos não sai em lugar nenhum do caderno.
 
-Formato da extra: assunto começando com "🚨", painel atualizado, `## Título`, `> **TL;DR:**`, de 200 a 400 palavras com:
-- o que aconteceu;
-- por que aconteceu;
-- o que muda no bolso;
-- o que observar amanhã.
+**Muito bem explicada e expandida.** Como a extra é a única edição, ela tem que bastar sozinha: quem lê entende o que houve, por que, como funciona e o que muda para ele, sem abrir outro texto. Formato:
+- assunto começando com "🚨";
+- "bom dia." de uma frase, o painel atualizado (`<!-- painel -->`, sozinho numa linha), `## Título` e `> **TL;DR:**` de 2 a 3 linhas;
+- de **700 a 1.100 palavras**, nesta ordem, cada parte com `### Subtítulo`:
+  - **O que aconteceu:** os fatos e os números, com escala (de quanto para quanto, desde quando);
+  - **Por que aconteceu:** as causas, separando o fato da leitura de analista (com o nome de quem diz);
+  - **Como funciona:** o mecanismo em linguagem simples, com cada termo técnico explicado na primeira vez (o que é circuit breaker, por que o juro futuro mexe com a bolsa, o que o FGC garante);
+  - **O tamanho disso:** a comparação com episódios parecidos (a última vez que aconteceu, o recorde), para o leitor saber se é raro de verdade;
+  - **O que muda no bolso:** os efeitos práticos (crédito, câmbio, renda fixa, poupança, preços), sem recomendar investimento;
+  - **O que observar nos próximos dias:** datas e sinais concretos (decisões, dados, prazos);
+- rodapé: "Não é recomendação de investimento."
 
-O front matter leva `breakthrough: true`, `tipo: extra` e a justificativa em `motivo_extra`. A extra não leva o bloco ECONOMIA.
+O front matter leva `breakthrough: true`, `tipo: extra`, `tempo_leitura_min` de 5 a 7 e a justificativa em `motivo_extra`.
 
 ## 7. O front matter
 Igual ao da geral (manual, seção 15), com estas diferenças:
@@ -95,7 +103,9 @@ Nos dias do bloco ECONOMIA, confira também (seção 9):
 - [ ] O explicador tem o mecanismo, os dois lados, "O que observar" e "No bolso", com número e fonte.
 - [ ] Não há "PARA ENTENDER" na edição.
 
-## 9. O bloco ECONOMIA (segunda, quarta e sexta)
+## 9. O bloco ECONOMIA (suspenso desde 29/10/2026)
+_Histórico: o bloco saía na edição da manhã, que não sai mais. Evento de economia que passe por um gatilho da seção 6 vira extra._
+
 O leitor decidiu em 22/10/2026 que a economia deixaria de ser um caderno e viraria um bloco do Mercado. O caderno Economia (`manual/MANUAL_ECONOMIA.md`) está encerrado; esta seção guarda o essencial dele.
 
 **Quando:** só nas segundas, quartas e sextas, os mesmos dias fixos que o caderno tinha. Nos outros dias, nada de economia fora do que o Mercado já cobre. Não há mais edição urgente de economia (veja a seção 6).

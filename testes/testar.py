@@ -950,15 +950,12 @@ def testar_arquivos_do_projeto():
                              for f in eco if isinstance(f.get("janela_horas"), dict)),
                  "fontes do bloco ECONOMIA no Mercado: 72 horas na segunda e 48 nos outros dias")
 
-    # Niterói: a coleta da edição cobre desde a última edição; o radar olha o último dia
+    # Niterói: desde 29/10/2026 só há o radar, todo dia, e ele olha o último dia
     if "niteroi" in todos:
         j = todos["niteroi"]["janela_horas"]
         segunda = date(2026, 10, 26).toordinal()
         horas = {d: coleta._horas_janela(j, date.fromordinal(segunda + i)) for i, d in enumerate(coleta.DIAS_JANELA)}
-        conferir([horas[d] for d in ("segunda", "quarta", "sexta")] == [72, 48, 48],
-                 "Niterói: 72 horas na segunda e 48 na quarta e na sexta (dias de edição)")
-        conferir(all(horas[d] == 30 for d in ("terca", "quinta", "sabado", "domingo")),
-                 "Niterói: 30 horas nos dias de radar")
+        conferir(all(h == 30 for h in horas.values()), "Niterói: 30 horas todo dia (só o radar)")
 
 
 def testar_horario_de_entrega(raiz):

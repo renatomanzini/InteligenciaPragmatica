@@ -1,6 +1,6 @@
 # Manual do caderno Niterói
 
-O caderno Niterói é a newsletter local da Inteligência Pragmática. Sai **segunda, quarta e sexta, de manhã**. Na **sexta**, a edição traz também o **bloco semanal de Vassouras e Búzios**. Nos outros dias (terça, quinta, sábado e domingo), uma checagem leve, o **radar**, só publica uma **edição extra** quando há aviso urgente (seção 10).
+O caderno Niterói é a newsletter local da Inteligência Pragmática. **Desde 29/10/2026, por decisão do leitor, ele só sai quando há um breakthrough na cidade:** uma **edição extra**, muito bem explicada e expandida (seção 10). Fora isso, não manda nada. A edição de segunda, quarta e sexta (seção 6) e o bloco de Vassouras e Búzios (seção 7) estão suspensos e ficam aqui só como histórico.
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz (seção 2), números com escala (seção 9), não repetição (seção 13), o rigor (seção 14) e as convenções de formato (seção 15). Este arquivo diz só o que muda.
 
@@ -39,7 +39,9 @@ Todo item de serviço termina com o que fazer, quando houver: prazo, endereço, 
 - **Corrida eleitoral não entra** (`preferencias.md`): nada de candidato, pesquisa, propaganda, apoio ou "quem atacou quem". O **serviço da eleição** entra (transporte gratuito, local de votação, Lei Seca, horários), sem nome de candidato.
 - Prefeito e vereadores aparecem pelo que fizeram no cargo, sem adjetivo. Quando houver dois lados, use Quem defende diz / Quem critica diz (seção 12 do manual geral).
 
-## 6. A estrutura da edição (segunda, quarta e sexta)
+## 6. A estrutura da edição (suspensa desde 29/10/2026)
+_Histórico: a edição regular não sai mais. Vale só a seção 10._
+
 1. **bom dia, Niterói.** Uma ou duas frases com o tom do dia (o que mais mexe com a cidade). Pode ter graça.
 2. **#### A HISTÓRIA DA CIDADE**: a notícia mais importante para o morador, com `## Título-gancho`, `> **TL;DR:**` e de 120 a 220 palavras. Termina com **"Na prática:"** (o que muda para quem mora aqui, em uma ou duas frases).
 3. **#### SERVIÇO**: de 3 a 6 linhas `→`, cada uma com um rótulo em negrito e os dois-pontos fora dele (`→ **Trânsito**: ...`, `→ **Água**: ...`, `→ **Saúde**: ...`, `→ **Matrícula**: ...`, `→ **Imposto**: ...`). Uma frase ou duas, com data, local e link.
@@ -50,7 +52,9 @@ Todo item de serviço termina com o que fazer, quando houver: prazo, endereço, 
 
 Alvo: **de 400 a 700 palavras** na segunda e na quarta, e **de 550 a 900** na sexta. Semana fraca é edição curta, sem encher linguiça.
 
-## 7. O bloco semanal de Vassouras e Búzios (só na sexta)
+## 7. O bloco semanal de Vassouras e Búzios (suspenso desde 29/10/2026)
+_Histórico: o bloco saía na edição de sexta, que não sai mais._
+
 - `### Vassouras` com de 1 a 3 linhas `→` e `### Búzios` com de 2 a 4 linhas `→`, cobrindo **a semana inteira** (de sexta a quinta).
 - Mesma régua de serviço: obra, estrada, saúde, imposto, evento, decisão da Câmara, turismo que mexe com a cidade (temporada, cruzeiros, taxa turística).
 - Em Búzios, a temporada importa: trânsito, taxa turística, cruzeiros, praias e água.
@@ -75,24 +79,22 @@ Igual ao da geral (manual, seção 15), com estas diferenças:
 - [ ] Na sexta, o bloco de Vassouras e Búzios cobre a semana inteira.
 - [ ] O fecho aponta para a próxima edição certa.
 
-## 10. Quando sai: edição nos dias fixos, radar nos outros
-O leitor decidiu em 22/10/2026 cortar o custo do caderno: a pesquisa diária com curadoria acabou. Agora há duas rotinas, e o prompt de cada uma diz o modo:
-1. **Modo EDIÇÃO: segunda, quarta e sexta** (os `dias_envio` do bloco `niteroi` no `cadernos.yaml`). A edição completa sai sempre, escrita pelo Sonnet e conferida por dois checadores. A coleta cobre **desde a última edição**: 48 horas, ou 72 na segunda, que pega a sexta e o fim de semana. Por isso não há curadoria entre as edições. O bloco de Vassouras e Búzios continua só na sexta.
-2. **Modo RADAR: terça, quinta, sábado e domingo.** Uma rotina leve (modelo Haiku) coleta, lê **só os títulos** e decide se há aviso urgente pelo critério abaixo. Sem urgência, não faz nada: sem edição, sem e-mail e sem commit. Com urgência, sai uma **edição extra**, curta, escrita por um agente Sonnet e conferida por outro.
+## 10. Quando sai: só o breakthrough
+O leitor decidiu em 29/10/2026 que o caderno **não tem mais edição regular**: só sai quando há um breakthrough na cidade. Uma rotina leve, o **radar** (modelo Haiku), roda **todo dia** às 05:22, coleta, lê **só os títulos** das últimas 30 horas e decide pelo critério abaixo. Sem breakthrough, não faz nada: sem edição, sem e-mail e sem commit. Com breakthrough, sai uma **edição extra**, escrita por um agente Sonnet e conferida por outro.
 
-O que não é urgente **não se guarda**: o próximo dia fixo já cobre o período, porque a coleta dele começa na última edição. Quem escreve a edição de segunda, quarta ou sexta olha tudo o que chegou desde então (inclusive o que o radar viu e deixou passar).
+**O que é breakthrough em Niterói.** Um fato raro e grande, que muda o dia a dia de boa parte da cidade:
+- emergência ou desastre com orientação oficial (alerta alto da Defesa Civil, enchente, deslizamento, evacuação);
+- falta d'água, de luz ou de transporte que atinge vários bairros por 24 horas ou mais, ou greve geral de barcas ou ônibus;
+- mudança grande e duradoura na cidade, já decidida (não só anunciada): tarifa, imposto ou taxa municipal nova, abertura ou fechamento de via, túnel, ponte ou linha de transporte por meses, regra nova que muda a vida de muita gente.
 
-**O que conta como muito importante** (o critério da edição extra). O aviso **não pode esperar o próximo dia fixo**, porque quem mora em Niterói precisa agir hoje ou amanhã:
-- falta d'água ou de luz programada, interdição de via, túnel ou ponte, mudança ou greve de barcas e ônibus;
-- alerta da Defesa Civil (chuva forte, ressaca, deslizamento), com o que fazer;
-- prazo que vence antes do próximo dia fixo e mexe no bolso ou na vida do morador (vacinação, matrícula, imposto, cadastro);
-- emergência na cidade, com orientação oficial.
+**Não é breakthrough:** aviso pequeno ou de um bairro só, obra anunciada, inauguração, política local, evento cultural, crime. **Na dúvida, não sai.** Extra toda semana vira ruído. O que não é breakthrough não sai em lugar nenhum do caderno. O radar também não repete um assunto: se uma extra já deu o fato, só uma novidade grande (piorou muito, a data mudou, saiu alerta novo) justifica outra.
 
-Obra anunciada, inauguração, política local, evento cultural e crime **não** são urgentes: esperam o próximo dia fixo. **Na dúvida, não sai.** Edição extra toda semana vira ruído. O radar também não repete um aviso: se a extra de ontem já deu o assunto, só uma novidade (o que mudou) justifica outra.
-
-**A edição extra** é curta, de 120 a 250 palavras, e fica na pasta do dia (`edicoes/niteroi/AAAA-MM-DD/`, com `tipo: extra`), para a rotina de envio das 06:00 achar:
-- "bom dia, Niterói." e uma frase sobre o aviso;
-- `#### AVISO` e `## Título`, que diz o que acontece e quando, com o `> **TL;DR:**`;
-- o aviso: o quê, quando, onde, quem é afetado e **o que fazer**, com a fonte primária;
-- outros avisos urgentes, se houver;
-- um fecho de uma linha que aponta para o próximo dia fixo ("A edição normal sai quarta (DD/MM)" na terça, "sexta (DD/MM)" na quinta e "segunda (DD/MM)" no sábado e no domingo).
+**A edição extra: muito bem explicada e expandida.** Como é a única edição, ela tem que bastar sozinha: o morador entende o que houve, por que, se é afetado e o que fazer, sem abrir outro texto. Tem de **450 a 800 palavras** e fica na pasta do dia (`edicoes/niteroi/AAAA-MM-DD/`, com `tipo: extra`), para a rotina de envio das 06:00 achar:
+- "bom dia, Niterói." e uma frase sobre o assunto;
+- `## Título`, que diz o que acontece e quando, e o `> **TL;DR:**` de 2 a 3 linhas;
+- `### O que está acontecendo`: o quê, onde, quando e desde quando, com os números da fonte;
+- `### Por que`: a causa e quem decidiu, separando o fato da versão de cada lado;
+- `### Quem é afetado`: bairros, linhas, quantas pessoas, com o número da fonte;
+- `### O que fazer`: os passos concretos e os canais oficiais;
+- `### O que vem agora`: as próximas datas e quando deve normalizar;
+- as fontes, a primária primeiro.

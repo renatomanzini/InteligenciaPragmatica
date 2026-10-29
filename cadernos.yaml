@@ -12,6 +12,8 @@
 #
 # Encerrados em 22/10/2026 (envio desligado): ia, economia (virou bloco do Mercado) e marketing (virou seção da geral).
 
+# Desde 29/10/2026, Mercado e Niterói não têm edição regular: só sai uma edição extra quando há breakthrough,
+# muito bem explicada e expandida (Mercado: o ALARME das 18:37, nos dias úteis; Niterói: o RADAR das 05:22, todo dia).
 mercado:
   nome: "Inteligência Pragmática · Mercado"
   remetente: "IP · Mercado"
@@ -24,7 +26,6 @@ niteroi:
   nome: "Inteligência Pragmática · Niterói"
   remetente: "IP · Niterói"
   envio: ligado
-  dias_envio: [segunda, quarta, sexta]   # dias de EDIÇÃO (Sonnet). Nos outros dias roda o RADAR (Haiku), que só publica uma edição extra se houver aviso urgente
   fontes: fontes_niteroi.yaml
   manual: manual/MANUAL_NITEROI.md
   roteiro: manual/ROTINA_NITEROI.md
