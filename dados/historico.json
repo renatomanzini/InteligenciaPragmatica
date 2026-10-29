@@ -2203,5 +2203,45 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-29",
+    "tipo": "dia_util",
+    "numero": 4,
+    "assunto": "a bolsa caiu de novo e a conta chegou à renda fixa",
+    "previa": "+ o IOF que pode chegar à LCI e à LCA",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "ressaca-eleicao-ibovespa-dolar",
+        "titulo": "Ibovespa cai 2,68% na quarta e perde quase 17% em três pregões; Tesouro IPCA+ 2032 chega a 7,97% e governo estuda IOF sobre LCI e LCA",
+        "tema": "bolsa_br",
+        "urls": [
+          "https://valorinveste.globo.com/mercados/renda-variavel/bolsas-e-indices/noticia/2026/10/28/ibovespa-flerta-com-menor-nivel-desde-agosto-e-coloca-em-xeque-tese-de-caiu-comprou.ghtml",
+          "https://investnews.com.br/investimentos/tesouro-ipca-perto-8-vale-comprar/",
+          "https://valorinveste.globo.com/mercados/brasil-e-politica/noticia/2026/10/28/governo-estuda-cobrar-iof-sobre-lci-lca-cri-e-debentures-diz-jornal.ghtml"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "big-techs-balanco-3t26",
+        "titulo": "Lucro da Alphabet cai 25% e ação desaba no pós-mercado; o da Microsoft sobe 32%",
+        "tema": "bolsa_eua",
+        "urls": [
+          "https://valorinveste.globo.com/mercados/internacional-e-commodities/noticia/2026/10/28/dona-do-google-reporta-resultado-abaixo-do-esperado-no-3o-tri-acoes-despencam-no-pos-mercado.ghtml",
+          "https://valorinveste.globo.com/mercados/internacional-e-commodities/noticia/2026/10/28/lucro-da-microsoft-cresce-32percent-e-atinge-us-36-bilhoes-no-1o-tri-fiscal-acoes-avancam-no-pos-mercado.ghtml"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "painel",
+      "o_que_mexeu",
+      "historia_do_dia",
+      "agenda",
+      "radar"
+    ],
+    "caderno": "mercado"
   }
 ]
