@@ -1,0 +1,78 @@
+{
+  "data": "2026-10-29",
+  "verificado_em": "2026-10-29T05:13:49-03:00",
+  "total": 11,
+  "resumo": {
+    "ok": 11,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://valorinveste.globo.com/mercados/renda-variavel/bolsas-e-indices/noticia/2026/10/28/ibovespa-flerta-com-menor-nivel-desde-agosto-e-coloca-em-xeque-tese-de-caiu-comprou.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/investimentos/tesouro-ipca-perto-8-vale-comprar/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/brasil-e-politica/noticia/2026/10/28/governo-estuda-cobrar-iof-sobre-lci-lca-cri-e-debentures-diz-jornal.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/internacional-e-commodities/noticia/2026/10/28/dona-do-google-reporta-resultado-abaixo-do-esperado-no-3o-tri-acoes-despencam-no-pos-mercado.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/internacional-e-commodities/noticia/2026/10/28/lucro-da-microsoft-cresce-32percent-e-atinge-us-36-bilhoes-no-1o-tri-fiscal-acoes-avancam-no-pos-mercado.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/financas/noticia/2026/10/28/ibovespa-cai-pela-3a-sessao-e-perdas-chegam-a-quase-17percent-apos-reeleicao-de-lula.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valor.globo.com/financas/noticia/2026/10/28/dolar-a-vista-recua-com-alivio-externo-em-dia-de-volatilidade-mais-alta.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.infomoney.com.br/mercados/vale-vale3-divulga-seu-balanco-do-3o-trimestre-nesta-5a-o-que-esperar/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/economia/fed-mantem-juros-nos-eua-dois-dirigentes-defendem-nova-alta-diante-da-inflacao/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://valorinveste.globo.com/mercados/renda-variavel/empresas/noticia/2026/10/28/lucro-do-santander-sanb11-cai-28percent-no-3o-trimestre-pressionado-pela-inadimplencia.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}

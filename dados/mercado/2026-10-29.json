@@ -1,0 +1,127 @@
+{
+  "gerado_em": "2026-10-29T05:11:36-03:00",
+  "itens": {
+    "ibov": {
+      "nome": "Ibovespa",
+      "valor": 171006.1,
+      "var": -2.68,
+      "unidade": "pts",
+      "data": "",
+      "fonte": "B3"
+    },
+    "medo_acoes": {
+      "nome": "Ações dos EUA (CNN)",
+      "valor": 36,
+      "rotulo": "medo",
+      "ontem": 36,
+      "semana": 20,
+      "fonte": "CNN"
+    },
+    "medo_cripto": {
+      "nome": "Cripto (alternative.me)",
+      "valor": 51,
+      "rotulo": "neutro",
+      "ontem": 51,
+      "fonte": "alternative.me"
+    },
+    "sp500": {
+      "nome": "S&P 500",
+      "valor": 7743.98,
+      "var": 0.27684976562296626,
+      "unidade": "pts",
+      "data": "2026-10-28",
+      "fonte": "FRED"
+    },
+    "nasdaq": {
+      "nome": "Nasdaq",
+      "valor": 26549.85,
+      "var": 0.27207688249140105,
+      "unidade": "pts",
+      "data": "2026-10-28",
+      "fonte": "FRED"
+    },
+    "dow": {
+      "nome": "Dow Jones",
+      "valor": 52475.1,
+      "var": 0.18620566017093498,
+      "unidade": "pts",
+      "data": "2026-10-28",
+      "fonte": "FRED"
+    },
+    "vix": {
+      "nome": "VIX (o \"medo\" das opções)",
+      "valor": 17.52,
+      "var": -4.730831973898864,
+      "unidade": "",
+      "data": "2026-10-27",
+      "fonte": "FRED"
+    },
+    "juros10": {
+      "nome": "Juros de 10 anos dos EUA",
+      "valor": 4.99,
+      "var": -0.20000000000000018,
+      "unidade": "%",
+      "data": "2026-10-27",
+      "fonte": "FRED",
+      "var_pp": -0.009999999999999787
+    },
+    "dolar": {
+      "nome": "Dólar",
+      "valor": 5.342,
+      "var": 0.1387170546994998,
+      "unidade": "R$",
+      "data": "2026-10-28",
+      "fonte": "PTAX"
+    },
+    "euro": {
+      "nome": "Euro",
+      "valor": 5.9515,
+      "var": 0.11101952934449155,
+      "unidade": "R$",
+      "data": "2026-10-28",
+      "fonte": "PTAX"
+    },
+    "libra": {
+      "nome": "Libra",
+      "valor": 7.1059,
+      "var": 0.047870468145028156,
+      "unidade": "R$",
+      "data": "2026-10-28",
+      "fonte": "PTAX"
+    },
+    "euro_usd": {
+      "nome": "Euro em dólar",
+      "valor": 1.1140958442530888,
+      "var": -0.027659157386528133,
+      "unidade": "US$",
+      "data": "2026-10-28",
+      "fonte": "PTAX"
+    },
+    "libra_usd": {
+      "nome": "Libra em dólar",
+      "valor": 1.3301946836390866,
+      "var": -0.09072074141398545,
+      "unidade": "US$",
+      "data": "2026-10-28",
+      "fonte": "PTAX"
+    },
+    "btc_usd": {
+      "nome": "Bitcoin",
+      "valor": 79870.0,
+      "var": -1.4999478719647832,
+      "unidade": "US$",
+      "data": "2026-10-29",
+      "hora": "05:11",
+      "fonte": "CoinGecko"
+    }
+  },
+  "falhas": {
+    "CNBC": "respondeu 403: <HTML><HEAD> <TITLE>Access Denied</TITLE> </HEAD><BODY> <H1>Access Denied</H1> You don't have permission to access \"http&#58;&#47;&#47;quote&#46;",
+    "AwesomeAPI": "respondeu 429: {\"status\":429,\"code\":\"QuotaExceeded\",\"message\":\"Quota exceeded. To continue using the service, please see https://docs.awesomeapi.com.br/aviso-so"
+  },
+  "reservas_usadas": [
+    "CoinGecko",
+    "FRED",
+    "PTAX"
+  ]
+}
