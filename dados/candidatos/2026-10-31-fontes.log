@@ -1,0 +1,10 @@
+Fontes que falharam em 2026-10-31
+
+- CNBC Tecnologia: HTTP 403
+- GitHub em alta: API: HTTP 403 (This GitHub API path is not available: sessions are bound to their configured repositories. Use repository-scoped endpoints (repos/{owner}/{repo}/...).); página de tendências: HTTP 403 (This GitHub API path is not available: sessions are bound to their configured repositories. Use repository-scoped endpoints (repos/{owner}/{repo}/...).)
+
+Falhas parciais:
+- Reddit: r/singularity: HTTP 429
+
+Responderam, mas sem itens na janela:
+- Johnathan Bi
