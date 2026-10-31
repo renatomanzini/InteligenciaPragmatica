@@ -2329,5 +2329,115 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-10-31",
+    "tipo": "sabado",
+    "numero": 13,
+    "assunto": "semana de tombos: bolsa, binance e o clique",
+    "previa": "+ como dizer à ia que ela não treina com seu site",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "claude-code-extensao-cursor",
+        "titulo": "Extensão do Claude Code no marketplace do Cursor sai com backdoor por cerca de 11 horas",
+        "tema": "ia",
+        "urls": [
+          "https://www.bleepingcomputer.com/news/security/malicious-claude-code-extension-on-cursor-planted-ssh-backdoors/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "ibovespa-pos-eleicao",
+        "titulo": "Ibovespa cai 18,12% na semana, a pior desde março de 2020",
+        "tema": "economia",
+        "urls": [
+          "https://investnews.com.br/investimentos/ibovespa-afunda-18-e-tem-pior-semana-desde-2020-dolar-salta-9/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "binance-ataque-2026",
+        "titulo": "Ataque à Binance levou ~20 minutos; empresas de análise apontam a Coreia do Norte",
+        "tema": "economia",
+        "urls": [
+          "https://www.wired.com/story/the-dollar63-billion-binance-hack-was-pulled-off-in-just-20-minutes/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "anthropic-receita-ipo",
+        "titulo": "Blackstone espera nota 'junk' alta para a Anthropic depois do IPO, segundo o FT",
+        "tema": "ia",
+        "urls": [
+          "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "openai-rodada-ipo",
+        "titulo": "OpenAI levanta menos da metade da meta de US$ 30 bi, segundo o WSJ",
+        "tema": "negocios",
+        "urls": [
+          "https://www.wsj.com/tech/ai/openai-raises-less-than-half-of-30-billion-target-in-latest-round-91aecdc5"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "reddit-login",
+        "titulo": "Reddit perde mais de 1 milhão de visitas da busca por semana e aponta a IA do Google",
+        "tema": "negocios",
+        "urls": [
+          "https://ppc.land/reddit-ad-revenue-gains-54-to-847m-as-daily-users-stall-at-130-3m/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "raizen-transacao-tributaria",
+        "titulo": "Credores aprovam a recuperação da Raízen e ficam com ~80% do capital",
+        "tema": "negocios",
+        "urls": [
+          "https://neofeed.com.br/negocios/credores-viram-socios-na-raizen-e-abrem-caminho-para-fim-de-maior-recuperacao-extrajudicial-do-brasil/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "kimi-k3-1-pro",
+        "titulo": "Pesos do Kimi K3.1 Pro ainda não saíram; prazo é 4/11",
+        "tema": "china",
+        "urls": [
+          "https://huggingface.co/moonshotai"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "robots-txt-treino-ia",
+        "titulo": "Google e Bing apoiam sinal único no robots.txt para recusar treino de IA, a partir de 2027",
+        "tema": "direito_tech",
+        "urls": [
+          "https://developers.google.com/search/blog/2026/10/ai-training-control"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "gemini-4-carbon",
+        "titulo": "Gemini 4 Carbon tem preço anunciado, mas segue restrito",
+        "tema": "ia",
+        "urls": [
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "semana_em_revista",
+      "breakthroughs",
+      "historias_em_andamento",
+      "numeros",
+      "ia_na_pratica",
+      "links",
+      "pergunta"
+    ]
   }
 ]
