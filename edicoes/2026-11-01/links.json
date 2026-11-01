@@ -1,0 +1,153 @@
+{
+  "data": "2026-11-01",
+  "verificado_em": "2026-11-01T04:45:12-03:00",
+  "total": 23,
+  "resumo": {
+    "ok": 22,
+    "quebrado": 0,
+    "inconclusivo": 1
+  },
+  "links": [
+    {
+      "url": "https://press-pubs.uchicago.edu/founders/documents/a1_8_8s12.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.seroundtable.com/google-ai-training-control-42430.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-ai-model-is-now-blocking-attempts-at-video-game-recreation-and-cloning-users-also-claim-non-malicious-generic-reverse-engineering-tasks-are-blocked",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://neofeed.com.br/economia/itau-ve-fim-do-ciclo-de-cortes-da-selic-diante-de-cenario-mais-adverso/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ppc.land/stack-overflow-drops-to-1-442-questions-in-july-down-99-from-2014-peak/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50319358",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET"
+    },
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9610.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://developers.google.com/search/blog/2026/10/ai-training-control",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.seroundtable.com/microsoft-bing-ai-controls-42429.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://datatracker.ietf.org/doc/draft-ietf-aipref-vocab/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.gutenberg.org/files/7370/7370-h/7370-h.htm",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.anthropic.com/legal/commercial-terms",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.euronews.com/2025/01/29/openai-says-chinese-companies-are-trying-to-use-us-models-to-train-ai",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.adexchanger.com/platforms/reddit-is-going-login-only-blame-google",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.adexchanger.com/platforms/reddit-is-going-login-only-blame-google/"
+    },
+    {
+      "url": "https://www.science.org/doi/10.1126/science.162.3859.1243",
+      "status": 403,
+      "resultado": "inconclusivo",
+      "metodo": "GET",
+      "detalhe": "o site bloqueia robôs ou exige login (403)"
+    },
+    {
+      "url": "https://garretthardinsociety.org/articles/art_extension_tragedy_commons.html",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.garretthardinsociety.org/articles/art_extension_tragedy_commons.html"
+    },
+    {
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/2009/summary/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ppc.land/google-and-bing-back-one-robots-txt-rule-to-opt-out-of-ai-training/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.eweek.com/news/anthropic-settlement-copyright-case/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.anthropic.com/news",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://investnews.com.br/investimentos/ibovespa-afunda-18-e-tem-pior-semana-desde-2020-dolar-salta-9/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/moonshotai",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
