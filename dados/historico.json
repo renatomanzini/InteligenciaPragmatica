@@ -2439,5 +2439,68 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-11-01",
+    "tipo": "domingo",
+    "numero": 14,
+    "assunto": "quem pode dizer 'não aprenda comigo'?",
+    "previa": "+ jefferson, a vela e a placa do robots.txt",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "ensaio-quem-pode-recusar-treino",
+        "titulo": "Ensaio: conhecimento comum, treino de IA e quem pode dizer 'não aprenda comigo'",
+        "tema": "filosofia",
+        "urls": [
+          "https://press-pubs.uchicago.edu/founders/documents/a1_8_8s12.html",
+          "https://www.seroundtable.com/google-ai-training-control-42430.html"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "robots-txt-treino-ia",
+        "titulo": "OpenAI e Anthropic também planejam aderir ao sinal comum contra treino no robots.txt, segundo o Search Engine Roundtable",
+        "tema": "direito_tech",
+        "urls": [
+          "https://www.seroundtable.com/google-ai-training-control-42430.html"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "anthropic-restricoes-uso",
+        "titulo": "Usuários relatam que o Claude recusa clonar jogos e tarefas de 'treinar concorrente'; Anthropic não comenta",
+        "tema": "ia",
+        "urls": [
+          "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-ai-model-is-now-blocking-attempts-at-video-game-recreation-and-cloning-users-also-claim-non-malicious-generic-reverse-engineering-tasks-are-blocked"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "selic-copom-2026",
+        "titulo": "Copom decide a Selic em 04/11, com 13,75% e aposta de manutenção",
+        "tema": "economia",
+        "urls": [
+          "https://neofeed.com.br/economia/itau-ve-fim-do-ciclo-de-cortes-da-selic-diante-de-cenario-mais-adverso/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "kimi-k3-1-pro",
+        "titulo": "Pesos do Kimi K3.1 Pro prometidos até 4/11 ainda não saíram",
+        "tema": "china",
+        "urls": [
+          "https://www.kimi.ai/blog/kimi-k3-1-pro"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "ensaio",
+      "filosofia",
+      "em_3_linhas",
+      "pergunta"
+    ]
   }
 ]
