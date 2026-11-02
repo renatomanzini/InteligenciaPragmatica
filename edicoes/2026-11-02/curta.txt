@@ -1,0 +1,10 @@
+a ia escreve, alguém tem que conferir
+segunda-feira, 2 de novembro de 2026
+
+• O Postgres 19 atrasou porque a IA achou bugs demais, e ninguém dá conta de revisar
+• As leis do Brasil com histórico de versões, prontas para um agente consultar
+• Copom na quarta: o Itaú já dá o ciclo de cortes como encerrado
+• Chilli Beans, Raízen, 99 e a compra da NeoSpace pelo Itaú
+• STATS: quantos pedidos os agentes de IA trouxeram para a DoorDash (spoiler: poucos)
+
+Edição completa: https://renatomanzini.github.io/InteligenciaPragmatica/2026-11-02.html

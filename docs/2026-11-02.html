@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a ia escreve, alguém tem que conferir · Inteligência Pragmática</title>
+<meta name="description" content="+ as leis do brasil com histórico de versões">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0F5C6E">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pragmática">
+<style>
+.sobe { color: #1E8E3E; } .desce { color: #D93025; }
+@media (prefers-color-scheme: dark) { .sobe { color: #5BD07A; } .desce { color: #FF7B72; } }
+.cadernos { margin: 8px 0 0 0; font-size: 14px; color: var(--sec); }
+.cadernos a { color: var(--dest); }
+:root { --fundo: #FAF8F5; --texto: #1F1F1F; --dest: #0F5C6E; --sec: #6B6B6B;
+        --linha: #E3DED6; --caixa: #E6F0F2; --codigo: #EFEBE4; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #141414; --texto: #EDEBE7; --dest: #6FC3D6; --sec: #A3A3A3;
+          --linha: #333; --caixa: #17292E; --codigo: #222; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.pagina { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+a { color: var(--dest); text-decoration: underline; }
+.voltar { font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.marca { font: 700 26px/1.2 Georgia, "Times New Roman", serif; color: var(--dest); margin: 22px 0 4px; }
+.meta { font-size: 14px; color: var(--sec); }
+.topo { border-bottom: 2px solid var(--dest); padding-bottom: 18px; margin-bottom: 26px; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.25; }
+h1.assunto { font-size: 30px; margin: 18px 0 0; }
+h2 { font-size: 26px; margin: 4px 0 14px; }
+h3 { font-size: 20px; margin: 26px 0 8px; }
+h4.rotulo { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dest);
+            font-weight: 700; margin: 4px 0 10px; }
+p, li { margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+hr { border: 0; border-top: 1px solid var(--linha); margin: 32px 0 28px; }
+del { color: var(--sec); }
+blockquote.tldr { margin: 0 0 20px; padding: 14px 18px; background: var(--caixa);
+                  border-left: 4px solid var(--dest); border-radius: 0 6px 6px 0; }
+blockquote.tldr p { margin: 0; }
+blockquote.tldr p + p { margin-top: 10px; }
+blockquote.cit { margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--linha); }
+.tldr-r { color: var(--dest); letter-spacing: .04em; }
+.setas { margin: 0 0 18px; }
+.seta { margin: 0 0 10px; padding-left: 24px; text-indent: -24px; }
+.seta-ic { display: inline-block; width: 24px; text-indent: 0; color: var(--dest); font-weight: 700; }
+p.fonte { font-size: 14px; line-height: 1.5; color: var(--sec); margin: 0 0 6px; }
+.ico { margin-right: 3px; }
+p.opiniao { font-style: italic; color: var(--sec); }
+.selo { display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--dest); border: 1px solid var(--dest); border-radius: 3px;
+        padding: 0 6px; margin-right: 4px; }
+code { font-family: Menlo, Consolas, monospace; font-size: .88em; background: var(--codigo);
+       padding: 1px 4px; border-radius: 3px; }
+pre { background: var(--codigo); padding: 12px; overflow: auto; border-radius: 6px; }
+table { border-collapse: collapse; margin: 0 0 16px; font-size: 15px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--linha); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--codigo); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding-top: 18px; font-size: 13px; color: var(--sec); }
+.rodape p { margin: 10px 0 0; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { margin: 0; border-bottom: 1px solid var(--linha); }
+.lista a.item { display: block; padding: 16px 2px; text-decoration: none; color: var(--texto); }
+.lista a.item:hover .tit { text-decoration: underline; }
+.lista .data { display: block; font-size: 13px; color: var(--sec); margin-bottom: 3px; }
+.lista .tit { display: block; font: 700 19px/1.3 Georgia, "Times New Roman", serif; }
+.lista .prev { display: block; font-size: 15px; color: var(--sec); margin-top: 3px; }
+.lista .sem-pagina { display: block; padding: 16px 2px; color: var(--sec); }
+.vazio { color: var(--sec); }
+@media (max-width: 480px) {
+  body { font-size: 16.5px; }
+  h1.assunto { font-size: 26px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+<header class="topo">
+<a class="voltar" href="index.html">← todas as edições</a>
+<div class="marca">Inteligência Pragmática</div>
+<div class="meta">segunda-feira, 2 de novembro de 2026 · Edição nº 15 · 7 min de leitura</div>
+<h1 class="assunto">a ia escreve, alguém tem que conferir</h1>
+</header>
+<main class="corpo">
+<p>bom dia. Escrever ficou barato: código, parecer e prova matemática saem em segundos. Conferir continua custando o mesmo tempo de sempre. Hoje a edição anda em volta dessa diferença.</p>
+<p><strong>Hoje eu aprendi:</strong> a pardela-de-Manx, ave marinha do tamanho de um pombo, tem jet lag: ela usa o Sol como bússola, e, voando muito para leste ou oeste, o relógio interno desalinha e o rumo erra até ~<strong>15 graus</strong>. É o que mostra um estudo na Science, com 20 anos de GPS (<a href="https://arstechnica.com/science/2026/10/seabirds-racing-home-over-the-ocean-can-get-jet-lagged/">Ars Technica</a>).</p>
+<p><strong>Nesta edição:</strong></p>
+<ul>
+<li>O Postgres 19 atrasou porque a IA achou bugs demais, e ninguém dá conta de revisar</li>
+<li>As leis do Brasil com histórico de versões, prontas para um agente consultar</li>
+<li>Copom na quarta: o Itaú já dá o ciclo de cortes como encerrado</li>
+<li>Chilli Beans, Raízen, 99 e a compra da NeoSpace pelo Itaú</li>
+<li>STATS: quantos pedidos os agentes de IA trouxeram para a DoorDash (spoiler: poucos)</li>
+</ul>
+<hr>
+<h4 class="rotulo">IA</h4>
+<h2>Quem confere o que a IA escreveu?</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> o Postgres 19 atrasou porque a IA ajudou a achar bugs demais, e a matemática recebeu mais de <strong>700</strong> artigos de uma vez: o gargalo agora é revisar.</p>
+</blockquote>
+<p>Em 30/10, Robert Haas, engenheiro da Databricks e <em>committer</em> do PostgreSQL (quem pode gravar mudanças no código oficial do banco de dados aberto que muita empresa usa), escreveu que a versão 19 deve sair "most likely" em novembro. Na última década, saíram entre meados de setembro e meados de outubro (<a href="https://rhaas.blogspot.com/2026/10/postgres-19-is-late-and-its-ais-fault.html">blog de Haas</a>).</p>
+<p>Ele culpa a IA. Muita gente reporta bugs achados com LLMs (os modelos de linguagem). A IA também rascunha correções que nem sempre estão certas, e alguém precisa revisar. Entre 08/04 e 25/09, os <em>commits</em> (cada alteração registrada no código) no ramo de correções da versão anterior foram de <strong>248</strong> para <strong>433</strong> na comparação com o ano passado, <strong>mais de 74%</strong>. No ramo da versão nova, de <strong>724</strong> para <strong>1.169</strong>, <strong>mais de 60%</strong>. Haas diz não saber como o projeto vai alcançar o acúmulo.</p>
+<p>A matemática vive a versão dela. No blog do matemático Terence Tao, o convidado Frank Calegari (01/11) lembra que a OpenAI liberou <strong>mais de 700</strong> artigos em 6 de outubro e propõe tratar todo trabalho como se tivesse ajuda de IA, com mais entrevista presencial nas contratações e mais espaço para provas em Lean, linguagem que o computador usa para verificar uma prova (<a href="https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/">texto de Calegari</a>). Para ele, "Choosing worthwhile problems may end up mattering more than producing proofs".</p>
+<p>Revisar sempre foi lento, lembra Calegari: o programa de classificação dos grupos simples finitos foi anunciado em 1972, a classificação foi declarada completa em 1983, e um caso só fechou umas duas décadas depois.</p>
+<p>Sam Altman, num podcast, disse ter mais resultados guardados e um gasto na casa das centenas de milhões de dólares, <strong>~US$ 10 milhões</strong> só no problema de Navier-Stokes. O Verge registra críticas de verificação insuficiente (<a href="https://www.theverge.com/ai-artificial-intelligence/1023054/altman-cheeky-pint-ai-math-interview">The Verge</a>). Já Kyle Kingsbury, do Jepsen, achou <strong>96 problemas</strong> no banco de dados ParticleDB, que se dizia "formally proven" sem ter a especificação que o provaria; para ele, LLMs corroem a confiança em documentação e software (<a href="https://jepsen.io/analyses/particledb-1.1.4">Jepsen</a>, <a href="https://simonwillison.net/2026/Nov/1/kyle-kingsbury/">Willison</a>).</p>
+<p><strong>Os otimistas:</strong> Altman (a humanidade merece o conhecimento), Calegari (adaptar a cultura e verificar por máquina) e o próprio Haas (que vê "desafio e oportunidade").</p>
+<p><strong>Os pessimistas:</strong> Haas (a revisão humana não escala), Kingsbury (a confiança corroída) e matemáticos ouvidos pelo Verge.</p>
+<p><strong>Por que isso importa pra você:</strong> o advogado já conhece essa cena: a peça escrita por IA que cita jurisprudência inventada. Quem entrega app feito com IA também precisa de alguém que leia o que foi gerado, e a IA agora é o estagiário que entrega 700 artigos na sexta às 18h.</p>
+<p class="opiniao"><span class="selo">Opinião</span> o valor migra de produzir para conferir e assinar, e a aposta é que "revisão" vira serviço vendável, com preço próprio, separado de "produção".</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://rhaas.blogspot.com/2026/10/postgres-19-is-late-and-its-ais-fault.html">Fonte primária</a></p>
+<hr>
+<h4 class="rotulo">🧠 IA NA PRÁTICA</h4>
+<h2>As leis do Brasil com histórico de versões, prontas para um agente</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> um projeto aberto guarda a Constituição, a CLT e outras leis com uma versão para cada alteração, na data em que entrou em vigor, e liga isso a agentes de IA.</p>
+</blockquote>
+<p>É o "controlar alterações" do Word, mas para a lei inteira. O <em>git</em> é um sistema de histórico de versões; aqui, cada emenda vira uma versão datada, e dá para perguntar "o que dizia o artigo X em tal data". O MCP é a tomada que pluga uma ferramenta no assistente de IA, e o projeto traz um servidor MCP local.</p>
+<p><strong>O caso.</strong> O repositório <code>global-law</code>, da organização lexifina, reúne leis de vários países; o do Brasil, o <code>brazil-law</code>, declara o Planalto como fonte, com um arquivo por artigo e um commit por alteração. Tem a Constituição com <strong>122</strong> versões, o Código Civil com <strong>64</strong>, a CLT com <strong>220</strong> e a LGPD com <strong>11</strong>, com registro até 28/10/2026 no conjunto (cada lei tem a própria data final; a CLT vai até 06/04/2026). O servidor roda na máquina, só lê o repositório, não faz chamadas de rede e tem <strong>18</strong> ferramentas, como ler um dispositivo numa data. Com o repositório clonado, liga no Claude Code com <code>claude mcp add global-law -- python tools/mcp_server.py</code>.</p>
+<p class="fonte"><span class="ico">🔗</span> <a href="https://github.com/lexifina/global-law">global-law</a> e <a href="https://github.com/lexifina/brazil-law">brazil-law</a></p>
+<p>⚠️ <strong>Freio de realidade:</strong> não é oficial: a fonte oficial continua sendo o Planalto. Há leis paradas no passado (a 9.099, dos juizados, vai só até 23/11/2021), alguns anexos e tabelas ficam de fora, e a checagem de citações não reconhece citações do Brasil. Requisito de máquina: não informado. É o tipo de coisa que se confere antes de confiar: <a href="https://www.planalto.gov.br/ccivil_03/leis/">Planalto</a> e <a href="https://www.lexml.gov.br">LexML</a>.</p>
+<p><strong>Agora aplica no mundo real:</strong></p>
+<ul>
+<li><strong>Advogado ou escritório:</strong> achar a redação vigente na data do fato, o direito intertemporal.</li>
+<li><strong>Estudante de Direito:</strong> ver como a CLT mudou, artigo por artigo.</li>
+<li><strong>Contador ou RH:</strong> consultar a CLT por data.</li>
+</ul>
+<p><strong>Como isso vira serviço:</strong> montar, para um escritório pequeno, um "assistente de vigência": agente, base versionada e checagem humana no Planalto. O cliente pagaria porque errar a redação vigente custa caro. O limite: não substitui a conferência na fonte oficial.</p>
+<p><strong>Para testar hoje (15 min):</strong> abra o <a href="https://github.com/lexifina/brazil-law">brazil-law</a> no navegador e veja o histórico de um artigo da LGPD ou do CDC. Sem instalar nada. Para o MCP, é preciso Python 3.10+ e git; clonar tudo com submódulos pode pesar num notebook de 8 GB (não testado).</p>
+<hr>
+<h4 class="rotulo">ECONOMIA</h4>
+<p><strong>🇧🇷 Por aqui</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Copom</strong>: decide na quarta (04/11), com Selic em <strong>13,75%</strong>; o Itaú espera que o Copom interrompa os cortes (<a href="https://neofeed.com.br/economia/itau-ve-fim-do-ciclo-de-cortes-da-selic-diante-de-cenario-mais-adverso/">NeoFeed</a>), e a previsão geral é de parada, embora a tabela de eventos do InfoMoney traga <strong>13,50%</strong> (<a href="https://www.infomoney.com.br/mercados/calendario-economico-da-semana-copom-trabalho-e-eleicoes-nos-eua-sao-destaques/">InfoMoney</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Petrobras</strong>: querosene de aviação <strong>+7,2%</strong> (+R$ 0,45 por litro) desde domingo (01/11), depois de <strong>+11,8%</strong> em outubro; é o combustível dos aviões (<a href="https://www.estadao.com.br/economia/petrobras-aumenta-preco-do-querosene-de-aviacao-em-72-a-partir-deste-domingo/">Estadão</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Binance</strong>: depois de suspender os saques pelo ataque hacker, reabriu e teve saída líquida de ~<strong>US$ 3,64 bi</strong> entre a manhã e o começo da tarde de domingo (01/11), <strong>2,1%</strong> dos ativos, segundo a própria Binance (<a href="https://www.estadao.com.br/economia/binance-registra-retiradas-liquidas-de-us-364-bilhoes-apos-retomada-de-saques/">Estadão</a>).</p>
+</div>
+<p><strong>🌎 Lá fora</strong></p>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Opep+</strong>: manteve as metas de produção para dezembro (01/11); o Brent fechou perto de <strong>US$ 118</strong> na sexta (30/10), o maior nível desde abril (<a href="https://www1.folha.uol.com.br/mercado/2026/11/opep-mantem-metas-de-producao-de-petroleo-para-dezembro-antes-de-decisao-sobre-2027.shtml">Folha</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Banco da Inglaterra</strong>: decide na quinta (05/11), com a taxa em <strong>3,75%</strong> (<a href="https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate">BoE</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>China</strong>: o PMI industrial RatingDog ficou em <strong>52,0</strong> em outubro, contra 52,1 em setembro, enquanto o oficial caiu de 50,1 para <strong>49,3</strong> (abaixo de 50 é contração) (<a href="https://valor.globo.com/mundo/noticia/2026/11/01/pmi-industrial-da-ratingdog-da-china-recua-para-520-em-outubro.ghtml">Valor</a>); na agenda, as eleições de meio de mandato nos EUA, terça (03/11) (<a href="https://www.infomoney.com.br/mercados/calendario-economico-da-semana-copom-trabalho-e-eleicoes-nos-eua-sao-destaques/">InfoMoney</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">🇧🇷 BRASIL ADENTRO</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Chilli Beans</strong>: pediu recuperação extrajudicial na sexta (30/10), com <strong>R$ 340 mi</strong> em dívidas (<a href="https://neofeed.com.br/negocios/com-dividas-de-r-340-milhoes-chilli-beans-entra-com-pedido-de-recuperacao-extrajudicial/">NeoFeed</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Raízen</strong>: as assembleias de acionistas de 30/10 aprovaram dividir a empresa em duas listadas (distribuição com a marca Shell; açúcar, etanol e bioenergia); o conselho vota o aumento de capital de até <strong>R$ 39,8 bi</strong> em 06/11 (<a href="https://investnews.com.br/negocios/raizen-assembleia-credores-outubro26/">InvestNews</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>99</strong>: segundo o diretor-geral no Brasil, Simeng Wang, a maioria das operações de delivery com mais de um ano já é rentável, sem números (<a href="https://www.estadao.com.br/economia/coluna-da-broad/maioria-das-operacoes-de-delivery-da-99-com-mais-de-um-ano-e-rentavel-diz-executivo/">Estadão</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Itaú</strong>: compra a NeoSpace por <strong>R$ 2,925 bi</strong>, sujeito a Cade e Banco Central; em janeiro de 2025 pagou US$ 15 mi por <strong>15%</strong> (<a href="https://www.bloomberglinea.com.br/startups/rodadas-da-semana-kalshi-capta-us-1-bilhao-e-chega-a-us-40-bi-de-valuation/">Bloomberg Línea</a>).</p>
+</div>
+<h4 class="rotulo">🌎 MUNDO AFORA</h4>
+<div class="setas">
+<p class="seta"><span class="seta-ic">→</span><strong>Toast</strong>: a FTC, oito estados e dois governos locais da Califórnia processam o sistema para restaurantes por taxa escondida de <strong>US$ 0,99</strong> em pedidos online acima de US$ 10 (de 2021 a 2023) e por cancelamento difícil; a Toast "discorda fortemente" (<a href="https://ppc.land/affle-agrees-to-buy-perion-for-420m-as-ftc-sues-toast-over-fees/">PPC Land</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Apple</strong>: corta a comissão da App Store em Taiwan de <strong>30%</strong> para <strong>26%</strong>; segundo a autoridade de concorrência de Taiwan, iguala Japão e Brasil (<a href="https://ppc.land/apple-cuts-taiwan-app-store-commission-to-26-after-antitrust-probe/">PPC Land</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>Shopify</strong>: em prévia por convite para desenvolvedores nos EUA, deixa a loja pagar comissão à empresa do agente de compras de IA, base de <strong>0,3%</strong> do pedido, detalhes ainda "not final" (<a href="https://www.searchenginejournal.com/shopify-now-lets-stores-pay-the-company-behind-your-ai-shopping-agent/594544/">Search Engine Journal</a>).</p>
+<p class="seta"><span class="seta-ic">→</span><strong>ChatGPT Ads</strong>: desde sexta (30/10), os ajustes automáticos de anúncio vêm ligados por padrão e podem reescrever título, traduzir e trocar a URL de destino sem aprovação; dá para desligar (<a href="https://www.searchenginejournal.com/chatgpt-ads-turns-on-automatic-ad-changes-by-default/595117/">Search Engine Journal</a>).</p>
+</div>
+<hr>
+<h4 class="rotulo">📊 STATS</h4>
+<h2>"Algumas centenas"</h2>
+<blockquote class="tldr">
+<p class="bq"><strong class="tldr-r">TL;DR:</strong> os agentes de IA de fora trouxeram só "several hundred orders" à DoorDash desde que entraram no ar, contra <strong>993 milhões</strong> de pedidos só no 3º tri.</p>
+</blockquote>
+<p>Tony Xu, CEO, disse isso na teleconferência de 29/10 (<a href="https://www.fool.com/earnings/call-transcripts/2026/10/29/doordash-dash-q3-2026-earnings-call-transcript/">transcrição</a>, <a href="https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/">Ars Technica</a>).</p>
+<p>O contraponto vem da Microsoft: o evento "checkout" aparece em <strong>25,21%</strong> das sessões de agentes contra <strong>14,65%</strong> das humanas (<a href="https://clarity.microsoft.com/blog/agentic-analytics-what-agents-do-on-websites/">Clarity</a>). Mas é evento de página: o próprio Clarity diz que não prova que o agente concluiu a compra.</p>
+<p class="opiniao"><span class="selo">Opinião</span> conector em beta (menos de um mês) » pedido simples vai direto ao app » agente fica para a compra pensada » quem vende "venda por agente" hoje vende promessa.</p>
+<hr>
+<p><strong>Para ler, ouvir ou assistir:</strong></p>
+<ul>
+<li>[Para ler] <a href="https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/">The AI cost of JavaScript frameworks</a>, de Nolan Lawson (28/10): o mesmo app em 12 frameworks; o custo por execução vai de US$ 2,67 a US$ 4,97.</li>
+<li>[Para ouvir] <a href="https://www.lennysnewsletter.com/p/how-a-19-year-old-intern-built-the">Lenny's Podcast com Hector Serrano</a>, da Wispr Flow (1h27): cerca de 50 criadores fazem 500 a 600 anúncios UGC (conteúdo feito por criador, não pela marca) por mês.</li>
+<li>[Curiosidade] <a href="https://karpathy.bearblog.dev/hacker-tube/">HackerTube</a>, de Andrej Karpathy: 6.454 vídeos recomendados no Hacker News, feito com o Claude em ~2 horas, segundo ele.</li>
+</ul>
+<hr>
+<p><strong>Pergunta do dia:</strong> no seu trabalho, quanto do que você entrega você realmente conferiu?</p>
+</main>
+<footer class="rodape">
+<a class="voltar" href="index.html">← todas as edições</a>
+<p>Feita por IA para um leitor só. Fontes linkadas em cada afirmação.</p>
+</footer>
+</div>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); }); }</script>
+</body>
+</html>
