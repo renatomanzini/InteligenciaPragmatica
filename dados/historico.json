@@ -2502,5 +2502,81 @@
       "em_3_linhas",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-11-02",
+    "tipo": "dia_util",
+    "numero": 15,
+    "assunto": "a ia escreve, alguém tem que conferir",
+    "previa": "+ as leis do brasil com histórico de versões",
+    "dia": "morno",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "ia-gargalo-revisao",
+        "titulo": "Postgres 19 atrasa e matemáticos pedem nova cultura: a IA produz mais do que dá para revisar",
+        "tema": "ia",
+        "urls": [
+          "https://rhaas.blogspot.com/2026/10/postgres-19-is-late-and-its-ais-fault.html",
+          "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "global-law-git",
+        "titulo": "Projeto aberto põe as leis do Brasil e de outros países em histórico git, com servidor MCP",
+        "tema": "direito_tech",
+        "urls": [
+          "https://github.com/lexifina/global-law"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "agentes-compras-realidade",
+        "titulo": "DoorDash diz que agentes de IA de fora renderam só algumas centenas de pedidos",
+        "tema": "negocios",
+        "urls": [
+          "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "selic-copom-2026",
+        "titulo": "Copom decide a Selic na quarta (04/11); Itaú espera manutenção em 13,75%",
+        "tema": "economia",
+        "urls": [
+          "https://neofeed.com.br/economia/itau-ve-fim-do-ciclo-de-cortes-da-selic-diante-de-cenario-mais-adverso/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "binance-ataque-2026",
+        "titulo": "Binance reabre saques e tem saída líquida de ~US$ 3,64 bi no domingo",
+        "tema": "economia",
+        "urls": [
+          "https://www.estadao.com.br/economia/binance-registra-retiradas-liquidas-de-us-364-bilhoes-apos-retomada-de-saques/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "raizen-transacao-tributaria",
+        "titulo": "Credores aprovam dividir a Raízen em duas empresas listadas",
+        "tema": "negocios",
+        "urls": [
+          "https://investnews.com.br/negocios/raizen-assembleia-credores-outubro26/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "explicador",
+      "materia_principal",
+      "ia_na_pratica",
+      "economia",
+      "rodadas",
+      "stats",
+      "links",
+      "pergunta"
+    ]
   }
 ]
