@@ -12,8 +12,9 @@
 #
 # Encerrados em 22/10/2026 (envio desligado): ia, economia (virou bloco do Mercado) e marketing (virou seção da geral).
 
-# Desde 29/10/2026, Mercado e Niterói não têm edição regular: só sai uma edição extra quando há breakthrough,
-# muito bem explicada e expandida (Mercado: o ALARME das 18:37, nos dias úteis; Niterói: o RADAR das 05:22, todo dia).
+# PAUSADO desde 03/11/2026: a geral e o Mercado estão sem rotina (as rotinas foram desligadas no claude.ai).
+# Só roda o caderno Niterói, que cobre Niterói, Búzios e Vassouras: o RADAR das 05:22, todo dia, só manda edição
+# quando há algo que vale a pena noticiar (manual/MANUAL_NITEROI.md, seção 10).
 mercado:
   nome: "Inteligência Pragmática · Mercado"
   remetente: "IP · Mercado"

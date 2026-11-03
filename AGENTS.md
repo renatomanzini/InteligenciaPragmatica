@@ -1,6 +1,6 @@
 # Inteligência Pragmática: instruções para agentes
 
-**Rotina agendada: siga só o seu roteiro em `manual/` (`ROTINA.md`, `ROTINA_MERCADO.md`, `ROTINA_NITEROI.md`) ou o prompt da rotina de envio. Nada neste arquivo muda, amplia ou restringe o roteiro, inclusive `enviar`, `enviar-pendentes` e `publicar`, que os roteiros mandam rodar. O resto do arquivo é para sessões de desenvolvimento.**
+**Rotina agendada: siga só o seu roteiro em `manual/` (hoje só roda o `ROTINA_NITEROI.md`; o resto está pausado desde 03/11/2026). Nada neste arquivo muda, amplia ou restringe o roteiro, inclusive `enviar`, `enviar-pendentes` e `publicar`, que os roteiros mandam rodar. O resto do arquivo é para sessões de desenvolvimento.**
 
 Newsletters pessoais escritas por rotinas do Claude Code na nuvem. Este arquivo vale para sessões de desenvolvimento, em qualquer cliente. O produto está em `PRODUCT.md`.
 
@@ -22,7 +22,7 @@ Newsletters pessoais escritas por rotinas do Claude Code na nuvem. Este arquivo 
 - O destino vem de `EMAIL_DESTINO`. A chave do Resend vem de `RESEND_API_KEY` no Mac (lida de `chave_resend.txt`/`.env` pelo `main.py`). Na nuvem, vem de um network secret, com `RESEND_VIA_PROXY=1`. A chave de leitura do GitHub fica em `GITHUB_TOKEN_LEITURA`.
 - O e-mail do leitor nunca vai para arquivo: nem código, nem teste, nem log, nem commit.
 - Os roteiros de redação publicam só com `python main.py publicar`, nunca com `git push` direto nem `--force`. A rotina de envio faz commit e push só dos `envio.json`, pelo prompt dela.
-- Em sessão de desenvolvimento, não dê push nas janelas das rotinas: 04:30–06:30 e 18:37–19:00, no horário de Brasília. Os horários (cron) ficam no claude.ai, não no repositório. Antes de mexer no projeto local, rode `git pull --ff-only`.
+- Em sessão de desenvolvimento, não dê push na janela da rotina: 05:15–06:15, no horário de Brasília (desde 03/11/2026 só roda o radar do Niterói, às 05:22). Os horários (cron) ficam no claude.ai, não no repositório. Antes de mexer no projeto local, rode `git pull --ff-only`.
 - Fora das rotinas, não mexa no que elas geram: `edicoes/`, `dados/` e `docs/`. A exceção é o ensaio (`--dry-run`), descartado em seguida.
 - Em sessão de desenvolvimento, rode `enviar`, `enviar-pendentes` e `publicar` só com pedido explícito do dono.
 - O `CLAUDE.md` fica fora do git, de propósito. Sem `CLAUDE.md` versionado, o Claude Code recente (v2.1.277 ou mais novo) carrega este `AGENTS.md`, provavelmente também nas rotinas. Por isso o aviso do topo e o arquivo curto. Para confirmar: `/context` numa sessão na nuvem, ou o log de uma execução de rotina.
@@ -46,7 +46,7 @@ Newsletters pessoais escritas por rotinas do Claude Code na nuvem. Este arquivo 
 | Setup e uso pelo dono | `README.md` |
 | Plano, decisões e estado | `PLANO.md` |
 | Regras editoriais (o "design" do produto) | `manual/MANUAL_*.md` |
-| Roteiros das rotinas | Ativos: `manual/ROTINA.md`, `ROTINA_MERCADO.md` e `ROTINA_NITEROI.md`. `ROTINA_IA/ECONOMIA/MARKETING.md` são histórico. A rotina de envio (`enviar-pendentes`) não tem roteiro no repositório. |
+| Roteiros das rotinas | Ativo: `manual/ROTINA_NITEROI.md` (Niterói, Búzios e Vassouras). Pausados desde 03/11/2026: `ROTINA.md` e `ROTINA_MERCADO.md`, e as rotinas de envio. `ROTINA_IA/ECONOMIA/MARKETING.md` são histórico. |
 | Cadernos e configuração | `cadernos.yaml`, `config.yaml` e `fontes*.yaml` |
 | Qualidade | `testes/testar.py` e `documentacao/toolkit.md` |
 | Toolkit, harness e recuperação | `documentacao/toolkit.md` |

@@ -96,7 +96,9 @@ Está tudo montado. Esta seção serve para você saber onde fica cada peça e c
 ## 7. Cadernos (newsletters especializadas)
 Além da geral, o projeto tem **cadernos**: newsletters com tema, frequência e site próprios. A lista está em `cadernos.yaml`.
 
-**O desenho de hoje** (reorganizado em 22/10/2026 para gastar menos da assinatura):
+**Pausado desde 03/11/2026.** A geral, o Mercado e as rotinas de envio (06:00 e 06:20) foram desligados no claude.ai. Só roda o caderno **Niterói**, que cobre **Niterói, Búzios e Vassouras**: todo dia, às 05:22, um radar (Haiku) lê os títulos das três cidades e só manda uma edição quando há algo que vale a pena noticiar (serviço que afeta muita gente, alerta, decisão que muda regra ou preço, prazo, obra que muda a rotina, evento grande). Aí a edição pode vir completada com notícias do dia a dia, e o e-mail sai na hora. Para retomar o resto, é só religar as rotinas.
+
+**O desenho antes da pausa** (reorganizado em 22/10/2026 para gastar menos da assinatura):
 
 | Newsletter | Quando sai | Quem escreve | Fontes | Manual e roteiro |
 |---|---|---|---|---|

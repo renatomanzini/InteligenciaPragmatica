@@ -1,6 +1,6 @@
 # Manual do caderno Niterói
 
-O caderno Niterói é a newsletter local da Inteligência Pragmática. **Desde 29/10/2026, por decisão do leitor, ele só sai quando há um breakthrough na cidade:** uma **edição extra**, muito bem explicada e expandida (seção 10). Fora isso, não manda nada. A edição de segunda, quarta e sexta (seção 6) e o bloco de Vassouras e Búzios (seção 7) estão suspensos e ficam aqui só como histórico.
+O caderno Niterói é a newsletter local da Inteligência Pragmática e cobre **Niterói, Búzios e Vassouras**. **Desde 03/11/2026, por decisão do leitor, é a única parte do projeto que roda** (a geral e o Mercado estão pausados). Não tem dia fixo: **só sai quando há algo que vale a pena noticiar** nas três cidades, e aí pode vir completado com notícias do dia a dia (seção 10). Fora isso, não manda nada.
 
 Vale tudo o que está no `manual/MANUAL_DE_REDACAO.md`: a voz (seção 2), números com escala (seção 9), não repetição (seção 13), o rigor (seção 14) e as convenções de formato (seção 15). Este arquivo diz só o que muda.
 
@@ -39,8 +39,8 @@ Todo item de serviço termina com o que fazer, quando houver: prazo, endereço, 
 - **Corrida eleitoral não entra** (`preferencias.md`): nada de candidato, pesquisa, propaganda, apoio ou "quem atacou quem". O **serviço da eleição** entra (transporte gratuito, local de votação, Lei Seca, horários), sem nome de candidato.
 - Prefeito e vereadores aparecem pelo que fizeram no cargo, sem adjetivo. Quando houver dois lados, use Quem defende diz / Quem critica diz (seção 12 do manual geral).
 
-## 6. A estrutura da edição (suspensa desde 29/10/2026)
-_Histórico: a edição regular não sai mais. Vale só a seção 10._
+## 6. A régua das seções (a edição regular acabou em 29/10/2026)
+_Não há mais edição de segunda, quarta e sexta. O que vale hoje é a seção 10, que usa as regras de linha abaixo (história, serviço, na cidade e agenda). O roteiro de dias e o fecho "Até quarta" ficaram como histórico._
 
 1. **bom dia, Niterói.** Uma ou duas frases com o tom do dia (o que mais mexe com a cidade). Pode ter graça.
 2. **#### A HISTÓRIA DA CIDADE**: a notícia mais importante para o morador, com `## Título-gancho`, `> **TL;DR:**` e de 120 a 220 palavras. Termina com **"Na prática:"** (o que muda para quem mora aqui, em uma ou duas frases).
@@ -52,8 +52,8 @@ _Histórico: a edição regular não sai mais. Vale só a seção 10._
 
 Alvo: **de 400 a 700 palavras** na segunda e na quarta, e **de 550 a 900** na sexta. Semana fraca é edição curta, sem encher linguiça.
 
-## 7. O bloco semanal de Vassouras e Búzios (suspenso desde 29/10/2026)
-_Histórico: o bloco saía na edição de sexta, que não sai mais._
+## 7. Vassouras e Búzios
+_Desde 03/11/2026 não há bloco semanal: Vassouras e Búzios entram na edição da seção 10 do mesmo jeito que Niterói, com o nome da cidade no título ou no rótulo. A régua abaixo continua valendo._
 
 - `### Vassouras` com de 1 a 3 linhas `→` e `### Búzios` com de 2 a 4 linhas `→`, cobrindo **a semana inteira** (de sexta a quinta).
 - Mesma régua de serviço: obra, estrada, saúde, imposto, evento, decisão da Câmara, turismo que mexe com a cidade (temporada, cruzeiros, taxa turística).
@@ -66,7 +66,7 @@ Igual ao da geral (manual, seção 15), com estas diferenças:
 - `tipo`: `segunda`, `quarta`, `sexta` ou `extra` (seção 10);
 - `tema` das histórias: `niteroi | vassouras | buzios`;
 - `formatos`: `[historia_da_cidade, servico, na_cidade, agenda, vassouras_buzios]`, só os usados;
-- `breakthrough`: `true` só na edição extra; nela, `motivo_extra` diz em uma linha por que não podia esperar.
+- `breakthrough`: `false`; o `motivo_extra` diz em uma linha por que a edição vale a pena hoje (seção 10).
 
 ## 9. Checklist
 - [ ] Toda data está explícita ("sábado (24/10)") e nenhum evento já passou na hora da entrega.
@@ -79,22 +79,20 @@ Igual ao da geral (manual, seção 15), com estas diferenças:
 - [ ] Na sexta, o bloco de Vassouras e Búzios cobre a semana inteira.
 - [ ] O fecho aponta para a próxima edição certa.
 
-## 10. Quando sai: só o breakthrough
-O leitor decidiu em 29/10/2026 que o caderno **não tem mais edição regular**: só sai quando há um breakthrough na cidade. Uma rotina leve, o **radar** (modelo Haiku), roda **todo dia** às 05:22, coleta, lê **só os títulos** das últimas 30 horas e decide pelo critério abaixo. Sem breakthrough, não faz nada: sem edição, sem e-mail e sem commit. Com breakthrough, sai uma **edição extra**, escrita por um agente Sonnet e conferida por outro.
+## 10. Quando sai: só quando vale a pena
+O leitor decidiu em 03/11/2026 pausar o resto do projeto e manter só as notícias de **Niterói, Búzios e Vassouras**, sem dia fixo. Uma rotina leve, o **radar** (modelo Haiku), roda **todo dia** às 05:22, coleta, lê **só os títulos** das últimas 30 horas das três cidades e decide pelo critério abaixo. Se nada vale a pena, não faz nada: sem edição, sem e-mail e sem commit. Se vale, sai uma edição, escrita por um agente Sonnet e conferida por checadores Sonnet, e o e-mail vai na hora.
 
-**O que é breakthrough em Niterói.** Um fato raro e grande, que muda o dia a dia de boa parte da cidade:
-- emergência ou desastre com orientação oficial (alerta alto da Defesa Civil, enchente, deslizamento, evacuação);
-- falta d'água, de luz ou de transporte que atinge vários bairros por 24 horas ou mais, ou greve geral de barcas ou ônibus;
-- mudança grande e duradoura na cidade, já decidida (não só anunciada): tarifa, imposto ou taxa municipal nova, abertura ou fechamento de via, túnel, ponte ou linha de transporte por meses, regra nova que muda a vida de muita gente.
+**O que vale a pena noticiar.** Um fato que muda a vida de quem mora, trabalha ou passa temporada em uma das três cidades, ou que essa pessoa ia querer saber hoje:
+- serviço que afeta muita gente: falta d'água ou de luz programada, interdição de via, túnel, ponte ou estrada importante, mudança ou greve de barcas e ônibus;
+- alerta da Defesa Civil, emergência ou desastre, com orientação oficial;
+- decisão já tomada pela prefeitura, pela Câmara ou pelo estado que muda regra, preço ou serviço (tarifa, imposto ou taxa, a taxa turística de Búzios, regra de trânsito ou de praia);
+- prazo que vence nos próximos dias e mexe no bolso ou na vida do morador (IPTU, matrícula, vacinação, cadastro);
+- obra que começa ou termina e muda a rotina da cidade; serviço público importante que abre ou fecha (hospital, escola, linha de transporte);
+- evento grande, que importa para a cidade inteira, com data e local.
 
-**Não é breakthrough:** aviso pequeno ou de um bairro só, obra anunciada, inauguração, política local, evento cultural, crime. **Na dúvida, não sai.** Extra toda semana vira ruído. O que não é breakthrough não sai em lugar nenhum do caderno. O radar também não repete um assunto: se uma extra já deu o fato, só uma novidade grande (piorou muito, a data mudou, saiu alerta novo) justifica outra.
+**Não vale:** inauguração pequena, agenda de político, nota de assessoria sem efeito prático, crime comum, obra só anunciada sem data. O que já saiu numa edição só volta com novidade (o que mudou). **Na dúvida, não sai.** Edição toda semana sem motivo vira ruído.
 
-**A edição extra: muito bem explicada e expandida.** Como é a única edição, ela tem que bastar sozinha: o morador entende o que houve, por que, se é afetado e o que fazer, sem abrir outro texto. Tem de **450 a 800 palavras** e fica na pasta do dia (`edicoes/niteroi/AAAA-MM-DD/`, com `tipo: extra`), para a rotina de envio das 06:00 achar:
-- "bom dia, Niterói." e uma frase sobre o assunto;
-- `## Título`, que diz o que acontece e quando, e o `> **TL;DR:**` de 2 a 3 linhas;
-- `### O que está acontecendo`: o quê, onde, quando e desde quando, com os números da fonte;
-- `### Por que`: a causa e quem decidiu, separando o fato da versão de cada lado;
-- `### Quem é afetado`: bairros, linhas, quantas pessoas, com o número da fonte;
-- `### O que fazer`: os passos concretos e os canais oficiais;
-- `### O que vem agora`: as próximas datas e quando deve normalizar;
-- as fontes, a primária primeiro.
+**A edição** fica na pasta do dia (`edicoes/niteroi/AAAA-MM-DD/`, com `tipo: extra`) e tem de **300 a 900 palavras**:
+- "bom dia." e uma frase sobre o assunto;
+- `#### A HISTÓRIA`: a notícia que vale a pena, com `## Título` (diz a cidade, o que acontece e quando), `> **TL;DR:**` e de 200 a 450 palavras, com o quê, onde, quando, por quê, quem é afetado e **o que fazer**, terminando em **"Na prática:"**;
+- **complementos, se a história estiver sozinha:** notícias do dia a dia das três cidades, das mesmas 30 horas, nas seções `#### SERVIÇO`, `#### NA CIDADE` e `#### AGENDA`, com as regras de linha da seção 6 e o nome da cidade no rótulo quando não for Niterói (`→ **Búzios · Trânsito**: ...`). Só entra complemento bom e que ainda vale na hora da entrega: edição curta é melhor que edição cheia de nada.

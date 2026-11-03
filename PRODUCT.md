@@ -3,6 +3,7 @@
 Resumo do produto como ele está no repositório. O detalhe de cada parte fica no documento citado. Plano e estado: `PLANO.md`.
 
 ## O que é
+- **Pausado desde 03/11/2026**, menos o caderno Niterói, que cobre Niterói, Búzios e Vassouras e só sai quando há algo que vale a pena noticiar (`manual/MANUAL_NITEROI.md`, seção 10). O resto desta página descreve o produto antes da pausa.
 - Uma família de newsletters escritas por IA para **um leitor**: a geral é diária, e os cadernos têm dias próprios.
 - **Geral**, todos os dias: IA, economia, negócios e marketing, com fontes linkadas em cada afirmação. No sábado sai a semana em revista, e no domingo, o ensaio. Na terça e na quinta, a edição leva a seção MARKETING DIGITAL.
 - **Cadernos ativos** (`cadernos.yaml`):

@@ -1,7 +1,7 @@
 # Fontes do caderno Niterói e região. Mesmo formato do fontes.yaml da geral, com 4 campos a mais por fonte:
 #   filtro       — só entram as notícias que citam uma dessas palavras (título, resumo ou endereço),
 #                  sem ligar para acento. Serve para jornais regionais que cobrem muitas cidades.
-#   janela_horas — janela própria da fonte (o bloco semanal de Vassouras e Búzios olha a semana inteira).
+#   janela_horas — janela própria da fonte (hoje nenhuma usa: todas olham as 30 horas do radar).
 #   paginas      — quantas páginas do feed ler (prefeituras publicam muito e o feed só mostra as 10 últimas).
 #   limite       — máximo de itens dessa fonte (no lugar do limite_por_fonte).
 #
@@ -15,7 +15,7 @@
 # tema: niteroi | vassouras | buzios
 
 # Desde 29/10/2026 não há edição regular: o radar roda todo dia e olha o último dia (30 horas).
-# As fontes de Vassouras e Búzios têm janela própria e ficam como estão; o radar ignora essas seções.
+# Desde 03/11/2026 o radar lê as três cidades (Niterói, Vassouras e Búzios) com a mesma janela.
 janela_horas:
   padrao: 30      # o radar roda todo dia e olha o último dia (desde 29/10/2026 não há edição regular)
 
@@ -24,8 +24,8 @@ limite_por_fonte: 12
 # Ordem e nome das seções no arquivo de candidatos.
 temas:
   niteroi: "Niterói"
-  vassouras: "Vassouras (bloco semanal, só na sexta)"
-  buzios: "Búzios (bloco semanal, só na sexta)"
+  vassouras: "Vassouras"
+  buzios: "Búzios"
 
 fontes:
   # ───────────── Niterói: fontes oficiais ─────────────
@@ -49,19 +49,19 @@ fontes:
   - {nome: O Dia Niterói, tema: niteroi, tipo: imprensa, pagina: "https://odia.ig.com.br/niteroi", ativo: true}
   - {nome: A Tribuna RJ, tema: niteroi, tipo: imprensa, pagina: "https://www.atribunarj.com.br/", ativo: true}
 
-  # ───────────── Vassouras (bloco semanal) ─────────────
-  - {nome: Prefeitura de Vassouras, tema: vassouras, tipo: primaria, rss: "https://www.vassouras.rj.gov.br/feed/", janela_horas: 168, ativo: true}
-  - {nome: G1 Sul do Rio e Costa Verde, tema: vassouras, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/sul-do-rio-costa-verde/", filtro: [Vassouras], janela_horas: 168, ativo: true}
-  - {nome: Diário do Vale, tema: vassouras, tipo: imprensa, rss: "https://diariodovale.com.br/feed/", filtro: [Vassouras], janela_horas: 168, paginas: 4, ativo: true}
-  - {nome: A Voz da Cidade, tema: vassouras, tipo: imprensa, rss: "https://avozdacidade.com/wp/?s=Vassouras&feed=rss2", filtro: [Vassouras], janela_horas: 168, paginas: 2, ativo: true}
-  - {nome: Entre-Rios Jornal, tema: vassouras, tipo: imprensa, rss: "https://www.entreriosjornal.com/feeds/posts/default?alt=rss&max-results=150", filtro: [Vassouras], janela_horas: 168, ativo: true}
+  # ───────────── Vassouras ─────────────
+  - {nome: Prefeitura de Vassouras, tema: vassouras, tipo: primaria, rss: "https://www.vassouras.rj.gov.br/feed/", ativo: true}
+  - {nome: G1 Sul do Rio e Costa Verde, tema: vassouras, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/sul-do-rio-costa-verde/", filtro: [Vassouras], ativo: true}
+  - {nome: Diário do Vale, tema: vassouras, tipo: imprensa, rss: "https://diariodovale.com.br/feed/", filtro: [Vassouras], paginas: 4, ativo: true}
+  - {nome: A Voz da Cidade, tema: vassouras, tipo: imprensa, rss: "https://avozdacidade.com/wp/?s=Vassouras&feed=rss2", filtro: [Vassouras], paginas: 2, ativo: true}
+  - {nome: Entre-Rios Jornal, tema: vassouras, tipo: imprensa, rss: "https://www.entreriosjornal.com/feeds/posts/default?alt=rss&max-results=150", filtro: [Vassouras], ativo: true}
   - {nome: Câmara Municipal de Vassouras, tema: vassouras, tipo: primaria, pagina: "https://www.vassouras.rj.leg.br/institucional/noticias", ativo: true}
 
-  # ───────────── Búzios (bloco semanal) ─────────────
-  - {nome: Prefeitura de Búzios, tema: buzios, tipo: primaria, rss: "https://buzios.rj.gov.br/feed/", paginas: 5, limite: 30, janela_horas: 168, ativo: true}
-  - {nome: Prensa de Babel, tema: buzios, tipo: imprensa, rss: "https://prensadebabel.com.br/category/buzios/feed/", janela_horas: 168, paginas: 3, ativo: true}
-  - {nome: G1 Região dos Lagos, tema: buzios, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/regiao-dos-lagos/", filtro: [Búzios], janela_horas: 168, ativo: true}
-  - {nome: Folha dos Lagos, tema: buzios, tipo: imprensa, rss: "https://www.folhadoslagos.com/ultimas-noticias/rss/", filtro: [Búzios], janela_horas: 168, ativo: true}
-  - {nome: RC24h, tema: buzios, tipo: imprensa, rss: "https://rc24h.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: true}
+  # ───────────── Búzios ─────────────
+  - {nome: Prefeitura de Búzios, tema: buzios, tipo: primaria, rss: "https://buzios.rj.gov.br/feed/", paginas: 5, limite: 30, ativo: true}
+  - {nome: Prensa de Babel, tema: buzios, tipo: imprensa, rss: "https://prensadebabel.com.br/category/buzios/feed/", paginas: 3, ativo: true}
+  - {nome: G1 Região dos Lagos, tema: buzios, tipo: imprensa, rss: "https://g1.globo.com/rss/g1/rj/regiao-dos-lagos/", filtro: [Búzios], ativo: true}
+  - {nome: Folha dos Lagos, tema: buzios, tipo: imprensa, rss: "https://www.folhadoslagos.com/ultimas-noticias/rss/", filtro: [Búzios], ativo: true}
+  - {nome: RC24h, tema: buzios, tipo: imprensa, rss: "https://rc24h.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], ativo: true}
   # Clique Diário: anti-robô (403) na nuvem (teste de 22/10)
-  - {nome: Clique Diário, tema: buzios, tipo: imprensa, rss: "https://cliquediario.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], janela_horas: 168, ativo: false}
+  - {nome: Clique Diário, tema: buzios, tipo: imprensa, rss: "https://cliquediario.com.br/?s=B%C3%BAzios&feed=rss2", filtro: [Búzios], ativo: false}
