@@ -1,0 +1,42 @@
+{
+  "data": "2026-11-06",
+  "verificado_em": "2026-11-06T05:25:04-03:00",
+  "total": 5,
+  "resumo": {
+    "ok": 5,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://niteroi.rj.gov.br/nittrans-tera-operacao-especial-de-transito-durante-os-dias-de-prova-do-enem/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/enem-niteroi-nittrans-transito-orla-viva/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/niteroi/180113/orla-viva-em-icarai-esta-suspensa-este-final-de-semana",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/armacao-dos-buzios-sera-pela-primeira-vez-polo-de-aplicacao-das-provas-do-enem/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/niteroi/180114/niteroi-celebra-453-anos-com-shows-gratuitos-nos-fins-de-semana-de-novembro",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
