@@ -2578,5 +2578,52 @@
       "links",
       "pergunta"
     ]
+  },
+  {
+    "data": "2026-11-06",
+    "tipo": "extra",
+    "numero": 4,
+    "assunto": "enem no domingo muda trânsito e suspende orla viva",
+    "previa": "+ Búzios recebe o Enem pela primeira vez, e a festa dos 453 anos de Niterói começa sábado",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "enem-nittrans-orla-viva-2026-11",
+        "titulo": "Enem em Niterói: NitTrans faz operação nos acessos e Orla Viva é suspenso no domingo (8/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/nittrans-tera-operacao-especial-de-transito-durante-os-dias-de-prova-do-enem/",
+          "https://folhadoleste.com.br/enem-niteroi-nittrans-transito-orla-viva/",
+          "https://www.osaogoncalo.com.br/niteroi/180113/orla-viva-em-icarai-esta-suspensa-este-final-de-semana"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "buzios-polo-enem-2026-11",
+        "titulo": "Búzios é polo de aplicação do Enem pela primeira vez, com 1.001 candidatos",
+        "tema": "buzios",
+        "urls": [
+          "https://buzios.rj.gov.br/armacao-dos-buzios-sera-pela-primeira-vez-polo-de-aplicacao-das-provas-do-enem/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "niteroi-453-anos-shows-2026-11",
+        "titulo": "Festa de 453 anos de Niterói começa sábado (7/11) com shows gratuitos",
+        "tema": "niteroi",
+        "urls": [
+          "https://www.osaogoncalo.com.br/niteroi/180114/niteroi-celebra-453-anos-com-shows-gratuitos-nos-fins-de-semana-de-novembro"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "na_cidade",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
