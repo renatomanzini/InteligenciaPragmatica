@@ -2625,5 +2625,87 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-11-11",
+    "tipo": "extra",
+    "numero": 5,
+    "assunto": "prazo das multas do rotativo de niterói ganha 100 dias",
+    "previa": "+ operação verão começa em 20/11 e fiscaliza o preço de mesa e guarda-sol",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "niteroi-rotativo-prorrogacao-multas",
+        "titulo": "Prefeitura prorroga em 100 dias o prazo para regularizar multas do Niterói Rotativo",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/prefeitura-prorroga-por-mais-100-dias-prazo-para-regularizacao-de-multas-do-niteroi-rotativo/",
+          "https://aseguirniteroi.com.br/noticias/motoristas-de-niteroi-tem-ate-fevereiro-para-regularizar-multas-do-rotativo/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "br101-niteroi-sao-goncalo-obras-novembro",
+        "titulo": "Obras da BR-101 entre Niterói e São Gonçalo até sábado (14/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/obras-br-101-niteroi-sao-goncalo-interdicoes-novembro/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "operacao-verao-niteroi-2026-2027",
+        "titulo": "Operação Verão de Niterói começa em 20/11",
+        "tema": "niteroi",
+        "urls": [
+          "https://aseguirniteroi.com.br/noticias/operacao-verao-niteroi-antecipa-para-20-de-novembro-a-fiscalizacao-nas-praias/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "arena-niteroi-concha-acustica-concessao",
+        "titulo": "Arena Niterói e Concha Acústica terão gestão privada por 35 anos",
+        "tema": "niteroi",
+        "urls": [
+          "https://aseguirniteroi.com.br/noticias/arena-niteroi-e-concha-acustica-terao-gestao-privada-por-35-anos/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "rampa-sul-parque-da-cidade-interdicao",
+        "titulo": "Rampa Sul de voo livre do Parque da Cidade interditada até 20/11",
+        "tema": "niteroi",
+        "urls": [
+          "https://www.osaogoncalo.com.br/niteroi/180224/rampa-sul-do-parque-da-cidade-esta-interditada"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "buzios-31-anos-emancipacao",
+        "titulo": "Búzios faz 31 anos de emancipação com festa de 12 a 15/11",
+        "tema": "buzios",
+        "urls": [
+          "https://buzios.rj.gov.br/buzios-celebra-31-anos-de-emancipacao-com-programacao-especial-entre-os-dias-12-e-15-de-novembro/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "vassouras-festival-flor-atlantica-2026",
+        "titulo": "Festival de Primavera Flor Atlântica, de 14 a 23/11, em Vassouras e Paulo de Frontin",
+        "tema": "vassouras",
+        "urls": [
+          "https://g1.globo.com/rj/sul-do-rio-costa-verde/noticia/2026/11/10/8a-edicao-do-festival-de-primavera-flor-atlantica-acontece-no-vale-do-cafe.ghtml"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "na_cidade",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
