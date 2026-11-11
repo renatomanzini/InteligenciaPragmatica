@@ -1,0 +1,60 @@
+{
+  "data": "2026-11-11",
+  "verificado_em": "2026-11-11T05:24:48-03:00",
+  "total": 8,
+  "resumo": {
+    "ok": 8,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://niteroi.rj.gov.br/prefeitura-prorroga-por-mais-100-dias-prazo-para-regularizacao-de-multas-do-niteroi-rotativo/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/motoristas-de-niteroi-tem-ate-fevereiro-para-regularizar-multas-do-rotativo/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/obras-br-101-niteroi-sao-goncalo-interdicoes-novembro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/operacao-verao-niteroi-antecipa-para-20-de-novembro-a-fiscalizacao-nas-praias/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/arena-niteroi-e-concha-acustica-terao-gestao-privada-por-35-anos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/niteroi/180224/rampa-sul-do-parque-da-cidade-esta-interditada",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/buzios-celebra-31-anos-de-emancipacao-com-programacao-especial-entre-os-dias-12-e-15-de-novembro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://g1.globo.com/rj/sul-do-rio-costa-verde/noticia/2026/11/10/8a-edicao-do-festival-de-primavera-flor-atlantica-acontece-no-vale-do-cafe.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
