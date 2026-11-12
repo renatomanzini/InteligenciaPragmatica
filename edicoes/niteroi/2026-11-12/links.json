@@ -1,0 +1,42 @@
+{
+  "data": "2026-11-12",
+  "verificado_em": "2026-11-12T05:24:20-03:00",
+  "total": 5,
+  "resumo": {
+    "ok": 5,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://folhadoleste.com.br/show-luan-santana-transito-niteroi-interdicoes-desvios/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/luan-santana-niteroi-show-ingressos-horarios-setores/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://enfoco.com.br/noticias/regiao/niteroi/show-de-luan-santana-tera-mudancas-no-transito-em-niteroi-neste-domingo/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/niteroi-open-futevolei-praia-icarai-feriado-2026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://buzios.rj.gov.br/3o-forum-mulheres-negocios-sera-realizado-em-buzios-no-dia-17-de-novembro/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
