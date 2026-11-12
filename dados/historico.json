@@ -2707,5 +2707,50 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-11-12",
+    "tipo": "extra",
+    "numero": 6,
+    "assunto": "show de luan santana muda o trânsito no centro de niterói",
+    "previa": "+ futevôlei grátis na praia de icaraí no feriado de sexta (20/11)",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "luan-santana-caminho-niemeyer-transito",
+        "titulo": "Show de Luan Santana no Caminho Niemeyer, domingo (15/11), muda o trânsito no Centro de Niterói",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/show-luan-santana-transito-niteroi-interdicoes-desvios/",
+          "https://folhadoleste.com.br/luan-santana-niteroi-show-ingressos-horarios-setores/",
+          "https://enfoco.com.br/noticias/regiao/niteroi/show-de-luan-santana-tera-mudancas-no-transito-em-niteroi-neste-domingo/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "niteroi-open-futevolei-2026",
+        "titulo": "15ª edição do Niterói Open de Futevôlei, na Praia de Icaraí, sexta (20/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/niteroi-open-futevolei-praia-icarai-feriado-2026/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "buzios-forum-mulheres-negocios-2026",
+        "titulo": "3º Fórum Mulheres & Negócios em Búzios, terça (17/11)",
+        "tema": "buzios",
+        "urls": [
+          "https://buzios.rj.gov.br/3o-forum-mulheres-negocios-sera-realizado-em-buzios-no-dia-17-de-novembro/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
