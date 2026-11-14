@@ -2752,5 +2752,68 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-11-14",
+    "tipo": "extra",
+    "numero": 7,
+    "assunto": "trânsito do centro muda no domingo por causa do show do luan santana",
+    "previa": "+ vacina contra o sarampo, Barão Vermelho em Piratininga e orquídeas em Charitas",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "luan-santana-caminho-niemeyer-transito",
+        "titulo": "Show de Luan Santana no Caminho Niemeyer muda o trânsito do Centro de Niterói",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/luan-santana-em-niteroi-nittrans-faz-planejamento-de-transito-para-show-no-caminho-niemeyer/",
+          "https://osaogoncalo.com.br/niteroi/180311/te-esperando-fas-de-luan-santana-acampam-para-garantir-l"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "sarampo-niteroi-vacinacao-reforco",
+        "titulo": "Reforço da vacinação contra o sarampo em Niterói, sem casos confirmados",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/sarampo-niteroi-alerta-vacinacao-gratuita-sintomas/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "agenda-niteroi-feriado-iorc-barao",
+        "titulo": "Tiago Iorc e Barão Vermelho em Piratininga no fim de semana do feriado",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/o-que-fazer-niteroi-fim-de-semana-13-15-novembro-2026/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "exposicao-orquideas-charitas-41",
+        "titulo": "41ª Exposição de Orquídeas na Casa da Amizade, em Charitas",
+        "tema": "niteroi",
+        "urls": [
+          "https://enfoco.com.br/noticias/regiao/niteroi/niteroi-recebe-41a-exposicao-de-orquideas-neste-fim-de-semana/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "agenda-buzios-aniversario-rasa",
+        "titulo": "Shows gratuitos na Praça da Tia Uia, na Rasa, em Búzios",
+        "tema": "buzios",
+        "urls": [
+          "https://prensadebabel.com.br/agenda-cultural-regiao-dos-lagos-13-15-novembro-2026/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
