@@ -1,0 +1,49 @@
+{
+  "data": "2026-11-14",
+  "verificado_em": "2026-11-14T05:26:54-03:00",
+  "total": 6,
+  "resumo": {
+    "ok": 6,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://niteroi.rj.gov.br/luan-santana-em-niteroi-nittrans-faz-planejamento-de-transito-para-show-no-caminho-niemeyer/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://osaogoncalo.com.br/niteroi/180311/te-esperando-fas-de-luan-santana-acampam-para-garantir-l",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD",
+      "url_final": "https://www.osaogoncalo.com.br/niteroi/180311/te-esperando-fas-de-luan-santana-acampam-para-garantir-lugar-na-grade-em-show-deste-domingo-15-em-niteroi"
+    },
+    {
+      "url": "https://folhadoleste.com.br/sarampo-niteroi-alerta-vacinacao-gratuita-sintomas/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/o-que-fazer-niteroi-fim-de-semana-13-15-novembro-2026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://enfoco.com.br/noticias/regiao/niteroi/niteroi-recebe-41a-exposicao-de-orquideas-neste-fim-de-semana/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "GET"
+    },
+    {
+      "url": "https://prensadebabel.com.br/agenda-cultural-regiao-dos-lagos-13-15-novembro-2026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
