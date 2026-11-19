@@ -2815,5 +2815,71 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-11-19",
+    "tipo": "extra",
+    "numero": 8,
+    "assunto": "viva zumbi de graça no caminho niemeyer, sexta",
+    "previa": "+ Operação Verão nas praias e festival alemão em Camboinhas",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "viva-zumbi-2026-caminho-niemeyer",
+        "titulo": "Festival Viva Zumbi, grátis, no Caminho Niemeyer, sexta (20/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://aseguirniteroi.com.br/noticias/viva-zumbi-tera-show-de-diogo-nogueira-oficinas-e-rodas-de-conversa-em-niteroi/",
+          "https://www.osaogoncalo.com.br/niteroi/180403/viva-zumbi-celebra-o-novembro-negro-com-grandes-nomes-da-musica-brasileira-em-niteroi",
+          "https://oglobo.globo.com/rio/bairros/niteroi/noticia/2026/11/18/gilberto-gil-e-diogo-nogueira-comandam-festas-gratuitas-em-niteroi.ghtml"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "operacao-verao-niteroi-2026",
+        "titulo": "Operação Verão começa nas praias de Niterói na sexta (20/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://aseguirniteroi.com.br/noticias/operacao-verao-niteroi-comeca-fiscalizacao-das-praias-nesta-sexta-20/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "senac-rj-vagas-gratuitas-2026",
+        "titulo": "Senac RJ abre mais de 5 mil vagas gratuitas de qualificação",
+        "tema": "niteroi",
+        "urls": [
+          "https://www.osaogoncalo.com.br/niteroi/180412/senac-rj-abre-mais-de-5-mil-vagas-gratuitas-para-cursos-de-qualificacao-profissional-em-niteroi-e-no-estado"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "festivais-camboinhas-453-anos",
+        "titulo": "Festivais alemão e italiano em Camboinhas e festa de 453 anos em Icaraí",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/niteroi-celebra-453-anos-com-festivais-alemao-e-italiano-gratuitos-em-camboinhas/",
+          "https://oglobo.globo.com/rio/bairros/niteroi/noticia/2026/11/18/gilberto-gil-e-diogo-nogueira-comandam-festas-gratuitas-em-niteroi.ghtml"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "fundo-royalties-930-milhoes-camara",
+        "titulo": "Câmara aprova em primeira discussão uso de R$ 930 milhões do fundo de royalties",
+        "tema": "niteroi",
+        "urls": [
+          "https://aseguirniteroi.com.br/noticias/prefeitura-apresenta-plano-para-investir-metade-do-fundo-de-reserva-dos-royalties-do-petroleo/"
+        ],
+        "em_andamento": true
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "na_cidade",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
