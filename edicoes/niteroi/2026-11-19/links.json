@@ -1,0 +1,54 @@
+{
+  "data": "2026-11-19",
+  "verificado_em": "2026-11-19T05:25:30-03:00",
+  "total": 7,
+  "resumo": {
+    "ok": 7,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/viva-zumbi-tera-show-de-diogo-nogueira-oficinas-e-rodas-de-conversa-em-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/niteroi/180403/viva-zumbi-celebra-o-novembro-negro-com-grandes-nomes-da-musica-brasileira-em-niteroi",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://oglobo.globo.com/rio/bairros/niteroi/noticia/2026/11/18/gilberto-gil-e-diogo-nogueira-comandam-festas-gratuitas-em-niteroi.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/operacao-verao-niteroi-comeca-fiscalizacao-das-praias-nesta-sexta-20/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/niteroi/180412/senac-rj-abre-mais-de-5-mil-vagas-gratuitas-para-cursos-de-qualificacao-profissional-em-niteroi-e-no-estado",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/niteroi-celebra-453-anos-com-festivais-alemao-e-italiano-gratuitos-em-camboinhas/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/prefeitura-apresenta-plano-para-investir-metade-do-fundo-de-reserva-dos-royalties-do-petroleo/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
