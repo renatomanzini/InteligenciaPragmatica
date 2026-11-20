@@ -2881,5 +2881,62 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-11-20",
+    "tipo": "extra",
+    "numero": 9,
+    "assunto": "o rotativo ganhou 26 trechos até janeiro",
+    "previa": "+ domingo tem Gilberto Gil de graça em Icaraí",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "niteroi-rotativo-portaria-744-2026",
+        "titulo": "Niterói Rotativo em 26 trechos do Centro, de Icaraí e do Jardim Icaraí até 3/1/2027",
+        "tema": "niteroi",
+        "urls": [
+          "https://diariooficial.niteroi.rj.gov.br/do/2026/11_Nov/18.pdf",
+          "https://ofluminense.com.br/niteroi-rotativo-novos-horarios-centro-icarai-janeiro-2027/",
+          "https://cidadedeniteroi.com/transito/vai-estacionar-em-niteroi-regra-de-fim-de-ano-muda-horarios-e-limita-permanencia/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "niteroi-aluguel-universitario-4-edital",
+        "titulo": "Quarto edital do Aluguel Universitário é lançado em 26/11 com mil vagas",
+        "tema": "niteroi",
+        "urls": [
+          "https://niteroi.rj.gov.br/prefeitura-de-niteroi-lanca-quarto-edital-do-aluguel-universitario-no-dia-26-com-mil-novas-vagas/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "niteroi-blue-running-2026-11-22",
+        "titulo": "Blue Running interdita parcialmente a orla de Icaraí no domingo (22/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://ofluminense.com.br/blue-running-interdicao-orla-icarai-22-novembro-2026/"
+        ],
+        "em_andamento": false
+      },
+      {
+        "id": "niteroi-gilberto-gil-icarai-2026-11-22",
+        "titulo": "Gilberto Gil faz show gratuito na Praia de Icaraí no domingo (22/11)",
+        "tema": "niteroi",
+        "urls": [
+          "https://g1.globo.com/guia/guia-rj/noticia/2026/11/19/o-que-fazer-no-rio-19-a-25.ghtml",
+          "https://aseguirniteroi.com.br/noticias/gilberto-gil-celebra-aniversario-de-niteroi-com-show-gratuito-no-proximo-domingo-2/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "na_cidade",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
