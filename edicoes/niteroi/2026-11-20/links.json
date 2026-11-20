@@ -1,0 +1,54 @@
+{
+  "data": "2026-11-20",
+  "verificado_em": "2026-11-20T05:25:34-03:00",
+  "total": 7,
+  "resumo": {
+    "ok": 7,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://diariooficial.niteroi.rj.gov.br/do/2026/11_Nov/18.pdf",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/niteroi-rotativo-novos-horarios-centro-icarai-janeiro-2027/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://cidadedeniteroi.com/transito/vai-estacionar-em-niteroi-regra-de-fim-de-ano-muda-horarios-e-limita-permanencia/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://niteroi.rj.gov.br/prefeitura-de-niteroi-lanca-quarto-edital-do-aluguel-universitario-no-dia-26-com-mil-novas-vagas/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://ofluminense.com.br/blue-running-interdicao-orla-icarai-22-novembro-2026/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://g1.globo.com/guia/guia-rj/noticia/2026/11/19/o-que-fazer-no-rio-19-a-25.ghtml",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/gilberto-gil-celebra-aniversario-de-niteroi-com-show-gratuito-no-proximo-domingo-2/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
