@@ -2938,5 +2938,52 @@
       "agenda"
     ],
     "caderno": "niteroi"
+  },
+  {
+    "data": "2026-11-21",
+    "tipo": "extra",
+    "numero": 10,
+    "assunto": "primeira ubs de icaraí abre domingo, com foco em idosos",
+    "previa": "+ mpox em niterói: 26 casos e vacina sem data",
+    "dia": "forte",
+    "breakthrough": false,
+    "historias": [
+      {
+        "id": "niteroi-ubs-icarai-abertura",
+        "titulo": "Icaraí ganha a primeira UBS no domingo (22/11), na Rua Álvares de Azevedo, 256",
+        "tema": "niteroi",
+        "urls": [
+          "https://aseguirniteroi.com.br/noticias/icarai-ganha-primeira-unidade-basica-de-saude-neste-domingo-22-com-foco-em-idosos/",
+          "https://folhadoleste.com.br/ubs-icarai-primeira-unidade-saude-idosos-niteroi/",
+          "https://saude.niteroi.rj.gov.br/nova-ubs-de-icarai-vai-ampliar-atencao-aos-idosos/"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "niteroi-mpox-casos-2026",
+        "titulo": "Niterói tem 26 casos de mpox em 2026 e ainda não tem data para novas vacinas",
+        "tema": "niteroi",
+        "urls": [
+          "https://folhadoleste.com.br/mpox-niteroi-26-casos-metade-leste-fluminense/",
+          "https://www.osaogoncalo.com.br/geral/180476/mpox-niteroi-e-sao-goncalo-ainda-nao-tem-previsao-para-receber-vacinas"
+        ],
+        "em_andamento": true
+      },
+      {
+        "id": "niteroi-coloquio-reabilitacao-2026-11-24",
+        "titulo": "XII Colóquio dos Centros Especializados em Reabilitação, na terça (24/11), na Fonseca",
+        "tema": "niteroi",
+        "urls": [
+          "https://enfoco.com.br/noticias/regiao/niteroi/ultimas-vagas-para-evento-sobre-violencia-contra-mulheres-em-niteroi/"
+        ],
+        "em_andamento": false
+      }
+    ],
+    "formatos": [
+      "historia_da_cidade",
+      "servico",
+      "agenda"
+    ],
+    "caderno": "niteroi"
   }
 ]
