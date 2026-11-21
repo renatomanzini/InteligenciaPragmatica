@@ -1,0 +1,48 @@
+{
+  "data": "2026-11-21",
+  "verificado_em": "2026-11-21T05:25:14-03:00",
+  "total": 6,
+  "resumo": {
+    "ok": 6,
+    "quebrado": 0,
+    "inconclusivo": 0
+  },
+  "links": [
+    {
+      "url": "https://aseguirniteroi.com.br/noticias/icarai-ganha-primeira-unidade-basica-de-saude-neste-domingo-22-com-foco-em-idosos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/ubs-icarai-primeira-unidade-saude-idosos-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://saude.niteroi.rj.gov.br/nova-ubs-de-icarai-vai-ampliar-atencao-aos-idosos/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://folhadoleste.com.br/mpox-niteroi-26-casos-metade-leste-fluminense/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://www.osaogoncalo.com.br/geral/180476/mpox-niteroi-e-sao-goncalo-ainda-nao-tem-previsao-para-receber-vacinas",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    },
+    {
+      "url": "https://enfoco.com.br/noticias/regiao/niteroi/ultimas-vagas-para-evento-sobre-violencia-contra-mulheres-em-niteroi/",
+      "status": 200,
+      "resultado": "ok",
+      "metodo": "HEAD"
+    }
+  ]
+}
